@@ -26,12 +26,12 @@ public class Metronome : MonoBehaviour {
         }
 	}
 
-    void OnNextBar()
+    void OnNextBar(int bar)
     {
         highTrig = true;
     }
 
-    void OnNextBeat()
+    void OnNextBeat(int beat)
     {
         if (!highTrig)
             lowTrig = true;

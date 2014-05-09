@@ -7,6 +7,7 @@ public class MainClock : MonoBehaviour
 
     public int BEATS = 4;
     public int NOTE_TYPE = 4;
+    public int CLOCK_FREQ = 16;
 
     private int sampleRate;
     private int bufferSize;
@@ -16,6 +17,7 @@ public class MainClock : MonoBehaviour
 
     public static int barCount;
     public static int beatCount;
+    public static int clockCount;
 
     static MainClock _instance;
 
@@ -35,17 +37,24 @@ public class MainClock : MonoBehaviour
     {
         phasor += bufferSize;
 
-        beatInterval = 240.0f * sampleRate / NOTE_TYPE / BPM;
+        beatInterval = 240.0f * sampleRate / CLOCK_FREQ / BPM;
         if (phasor >= beatInterval)
         {
-            beatCount = beatCount % BEATS + 1;
-            if (beatCount == 1)
+            clockCount = (clockCount + 1) % CLOCK_FREQ;
+
+            if (clockCount % (CLOCK_FREQ / NOTE_TYPE) == 0)
             {
-                barCount = barCount + 1; 
-                AudioEventManager.TriggerOnNextBar();
+                beatCount = beatCount % BEATS + 1;
+                if (beatCount == 1)
+                {
+                    barCount = barCount + 1;
+                    AudioEventManager.TriggerOnNextBar(barCount);
+                }
+
+                AudioEventManager.TriggerOnNextBeat(beatCount);
             }
 
-            AudioEventManager.TriggerOnNextBeat();
+            AudioEventManager.TriggerOnNextTrig(clockCount);
 
             phasor %= beatInterval;
         }
@@ -53,11 +62,12 @@ public class MainClock : MonoBehaviour
 
     void Reset()
     {
-        beatInterval = 240.0f * sampleRate / NOTE_TYPE / BPM;
+        beatInterval = 240.0f * sampleRate / CLOCK_FREQ / BPM;
         phasor = beatInterval;
 
         barCount = 0;
         beatCount = 0;
+        clockCount = -1;
     }
 
     public static void Play()

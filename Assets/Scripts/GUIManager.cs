@@ -61,8 +61,8 @@ public class GUIManager : MonoBehaviour
         GUILayout.EndArea();
     }
 
-    void OnNextBeat()
+    void OnNextBeat(int beat)
     {
-        timeSigText = MainClock.beatCount.ToString();
+        timeSigText = beat.ToString();
     }
 }

@@ -77,7 +77,7 @@ public class AudioSynth : MonoBehaviour
         }
     }
 
-    void OnNextBeat()
+    void OnNextBeat(int beat)
     {
         frequency = fundamental * Mathf.Pow(1.0594f, order);
         noteOn = !noteOn;
