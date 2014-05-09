@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Metronome : MonoBehaviour {
 
-    public AudioSource high, low;
+    public AudioClip high, low;
     bool highTrig, lowTrig;
 
 	// Use this for initialization
@@ -17,12 +17,12 @@ public class Metronome : MonoBehaviour {
         if (highTrig)
         {
             highTrig = false;
-            high.Play();
+            audio.PlayOneShot(high);
         }
         if (lowTrig)
         {
             lowTrig = false;
-            low.Play();
+            audio.PlayOneShot(low);
         }
 	}
 

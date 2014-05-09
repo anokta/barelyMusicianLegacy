@@ -11,7 +11,7 @@ public class MainClock : MonoBehaviour
     private int sampleRate;
     private int bufferSize;
 
-    private double phaser;
+    private double phasor;
     private double beatInterval;
 
     public static int barCount;
@@ -33,10 +33,10 @@ public class MainClock : MonoBehaviour
 
     void OnAudioFilterRead(float[] data, int channels)
     {
-        phaser += bufferSize;
+        phasor += bufferSize;
 
         beatInterval = 240.0f * sampleRate / NOTE_TYPE / BPM;
-        if (phaser >= beatInterval)
+        if (phasor >= beatInterval)
         {
             beatCount = beatCount % BEATS + 1;
             if (beatCount == 1)
@@ -47,14 +47,14 @@ public class MainClock : MonoBehaviour
 
             AudioEventManager.TriggerOnNextBeat();
 
-            phaser %= beatInterval;
+            phasor %= beatInterval;
         }
     }
 
     void Reset()
     {
         beatInterval = 240.0f * sampleRate / NOTE_TYPE / BPM;
-        phaser = beatInterval;
+        phasor = beatInterval;
 
         barCount = 0;
         beatCount = 0;
