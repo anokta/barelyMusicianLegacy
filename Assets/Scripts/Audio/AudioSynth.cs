@@ -16,18 +16,35 @@ public class AudioSynth : MonoBehaviour
 
     private KeyCode[] keys = { KeyCode.A, KeyCode.W, KeyCode.S, KeyCode.E, KeyCode.D, KeyCode.F, KeyCode.T, KeyCode.G, KeyCode.Y, KeyCode.H, KeyCode.U, KeyCode.J, KeyCode.K, KeyCode.O, KeyCode.L };
 
+    int[] currentBar;
+    int[] notes = { 60, 62, 64, 71 };
+
     void Start()
     {
         sampling_frequency = AudioSettings.outputSampleRate;
         noteOn = false;
 
-        AudioEventManager.OnNextBeat += OnNextBeat;
+        currentBar = new int[16];
+
+        for (int i = 0; i < currentBar.Length; ++i)
+        {
+            currentBar[i] = (i % 2 == 0 && Random.Range(0.0f, 1.0f) > 0.25f) ? notes[Random.Range(0, notes.Length-1)] : 0;
+        }
+
+        AudioEventManager.OnNextBar += OnNextBar;
+        AudioEventManager.OnNextTrig += OnNextTrig;
     }
 
-    int order = 0;
     void Update()
     {
-        order = Random.Range(0, keys.Length);
+        //if (change)
+        //{
+        //    change = false;
+        //    for (int i = 0; i < currentBar.Length; ++i)
+        //    {
+        //        currentBar[i] = (i % 2 == 0 && Random.Range(0.0f, 1.0f) > 0.25f) ? notes[Random.Range(0, notes.Length - 1)] : 0;
+        //    }
+        //}
     }
 
     void OnGUI()
@@ -77,10 +94,22 @@ public class AudioSynth : MonoBehaviour
         }
     }
 
-    void OnNextBeat(int beat)
+    void OnNextTrig(int clock)
     {
-        frequency = fundamental * Mathf.Pow(1.0594f, order);
-        noteOn = !noteOn;
+        if (currentBar[clock] > 0)
+        {
+            frequency = fundamental * Mathf.Pow(1.0594f, currentBar[clock] - 60);
+            noteOn = true;
+        }
+        else
+        {
+            noteOn = false;
+        }
+    }
+
+    void OnNextBar(int bar)
+    {
+        //change = true;
     }
 }
 
