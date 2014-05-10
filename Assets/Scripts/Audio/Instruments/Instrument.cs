@@ -3,35 +3,28 @@ using System.Collections;
 
 public class Instrument : MonoBehaviour {
 
-    protected AudioSource sample;
+    public AudioClip sample;
+
+    protected float[] sampleData;
+    protected int sampleOffset;
 
     protected bool noteOn;
     protected bool trigger;
 
     void Awake () 
     {
-        sample = audio;
+        sampleData = new float[sample.samples];
+        sample.GetData(sampleData, 0);
+        sampleOffset = -1;
 
         noteOn = false;
         trigger = false;
 	}
 	
-	void OnGUI() 
-    {
-        if (trigger || noteOn)
-        {
-            trigger = false;
-
-            if (!sample.isPlaying)
-            {
-                sample.Play();
-            }
-        }
-	}
-
     public void Trigger()
     {
         trigger = true;
+        sampleOffset = 0;
     }
 
     public void NoteOn()
@@ -42,5 +35,26 @@ public class Instrument : MonoBehaviour {
     public void NoteOff()
     {
         noteOn = false;
+    }
+
+    void OnAudioFilterRead(float[] data, int channels)
+    {
+        if (sampleOffset >= 0)
+        {
+            for (int i = 0; i < data.Length; i += channels)
+            {
+                if (sampleOffset < sampleData.Length)
+                {
+                    data[i] = sampleData[sampleOffset];
+                    if (channels == 2) data[i + 1] = sampleData[sampleOffset];
+                    sampleOffset++;
+                }
+                else
+                {
+                    sampleOffset += -1;
+                    break;
+                }
+            }
+        }
     }
 }

@@ -14,6 +14,8 @@ public class AudioSynth : MonoBehaviour
 
     public bool noteOn;
 
+    private bool change;
+
     private KeyCode[] keys = { KeyCode.A, KeyCode.W, KeyCode.S, KeyCode.E, KeyCode.D, KeyCode.F, KeyCode.T, KeyCode.G, KeyCode.Y, KeyCode.H, KeyCode.U, KeyCode.J, KeyCode.K, KeyCode.O, KeyCode.L };
 
     int[] currentBar;
@@ -37,14 +39,14 @@ public class AudioSynth : MonoBehaviour
 
     void Update()
     {
-        //if (change)
-        //{
-        //    change = false;
-        //    for (int i = 0; i < currentBar.Length; ++i)
-        //    {
-        //        currentBar[i] = (i % 2 == 0 && Random.Range(0.0f, 1.0f) > 0.25f) ? notes[Random.Range(0, notes.Length - 1)] : 0;
-        //    }
-        //}
+        if (change)
+        {
+            change = false;
+            for (int i = 0; i < currentBar.Length; ++i)
+            {
+                currentBar[i] = (i % 2 == 0 && Random.Range(0.0f, 1.0f) > 0.25f) ? notes[Random.Range(0, notes.Length - 1)] : 0;
+            }
+        }
     }
 
     void OnGUI()
@@ -86,7 +88,7 @@ public class AudioSynth : MonoBehaviour
             {
                 phase = phase + increment;
                 // this is where we copy audio data to make them “available” to Unity
-                data[i] = (float)(gain * Mathf.Sin(phase));
+                data[i] = (float)(gain * (phase / (2*Mathf.PI)));
                 // if we have stereo, we copy the mono data to each channel
                 if (channels == 2) data[i + 1] = data[i];
                 if (phase > 2 * Mathf.PI) phase = 0;
@@ -109,7 +111,7 @@ public class AudioSynth : MonoBehaviour
 
     void OnNextBar(int bar)
     {
-        //change = true;
+        change = true;
     }
 }
 

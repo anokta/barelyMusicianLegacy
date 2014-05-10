@@ -110,9 +110,9 @@ AudioSource:
   m_GameObject: {fileID: 307876936}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 836f6a87c27a2004990660e1c324dfd4, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: .5
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f38a88cf5d21cf94c8a5612a17ec75dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sample: {fileID: 8300000, guid: 836f6a87c27a2004990660e1c324dfd4, type: 3}
 --- !u!1 &434941140
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,6 +392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f38a88cf5d21cf94c8a5612a17ec75dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sample: {fileID: 8300000, guid: 6628b1b1199a7cf4da21ef7f679e5b66, type: 3}
 --- !u!82 &574557485
 AudioSource:
   m_ObjectHideFlags: 0
@@ -399,9 +401,9 @@ AudioSource:
   m_GameObject: {fileID: 574557482}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 6628b1b1199a7cf4da21ef7f679e5b66, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: .5
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -459,9 +461,6 @@ GameObject:
   - 4: {fileID: 579186875}
   - 114: {fileID: 579186877}
   - 82: {fileID: 579186876}
-  - 164: {fileID: 579186879}
-  - 166: {fileID: 579186880}
-  - 168: {fileID: 579186878}
   m_Layer: 0
   m_Name: Sine Synth
   m_TagString: Untagged
@@ -552,54 +551,6 @@ MonoBehaviour:
   fundamental: 261.630005
   gain: 1
   noteOn: 0
---- !u!168 &579186878
-AudioEchoFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 579186874}
-  m_Enabled: 1
-  m_Delay: 500
-  m_DecayRatio: .5
-  m_WetMix: 1
-  m_DryMix: 1
---- !u!164 &579186879
-AudioReverbFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 579186874}
-  m_Enabled: 1
-  m_DryLevel: 0
-  m_Room: -1000
-  m_RoomHF: -400
-  m_RoomRolloff: 0
-  m_DecayTime: 17.2299995
-  m_DecayHFRatio: .560000002
-  m_ReflectionsLevel: -1713
-  m_ReverbLevel: -613
-  m_ReverbDelay: .0299999993
-  m_Diffusion: 100
-  m_Density: 100
-  m_HFReference: 5000
-  m_RoomLF: 0
-  m_LFReference: 250
-  m_ReflectionsDelay: 0
-  m_ReverbPreset: 25
---- !u!166 &579186880
-AudioChorusFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 579186874}
-  m_Enabled: 1
-  m_DryMix: .5
-  m_WetMix1: .5
-  m_WetMix2: .5
-  m_WetMix3: .5
-  m_Delay: 40
-  m_Rate: .800000012
-  m_Depth: .0299999993
 --- !u!1 &587488974
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,6 +637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f38a88cf5d21cf94c8a5612a17ec75dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sample: {fileID: 8300000, guid: 8611cd4d247e5b94b861775dd46642e8, type: 3}
 --- !u!82 &936862941
 AudioSource:
   m_ObjectHideFlags: 0
@@ -694,9 +646,9 @@ AudioSource:
   m_GameObject: {fileID: 936862938}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 8611cd4d247e5b94b861775dd46642e8, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: .5
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -901,6 +853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f38a88cf5d21cf94c8a5612a17ec75dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sample: {fileID: 8300000, guid: 027264c19660ff84b86a6b4445b9dfaa, type: 3}
 --- !u!82 &1831899817
 AudioSource:
   m_ObjectHideFlags: 0
@@ -909,9 +862,9 @@ AudioSource:
   m_GameObject: {fileID: 1831899814}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 027264c19660ff84b86a6b4445b9dfaa, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: .5
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1031,7 +984,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2076098129
 Transform:
   m_ObjectHideFlags: 0
