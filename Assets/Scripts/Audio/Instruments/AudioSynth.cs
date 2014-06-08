@@ -12,8 +12,6 @@ public class AudioSynth : MonoBehaviour
     private float phase;
     private float sampling_frequency;
 
-    public bool noteOn;
-
     private bool change;
 
     private KeyCode[] keys = { KeyCode.A, KeyCode.W, KeyCode.S, KeyCode.E, KeyCode.D, KeyCode.F, KeyCode.T, KeyCode.G, KeyCode.Y, KeyCode.H, KeyCode.U, KeyCode.J, KeyCode.K, KeyCode.O, KeyCode.L };
@@ -21,10 +19,11 @@ public class AudioSynth : MonoBehaviour
     int[] currentBar;
     int[] notes = { 60, 62, 64, 71 };
 
-    void Start()
+    Envelope envelope;
+
+    void Awake()
     {
         sampling_frequency = AudioSettings.outputSampleRate;
-        noteOn = false;
 
         currentBar = new int[16];
 
@@ -35,6 +34,8 @@ public class AudioSynth : MonoBehaviour
 
         AudioEventManager.OnNextBar += OnNextBar;
         AudioEventManager.OnNextTrig += OnNextTrig;
+
+        envelope = new Envelope(0.5f, 1.0f, 0.75f, 1.0f);
     }
 
     void Update()
@@ -67,33 +68,33 @@ public class AudioSynth : MonoBehaviour
 
                 if (!anykey)
                 {
-                    noteOn = false;
+                    envelope.NoteOn = false;
                 }
             }
             else if (Input.GetKeyDown(keys[i]))
             {
                 frequency = fundamental * Mathf.Pow(1.0594f, i);
-                noteOn = true;
+                envelope.NoteOn = true;
             }
         }
     }
 
     void OnAudioFilterRead(float[] data, int channels)
     {
-        if (noteOn)
-        {
+        
             // update increment in case frequency has changed
             increment = frequency * 2 * Mathf.PI / sampling_frequency;
             for (var i = 0; i < data.Length; i = i + channels)
             {
+                envelope.OnNextBlock(1.0f / 44100);
+
                 phase = phase + increment;
                 // this is where we copy audio data to make them “available” to Unity
-                data[i] = (float)(gain * (phase / (2*Mathf.PI)));
+                data[i] = envelope.Multiplier * (float)(gain * (phase / (2*Mathf.PI)));
                 // if we have stereo, we copy the mono data to each channel
                 if (channels == 2) data[i + 1] = data[i];
                 if (phase > 2 * Mathf.PI) phase = 0;
             }
-        }
     }
 
     void OnNextTrig(int clock)
@@ -101,11 +102,11 @@ public class AudioSynth : MonoBehaviour
         if (currentBar[clock] > 0)
         {
             frequency = fundamental * Mathf.Pow(1.0594f, currentBar[clock] - 60);
-            noteOn = true;
+            envelope.NoteOn = true;
         }
         else
         {
-            noteOn = false;
+            envelope.NoteOn = false;
         }
     }
 
