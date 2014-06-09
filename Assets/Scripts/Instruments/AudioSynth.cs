@@ -7,7 +7,7 @@ public class AudioSynth : MonoBehaviour
     public float fundamental = 261.63f;
     public float gain = 0.05f;
 
-    private float frequency = 440;
+    //private float frequency = 440;
     private float increment;
     private float phase;
     private float sampling_frequency;
@@ -20,6 +20,7 @@ public class AudioSynth : MonoBehaviour
     int[] notes = { 60, 62, 64, 71 };
 
     Envelope envelope;
+    Oscillator osc;
 
     void Awake()
     {
@@ -29,13 +30,16 @@ public class AudioSynth : MonoBehaviour
 
         for (int i = 0; i < currentBar.Length; ++i)
         {
-            currentBar[i] = (i % 2 == 0 && Random.Range(0.0f, 1.0f) > 0.25f) ? notes[Random.Range(0, notes.Length-1)] : 0;
+            currentBar[i] = (i % 2 == 0 && Random.Range(0.0f, 1.0f) > 0.25f) ? notes[Random.Range(0, notes.Length - 1)] : 0;
         }
 
         AudioEventManager.OnNextBar += OnNextBar;
         AudioEventManager.OnNextTrig += OnNextTrig;
 
-        envelope = new Envelope(0.5f, 1.0f, 0.75f, 1.0f);
+        osc = new Oscillator(Oscillator.OSCType.SQUARE);
+        osc.PulseDuty = 0.25f;
+        osc.Frequency = 440.0f;
+        envelope = new Envelope(0.2f, 0.5f, 0.75f, 1.0f);
     }
 
     void Update()
@@ -61,8 +65,8 @@ public class AudioSynth : MonoBehaviour
                 {
                     if (Input.GetKey(keys[j]))
                     {
-                        frequency = fundamental * Mathf.Pow(1.0594f, j);
-                        anykey = true; 
+                        osc.Frequency = fundamental * Mathf.Pow(1.0594f, j);
+                        anykey = true;
                     }
                 }
 
@@ -73,7 +77,7 @@ public class AudioSynth : MonoBehaviour
             }
             else if (Input.GetKeyDown(keys[i]))
             {
-                frequency = fundamental * Mathf.Pow(1.0594f, i);
+                osc.Frequency = fundamental * Mathf.Pow(1.0594f, i);
                 envelope.NoteOn = true;
             }
         }
@@ -81,27 +85,22 @@ public class AudioSynth : MonoBehaviour
 
     void OnAudioFilterRead(float[] data, int channels)
     {
-        
-            // update increment in case frequency has changed
-            increment = frequency * 2 * Mathf.PI / sampling_frequency;
-            for (var i = 0; i < data.Length; i = i + channels)
-            {
-                envelope.OnNextBlock(1.0f / 44100);
+        for (var i = 0; i < data.Length; i = i + channels)
+        {
+            envelope.ProcessNext();
 
-                phase = phase + increment;
-                // this is where we copy audio data to make them “available” to Unity
-                data[i] = envelope.Multiplier * (float)(gain * (phase / (2*Mathf.PI)));
-                // if we have stereo, we copy the mono data to each channel
-                if (channels == 2) data[i + 1] = data[i];
-                if (phase > 2 * Mathf.PI) phase = 0;
-            }
+            data[i] = envelope.Multiplier * gain * osc.Next();
+            // if we have stereo, we copy the mono data to each channel
+            if (channels == 2) data[i + 1] = data[i];
+
+        }
     }
 
     void OnNextTrig(int clock)
     {
         if (currentBar[clock] > 0)
         {
-            frequency = fundamental * Mathf.Pow(1.0594f, currentBar[clock] - 60);
+            osc.Frequency = fundamental * Mathf.Pow(1.0594f, currentBar[clock] - 60);
             envelope.NoteOn = true;
         }
         else

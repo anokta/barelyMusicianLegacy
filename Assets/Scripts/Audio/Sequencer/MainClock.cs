@@ -9,9 +9,6 @@ public class MainClock : MonoBehaviour
     public int NOTE_TYPE = 4;
     public int CLOCK_FREQ = 16;
 
-    private int sampleRate;
-    private int bufferSize;
-
     private double phasor;
     private double beatInterval;
 
@@ -23,21 +20,16 @@ public class MainClock : MonoBehaviour
 
     void Awake()
     {
-        _instance = this; 
-
-        // ISSUE: Output sample rate does not correspond to the DSP sample rate for some reason by default.
-        sampleRate = AudioSettings.outputSampleRate = 44100;
-        int numBuffers; 
-        AudioSettings.GetDSPBufferSize(out bufferSize, out numBuffers);
+        _instance = this;
 
         Reset();
     }
 
     void OnAudioFilterRead(float[] data, int channels)
     {
-        phasor += bufferSize;
+        phasor += AudioProperties.BufferSize;
 
-        beatInterval = 240.0f * sampleRate / CLOCK_FREQ / BPM;
+        beatInterval = 240.0f * AudioProperties.SampleRate / CLOCK_FREQ / BPM;
         if (phasor >= beatInterval)
         {
             clockCount = (clockCount + 1) % CLOCK_FREQ;
@@ -62,7 +54,7 @@ public class MainClock : MonoBehaviour
 
     void Reset()
     {
-        beatInterval = 240.0f * sampleRate / CLOCK_FREQ / BPM;
+        beatInterval = 240.0f * AudioProperties.SampleRate / CLOCK_FREQ / BPM;
         phasor = beatInterval;
 
         barCount = 0;

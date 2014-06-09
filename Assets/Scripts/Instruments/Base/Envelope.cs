@@ -49,6 +49,7 @@ public class Envelope
 
             if (noteOn)
             {
+                multiplierLast = Multiplier;
                 changeState(EnvelopeState.ATTACK);
             }
             else
@@ -83,7 +84,7 @@ public class Envelope
         changeState(EnvelopeState.OFF);
     }
 
-    public void OnNextBlock(float interval)
+    public void ProcessNext()
     {
         switch (state)
         {
@@ -91,13 +92,13 @@ public class Envelope
                 break;
 
             case EnvelopeState.ATTACK:
-                progress += interval * attack;
-                Multiplier = Mathf.Lerp(0.0f, 1.0f, progress);
+                progress += AudioProperties.Interval * attack;
+                Multiplier = Mathf.Lerp(multiplierLast, 1.0f, progress);
                 if (progress >= 1.0f) changeState(EnvelopeState.DECAY);
                 break;
 
             case EnvelopeState.DECAY:
-                progress += interval * decay;
+                progress += AudioProperties.Interval * decay;
                 Multiplier = Mathf.Lerp(1.0f, sustain, progress);
                 if (progress >= 1.0f) changeState(EnvelopeState.SUSTAIN);
                 break;
@@ -107,7 +108,7 @@ public class Envelope
                 break;
 
             case EnvelopeState.RELEASE:
-                progress += interval * release;
+                progress += AudioProperties.Interval * release;
                 Multiplier = Mathf.Lerp(multiplierLast, 0.0f, progress);
                 if (progress >= 1.0) changeState(EnvelopeState.OFF);
                 break;
