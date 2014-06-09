@@ -3,10 +3,6 @@ using System.Collections;
 
 public class Envelope
 {
-    // Final amplitude (0. - 1.)
-    public float Multiplier;
-    float multiplierLast;
-
     // Attack (ms)
     float attack;
     public float Attack
@@ -49,12 +45,12 @@ public class Envelope
 
             if (noteOn)
             {
-                multiplierLast = Multiplier;
+                multiplierLast = multiplier;
                 changeState(EnvelopeState.ATTACK);
             }
             else
             {
-                multiplierLast = Multiplier;
+                multiplierLast = multiplier;
                 changeState(EnvelopeState.RELEASE);
             }
         }
@@ -71,6 +67,9 @@ public class Envelope
     // State progress
     float progress;
 
+    // Final amplitude (0. - 1.)
+    float multiplier, multiplierLast;
+
 
     public Envelope(float attack, float decay, float sustain, float release)
     {
@@ -80,11 +79,17 @@ public class Envelope
         Release = release;
 
         noteOn = false;
-        Multiplier = multiplierLast = 0.0f;
+
+        Reset();
+    }
+
+    public void Reset()
+    {
+        multiplier = multiplierLast = 0.0f;
         changeState(EnvelopeState.OFF);
     }
 
-    public void ProcessNext()
+    public float Next()
     {
         switch (state)
         {
@@ -93,26 +98,28 @@ public class Envelope
 
             case EnvelopeState.ATTACK:
                 progress += AudioProperties.Interval * attack;
-                Multiplier = Mathf.Lerp(multiplierLast, 1.0f, progress);
+                multiplier = Mathf.Lerp(multiplierLast, 1.0f, progress);
                 if (progress >= 1.0f) changeState(EnvelopeState.DECAY);
                 break;
 
             case EnvelopeState.DECAY:
                 progress += AudioProperties.Interval * decay;
-                Multiplier = Mathf.Lerp(1.0f, sustain, progress);
+                multiplier = Mathf.Lerp(1.0f, sustain, progress);
                 if (progress >= 1.0f) changeState(EnvelopeState.SUSTAIN);
                 break;
 
             case EnvelopeState.SUSTAIN:
-                Multiplier = sustain;
+                multiplier = sustain;
                 break;
 
             case EnvelopeState.RELEASE:
                 progress += AudioProperties.Interval * release;
-                Multiplier = Mathf.Lerp(multiplierLast, 0.0f, progress);
+                multiplier = Mathf.Lerp(multiplierLast, 0.0f, progress);
                 if (progress >= 1.0) changeState(EnvelopeState.OFF);
                 break;
         }
+
+        return multiplier;
     }
 
     void changeState(EnvelopeState state)

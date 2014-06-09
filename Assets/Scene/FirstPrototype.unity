@@ -558,6 +558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fundamental: 261.630005
   gain: 1
+  sample: {fileID: 8300000, guid: 84d039048c1f7094597447d8bc5eca41, type: 3}
 --- !u!1 &587488974
 GameObject:
   m_ObjectHideFlags: 0

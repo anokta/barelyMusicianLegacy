@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;  // Needed for Math
+using System.Collections;
 
 public class AudioSynth : MonoBehaviour
 {
@@ -19,8 +19,11 @@ public class AudioSynth : MonoBehaviour
     int[] currentBar;
     int[] notes = { 60, 62, 64, 71 };
 
-    Envelope envelope;
-    Oscillator osc;
+    //Envelope envelope;
+    Audible voice;
+    //Sonic sonic;
+
+    public AudioClip sample;
 
     void Awake()
     {
@@ -36,11 +39,18 @@ public class AudioSynth : MonoBehaviour
         AudioEventManager.OnNextBar += OnNextBar;
         AudioEventManager.OnNextTrig += OnNextTrig;
 
-        osc = new Oscillator(Oscillator.OSCType.SQUARE);
-        osc.PulseDuty = 0.25f;
-        osc.Frequency = 440.0f;
-        envelope = new Envelope(0.2f, 0.5f, 0.75f, 1.0f);
+        //osc = new Oscillator(Oscillator.OSCType.SQUARE);
+        //osc.PulseDuty = 0.25f;
+
+        //envelope = new Envelope(0.2f, 0.5f, 0.75f, 1.0f);
     }
+
+    void Start()
+    {
+        voice = new Impulse(new Sampler(sample), 2.0f);//new Voice(new Sampler(sample), new Envelope(0.2f, 0.5f, 0.75f, 1.0f));//new Voice(new Oscillator(Oscillator.OSCType.SQUARE), new Envelope(0.2f, 0.5f, 0.75f, 1.0f), 1.0f);
+        //sonic = new Sampler(sample);
+    }
+
 
     void Update()
     {
@@ -65,47 +75,45 @@ public class AudioSynth : MonoBehaviour
                 {
                     if (Input.GetKey(keys[j]))
                     {
-                        osc.Frequency = fundamental * Mathf.Pow(1.0594f, j);
+                        voice.Pitch = fundamental * Mathf.Pow(1.0594f, j);
                         anykey = true;
                     }
                 }
 
                 if (!anykey)
                 {
-                    envelope.NoteOn = false;
+                    voice.NoteOff();
                 }
             }
             else if (Input.GetKeyDown(keys[i]))
             {
-                osc.Frequency = fundamental * Mathf.Pow(1.0594f, i);
-                envelope.NoteOn = true;
+                voice.Pitch = fundamental * Mathf.Pow(1.0594f, i);
+                voice.NoteOn();
+                    
             }
         }
     }
 
     void OnAudioFilterRead(float[] data, int channels)
     {
-        for (var i = 0; i < data.Length; i = i + channels)
-        {
-            envelope.ProcessNext();
-
-            data[i] = envelope.Multiplier * gain * osc.Next();
-            // if we have stereo, we copy the mono data to each channel
-            if (channels == 2) data[i + 1] = data[i];
-
-        }
+            for (var i = 0; i < data.Length; i = i + channels)
+            {
+                data[i] = voice.ProcessNext();
+                // if we have stereo, we copy the mono data to each channel
+                if (channels == 2) data[i + 1] = data[i];
+            }
     }
 
     void OnNextTrig(int clock)
     {
         if (currentBar[clock] > 0)
         {
-            osc.Frequency = fundamental * Mathf.Pow(1.0594f, currentBar[clock] - 60);
-            envelope.NoteOn = true;
+            voice.Pitch = fundamental * Mathf.Pow(1.0594f, currentBar[clock] - 60);
+            voice.NoteOn();
         }
         else
         {
-            envelope.NoteOn = false;
+           //voice.NoteOff();
         }
     }
 

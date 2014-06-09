@@ -2,18 +2,49 @@
 using System.Collections;
 using System;
 
-public class Oscillator
+public class Oscillator : Sonic
 {
+    // Wave type
     public enum OSCType { SINE, COS, SAW, SQUARE, PULSE, TRIANGLE, NOISE };
     OSCType type;
-    
-    float frequency;
-    public float Frequency
+    public OSCType Type
     {
-        get { return frequency; }
-        set { frequency = value; }
-    }
+        get 
+        { 
+            return type; 
+        }
+        set
+        {
+            type = value;
 
+            switch (type)
+            {
+                case OSCType.SINE:
+                    oscFunc = sine;
+                    break;
+                case OSCType.COS:
+                    oscFunc = cos;
+                    break;
+                case OSCType.SAW:
+                    oscFunc = saw;
+                    break;
+                case OSCType.SQUARE:
+                    oscFunc = square;
+                    break;
+                case OSCType.PULSE:
+                    oscFunc = pulse;
+                    break;
+                case OSCType.TRIANGLE:
+                    oscFunc = triangle;
+                    break;
+                case OSCType.NOISE:
+                    oscFunc = noise;
+                    break;
+            }
+        }
+    }
+    
+    // Pulse duty (0. - 1.)
     float duty;
     public float PulseDuty
     {
@@ -23,46 +54,22 @@ public class Oscillator
 
     Func<float> oscFunc;
 
-    float phase;
-    float output;
-
     static float TWO_PI = 2.0f * Mathf.PI;
     static System.Random rand = new System.Random();
 
-    public Oscillator(OSCType type)
-    {
-        this.type = type;
 
-        switch (type)
-        {
-            case OSCType.SINE:
-                oscFunc = sine;
-                break;
-            case OSCType.COS:
-                oscFunc = cos;
-                break;
-            case OSCType.SAW:
-                oscFunc = saw;
-                break;
-            case OSCType.SQUARE:
-                oscFunc = square;
-                break;
-            case OSCType.PULSE:
-                oscFunc = pulse;
-                break;
-            case OSCType.TRIANGLE:
-                oscFunc = triangle;
-                break;
-            case OSCType.NOISE:
-                oscFunc = noise;
-                break;
-        }
+    public Oscillator(OSCType type, float frequency = 440.0f, float duty = 0.0f)
+    {
+        Type = type;
+        Frequency = frequency;
+        PulseDuty = duty;
     }
 
-    public float Next()
+    public override float Next()
     {
         return oscFunc();
     }
+
 
     float sine()
     {
