@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Impulse : Audible {
+public class Impulse : Audible
+{
 
     // Impulse (sample) trigger
     bool trigger;
@@ -10,9 +11,14 @@ public class Impulse : Audible {
     {
         sonic = sampler;
 
-        Gain = gain;
+        Volume = gain;
 
         trigger = false;
+    }
+
+    public override bool IsFree()
+    {
+        return trigger;
     }
 
     public override void NoteOn()

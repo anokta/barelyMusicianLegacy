@@ -10,7 +10,7 @@ public class AudioSynth : MonoBehaviour
     //private float frequency = 440;
     private float increment;
     private float phase;
-    private float sampling_frequency;
+    //private float sampling_frequency;
 
     private bool change;
 
@@ -27,7 +27,7 @@ public class AudioSynth : MonoBehaviour
 
     void Awake()
     {
-        sampling_frequency = AudioSettings.outputSampleRate;
+        //sampling_frequency = AudioSettings.outputSampleRate;
 
         currentBar = new int[16];
 

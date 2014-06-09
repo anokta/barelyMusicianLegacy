@@ -3,37 +3,23 @@ using System.Collections;
 
 public class Metronome : MonoBehaviour {
 
-    public AudioClip high, low;
-    bool highTrig, lowTrig;
+    PercussiveInstrument instrument;
 
 	// Use this for initialization
 	void Start () {
+        instrument = GetComponent<PercussiveInstrument>();
+        
         AudioEventManager.OnNextBar += OnNextBar;
         AudioEventManager.OnNextBeat += OnNextBeat;
 	}
 	
-	// Update is called once per frame
-	void OnGUI () {
-        if (highTrig)
-        {
-            highTrig = false;
-            audio.PlayOneShot(high);
-        }
-        if (lowTrig)
-        {
-            lowTrig = false;
-            audio.PlayOneShot(low);
-        }
-	}
-
     void OnNextBar(int bar)
     {
-        highTrig = true;
+        instrument.AddNote(instrument.rootPitch);
     }
 
     void OnNextBeat(int beat)
     {
-        if (!highTrig)
-            lowTrig = true;
+        instrument.AddNote(instrument.rootPitch * 1.0594f);
     }
 }

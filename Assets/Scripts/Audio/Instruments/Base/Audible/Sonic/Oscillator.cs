@@ -9,9 +9,9 @@ public class Oscillator : Sonic
     OSCType type;
     public OSCType Type
     {
-        get 
-        { 
-            return type; 
+        get
+        {
+            return type;
         }
         set
         {
@@ -43,7 +43,7 @@ public class Oscillator : Sonic
             }
         }
     }
-    
+
     // Pulse duty (0. - 1.)
     float duty;
     public float PulseDuty
@@ -58,10 +58,9 @@ public class Oscillator : Sonic
     static System.Random rand = new System.Random();
 
 
-    public Oscillator(OSCType type, float frequency = 440.0f, float duty = 0.0f)
+    public Oscillator(OSCType type, float duty = 0.0f)
     {
         Type = type;
-        Frequency = frequency;
         PulseDuty = duty;
     }
 

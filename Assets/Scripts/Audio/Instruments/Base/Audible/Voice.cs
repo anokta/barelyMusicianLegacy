@@ -16,7 +16,12 @@ public class Voice : Audible
 
         this.envelope = envelope;
 
-        Gain = gain;
+        Volume = gain;
+    }
+
+    public override bool IsFree()
+    {
+        return envelope.State == Envelope.EnvelopeState.OFF;
     }
 
     public override void NoteOn()
@@ -33,7 +38,7 @@ public class Voice : Audible
     {
         envelope.NoteOn = false;
     }
-    
+
     public override float ProcessNext()
     {
         return gain * envelope.Next() * sonic.Next();

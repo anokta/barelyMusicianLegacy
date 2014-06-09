@@ -5,7 +5,7 @@ public abstract class Audible
 {
     // Volume
     protected float gain;
-    public float Gain
+    public float Volume
     {
         get { return gain; }
         set { gain = value; }
@@ -20,6 +20,9 @@ public abstract class Audible
 
     // Sound generator
     protected Sonic sonic;
+
+    // Is being used or not?
+    public abstract bool IsFree();
 
     // Note onset
     public abstract void NoteOn();

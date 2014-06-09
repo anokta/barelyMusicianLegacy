@@ -1,60 +1,58 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class Instrument : MonoBehaviour {
+public abstract class Instrument : MonoBehaviour
+{
+    // Instrument audibles
+    protected List<Audible> audibles;
 
-    public AudioClip sample;
-
-    protected float[] sampleData;
-    protected int sampleOffset;
-
-    protected bool noteOn;
-    protected bool trigger;
-
-    void Awake () 
+    // Master volume
+    protected float masterGain;
+    public float MasterVolume
     {
-        sampleData = new float[sample.samples];
-        sample.GetData(sampleData, 0);
-        sampleOffset = -1;
-
-        noteOn = false;
-        trigger = false;
-	}
-	
-    public void Trigger()
-    {
-        trigger = true;
-        sampleOffset = 0;
+        get { return masterGain; }
+        set { masterGain = value; }
     }
 
-    public void NoteOn()
+    protected AudioSource audioSource;
+
+
+    protected virtual void Awake()
     {
-        noteOn = true;
+        audioSource = GetComponent<AudioSource>();
+
+        audibles = new List<Audible>();
+
+        masterGain = 1.0f;
     }
 
-    public void NoteOff()
+    protected virtual void OnAudioFilterRead(float[] data, int channels)
     {
-        noteOn = false;
-    }
-
-    void OnAudioFilterRead(float[] data, int channels)
-    {
-        if (sampleOffset >= 0)
+        for (int i = 0; i < data.Length; i += channels)
         {
-            for (int i = 0; i < data.Length; i += channels)
+            // Fill the buffer
+            float output = 0.0f;
+            foreach (Audible audible in audibles)
             {
-                if (sampleOffset < sampleData.Length)
-                {
-                    data[i] = sampleData[sampleOffset];
-                    if (channels == 2) data[i + 1] = sampleData[sampleOffset];
-                    sampleOffset++;
-                }
-                else
-                {
-                    sampleOffset += -1;
-                    break;
-                }
+                output += audible.ProcessNext();
             }
+            data[i] = masterGain * output;
+
+            // If stereo, copy the mono data to each channel
+            if (channels == 2) data[i + 1] = data[i];
         }
     }
+
+    public virtual void RemoveAllNotes()
+    {
+        foreach (Audible audible in audibles)
+        {
+            audible.NoteOff();
+        }
+    }
+
+    // TODO: Parameter to be changed to Note structure
+    public abstract void AddNote(float pitch);
+    public abstract void RemoveNote(float pitch);
 }

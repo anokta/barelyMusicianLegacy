@@ -29,7 +29,7 @@ public class Sampler : Sonic
         sampleData = new float[sample.samples];
         sample.GetData(sampleData, 0);
 
-        RootFrequency = Frequency = rootFrequency;
+        RootFrequency = rootFrequency;
         samplingRatio = sample.frequency / AudioProperties.SampleRate;
 
         Loop = loop;

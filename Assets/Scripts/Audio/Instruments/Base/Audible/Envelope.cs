@@ -46,12 +46,12 @@ public class Envelope
             if (noteOn)
             {
                 multiplierLast = multiplier;
-                changeState(EnvelopeState.ATTACK);
+                State = EnvelopeState.ATTACK;
             }
             else
             {
                 multiplierLast = multiplier;
-                changeState(EnvelopeState.RELEASE);
+                State = EnvelopeState.RELEASE;
             }
         }
         get
@@ -61,8 +61,13 @@ public class Envelope
     }
 
     // Envelope state
-    enum EnvelopeState { ATTACK, DECAY, SUSTAIN, RELEASE, OFF };
+    public enum EnvelopeState { ATTACK, DECAY, SUSTAIN, RELEASE, OFF };
     EnvelopeState state;
+    public EnvelopeState State
+    {
+        get { return state; }
+        set { progress = 0.0f; state = value; }
+    }
 
     // State progress
     float progress;
@@ -86,7 +91,7 @@ public class Envelope
     public void Reset()
     {
         multiplier = multiplierLast = 0.0f;
-        changeState(EnvelopeState.OFF);
+        State = EnvelopeState.OFF;
     }
 
     public float Next()
@@ -99,13 +104,13 @@ public class Envelope
             case EnvelopeState.ATTACK:
                 progress += AudioProperties.Interval * attack;
                 multiplier = Mathf.Lerp(multiplierLast, 1.0f, progress);
-                if (progress >= 1.0f) changeState(EnvelopeState.DECAY);
+                if (progress >= 1.0f) State = EnvelopeState.DECAY;
                 break;
 
             case EnvelopeState.DECAY:
                 progress += AudioProperties.Interval * decay;
                 multiplier = Mathf.Lerp(1.0f, sustain, progress);
-                if (progress >= 1.0f) changeState(EnvelopeState.SUSTAIN);
+                if (progress >= 1.0f) State = EnvelopeState.SUSTAIN;
                 break;
 
             case EnvelopeState.SUSTAIN:
@@ -115,16 +120,10 @@ public class Envelope
             case EnvelopeState.RELEASE:
                 progress += AudioProperties.Interval * release;
                 multiplier = Mathf.Lerp(multiplierLast, 0.0f, progress);
-                if (progress >= 1.0) changeState(EnvelopeState.OFF);
+                if (progress >= 1.0) State = EnvelopeState.OFF;
                 break;
         }
 
         return multiplier;
-    }
-
-    void changeState(EnvelopeState state)
-    {
-        progress = 0.0f;
-        this.state = state;
     }
 }
