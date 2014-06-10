@@ -27,28 +27,31 @@ public class MainClock : MonoBehaviour
 
     void OnAudioFilterRead(float[] data, int channels)
     {
-        phasor += AudioProperties.BufferSize;
-
-        beatInterval = 240.0f * AudioProperties.SampleRate / CLOCK_FREQ / BPM;
-        if (phasor >= beatInterval)
+        for (int i = 0; i < data.Length; i += channels)
         {
-            clockCount = (clockCount + 1) % CLOCK_FREQ;
+            phasor++;
 
-            if (clockCount % (CLOCK_FREQ / NOTE_TYPE) == 0)
+            beatInterval = 240.0f * AudioProperties.SampleRate / CLOCK_FREQ / BPM;
+            if (phasor >= beatInterval)
             {
-                beatCount = beatCount % BEATS + 1;
-                if (beatCount == 1)
+                clockCount = (clockCount + 1) % CLOCK_FREQ;
+
+                if (clockCount % (CLOCK_FREQ / NOTE_TYPE) == 0)
                 {
-                    barCount = barCount + 1;
-                    AudioEventManager.TriggerOnNextBar(barCount);
+                    beatCount = beatCount % BEATS + 1;
+                    if (beatCount == 1)
+                    {
+                        barCount = barCount + 1;
+                        AudioEventManager.TriggerOnNextBar(barCount);
+                    }
+
+                    AudioEventManager.TriggerOnNextBeat(beatCount);
                 }
 
-                AudioEventManager.TriggerOnNextBeat(beatCount);
+                AudioEventManager.TriggerOnNextTrig(clockCount);
+
+                phasor %= beatInterval;
             }
-
-            AudioEventManager.TriggerOnNextTrig(clockCount);
-
-            phasor %= beatInterval;
         }
     }
 

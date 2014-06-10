@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public abstract class MelodicInstrument : Instrument
 {
+    [SerializeField]
+    [Range(1, 16)]
     public int voiceCount = 1;
 
     List<int> activeList;

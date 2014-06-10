@@ -8,12 +8,9 @@ public abstract class Instrument : MonoBehaviour
     protected List<Audible> audibles;
 
     // Master volume
-    protected float masterGain;
-    public float MasterVolume
-    {
-        get { return masterGain; }
-        set { masterGain = value; }
-    }
+    [SerializeField]
+    [Range(0f, 1f)]
+    public float MasterVolume = 1.0f;
 
     protected AudioSource audioSource;
 
@@ -23,8 +20,6 @@ public abstract class Instrument : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         audibles = new List<Audible>();
-
-        masterGain = 1.0f;
     }
 
     protected virtual void OnAudioFilterRead(float[] data, int channels)
@@ -37,7 +32,7 @@ public abstract class Instrument : MonoBehaviour
             {
                 output += audible.ProcessNext();
             }
-            data[i] = masterGain * output;
+            data[i] = MasterVolume * output;
 
             // If stereo, copy the mono data to each channel
             if (channels == 2) data[i + 1] = data[i];

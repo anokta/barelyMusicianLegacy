@@ -189,7 +189,7 @@ MonoBehaviour:
   BPM: 135
   BEATS: 8
   NOTE_TYPE: 8
-  CLOCK_FREQ: 16
+  CLOCK_FREQ: 32
 --- !u!4 &476854252
 Transform:
   m_ObjectHideFlags: 0
@@ -410,7 +410,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1369899214
 Transform:
   m_ObjectHideFlags: 0
@@ -492,6 +492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ac24639883f154199b9172361df954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MasterVolume: .5
   samples:
   - {fileID: 8300000, guid: 136feda69c8f7454082f64a0cbfd393b, type: 3}
   - {fileID: 8300000, guid: f5e981d4a7f821e4d89398604346e10f, type: 3}
@@ -606,6 +607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ac24639883f154199b9172361df954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MasterVolume: 1
   samples:
   - {fileID: 8300000, guid: 836f6a87c27a2004990660e1c324dfd4, type: 3}
   - {fileID: 8300000, guid: 027264c19660ff84b86a6b4445b9dfaa, type: 3}
@@ -723,11 +725,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaaf4b3e2ea333645b8c7c3e04e4a01c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MasterVolume: 1
   voiceCount: 4
   sample: {fileID: 8300000, guid: b2ad64378982c1248b6e3decf8a2b855, type: 3}
   loop: 1
-  attack: .5
-  decay: 1
+  attack: .25
+  decay: .5
   sustain: .75
   release: .5
 --- !u!114 &1768703050
@@ -841,6 +844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6fec5683cfe37149bfa7b13d867f4cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MasterVolume: 1
   voiceCount: 5
   oscType: 3
   attack: .5
