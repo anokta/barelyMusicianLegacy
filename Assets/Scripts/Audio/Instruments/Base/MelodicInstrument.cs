@@ -29,6 +29,7 @@ public abstract class MelodicInstrument : Instrument
                 {
                     activeList.Add(i);
                     audibles[i].Pitch = note.Pitch;
+                    audibles[i].Volume = note.Velocity;
                     audibles[i].NoteOn();
 
                     return;
@@ -41,6 +42,7 @@ public abstract class MelodicInstrument : Instrument
                 {
                     activeList.Add(i);
                     audibles[i].Pitch = note.Pitch;
+                    audibles[i].Volume = note.Velocity;
                     audibles[i].NoteOn();
 
                     return;
@@ -54,6 +56,7 @@ public abstract class MelodicInstrument : Instrument
 
         int last = activeList[activeList.Count - 1];
         audibles[last].Pitch = note.Pitch;
+        audibles[last].Volume = note.Velocity;
         audibles[last].NoteOn();
     }
 

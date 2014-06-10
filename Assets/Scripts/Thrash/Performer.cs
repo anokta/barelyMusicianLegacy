@@ -15,13 +15,12 @@ public class Performer : MonoBehaviour {
     {
         instrument = FindObjectOfType<SynthIntstrument>();
 
-        Debug.Log(instrument);
         //score = new Note[MainClock.BarLength]; 
         //for (int i = 0; i < score.Length; ++i)
         //{
         //    score[i] = new Note(Random.Range(36, 48), Random.Range(0.75f, 1.0f));
         //}
-        currentBar = new Note[MainClock.BarLength / 2];
+        currentBar = new Note[MainClock.BarLength];
 
         for (int i = 0; i < currentBar.Length; ++i)
         {
@@ -36,7 +35,7 @@ public class Performer : MonoBehaviour {
             change = false;
             for (int i = 0; i < currentBar.Length; ++i)
             {
-                currentBar[i] = new Note((i % 4 == 0 && Random.Range(0.0f, 1.0f) > 0.25f) ? notes[Random.Range(0, notes.Length - 1)] : 0, Random.Range(0.75f, 1.0f));
+                currentBar[i] = new Note((i % 4 == 0 && Random.Range(0.0f, 1.0f) > 0.3f) ? notes[Random.Range(0, notes.Length - 1)] : 0, Random.Range(0.6f, 1.0f));
             }
         }
     }
@@ -65,10 +64,10 @@ public class Performer : MonoBehaviour {
 
     void OnNextPulse(int pulse)
     {
-        if (pulse % 2 == 0)
+       // if (pulse % 2 == 0)
         {
-            if (currentBar[pulse / 2].Index > 0)
-                instrument.AddNote(currentBar[pulse / 2]);
+            if (currentBar[pulse % currentBar.Length].Index > 0)
+                instrument.AddNote(currentBar[pulse % currentBar.Length]);
             else
                 instrument.RemoveAllNotes();
         }

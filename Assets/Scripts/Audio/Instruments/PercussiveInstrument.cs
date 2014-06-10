@@ -28,6 +28,7 @@ public class PercussiveInstrument : Instrument
         int index = note.Index - rootNote.Index;
         if (index >= 0 && index < audibles.Count)
         {
+            audibles[index].Volume = note.Velocity;
             audibles[index].NoteOn();
         }   
     }

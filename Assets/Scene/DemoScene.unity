@@ -88,7 +88,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &61104687
 Transform:
   m_ObjectHideFlags: 0
@@ -233,7 +233,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &468902631
 Transform:
   m_ObjectHideFlags: 0
@@ -367,7 +367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a6bc81b5de29d848adb1695392d19ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BPM: 135
+  BPM: 110
   BEATS: 4
   NOTE_TYPE: 4
   CLOCK_FREQ: 32
@@ -451,6 +451,7 @@ GameObject:
   - 4: {fileID: 993552976}
   - 114: {fileID: 993552977}
   - 114: {fileID: 993552978}
+  - 114: {fileID: 993552979}
   m_Layer: 0
   m_Name: Audio Manager
   m_TagString: Untagged
@@ -492,6 +493,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f9e107ef298fb548ae8db77af9f6cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &993552979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 993552975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0acecaec33a90a341be3f4d0d50a14a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1117552450
@@ -603,7 +615,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1369899214
 Transform:
   m_ObjectHideFlags: 0
@@ -719,7 +731,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1452604498
 Transform:
   m_ObjectHideFlags: 0
@@ -802,7 +814,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MasterVolume: 1
-  sustained: 1
+  sustained: 0
   samples:
   - {fileID: 8300000, guid: 836f6a87c27a2004990660e1c324dfd4, type: 3}
   - {fileID: 8300000, guid: 027264c19660ff84b86a6b4445b9dfaa, type: 3}
@@ -815,7 +827,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1452604497}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96110f2c31412cc4ea75fe86d51786d3, type: 3}
   m_Name: 
@@ -926,7 +938,7 @@ MonoBehaviour:
   loop: 1
   attack: .25
   decay: .5
-  sustain: .75
+  sustain: .899999976
   release: .5
   rootIndex: 36
 --- !u!114 &1768703050
@@ -1040,20 +1052,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6fec5683cfe37149bfa7b13d867f4cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MasterVolume: 1
+  MasterVolume: .819999993
   voiceCount: 4
   oscType: 3
-  attack: .400000006
-  decay: 1
-  sustain: .600000024
-  release: 1
+  attack: .349999994
+  decay: .75
+  sustain: .649999976
+  release: .75
 --- !u!114 &1825056064
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1825056060}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96110f2c31412cc4ea75fe86d51786d3, type: 3}
   m_Name: 
