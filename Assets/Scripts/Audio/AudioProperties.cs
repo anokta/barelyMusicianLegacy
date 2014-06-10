@@ -17,6 +17,11 @@ public class AudioProperties : MonoBehaviour
         int numBuffers;
         AudioSettings.GetDSPBufferSize(out BufferSize, out numBuffers);
 
+        // For testing purposes (is it more precise?)
+        BufferSize = 256;
+        AudioSettings.SetDSPBufferSize(BufferSize, numBuffers);
+
+
         Note.Initialize();
     }
 }
