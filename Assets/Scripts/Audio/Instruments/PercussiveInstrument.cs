@@ -6,33 +6,32 @@ public class PercussiveInstrument : Instrument
 {
     public AudioClip[] samples;
 
-    public float rootPitch;
+    public int rootIndex;
+    Note rootNote;
 
 
     void Start()
     {
+        rootNote = new Note(rootIndex, 1.0f);
+
         for (int i = 0; i < samples.Length; ++i)
         {
-            audibles.Add(new Impulse(new Sampler(samples[i], false, rootPitch)));
+            audibles.Add(new Impulse(new Sampler(samples[i], false, rootNote.Pitch)));
+            audibles[audibles.Count - 1].Pitch = rootNote.Pitch;
         }
     }
 
     // TODO: Note structure should be added!
-    public override void AddNote(float pitch)
+    public override void AddNote(Note note)
     {
-        for (int i = 0; i < samples.Length; ++i)
+        int index = note.Index - rootNote.Index;
+        if (index >= 0 && index < audibles.Count)
         {
-            float targetPitch = rootPitch * Mathf.Pow(1.0594f, i);
-
-            if (targetPitch == pitch)
-            {
-                audibles[i].Pitch = rootPitch;
-                audibles[i].NoteOn();
-            }
-        }
+            audibles[index].NoteOn();
+        }   
     }
 
-    public override void RemoveNote(float pitch)
+    public override void RemoveNote(Note note)
     {
     }
 }

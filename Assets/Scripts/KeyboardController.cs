@@ -4,7 +4,7 @@ using System.Collections;
 public class KeyboardController : MonoBehaviour
 {
 
-    public float fundamental = 261.63f;
+    public int fundamentalIndex = 36; //261.63f;
 
     Instrument instrument;
 
@@ -23,12 +23,12 @@ public class KeyboardController : MonoBehaviour
         // octave up-down
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            fundamental /= 2.0f;
+            fundamentalIndex = Mathf.Max(0, fundamentalIndex-12);
             instrument.RemoveAllNotes();
         }
         else if (Input.GetKeyDown(KeyCode.X))
         {
-            fundamental *= 2.0f;
+            fundamentalIndex = Mathf.Min(Note.notes.Length - 12, fundamentalIndex + 12);
             instrument.RemoveAllNotes();
         }
 
@@ -37,11 +37,11 @@ public class KeyboardController : MonoBehaviour
         {
             if (Input.GetKeyUp(keys[i]))
             {
-                instrument.RemoveNote(fundamental * Mathf.Pow(1.0594f, i));
+                instrument.RemoveNote(new Note(fundamentalIndex+i, 1.0f));
             }
             else if (Input.GetKeyDown(keys[i]))
             {
-                instrument.AddNote(fundamental * Mathf.Pow(1.0594f, i));
+                instrument.AddNote(new Note(fundamentalIndex + i, 1.0f));
             }
         }
     }

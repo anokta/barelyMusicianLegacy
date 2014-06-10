@@ -15,11 +15,11 @@ public class Metronome : MonoBehaviour {
 	
     void OnNextBar(int bar)
     {
-        instrument.AddNote(instrument.rootPitch);
+        instrument.AddNote(new Note(instrument.rootIndex, 1.0f));
     }
 
     void OnNextBeat(int beat)
     {
-        instrument.AddNote(instrument.rootPitch * 1.0594f);
+        instrument.AddNote(new Note(instrument.rootIndex+1, 1.0f));
     }
 }

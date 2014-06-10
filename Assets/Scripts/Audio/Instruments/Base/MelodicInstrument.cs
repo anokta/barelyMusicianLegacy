@@ -16,7 +16,7 @@ public abstract class MelodicInstrument : Instrument
     }
 
     // TODO: Optimization + refactoring needed!
-    public override void AddNote(float pitch)
+    public override void AddNote(Note note)
     {
         if (activeList.Count < voiceCount)
         {
@@ -26,7 +26,7 @@ public abstract class MelodicInstrument : Instrument
                 if (audibles[i].IsFree())
                 {
                     activeList.Add(i);
-                    audibles[i].Pitch = pitch;
+                    audibles[i].Pitch = note.Pitch;
                     audibles[i].NoteOn();
 
                     return;
@@ -38,7 +38,7 @@ public abstract class MelodicInstrument : Instrument
                 if (activeList.IndexOf(i) == -1)
                 {
                     activeList.Add(i);
-                    audibles[i].Pitch = pitch;
+                    audibles[i].Pitch = note.Pitch;
                     audibles[i].NoteOn();
 
                     return;
@@ -51,15 +51,15 @@ public abstract class MelodicInstrument : Instrument
         activeList.RemoveAt(0);
 
         int last = activeList[activeList.Count - 1];
-        audibles[last].Pitch = pitch;
+        audibles[last].Pitch = note.Pitch;
         audibles[last].NoteOn();
     }
 
-    public override void RemoveNote(float pitch)
+    public override void RemoveNote(Note note)
     {
         for (int i = 0; i < activeList.Count; ++i)
         {
-            if (audibles[activeList[i]].Pitch == pitch)
+            if (audibles[activeList[i]].Pitch == note.Pitch)
             {
                 audibles[activeList[i]].NoteOff();
                 activeList.RemoveAt(i);

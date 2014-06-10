@@ -16,5 +16,7 @@ public class AudioProperties : MonoBehaviour
 
         int numBuffers;
         AudioSettings.GetDSPBufferSize(out BufferSize, out numBuffers);
+
+        Note.Initialize();
     }
 }

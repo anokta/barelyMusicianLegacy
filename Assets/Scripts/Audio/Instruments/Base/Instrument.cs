@@ -53,6 +53,6 @@ public abstract class Instrument : MonoBehaviour
     }
 
     // TODO: Parameter to be changed to Note structure
-    public abstract void AddNote(float pitch);
-    public abstract void RemoveNote(float pitch);
+    public abstract void AddNote(Note note);
+    public abstract void RemoveNote(Note note);
 }
