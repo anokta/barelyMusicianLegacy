@@ -8,7 +8,7 @@ public class PreciseSequenceTest : MonoBehaviour {
 
     bool trigger;
 
-	// Use this for initialization
+
 	void Start () {
         sampler = new Sampler(sample);
         sampler.Frequency = sampler.RootFrequency;

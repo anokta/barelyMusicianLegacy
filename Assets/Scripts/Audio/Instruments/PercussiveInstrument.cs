@@ -4,11 +4,12 @@ using System.Collections.Generic;
 
 public class PercussiveInstrument : Instrument
 {
+    public bool sustained;
+
     public AudioClip[] samples;
 
     public int rootIndex;
     Note rootNote;
-
 
     void Start()
     {
@@ -21,7 +22,7 @@ public class PercussiveInstrument : Instrument
         }
     }
 
-    // TODO: Note structure should be added!
+    // TODO: Note structure should be restructured!
     public override void AddNote(Note note)
     {
         int index = note.Index - rootNote.Index;
@@ -33,5 +34,13 @@ public class PercussiveInstrument : Instrument
 
     public override void RemoveNote(Note note)
     {
+        if (sustained)
+        {
+            int index = note.Index - rootNote.Index;
+            if (index >= 0 && index < audibles.Count)
+            {
+                audibles[index].NoteOff();
+            }   
+        }
     }
 }
