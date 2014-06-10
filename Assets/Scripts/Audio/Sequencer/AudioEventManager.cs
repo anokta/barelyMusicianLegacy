@@ -6,7 +6,7 @@ public static class AudioEventManager {
     public delegate void AudioEvent(int count);
 
     // Audio Events
-    public static event AudioEvent OnNextBar, OnNextBeat, OnNextTrig;
+    public static event AudioEvent OnNextBar, OnNextBeat, OnNextPulse;
 
 
     public static void TriggerOnNextBar(int bar)
@@ -29,11 +29,11 @@ public static class AudioEventManager {
         //Debug.Log(Sequencer.barCount + "/" + Sequencer.beatCount);
     }
 
-    public static void TriggerOnNextTrig(int clock)
+    public static void TriggerOnNextPulse(int clock)
     {
-        if (OnNextTrig != null)
+        if (OnNextPulse != null)
         {
-            OnNextTrig(clock);
+            OnNextPulse(clock);
         }
     }
 }

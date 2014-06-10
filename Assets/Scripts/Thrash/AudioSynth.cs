@@ -37,7 +37,7 @@ public class AudioSynth : MonoBehaviour
         }
 
         AudioEventManager.OnNextBar += OnNextBar;
-        AudioEventManager.OnNextTrig += OnNextTrig;
+        AudioEventManager.OnNextPulse += OnNextPulse;
 
         //osc = new Oscillator(Oscillator.OSCType.SQUARE);
         //osc.PulseDuty = 0.25f;
@@ -104,7 +104,7 @@ public class AudioSynth : MonoBehaviour
             }
     }
 
-    void OnNextTrig(int clock)
+    void OnNextPulse(int clock)
     {
         if (currentBar[clock] > 0)
         {

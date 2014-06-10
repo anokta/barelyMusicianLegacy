@@ -25,10 +25,10 @@ public class DrumMachine : MonoBehaviour
             currentBar[3][i] = (i % 16 == 15) ? (int)DrumKit.HihatOpen : 0;
         }
 
-        //AudioEventManager.OnNextTrig += OnNextTrig;
+        //AudioEventManager.OnNextPulse += OnNextPulse;
     }
 
-    //void OnNextTrig(int clock)
+    //void OnNextPulse(int clock)
     //{
     //    for (int i = 0; i < drumKit.Length; ++i)
     //    {

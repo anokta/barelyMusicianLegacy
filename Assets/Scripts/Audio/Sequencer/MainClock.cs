@@ -14,7 +14,7 @@ public class MainClock : MonoBehaviour
 
     public static int barCount;
     public static int beatCount;
-    public static int clockCount;
+    public static int pulseCount;
 
     static MainClock _instance;
 
@@ -34,9 +34,9 @@ public class MainClock : MonoBehaviour
             beatInterval = 240.0f * AudioProperties.SampleRate / CLOCK_FREQ / BPM;
             if (phasor >= beatInterval)
             {
-                clockCount = (clockCount + 1) % CLOCK_FREQ;
+                pulseCount = (pulseCount + 1) % CLOCK_FREQ;
 
-                if (clockCount % (CLOCK_FREQ / NOTE_TYPE) == 0)
+                if (pulseCount % (CLOCK_FREQ / NOTE_TYPE) == 0)
                 {
                     beatCount = beatCount % BEATS + 1;
                     if (beatCount == 1)
@@ -48,7 +48,7 @@ public class MainClock : MonoBehaviour
                     AudioEventManager.TriggerOnNextBeat(beatCount);
                 }
 
-                AudioEventManager.TriggerOnNextTrig(clockCount);
+                AudioEventManager.TriggerOnNextPulse(pulseCount);
 
                 phasor %= beatInterval;
             }
@@ -62,7 +62,7 @@ public class MainClock : MonoBehaviour
 
         barCount = 0;
         beatCount = 0;
-        clockCount = -1;
+        pulseCount = -1;
     }
 
     public static void Play()
@@ -94,5 +94,10 @@ public class MainClock : MonoBehaviour
     public static bool IsPlaying()
     {
         return _instance.audio.isPlaying;
+    }
+
+    public static int BarLength
+    {
+        get { return _instance.BEATS * (_instance.CLOCK_FREQ / _instance.NOTE_TYPE); }
     }
 }

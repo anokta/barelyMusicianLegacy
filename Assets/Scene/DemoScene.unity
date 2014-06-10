@@ -88,7 +88,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &61104687
 Transform:
   m_ObjectHideFlags: 0
@@ -368,8 +368,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BPM: 135
-  BEATS: 8
-  NOTE_TYPE: 8
+  BEATS: 4
+  NOTE_TYPE: 4
   CLOCK_FREQ: 32
 --- !u!4 &476854252
 Transform:
@@ -450,6 +450,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 993552976}
   - 114: {fileID: 993552977}
+  - 114: {fileID: 993552978}
   m_Layer: 0
   m_Name: Audio Manager
   m_TagString: Untagged
@@ -480,6 +481,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 381d5199194f65d4182337753e335c13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &993552978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 993552975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f9e107ef298fb548ae8db77af9f6cf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1117552450
@@ -826,7 +838,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1768703047
 Transform:
   m_ObjectHideFlags: 0
@@ -916,6 +928,7 @@ MonoBehaviour:
   decay: .5
   sustain: .75
   release: .5
+  rootIndex: 36
 --- !u!114 &1768703050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -945,7 +958,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1825056061
 Transform:
   m_ObjectHideFlags: 0
@@ -1028,9 +1041,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MasterVolume: 1
-  voiceCount: 5
+  voiceCount: 4
   oscType: 3
-  attack: .5
+  attack: .400000006
   decay: 1
   sustain: .600000024
   release: 1
