@@ -255,7 +255,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -753,7 +753,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -872,7 +872,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -933,13 +933,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MasterVolume: 1
-  voiceCount: 4
+  voiceCount: 16
   sample: {fileID: 8300000, guid: b2ad64378982c1248b6e3decf8a2b855, type: 3}
   loop: 1
-  attack: .25
+  attack: .100000001
   decay: .5
   sustain: .899999976
-  release: .5
+  release: .400000006
   rootIndex: 36
 --- !u!114 &1768703050
 MonoBehaviour:
@@ -963,6 +963,7 @@ GameObject:
   - 4: {fileID: 1825056061}
   - 114: {fileID: 1825056064}
   - 114: {fileID: 1825056063}
+  - 114: {fileID: 1825056065}
   - 82: {fileID: 1825056062}
   m_Layer: 0
   m_Name: Synthesizer
@@ -992,7 +993,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1053,12 +1054,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MasterVolume: .839999974
-  voiceCount: 4
-  oscType: 3
-  attack: .349999994
+  voiceCount: 16
+  oscType: 2
+  attack: .100000001
   decay: .75
   sustain: .649999976
-  release: .75
+  release: .5
   lfoEnabled: 0
   lfoFrequency: 5
 --- !u!114 &1825056064
@@ -1073,6 +1074,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fundamentalIndex: 36
+--- !u!114 &1825056065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1825056060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4e0dde3a0e701a4d9bff12f755543de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 1
 --- !u!1 &1939825594
 GameObject:
   m_ObjectHideFlags: 0

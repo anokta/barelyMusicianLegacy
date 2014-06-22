@@ -11,7 +11,7 @@ public class PercussiveInstrument : Instrument
     public int rootIndex;
     Note rootNote;
 
-    void Start()
+    protected override void Start()
     {
         rootNote = new Note(rootIndex, 1.0f);
 
@@ -20,6 +20,8 @@ public class PercussiveInstrument : Instrument
             audibles.Add(new Impulse(new Sampler(samples[i], false, rootNote.Pitch)));
             audibles[audibles.Count - 1].Pitch = rootNote.Pitch;
         }
+
+        base.Start();
     }
 
     // TODO: Note structure should be restructured!

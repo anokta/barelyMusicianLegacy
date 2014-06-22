@@ -22,6 +22,8 @@ public class SynthIntstrument : MelodicInstrument
         lfo = new Oscillator(Oscillator.OSCType.SINE);
         lfo.Frequency = lfoFrequency;
 
+        effects.Add(new Distortion(1.0f));
+
         base.Start();
     }
 

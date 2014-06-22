@@ -10,10 +10,12 @@ public abstract class MelodicInstrument : Instrument
 
     LinkedList<Audible> activeList, freeList;
 
-    protected virtual void Start()
+    protected override void Start()
     {
         freeList = new LinkedList<Audible>(audibles);
         activeList = new LinkedList<Audible>();
+
+        base.Start();
     }
 
     // TODO: Refactoring needed!
