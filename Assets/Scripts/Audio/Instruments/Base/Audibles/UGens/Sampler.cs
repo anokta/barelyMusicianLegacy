@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class Sampler : Sonic
+public class Sampler : UGen
 {
     // Sample raw data
     float[] sampleData;

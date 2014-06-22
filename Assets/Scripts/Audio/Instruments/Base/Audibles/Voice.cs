@@ -8,7 +8,7 @@ public class Voice : Audible
     enum VoiceType { SYNTH, SAMPLER }
     VoiceType type;
 
-    public Voice(Sonic sonic, Envelope envelope, float gain = 1.0f)
+    public Voice(UGen sonic, Envelope envelope, float gain = 1.0f)
     {
         this.sonic = sonic;
         if (sonic.GetType() == typeof(Oscillator)) type = VoiceType.SYNTH;
@@ -31,12 +31,12 @@ public class Voice : Audible
             sonic.Reset();
         }
 
-        envelope.NoteOn = true;
+        envelope.State = Envelope.EnvelopeState.ATTACK;
     }
 
     public override void NoteOff()
     {
-        envelope.NoteOn = false;
+        envelope.State = Envelope.EnvelopeState.RELEASE;
     }
 
     public override float ProcessNext()

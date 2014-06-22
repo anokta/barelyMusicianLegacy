@@ -5,69 +5,51 @@ using System.Collections.Generic;
 public abstract class MelodicInstrument : Instrument
 {
     [SerializeField]
-    [Range(1, 16)]
+    [Range(1, 32)]
     public int voiceCount = 1;
 
-    List<int> activeList;
+    LinkedList<Audible> activeList, freeList;
 
-    protected override void Awake()
+    protected virtual void Start()
     {
-        base.Awake();
-
-        activeList = new List<int>();
+        freeList = new LinkedList<Audible>(audibles);
+        activeList = new LinkedList<Audible>();
     }
 
-    // TODO: Optimization + refactoring needed!
+    // TODO: Refactoring needed!
     public override void AddNote(Note note)
     {
-        if (activeList.Count < voiceCount)
+        Audible audible;
+        
+        // is any voice available?
+        if (freeList.Count > 0)
         {
-            // is free?
-            for (int i = 0; i < voiceCount; ++i)
-            {
-                if (audibles[i].IsFree())
-                {
-                    activeList.Add(i);
-                    audibles[i].Pitch = note.Pitch;
-                    audibles[i].Volume = note.Velocity;
-                    audibles[i].NoteOn();
+            audible = freeList.First.Value;
 
-                    return;
-                }
-            }
-            // or is noteoff?
-            for (int i = 0; i < voiceCount; ++i)
-            {
-                if (activeList.IndexOf(i) == -1)
-                {
-                    activeList.Add(i);
-                    audibles[i].Pitch = note.Pitch;
-                    audibles[i].Volume = note.Velocity;
-                    audibles[i].NoteOn();
-
-                    return;
-                }
-            }
+            freeList.RemoveFirst();
+            activeList.AddLast(audible);
+        }
+        else
+        {   
+            audible = activeList.First.Value;
         }
 
-        // otherwise, replace
-        activeList.Add(activeList[0]);
-        activeList.RemoveAt(0);
-
-        int last = activeList[activeList.Count - 1];
-        audibles[last].Pitch = note.Pitch;
-        audibles[last].Volume = note.Velocity;
-        audibles[last].NoteOn();
+        audible.Pitch = note.Pitch;
+        audible.Volume = note.Velocity;
+        audible.NoteOn();
     }
 
     public override void RemoveNote(Note note)
     {
-        for (int i = 0; i < activeList.Count; ++i)
+        foreach (Audible audible in activeList)
         {
-            if (audibles[activeList[i]].Pitch == note.Pitch)
+            if (audible.Pitch == note.Pitch)
             {
-                audibles[activeList[i]].NoteOff();
-                activeList.RemoveAt(i);
+                audible.NoteOff();
+                activeList.Remove(audible);
+                freeList.AddLast(audible);
+
+                break;
             }
         }
     }
@@ -75,6 +57,7 @@ public abstract class MelodicInstrument : Instrument
     public override void RemoveAllNotes()
     {
         activeList.Clear();
+        freeList = new LinkedList<Audible>(audibles);
 
         base.RemoveAllNotes();
     }

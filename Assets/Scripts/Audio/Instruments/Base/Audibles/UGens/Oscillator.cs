@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class Oscillator : Sonic
+public class Oscillator : UGen
 {
     // Wave type
     public enum OSCType { SINE, COS, SAW, SQUARE, PULSE, TRIANGLE, NOISE };
@@ -58,7 +58,7 @@ public class Oscillator : Sonic
     static System.Random rand = new System.Random();
 
 
-    public Oscillator(OSCType type, float duty = 0.0f)
+    public Oscillator(OSCType type, float duty = 0.5f)
     {
         Type = type;
         PulseDuty = duty;

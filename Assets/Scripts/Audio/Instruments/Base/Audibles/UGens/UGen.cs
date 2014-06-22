@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class Sonic
+public abstract class UGen
 {
     // Frequency (Hz)
     protected float frequency;
@@ -20,7 +20,7 @@ public abstract class Sonic
     // Compute next sample
     public abstract float Next();
 
-    protected Sonic()
+    protected UGen()
     {
         Reset();
     }

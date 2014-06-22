@@ -19,7 +19,7 @@ public abstract class Audible
     }
 
     // Sound generator
-    protected Sonic sonic;
+    protected UGen sonic;
 
     // Is being used or not?
     public abstract bool IsFree();

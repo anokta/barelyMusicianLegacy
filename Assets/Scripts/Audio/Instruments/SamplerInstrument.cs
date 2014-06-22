@@ -13,7 +13,7 @@ public class SamplerInstrument : MelodicInstrument
     public int rootIndex;
     Note rootNote;
     
-    void Start()
+    protected override void Start()
     {
         rootNote = new Note(rootIndex, 1.0f);
 
@@ -21,6 +21,8 @@ public class SamplerInstrument : MelodicInstrument
         {
             audibles.Add(new Voice(new Sampler(sample, loop, rootNote.Pitch), new Envelope(attack, decay, sustain, release)));
         }
+
+        base.Start();
     }
 
 }
