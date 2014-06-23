@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using BarelyAPI.Musician;
 
 public class KeyboardController : MonoBehaviour
 {
-
     public int fundamentalIndex = 36; //261.63f;
 
     Instrument instrument;
@@ -24,12 +24,12 @@ public class KeyboardController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z))
         {
             fundamentalIndex = Mathf.Max(0, fundamentalIndex-12);
-            instrument.RemoveAllNotes();
+            instrument.StopAllNotes();
         }
         else if (Input.GetKeyDown(KeyCode.X))
         {
             fundamentalIndex = Mathf.Min(Note.notes.Length - 12, fundamentalIndex + 12);
-            instrument.RemoveAllNotes();
+            instrument.StopAllNotes();
         }
 
         // keys
@@ -37,11 +37,11 @@ public class KeyboardController : MonoBehaviour
         {
             if (Input.GetKeyUp(keys[i]))
             {
-                instrument.NoteOff(new Note(fundamentalIndex+i, 1.0f));
+                instrument.PlayNote(new Note(fundamentalIndex+i, 0.0f));
             }
             else if (Input.GetKeyDown(keys[i]))
             {
-                instrument.NoteOn(new Note(fundamentalIndex + i, 1.0f));
+                instrument.PlayNote(new Note(fundamentalIndex + i, 1.0f));
             }
         }
     }

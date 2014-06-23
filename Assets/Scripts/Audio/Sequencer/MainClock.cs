@@ -1,103 +1,112 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MainClock : MonoBehaviour
+namespace BarelyAPI
 {
-    public int BPM = 120;
-
-    public int BEATS = 4;
-    public int NOTE_TYPE = 4;
-    public int CLOCK_FREQ = 16;
-
-    private double phasor;
-    private double beatInterval;
-
-    public static int barCount;
-    public static int beatCount;
-    public static int pulseCount;
-
-    static MainClock _instance;
-
-    void Awake()
+    public class MainClock : MonoBehaviour
     {
-        _instance = this;
+        public int BPM = 120;
 
-        Reset();
-    }
+        public int BEATS = 4;
+        public int NOTE_TYPE = 4;
+        public int CLOCK_FREQ = 16;
 
-    void OnAudioFilterRead(float[] data, int channels)
-    {
-        for (int i = 0; i < data.Length; i += channels)
+        private double phasor;
+        private double clockInterval;
+
+        public static int barCount;
+        public static int beatCount;
+        public static int pulseCount;
+
+        static MainClock _instance;
+
+        void Awake()
         {
-            phasor++;
+            _instance = this;
 
-            beatInterval = 240.0f * AudioProperties.SampleRate / CLOCK_FREQ / BPM;
-            if (phasor >= beatInterval)
+            clockInterval = 240.0f * AudioProperties.SampleRate / CLOCK_FREQ / BPM;
+
+            Reset();
+        }
+
+        void OnAudioFilterRead(float[] data, int channels)
+        {
+            for (int i = 0; i < data.Length; i += channels)
             {
-                pulseCount = (pulseCount + 1) % CLOCK_FREQ;
+                phasor++;
 
-                if (pulseCount % (CLOCK_FREQ / NOTE_TYPE) == 0)
+                clockInterval = 240.0f * AudioProperties.SampleRate / CLOCK_FREQ / BPM;
+                if (phasor >= clockInterval)
                 {
-                    beatCount = beatCount % BEATS + 1;
-                    if (beatCount == 1)
+                    pulseCount = pulseCount % CLOCK_FREQ + 1;
+
+                    if (pulseCount % (CLOCK_FREQ / NOTE_TYPE) == 1)
                     {
-                        barCount = barCount + 1;
-                        AudioEventManager.TriggerOnNextBar(barCount);
+                        beatCount = beatCount % BEATS + 1;
+                        if (beatCount == 1)
+                        {
+                            barCount = barCount + 1;
+                            AudioEventManager.TriggerOnNextBar(barCount);
+                        }
+
+                        AudioEventManager.TriggerOnNextBeat(beatCount);
                     }
 
-                    AudioEventManager.TriggerOnNextBeat(beatCount);
+                    AudioEventManager.TriggerOnNextPulse(pulseCount);
+
+                    phasor %= clockInterval;
                 }
-
-                AudioEventManager.TriggerOnNextPulse(pulseCount);
-
-                phasor %= beatInterval;
             }
         }
-    }
 
-    void Reset()
-    {
-        beatInterval = 240.0f * AudioProperties.SampleRate / CLOCK_FREQ / BPM;
-        phasor = beatInterval;
-
-        barCount = 0;
-        beatCount = 0;
-        pulseCount = -1;
-    }
-
-    public static void Play()
-    {
-        if (!_instance.audio.isPlaying)
+        void Reset()
         {
-            _instance.audio.Play();
-        }
-    }
+            phasor = clockInterval;
 
-    public static void Pause()
-    {
-        if (_instance.audio.isPlaying)
-        {
-            _instance.audio.Pause();
-        }
-    }
-
-    public static void Stop()
-    {
-        if (_instance.audio.isPlaying)
-        {
-            _instance.audio.Stop();
+            barCount = 0;
+            beatCount = 0;
+            pulseCount = 0;
         }
 
-        _instance.Reset();
-    }
+        public static void Play()
+        {
+            if (!_instance.audio.isPlaying)
+            {
+                _instance.audio.Play();
+            }
+        }
 
-    public static bool IsPlaying()
-    {
-        return _instance.audio.isPlaying;
-    }
+        public static void Pause()
+        {
+            if (_instance.audio.isPlaying)
+            {
+                _instance.audio.Pause();
+            }
+        }
 
-    public static int BarLength
-    {
-        get { return _instance.BEATS * (_instance.CLOCK_FREQ / _instance.NOTE_TYPE); }
+        public static void Stop()
+        {
+            if (_instance.audio.isPlaying)
+            {
+                _instance.audio.Stop();
+            }
+
+            _instance.Reset();
+        }
+
+        public static bool IsPlaying()
+        {
+            return _instance.audio.isPlaying;
+        }
+
+        public static int BarLength
+        {
+            get { return _instance.BEATS * BeatLength; }
+        }
+
+        public static int BeatLength
+        {
+            get { return _instance.CLOCK_FREQ / _instance.NOTE_TYPE; }
+        }
     }
 }

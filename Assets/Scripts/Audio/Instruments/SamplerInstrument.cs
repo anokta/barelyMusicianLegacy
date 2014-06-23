@@ -1,27 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SamplerInstrument : MelodicInstrument
+namespace BarelyAPI.Musician
 {
-    public AudioClip sample;
-    public bool loop;
-
-    public float attack, decay, sustain, release;
-
-    // TODO: Remove these (restructuring needed!)
-    public int rootIndex;
-    Note rootNote;
-
-    protected override void Start()
+    public class SamplerInstrument : MelodicInstrument
     {
-        rootNote = new Note(rootIndex, 1.0f);
+        public AudioClip sample;
+        public bool loop;
 
-        for (int i = 0; i < voiceCount; ++i)
+        public float attack, decay, sustain, release;
+
+        // TODO: Remove these (restructuring needed!)
+        public int rootIndex;
+        Note rootNote;
+
+        protected override void Start()
         {
-            voices.Add(new Voice(new Sampler(sample, loop, rootNote.Pitch), new Envelope(attack, decay, sustain, release)));
+            rootNote = new Note(rootIndex, 1.0f);
+
+            for (int i = 0; i < voiceCount; ++i)
+            {
+                voices.Add(new Voice(new Sampler(sample, loop, rootNote.Pitch), new Envelope(attack, decay, sustain, release)));
+            }
+
+            base.Start();
         }
-
-        base.Start();
     }
-
 }

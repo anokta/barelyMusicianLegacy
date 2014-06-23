@@ -1,144 +1,146 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System;
 
-public class Oscillator : UGen
+namespace BarelyAPI.Musician
 {
-    // Wave type
-    public enum OSCType { SINE, COS, SAW, SQUARE, PULSE, TRIANGLE, NOISE };
-    OSCType type;
-    public OSCType Type
+    public class Oscillator : UGen
     {
-        get
+        // Wave type
+        public enum OSCType { SINE, COS, SAW, SQUARE, PULSE, TRIANGLE, NOISE };
+        OSCType type;
+        public OSCType Type
         {
-            return type;
-        }
-        set
-        {
-            type = value;
-
-            switch (type)
+            get
             {
-                case OSCType.SINE:
-                    oscFunc = sine;
-                    break;
-                case OSCType.COS:
-                    oscFunc = cos;
-                    break;
-                case OSCType.SAW:
-                    oscFunc = saw;
-                    break;
-                case OSCType.SQUARE:
-                    oscFunc = square;
-                    break;
-                case OSCType.PULSE:
-                    oscFunc = pulse;
-                    break;
-                case OSCType.TRIANGLE:
-                    oscFunc = triangle;
-                    break;
-                case OSCType.NOISE:
-                    oscFunc = noise;
-                    break;
+                return type;
+            }
+            set
+            {
+                type = value;
+
+                switch (type)
+                {
+                    case OSCType.SINE:
+                        oscFunc = sine;
+                        break;
+                    case OSCType.COS:
+                        oscFunc = cos;
+                        break;
+                    case OSCType.SAW:
+                        oscFunc = saw;
+                        break;
+                    case OSCType.SQUARE:
+                        oscFunc = square;
+                        break;
+                    case OSCType.PULSE:
+                        oscFunc = pulse;
+                        break;
+                    case OSCType.TRIANGLE:
+                        oscFunc = triangle;
+                        break;
+                    case OSCType.NOISE:
+                        oscFunc = noise;
+                        break;
+                }
             }
         }
-    }
 
-    // Pulse duty (0. - 1.)
-    float duty;
-    public float PulseDuty
-    {
-        get { return duty; }
-        set { duty = value; }
-    }
+        // Pulse duty (0. - 1.)
+        float duty;
+        public float PulseDuty
+        {
+            get { return duty; }
+            set { duty = value; }
+        }
 
-    Func<float> oscFunc;
+        Func<float> oscFunc;
 
-    static float TWO_PI = 2.0f * Mathf.PI;
-    static System.Random rand = new System.Random();
-
-
-    public Oscillator(OSCType type, float duty = 0.5f)
-    {
-        Type = type;
-        PulseDuty = duty;
-    }
-
-    public override float Next()
-    {
-        return oscFunc();
-    }
+        static float TWO_PI = 2.0f * Mathf.PI;
+        static System.Random rand = new System.Random();
 
 
-    float sine()
-    {
-        output = Mathf.Sin(phase * TWO_PI);
+        public Oscillator(OSCType type, float duty = 0.5f)
+        {
+            Type = type;
+            PulseDuty = duty;
+        }
 
-        if (phase >= 1.0f) phase -= 1.0f;
-        phase += frequency * AudioProperties.Interval;
+        public override float Next()
+        {
+            return oscFunc();
+        }
 
-        return output;
-    }
 
-    float cos()
-    {
-        output = Mathf.Cos(phase * TWO_PI);
+        float sine()
+        {
+            output = Mathf.Sin(phase * TWO_PI);
 
-        if (phase >= 1.0f) phase -= 1.0f;
-        phase += frequency * AudioProperties.Interval;
+            if (phase >= 1.0f) phase -= 1.0f;
+            phase += frequency * AudioProperties.Interval;
 
-        return output;
-    }
+            return output;
+        }
 
-    float saw()
-    {
-        output = phase;
+        float cos()
+        {
+            output = Mathf.Cos(phase * TWO_PI);
 
-        if (phase >= 1.0f) phase -= 2.0f;
-        phase += frequency * AudioProperties.Interval;
+            if (phase >= 1.0f) phase -= 1.0f;
+            phase += frequency * AudioProperties.Interval;
 
-        return output;
-    }
+            return output;
+        }
 
-    float square()
-    {
-        if (phase < 0.5f) output = -1.0f;
-        if (phase > 0.5f) output = 1.0f;
+        float saw()
+        {
+            output = phase;
 
-        if (phase >= 1.0f) phase -= 1.0f;
-        phase += frequency * AudioProperties.Interval;
+            if (phase >= 1.0f) phase -= 2.0f;
+            phase += frequency * AudioProperties.Interval;
 
-        return output;
-    }
+            return output;
+        }
 
-    float pulse()
-    {
-        if (duty < 0.0f) duty = 0.0f;
-        if (duty > 1.0f) duty = 1.0f;
-        if (phase < duty) output = -1.0f;
-        if (phase > duty) output = 1.0f;
+        float square()
+        {
+            if (phase < 0.5f) output = -1.0f;
+            if (phase > 0.5f) output = 1.0f;
 
-        if (phase >= 1.0f) phase -= 1.0f;
-        phase += frequency * AudioProperties.Interval;
+            if (phase >= 1.0f) phase -= 1.0f;
+            phase += frequency * AudioProperties.Interval;
 
-        return output;
-    }
+            return output;
+        }
 
-    float triangle()
-    {
-        if (phase <= 0.5f) output = (phase - 0.25f) * 4.0f;
-        else output = ((1.0f - phase) - 0.25f) * 4.0f;
+        float pulse()
+        {
+            if (duty < 0.0f) duty = 0.0f;
+            if (duty > 1.0f) duty = 1.0f;
+            if (phase < duty) output = -1.0f;
+            if (phase > duty) output = 1.0f;
 
-        if (phase >= 1.0f) phase -= 1.0f;
-        phase += frequency * AudioProperties.Interval;
+            if (phase >= 1.0f) phase -= 1.0f;
+            phase += frequency * AudioProperties.Interval;
 
-        return output;
-    }
+            return output;
+        }
 
-    float noise()
-    {
-        output = 2.0f * (float)rand.NextDouble() - 1.0f;
+        float triangle()
+        {
+            if (phase <= 0.5f) output = (phase - 0.25f) * 4.0f;
+            else output = ((1.0f - phase) - 0.25f) * 4.0f;
 
-        return output;
+            if (phase >= 1.0f) phase -= 1.0f;
+            phase += frequency * AudioProperties.Interval;
+
+            return output;
+        }
+
+        float noise()
+        {
+            output = 2.0f * (float)rand.NextDouble() - 1.0f;
+
+            return output;
+        }
     }
 }

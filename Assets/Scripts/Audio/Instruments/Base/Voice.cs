@@ -1,62 +1,65 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Voice
+namespace BarelyAPI.Musician
 {
-    // Volume
-    float gain;
-    public float Gain
+    public class Voice
     {
-        get { return gain; }
-        set { gain = value; }
-    }
+        // Volume
+        float gain;
+        public float Gain
+        {
+            get { return gain; }
+            set { gain = value; }
+        }
 
-    // Frequency
-    public float Pitch
-    {
-        get { return ugen.Frequency; }
-        set { ugen.Frequency = value; }
-    }
+        // Frequency
+        public float Pitch
+        {
+            get { return ugen.Frequency; }
+            set { ugen.Frequency = value; }
+        }
 
-    // Envelope
-    Envelope envelope;
-    public Envelope Envelope
-    {
-        get { return envelope; }
-    }
+        // Envelope
+        Envelope envelope;
+        public Envelope Envelope
+        {
+            get { return envelope; }
+        }
 
-    // Sound generator
-    UGen ugen;
+        // Sound generator
+        UGen ugen;
 
-    public Voice(UGen soundGenerator, Envelope soundEnvelope, float gain = 1.0f)
-    {
-        ugen = soundGenerator;
-        envelope = soundEnvelope;
-        
-        Gain = gain;
-    }
+        public Voice(UGen soundGenerator, Envelope soundEnvelope, float gain = 1.0f)
+        {
+            ugen = soundGenerator;
+            envelope = soundEnvelope;
 
-    public void Start()
-    {
-        ugen.Reset();
+            Gain = gain;
+        }
 
-        envelope.Start();
-    }
+        public void Start()
+        {
+            ugen.Reset();
 
-    public void Stop()
-    {
-        envelope.Stop();
-    }
+            envelope.Start();
+        }
 
-    public void StopImmediately()
-    {
-        envelope.Reset();
+        public void Stop()
+        {
+            envelope.Stop();
+        }
 
-        ugen.Reset();
-    }
+        public void StopImmediately()
+        {
+            envelope.Reset();
 
-    public float ProcessNext()
-    {
-        return gain * envelope.Next() * ugen.Next();
+            ugen.Reset();
+        }
+
+        public float ProcessNext()
+        {
+            return gain * envelope.Next() * ugen.Next();
+        }
     }
 }

@@ -1,75 +1,125 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class Performer : MonoBehaviour {
-
-    Instrument instrument;
-
-    Note[] score;
-
-    bool change;
-    Note[] currentBar;
-    int[] notes = { 36, 38, 40, 47 };
-
-    void Start()
+namespace BarelyAPI.Musician
+{
+    public class Performer : MonoBehaviour
     {
-        instrument = FindObjectOfType<SynthIntstrument>();
+        Instrument instrument;
+  
+        Dictionary<int, List<Note>[]> score;
+        int currentBar;
 
-        //score = new Note[MainClock.BarLength]; 
-        //for (int i = 0; i < score.Length; ++i)
-        //{
-        //    score[i] = new Note(Random.Range(36, 48), Random.Range(0.75f, 1.0f));
-        //}
-        currentBar = new Note[MainClock.BarLength];
+        int nextNote;
+        int[] notes = { 36, 38, 40, 41, 43, 45, 47, 48 };
 
-        for (int i = 0; i < currentBar.Length; ++i)
+        void Start()
         {
-            currentBar[i] = new Note((i % 4 == 0 && Random.Range(0.0f, 1.0f) > 0.25f) ? notes[Random.Range(0, notes.Length - 1)] : 0, Random.Range(0.75f, 1.0f));
-        }
-    }
+            instrument = FindObjectOfType<SynthIntstrument>();
 
-    void Update()
-    {
-        if (change)
-        {
-            change = false;
-            for (int i = 0; i < currentBar.Length; ++i)
+            score = new Dictionary<int, List<Note>[]>();
+
+            // up & down test
+            for (int i = 0; i < notes.Length; ++i)
             {
-                currentBar[i] = new Note((i % 4 == 0 && Random.Range(0.0f, 1.0f) > 0.3f) ? notes[Random.Range(0, notes.Length - 1)] : 0, Random.Range(0.6f, 1.0f));
+                AddNote(new Note(notes[i], 1.0f), 1.0f + i / 4.0f, 0.25f);
+                AddNote(new Note(notes[notes.Length - 1 - i], 1.0f), notes.Length/4.0f + 1.0f + i / 4.0f, 0.25f);
+
+                AddNote(new Note(notes[i], 1.0f), notes.Length / 2.0f + 1.0f + i / 2.0f, 0.5f);
+                AddNote(new Note(notes[(i + 2) % notes.Length], 1.0f), notes.Length / 2.0f + 1.0f + i / 2.0f, 0.5f);
+                AddNote(new Note(notes[(i + 4) % notes.Length], 1.0f), notes.Length / 2.0f + 1.0f + i / 2.0f, 0.5f);
+
+                AddNote(new Note(notes[notes.Length - 1 - i], 1.0f), notes.Length + 1.0f + i / 2.0f, 0.5f);
+                AddNote(new Note(notes[(notes.Length - 1 - i + 4) % notes.Length], 1.0f), notes.Length + 1.0f + i / 2.0f, 0.5f);
+                AddNote(new Note(notes[(notes.Length - 1 - i + 8) % notes.Length], 1.0f), notes.Length + 1.0f + i / 2.0f, 0.5f);
+            }
+
+            //AddNote(new Note(notes[0], 1.0f), 1.0f, 0.5f);
+            //AddNote(new Note(notes[1], 1.0f), 1.0f, 0.5f);
+            //AddNote(new Note(notes[2], 1.0f), 1.0f, 0.5f);
+            //AddNote(new Note(notes[2], 1.0f), 3.0f, 0.5f);
+            //AddNote(new Note(notes[3], 1.0f), 3.0f, 0.5f);
+            //AddNote(new Note(notes[1], 1.0f), 4.0f, 0.5f);
+            //AddNote(new Note(notes[Random.Range(0, notes.Length)], 1.0f), 2.0f, 0.5f);
+            //AddNote(new Note(notes[Random.Range(0, notes.Length)], 1.0f), 2.0f, 0.5f);
+
+            //AddNote(new Note(notes[2], 1.0f), 4.0f, 0.25f);
+           // AddNote(new Note(notes[Random.Range(0, notes.Length)], 1.0f), 4.0f, 0.25f);
+           // AddNote(new Note(notes[Random.Range(0, notes.Length)], 1.0f), 4.0f, 0.25f);
+        }
+
+        void Update()
+        {
+            nextNote = Random.Range(0, notes.Length);
+        }
+
+        void OnEnable()
+        {
+            AudioEventManager.OnNextPulse += OnNextPulse;
+            AudioEventManager.OnNextBar += OnNextBar;
+        }
+
+        void OnDisable()
+        {
+            AudioEventManager.OnNextPulse -= OnNextPulse;
+            AudioEventManager.OnNextBar -= OnNextBar;
+        }
+
+        void OnNextBar(int bar)
+        {
+            currentBar++;
+
+            //AddNote(new Note(notes[nextNote], 1.0f), currentBar, 0.5f);
+        }
+
+        void OnNextPulse(int pulse)
+        {
+            List<Note>[] currentBar;
+            if (score.TryGetValue(MainClock.barCount, out currentBar) && currentBar[pulse-1] != null)
+            {
+                foreach (Note note in currentBar[pulse - 1])
+                {
+                    instrument.PlayNote(note);
+                }
             }
         }
-    }
 
-    void OnEnable()
-    {
-        AudioEventManager.OnNextPulse += OnNextPulse;
-        AudioEventManager.OnNextBar += OnNextBar;
-    }
-
-    void OnDisable()
-    {
-        AudioEventManager.OnNextPulse -= OnNextPulse;
-        AudioEventManager.OnNextBar -= OnNextBar;
-    }
-
-    void OnNextBar(int bar)
-    {
-        //for (int i = 0; i < score.Length; ++i)
-        //{
-        //   // score[i] = new Note(Random.Range(36, 48), Random.Range(0.75f, 1.0f));
-        //}
-
-        change = true;
-    }
-
-    void OnNextPulse(int pulse)
-    {
-       // if (pulse % 2 == 0)
+        public void AddNote(Note note, float start, float duration)
         {
-            if (currentBar[pulse % currentBar.Length].Index > 0)
-                instrument.NoteOn(currentBar[pulse % currentBar.Length]);
-            else
-                instrument.RemoveAllNotes();
+            // Note On
+            int bar = (int)start;
+            List<Note>[] currentBar;
+
+            if (!score.TryGetValue(bar, out currentBar))
+                score[bar] = currentBar = new List<Note>[MainClock.BarLength];
+
+            int startPulse = Mathf.RoundToInt((start - bar) * MainClock.BarLength);
+
+            if (currentBar[startPulse] == null)
+            {
+                currentBar[startPulse] = new List<Note>();
+            }
+            currentBar[startPulse].Add(note);
+            
+            // Note Off
+            float endTime = start - bar + duration;
+            if (endTime >= 1.0f)
+            {
+                bar++;
+                endTime -= 1.0f; 
+                if (!score.TryGetValue(bar, out currentBar))
+                    score[bar] = currentBar = new List<Note>[MainClock.BarLength];
+            }
+
+            int endPulse = Mathf.RoundToInt(endTime * MainClock.BarLength);
+  
+            Note noteOff = new Note(note.Index, 0.0f);
+            if (currentBar[endPulse] == null)
+            {
+                currentBar[endPulse] = new List<Note>();
+            }
+            currentBar[endPulse].Add(noteOff);
         }
     }
 }

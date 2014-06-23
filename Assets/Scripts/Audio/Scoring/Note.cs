@@ -1,51 +1,59 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Note {
-
-    // C0
-    public static float rootFrequency = 16.35f;
-
-    // Notes from C0 to B7
-    public static float[] notes;
-
-    public static void Initialize()
+namespace BarelyAPI.Musician
+{
+    public class Note
     {
-        notes = new float[12 * 8];
 
-        float currentFrequency = rootFrequency;
-        for (int i = 0; i < notes.Length; ++i)
+        // C0
+        public static float rootFrequency = 16.35f;
+
+        // Notes from C0 to B7
+        public static float[] notes;
+
+        public static void Initialize()
         {
-            notes[i] = currentFrequency;
-            currentFrequency *= 1.0594f;
-        }
-    }
+            notes = new float[12 * 8];
 
-    public float Pitch;
-    public int Index;
-    public float Velocity;
-
-    public Note(int index, float velocity = 1.0f)
-    {
-        Index = index;
-        Pitch = notes[Index];
-
-        Velocity = velocity;
-    }
-
-    public Note(float frequency, float velocity = 1.0f)
-    {
-        for (int i = 0; i < notes.Length; ++i)
-        {
-            if (Mathf.Abs(notes[i] - frequency) < 0.01f)
+            float currentFrequency = rootFrequency;
+            for (int i = 0; i < notes.Length; ++i)
             {
-                Index = i;
-                break;
+                notes[i] = currentFrequency;
+                currentFrequency *= 1.0594f;
             }
         }
-        Pitch = notes[Index];
 
-        Velocity = velocity;
+        public float Pitch;
+        public int Index;
+        public float Velocity;
+
+        public bool IsNoteOn
+        {
+            get { return Velocity > 0; }
+        }
+
+        public Note(int index, float velocity = 1.0f)
+        {
+            Index = index;
+            Pitch = notes[Index];
+
+            Velocity = velocity;
+        }
+
+        public Note(float frequency, float velocity = 1.0f)
+        {
+            for (int i = 0; i < notes.Length; ++i)
+            {
+                if (Mathf.Abs(notes[i] - frequency) < 0.01f)
+                {
+                    Index = i;
+                    break;
+                }
+            }
+            Pitch = notes[Index];
+
+            Velocity = velocity;
+        }
     }
-	
 }

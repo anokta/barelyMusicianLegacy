@@ -2,64 +2,66 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public abstract class MelodicInstrument : Instrument
+namespace BarelyAPI.Musician
 {
-    [SerializeField]
-    [Range(1, 32)]
-    public int voiceCount = 16;
-
-    LinkedList<Voice> activeList, freeList;
-
-    protected override void Start()
+    public abstract class MelodicInstrument : Instrument
     {
-        freeList = new LinkedList<Voice>(voices);
-        activeList = new LinkedList<Voice>();
+        [SerializeField]
+        [Range(1, 32)]
+        public int voiceCount = 16;
 
-        base.Start();
-    }
+        LinkedList<Voice> activeList, freeList;
 
-    // TODO: Refactoring needed!
-    public override void NoteOn(Note note)
-    {
-        Voice voice;
-
-        if (freeList.Count > 0) // are any voices free?
+        protected override void Start()
         {
-            voice = freeList.First.Value;
+            freeList = new LinkedList<Voice>(voices);
+            activeList = new LinkedList<Voice>();
 
-            freeList.RemoveFirst();
-            activeList.AddLast(voice);
-        }
-        else // if not, steal the first used one
-        {
-            voice = activeList.First.Value;
+            base.Start();
         }
 
-        voice.Pitch = note.Pitch;
-        voice.Gain = note.Velocity;
-        voice.Start();
-    }
-
-    public override void NoteOff(Note note)
-    {
-        foreach (Voice voice in activeList)
+        protected override void noteOn(Note note)
         {
-            if (voice.Pitch == note.Pitch)
+            Voice voice;
+
+            if (freeList.Count > 0) // are any voices free?
             {
-                voice.Stop();
-                activeList.Remove(voice);
-                freeList.AddLast(voice);
+                voice = freeList.First.Value;
 
-                break;
+                freeList.RemoveFirst();
+                activeList.AddLast(voice);
+            }
+            else // if not, steal the first used one
+            {
+                voice = activeList.First.Value;
+            }
+
+            voice.Pitch = note.Pitch;
+            voice.Gain = note.Velocity;
+            voice.Start();
+        }
+
+        protected override void noteOff(Note note)
+        {
+            foreach (Voice voice in activeList)
+            {
+                if (voice.Pitch == note.Pitch)
+                {
+                    voice.Stop();
+                    activeList.Remove(voice);
+                    freeList.AddLast(voice);
+
+                    break;
+                }
             }
         }
-    }
 
-    public override void RemoveAllNotes()
-    {
-        activeList.Clear();
-        freeList = new LinkedList<Voice>(voices);
+        public override void StopAllNotes()
+        {
+            activeList.Clear();
+            freeList = new LinkedList<Voice>(voices);
 
-        base.RemoveAllNotes();
+            base.StopAllNotes();
+        }
     }
 }

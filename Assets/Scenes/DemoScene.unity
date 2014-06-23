@@ -400,7 +400,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 993552976}
   - 114: {fileID: 993552977}
-  - 114: {fileID: 993552978}
   - 114: {fileID: 993552979}
   m_Layer: 0
   m_Name: Audio Manager
@@ -432,17 +431,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 381d5199194f65d4182337753e335c13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &993552978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 993552975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f9e107ef298fb548ae8db77af9f6cf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &993552979
@@ -718,7 +706,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1452604497}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96110f2c31412cc4ea75fe86d51786d3, type: 3}
   m_Name: 
@@ -795,6 +783,7 @@ GameObject:
   - 4: {fileID: 1825056061}
   - 114: {fileID: 1825056064}
   - 114: {fileID: 1825056063}
+  - 114: {fileID: 1825056062}
   m_Layer: 0
   m_Name: Synthesizer
   m_TagString: Untagged
@@ -814,6 +803,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 287838160}
   m_RootOrder: 0
+--- !u!114 &1825056062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1825056060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f9e107ef298fb548ae8db77af9f6cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1825056063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -825,13 +825,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6fec5683cfe37149bfa7b13d867f4cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MasterVolume: .839999974
-  voiceCount: 16
+  MasterVolume: .5
+  voiceCount: 20
   oscType: 3
-  attack: .25
-  decay: .75
-  sustain: .649999976
-  release: .5
+  attack: .100000001
+  decay: .25
+  sustain: .600000024
+  release: .25
 --- !u!114 &1825056064
 MonoBehaviour:
   m_ObjectHideFlags: 0

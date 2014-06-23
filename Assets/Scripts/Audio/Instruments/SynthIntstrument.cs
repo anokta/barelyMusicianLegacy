@@ -1,21 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SynthIntstrument : MelodicInstrument
+namespace BarelyAPI.Musician
 {
-    public Oscillator.OSCType oscType;
-
-    public float attack, decay, sustain, release;
-
-    protected override void Start()
+    public class SynthIntstrument : MelodicInstrument
     {
-        for (int i = 0; i < voiceCount; ++i)
+        public Oscillator.OSCType oscType;
+
+        public float attack, decay, sustain, release;
+
+        protected override void Start()
         {
-            voices.Add(new Voice(new Oscillator(oscType), new Envelope(attack, decay, sustain, release)));
+            for (int i = 0; i < voiceCount; ++i)
+            {
+                voices.Add(new Voice(new Oscillator(oscType), new Envelope(attack, decay, sustain, release)));
+            }
+
+            effects.Add(new Distortion(1.0f));
+
+            base.Start();
         }
-
-        effects.Add(new Distortion(1.0f));
-
-        base.Start();
     }
 }
