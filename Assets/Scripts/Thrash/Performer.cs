@@ -67,7 +67,7 @@ public class Performer : MonoBehaviour {
        // if (pulse % 2 == 0)
         {
             if (currentBar[pulse % currentBar.Length].Index > 0)
-                instrument.AddNote(currentBar[pulse % currentBar.Length]);
+                instrument.NoteOn(currentBar[pulse % currentBar.Length]);
             else
                 instrument.RemoveAllNotes();
         }

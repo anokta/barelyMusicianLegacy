@@ -4,25 +4,27 @@ using System.Collections.Generic;
 
 public abstract class Instrument : MonoBehaviour
 {
-    // Instrument audibles
-    protected List<Audible> audibles;
+    // Instrument Voices
+    protected List<Voice> voices;
+
+    // Effects
+    protected List<AudioEffect> effects;
 
     // Master volume
     [SerializeField]
     [Range(0f, 1f)]
     public float MasterVolume = 1.0f;
 
-    // Effects
-    protected List<AudioEffect> effects;
-
+    // Audio output
     protected AudioSource audioSource;
+
 
     protected virtual void Awake()
     {
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.Stop();
 
-        audibles = new List<Audible>();
+        voices = new List<Voice>();
         effects = new List<AudioEffect>();
     }
 
@@ -37,9 +39,9 @@ public abstract class Instrument : MonoBehaviour
         {
             // Fill the buffer
             float output = 0.0f;
-            foreach (Audible audible in audibles)
+            foreach (Voice voice in voices)
             {
-                output += audible.ProcessNext();
+                output += voice.ProcessNext();
             }
             data[i] = MasterVolume * output;
 
@@ -55,12 +57,12 @@ public abstract class Instrument : MonoBehaviour
 
     public virtual void RemoveAllNotes()
     {
-        foreach (Audible audible in audibles)
+        foreach (Voice voice in voices)
         {
-            audible.NoteOff();
+            voice.StopImmediately();
         }
     }
 
-    public abstract void AddNote(Note note);
-    public abstract void RemoveNote(Note note);
+    public abstract void NoteOn(Note note);
+    public abstract void NoteOff(Note note);
 }

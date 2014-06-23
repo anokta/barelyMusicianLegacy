@@ -66,7 +66,7 @@ public class PerformerDrums : MonoBehaviour
             for (int i = 0; i < 4; ++i)
             {
                 if (currentBar[i][pulse / 2].Index > 0)
-                    instrument.AddNote(currentBar[i][pulse / 2]);
+                    instrument.NoteOn(currentBar[i][pulse / 2]);
             }
         }
     }

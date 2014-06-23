@@ -17,33 +17,33 @@ public class PercussiveInstrument : Instrument
 
         for (int i = 0; i < samples.Length; ++i)
         {
-            audibles.Add(new Impulse(new Sampler(samples[i], false, rootNote.Pitch)));
-            audibles[audibles.Count - 1].Pitch = rootNote.Pitch;
+            voices.Add(new Voice(new Sampler(samples[i], false, rootNote.Pitch), new Envelope(0.0f, 0.0f, 1.0f, samples.Length)));
+            voices[voices.Count - 1].Pitch = rootNote.Pitch;
         }
 
         base.Start();
     }
 
     // TODO: Note structure should be restructured!
-    public override void AddNote(Note note)
+    public override void NoteOn(Note note)
     {
         int index = note.Index - rootNote.Index;
-        if (index >= 0 && index < audibles.Count)
+        if (index >= 0 && index < voices.Count)
         {
-            audibles[index].Volume = note.Velocity;
-            audibles[index].NoteOn();
-        }   
+            voices[index].Gain = note.Velocity;
+            voices[index].Start();
+        }
     }
 
-    public override void RemoveNote(Note note)
+    public override void NoteOff(Note note)
     {
         if (sustained)
         {
             int index = note.Index - rootNote.Index;
-            if (index >= 0 && index < audibles.Count)
+            if (index >= 0 && index < voices.Count)
             {
-                audibles[index].NoteOff();
-            }   
+                voices[index].Stop();
+            }
         }
     }
 }

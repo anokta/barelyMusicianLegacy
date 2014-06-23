@@ -37,11 +37,11 @@ public class KeyboardController : MonoBehaviour
         {
             if (Input.GetKeyUp(keys[i]))
             {
-                instrument.RemoveNote(new Note(fundamentalIndex+i, 1.0f));
+                instrument.NoteOff(new Note(fundamentalIndex+i, 1.0f));
             }
             else if (Input.GetKeyDown(keys[i]))
             {
-                instrument.AddNote(new Note(fundamentalIndex + i, 1.0f));
+                instrument.NoteOn(new Note(fundamentalIndex + i, 1.0f));
             }
         }
     }

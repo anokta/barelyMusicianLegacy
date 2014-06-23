@@ -226,7 +226,6 @@ GameObject:
   - 4: {fileID: 468902631}
   - 114: {fileID: 468902634}
   - 114: {fileID: 468902633}
-  - 82: {fileID: 468902632}
   m_Layer: 0
   m_Name: Sample Rack
   m_TagString: Untagged
@@ -246,64 +245,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 61104687}
   m_RootOrder: 1
---- !u!82 &468902632
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 468902630}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
 --- !u!114 &468902633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,6 +290,7 @@ GameObject:
   - 4: {fileID: 476854252}
   - 114: {fileID: 476854251}
   - 82: {fileID: 476854253}
+  - 170: {fileID: 476854254}
   m_Layer: 0
   m_Name: Main Clock
   m_TagString: Untagged
@@ -441,6 +383,14 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!170 &476854254
+AudioDistortionFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 476854250}
+  m_Enabled: 1
+  m_DistortionLevel: .5
 --- !u!1 &993552975
 GameObject:
   m_ObjectHideFlags: 0
@@ -724,7 +674,6 @@ GameObject:
   - 4: {fileID: 1452604498}
   - 114: {fileID: 1452604501}
   - 114: {fileID: 1452604500}
-  - 82: {fileID: 1452604499}
   m_Layer: 0
   m_Name: Drum Machine
   m_TagString: Untagged
@@ -744,64 +693,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 61104687}
   m_RootOrder: 0
---- !u!82 &1452604499
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1452604497}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
 --- !u!114 &1452604500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -827,7 +718,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1452604497}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96110f2c31412cc4ea75fe86d51786d3, type: 3}
   m_Name: 
@@ -843,7 +734,6 @@ GameObject:
   - 4: {fileID: 1768703047}
   - 114: {fileID: 1768703050}
   - 114: {fileID: 1768703049}
-  - 82: {fileID: 1768703048}
   m_Layer: 0
   m_Name: Sampler
   m_TagString: Untagged
@@ -863,64 +753,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 287838160}
   m_RootOrder: 1
---- !u!82 &1768703048
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1768703046}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
 --- !u!114 &1768703049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -963,8 +795,6 @@ GameObject:
   - 4: {fileID: 1825056061}
   - 114: {fileID: 1825056064}
   - 114: {fileID: 1825056063}
-  - 114: {fileID: 1825056065}
-  - 82: {fileID: 1825056062}
   m_Layer: 0
   m_Name: Synthesizer
   m_TagString: Untagged
@@ -984,64 +814,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 287838160}
   m_RootOrder: 0
---- !u!82 &1825056062
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1825056060}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
 --- !u!114 &1825056063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1055,13 +827,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MasterVolume: .839999974
   voiceCount: 16
-  oscType: 2
-  attack: .100000001
+  oscType: 3
+  attack: .25
   decay: .75
   sustain: .649999976
   release: .5
-  lfoEnabled: 0
-  lfoFrequency: 5
 --- !u!114 &1825056064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1074,18 +844,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fundamentalIndex: 36
---- !u!114 &1825056065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1825056060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4e0dde3a0e701a4d9bff12f755543de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  level: 1
 --- !u!1 &1939825594
 GameObject:
   m_ObjectHideFlags: 0

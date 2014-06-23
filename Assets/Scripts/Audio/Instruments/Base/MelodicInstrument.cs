@@ -6,50 +6,49 @@ public abstract class MelodicInstrument : Instrument
 {
     [SerializeField]
     [Range(1, 32)]
-    public int voiceCount = 1;
+    public int voiceCount = 16;
 
-    LinkedList<Audible> activeList, freeList;
+    LinkedList<Voice> activeList, freeList;
 
     protected override void Start()
     {
-        freeList = new LinkedList<Audible>(audibles);
-        activeList = new LinkedList<Audible>();
+        freeList = new LinkedList<Voice>(voices);
+        activeList = new LinkedList<Voice>();
 
         base.Start();
     }
 
     // TODO: Refactoring needed!
-    public override void AddNote(Note note)
+    public override void NoteOn(Note note)
     {
-        Audible audible;
-        
-        // is any voice available?
-        if (freeList.Count > 0)
+        Voice voice;
+
+        if (freeList.Count > 0) // are any voices free?
         {
-            audible = freeList.First.Value;
+            voice = freeList.First.Value;
 
             freeList.RemoveFirst();
-            activeList.AddLast(audible);
+            activeList.AddLast(voice);
         }
-        else
-        {   
-            audible = activeList.First.Value;
+        else // if not, steal the first used one
+        {
+            voice = activeList.First.Value;
         }
 
-        audible.Pitch = note.Pitch;
-        audible.Volume = note.Velocity;
-        audible.NoteOn();
+        voice.Pitch = note.Pitch;
+        voice.Gain = note.Velocity;
+        voice.Start();
     }
 
-    public override void RemoveNote(Note note)
+    public override void NoteOff(Note note)
     {
-        foreach (Audible audible in activeList)
+        foreach (Voice voice in activeList)
         {
-            if (audible.Pitch == note.Pitch)
+            if (voice.Pitch == note.Pitch)
             {
-                audible.NoteOff();
-                activeList.Remove(audible);
-                freeList.AddLast(audible);
+                voice.Stop();
+                activeList.Remove(voice);
+                freeList.AddLast(voice);
 
                 break;
             }
@@ -59,7 +58,7 @@ public abstract class MelodicInstrument : Instrument
     public override void RemoveAllNotes()
     {
         activeList.Clear();
-        freeList = new LinkedList<Audible>(audibles);
+        freeList = new LinkedList<Voice>(voices);
 
         base.RemoveAllNotes();
     }

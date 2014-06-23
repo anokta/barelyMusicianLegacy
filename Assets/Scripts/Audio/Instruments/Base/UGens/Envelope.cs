@@ -37,9 +37,9 @@ public class Envelope : UGen
     float releaseOutput;
 
     // Envelope state
-    public enum EnvelopeState { ATTACK, DECAY, SUSTAIN, RELEASE, OFF };
+    enum EnvelopeState { ATTACK, DECAY, SUSTAIN, RELEASE, OFF };
     EnvelopeState state;
-    public EnvelopeState State
+    EnvelopeState State
     {
         get
         {
@@ -70,7 +70,6 @@ public class Envelope : UGen
         State = EnvelopeState.OFF;
     }
 
-    // Process next output
     public override float Next()
     {
         switch (state)
@@ -104,16 +103,14 @@ public class Envelope : UGen
         return output;
     }
 
-    // Helper functions
-    public void NoteOn()
+    public void Start()
+    {
+        State = EnvelopeState.ATTACK;
+    }
+
+    public void Stop()
     {
         if (State != EnvelopeState.OFF)
             State = EnvelopeState.RELEASE;
-    }
-
-    public void NoteOff()
-    {
-        if (State == EnvelopeState.OFF)
-            State = EnvelopeState.ATTACK;
     }
 }
