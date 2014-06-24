@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-using BarelyAPI.Musician;
 
-namespace BarelyAPI
+namespace BarelyMusician
 {
     public class AudioProperties : MonoBehaviour
     {

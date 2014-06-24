@@ -1,4 +1,4 @@
-﻿namespace BarelyAPI.Musician
+﻿namespace BarelyMusician
 {
     public abstract class UGen
     {

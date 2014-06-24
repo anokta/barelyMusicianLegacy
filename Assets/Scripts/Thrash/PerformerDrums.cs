@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace BarelyAPI.Musician
+namespace BarelyMusician
 {
     public class PerformerDrums : MonoBehaviour
     {
@@ -17,7 +17,7 @@ namespace BarelyAPI.Musician
             currentBar = new Note[4][];
             for (int i = 0; i < 4; ++i)
             {
-                currentBar[i] = new Note[16];
+                currentBar[i] = new Note[32];
             }
 
             for (int i = 0; i < currentBar[0].Length; ++i)

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using BarelyAPI.Musician;
+using BarelyMusician;
 
 public class KeyboardController : MonoBehaviour
 {

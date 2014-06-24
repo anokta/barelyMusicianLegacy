@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BarelyAPI.Musician
+namespace BarelyMusician
 {
     public class Sampler : UGen
     {

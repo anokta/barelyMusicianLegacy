@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace BarelyAPI
+namespace BarelyMusician
 {
     public static class AudioEventManager
     {

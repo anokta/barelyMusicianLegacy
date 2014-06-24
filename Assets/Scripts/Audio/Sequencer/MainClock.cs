@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace BarelyAPI
+namespace BarelyMusician
 {
     public class MainClock : MonoBehaviour
     {
@@ -14,9 +14,9 @@ namespace BarelyAPI
         private double phasor;
         private double clockInterval;
 
-        public static int barCount;
-        public static int beatCount;
-        public static int pulseCount;
+        public static int currentBar;
+        public static int currentBeat;
+        public static int currentPulse;
 
         static MainClock _instance;
         AudioSource audioSource;
@@ -43,21 +43,21 @@ namespace BarelyAPI
                 clockInterval = 240.0f * AudioProperties.SampleRate / CLOCK_FREQ / BPM;
                 if (phasor >= clockInterval)
                 {
-                    pulseCount = pulseCount % CLOCK_FREQ + 1;
+                    currentPulse = currentPulse % BarLength + 1;
 
-                    if (pulseCount % (CLOCK_FREQ / NOTE_TYPE) == 1)
+                    if (currentPulse % BeatLength == 1)
                     {
-                        beatCount = beatCount % BEATS + 1;
-                        if (beatCount == 1)
+                        currentBeat = currentBeat % BEATS + 1;
+                        if (currentBeat == 1)
                         {
-                            barCount = barCount + 1;
-                            AudioEventManager.TriggerOnNextBar(barCount);
+                            currentBar = currentBar + 1;
+                            AudioEventManager.TriggerOnNextBar(currentBar);
                         }
 
-                        AudioEventManager.TriggerOnNextBeat(beatCount);
+                        AudioEventManager.TriggerOnNextBeat(currentBeat);
                     }
 
-                    AudioEventManager.TriggerOnNextPulse(pulseCount);
+                    AudioEventManager.TriggerOnNextPulse(currentPulse);
 
                     phasor %= clockInterval;
                 }
@@ -68,9 +68,9 @@ namespace BarelyAPI
         {
             phasor = clockInterval;
 
-            barCount = 0;
-            beatCount = 0;
-            pulseCount = 0;
+            currentBar = 0;
+            currentBeat = 0;
+            currentPulse = 0;
         }
 
         public static void Play()
@@ -112,6 +112,11 @@ namespace BarelyAPI
         public static int BeatLength
         {
             get { return _instance.CLOCK_FREQ / _instance.NOTE_TYPE; }
+        }
+
+        public static int BeatCount
+        {
+            get { return _instance.BEATS; }
         }
     }
 }
