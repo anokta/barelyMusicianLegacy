@@ -12,18 +12,16 @@ namespace BarelyAPI.Musician
 
         public int rootIndex;
         Note rootNote;
-
-        protected override void Start()
+        
+        protected override void initialize()
         {
             rootNote = new Note(rootIndex, 1.0f);
 
             for (int i = 0; i < samples.Length; ++i)
             {
-                voices.Add(new Voice(new Sampler(samples[i], false, rootNote.Pitch), new Envelope(0.0f, 0.0f, 1.0f, samples.Length)));
+                voices.Add(new Voice(new Sampler(samples[i], false, rootNote.Pitch), new Envelope(0.0f, 0.0f, 1.0f, sustained ? 0.0f : samples.Length)));
                 voices[voices.Count - 1].Pitch = rootNote.Pitch;
             }
-
-            base.Start();
         }
 
         // TODO: Note structure should be restructured!

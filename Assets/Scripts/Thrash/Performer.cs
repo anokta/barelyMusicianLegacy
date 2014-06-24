@@ -76,6 +76,7 @@ namespace BarelyAPI.Musician
         void OnNextPulse(int pulse)
         {
             List<Note>[] currentBar;
+
             if (score.TryGetValue(MainClock.barCount, out currentBar) && currentBar[pulse-1] != null)
             {
                 foreach (Note note in currentBar[pulse - 1])
@@ -85,6 +86,7 @@ namespace BarelyAPI.Musician
             }
         }
 
+        // TODO Any optimizations possible?
         public void AddNote(Note note, float start, float duration)
         {
             // Note On

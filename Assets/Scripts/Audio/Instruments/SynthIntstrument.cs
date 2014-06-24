@@ -5,20 +5,26 @@ namespace BarelyAPI.Musician
 {
     public class SynthIntstrument : MelodicInstrument
     {
-        public Oscillator.OSCType oscType;
+        [SerializeField]
+        private Oscillator.OSCType oscType;
+        public Oscillator.OSCType OscType
+        {
+            get { return oscType; }
+            set
+            {
+                foreach (Voice voice in voices)
+                {
+                    ((Oscillator)voice.Ugen).Type = oscType = value;
+                }
+            }
+        }
 
-        public float attack, decay, sustain, release;
-
-        protected override void Start()
+        protected override void initialize()
         {
             for (int i = 0; i < voiceCount; ++i)
             {
                 voices.Add(new Voice(new Oscillator(oscType), new Envelope(attack, decay, sustain, release)));
             }
-
-            effects.Add(new Distortion(1.0f));
-
-            base.Start();
         }
     }
 }

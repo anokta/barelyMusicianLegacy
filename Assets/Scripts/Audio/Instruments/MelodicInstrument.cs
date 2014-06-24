@@ -6,18 +6,18 @@ namespace BarelyAPI.Musician
 {
     public abstract class MelodicInstrument : Instrument
     {
-        [SerializeField]
+        [SerializeField] // TODO delete SerializeFields later
         [Range(1, 32)]
         public int voiceCount = 16;
 
         LinkedList<Voice> activeList, freeList;
 
-        protected override void Start()
+        protected override void Awake()
         {
+            base.Awake();
+
             freeList = new LinkedList<Voice>(voices);
             activeList = new LinkedList<Voice>();
-
-            base.Start();
         }
 
         protected override void noteOn(Note note)

@@ -29,6 +29,10 @@ namespace BarelyAPI.Musician
 
         // Sound generator
         UGen ugen;
+        public UGen Ugen
+        {
+            get { return Ugen; }
+        }
 
         public Voice(UGen soundGenerator, Envelope soundEnvelope, float gain = 1.0f)
         {

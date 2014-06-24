@@ -19,10 +19,15 @@ namespace BarelyAPI
         public static int pulseCount;
 
         static MainClock _instance;
+        AudioSource audioSource;
 
         void Awake()
         {
             _instance = this;
+
+            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.hideFlags = HideFlags.HideInInspector;
+            audioSource.Stop();
 
             clockInterval = 240.0f * AudioProperties.SampleRate / CLOCK_FREQ / BPM;
 
@@ -70,25 +75,25 @@ namespace BarelyAPI
 
         public static void Play()
         {
-            if (!_instance.audio.isPlaying)
+            if (!_instance.audioSource.isPlaying)
             {
-                _instance.audio.Play();
+                _instance.audioSource.Play();
             }
         }
 
         public static void Pause()
         {
-            if (_instance.audio.isPlaying)
+            if (_instance.audioSource.isPlaying)
             {
-                _instance.audio.Pause();
+                _instance.audioSource.Pause();
             }
         }
 
         public static void Stop()
         {
-            if (_instance.audio.isPlaying)
+            if (_instance.audioSource.isPlaying)
             {
-                _instance.audio.Stop();
+                _instance.audioSource.Stop();
             }
 
             _instance.Reset();
@@ -96,7 +101,7 @@ namespace BarelyAPI
 
         public static bool IsPlaying()
         {
-            return _instance.audio.isPlaying;
+            return _instance.audioSource.isPlaying;
         }
 
         public static int BarLength
