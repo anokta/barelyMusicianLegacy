@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 
-namespace BarelyMusician
+namespace BarelyAPI
 {
     public class Oscillator : UGen
     {

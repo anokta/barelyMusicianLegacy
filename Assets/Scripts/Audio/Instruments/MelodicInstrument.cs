@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace BarelyMusician
+namespace BarelyAPI
 {
     public abstract class MelodicInstrument : Instrument
     {
@@ -37,7 +37,7 @@ namespace BarelyMusician
             }
 
             voice.Pitch = note.Pitch;
-            voice.Gain = note.Velocity;
+            voice.Gain = note.Loudness;
             voice.Start();
         }
 

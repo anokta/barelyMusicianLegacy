@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace BarelyMusician
+namespace BarelyAPI
 {
     public abstract class Instrument : MonoBehaviour
     {

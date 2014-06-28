@@ -103,45 +103,6 @@ Transform:
   - {fileID: 1452604498}
   m_Father: {fileID: 2004341748}
   m_RootOrder: 1
---- !u!1 &192397853
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 192397855}
-  - 114: {fileID: 192397854}
-  m_Layer: 0
-  m_Name: AutomatonTest
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &192397854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 192397853}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e434a694d3613524da6d53d685388e6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &192397855
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 192397853}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 975618266}
-  m_RootOrder: 1
 --- !u!1 &287838159
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,7 +211,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 434941140}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 1, z: -40}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -349,7 +310,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1446465718}
-  - {fileID: 192397855}
   m_Father: {fileID: 0}
   m_RootOrder: 3
 --- !u!1 &993552975
@@ -803,12 +763,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6fec5683cfe37149bfa7b13d867f4cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attack: 0
+  attack: .100000001
   decay: .25
   sustain: .75
   release: .25
   volume: .600000024
-  voiceCount: 20
+  voiceCount: 16
   oscType: 3
 --- !u!114 &1825056064
 MonoBehaviour:
@@ -821,7 +781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96110f2c31412cc4ea75fe86d51786d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fundamentalIndex: 36
+  fundamentalIndex: 3
 --- !u!114 &1825056065
 MonoBehaviour:
   m_ObjectHideFlags: 0

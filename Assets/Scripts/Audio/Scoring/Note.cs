@@ -1,59 +1,54 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace BarelyMusician
+namespace BarelyAPI
 {
     public class Note
     {
-
-        // C0
-        public static float rootFrequency = 16.35f;
-
-        // Notes from C0 to B7
-        public static float[] notes;
-
-        public static void Initialize()
+        // Pitch (Hz)
+        float frequency;
+        public float Pitch
         {
-            notes = new float[12 * 8];
-
-            float currentFrequency = rootFrequency;
-            for (int i = 0; i < notes.Length; ++i)
-            {
-                notes[i] = currentFrequency;
-                currentFrequency *= 1.0594f;
-            }
+            get { return frequency; }
         }
 
-        public float Pitch;
-        public int Index;
-        public float Velocity;
+        // Index (default = A4)
+        float index;
+        public float Index
+        {
+            get { return index; }
+            set { index = value; frequency = Mathf.Pow(2, index / 12) * 440.0f; }
+        }
+
+        // Loudness (0. - 1.)
+        float loudness;
+        public float Loudness
+        {
+            get { return loudness; }
+            set { loudness = value; }
+        }
+        //public int Velocity
+        //{
+        //    get { return (int)(loudness * 127); }
+        //    set { loudness = value / 127.0f; }
+        //}
 
         public bool IsNoteOn
         {
-            get { return Velocity > 0; }
+            get { return loudness > 0.0f; }
         }
 
-        public Note(int index, float velocity = 1.0f)
+        public Note(float index, float loudness = 1.0f)
         {
             Index = index;
-            Pitch = notes[Index];
 
-            Velocity = velocity;
-        }
-
-        public Note(float frequency, float velocity = 1.0f)
-        {
-            for (int i = 0; i < notes.Length; ++i)
-            {
-                if (Mathf.Abs(notes[i] - frequency) < 0.01f)
-                {
-                    Index = i;
-                    break;
-                }
-            }
-            Pitch = notes[Index];
-
-            Velocity = velocity;
+            Loudness = loudness;
         }
     }
+
+    public enum NoteIndex
+    {
+        A4 = 0, B4 = 2, C4 = 3, D4 = 5, E4 = 7, F4 = 8, G4 = 10
+    }
+
 }

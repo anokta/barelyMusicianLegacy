@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using BarelyMusician;
+using BarelyAPI;
 
 public class GUIManager : MonoBehaviour
 {

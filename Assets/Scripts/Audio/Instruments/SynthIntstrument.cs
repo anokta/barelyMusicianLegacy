@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace BarelyMusician
+namespace BarelyAPI
 {
     public class SynthIntstrument : MelodicInstrument
     {

@@ -2,14 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace BarelyMusician
+namespace BarelyAPI
 {
     public class Performer : MonoBehaviour
     {
         Instrument instrument;
   
         Dictionary<int, List<Note>[]> score;
-        int currentBar;
+        int currentBarIndex;
 
         void Awake()
         {
@@ -32,7 +32,7 @@ namespace BarelyMusician
 
         void OnNextBar(int bar)
         {
-            currentBar++;
+            currentBarIndex++;
         }
 
         void OnNextPulse(int pulse)
@@ -48,42 +48,33 @@ namespace BarelyMusician
             }
         }
 
-        // TODO Any optimizations possible?
         public void AddNote(Note note, float start, float duration)
         {
             // Note On
-            int bar = (int)start;
-            List<Note>[] currentBar;
-
-            if (!score.TryGetValue(bar, out currentBar))
-                score[bar] = currentBar = new List<Note>[MainClock.BarLength];
-
-            int startPulse = Mathf.RoundToInt((start - bar) * MainClock.BarLength);
-
-            if (currentBar[startPulse] == null)
-            {
-                currentBar[startPulse] = new List<Note>();
-            }
-            currentBar[startPulse].Add(note);
+            addNote(note, start);
             
             // Note Off
-            float endTime = start - bar + duration;
-            if (endTime >= 1.0f)
-            {
-                bar++;
-                endTime -= 1.0f; 
-                if (!score.TryGetValue(bar, out currentBar))
-                    score[bar] = currentBar = new List<Note>[MainClock.BarLength];
-            }
-
-            int endPulse = Mathf.RoundToInt(endTime * MainClock.BarLength);
-
             Note noteOff = new Note(note.Index, 0.0f);
-            if (currentBar[endPulse] == null)
+            addNote(noteOff, start + duration);
+        }
+
+        void addNote(Note note, float onset)
+        {
+            List<Note>[] currentBar;
+            int barLength = MainClock.BarLength;
+            
+            int pulse = Mathf.RoundToInt(onset * barLength);
+            int bar = pulse / barLength;
+            pulse %= barLength;
+
+            if (!score.TryGetValue(bar, out currentBar))
+                score[bar] = currentBar = new List<Note>[barLength];
+
+            if (currentBar[pulse] == null)
             {
-                currentBar[endPulse] = new List<Note>();
+                currentBar[pulse] = new List<Note>();
             }
-            currentBar[endPulse].Add(noteOff);
+            currentBar[pulse].Add(note);
         }
     }
 }

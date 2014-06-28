@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
-using BarelyMusician;
+using BarelyAPI;
 
 public class KeyboardController : MonoBehaviour
 {
-    public int fundamentalIndex = 36; //261.63f;
+    public int fundamentalIndex = (int)NoteIndex.C4;
 
     Instrument instrument;
 
@@ -23,12 +23,12 @@ public class KeyboardController : MonoBehaviour
         // octave up-down
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            fundamentalIndex = Mathf.Max(0, fundamentalIndex-12);
+            fundamentalIndex = Mathf.Max(-36, fundamentalIndex - 12);
             instrument.StopAllNotes();
         }
         else if (Input.GetKeyDown(KeyCode.X))
         {
-            fundamentalIndex = Mathf.Min(Note.notes.Length - 12, fundamentalIndex + 12);
+            fundamentalIndex = Mathf.Min(36, fundamentalIndex + 12);
             instrument.StopAllNotes();
         }
 
@@ -37,7 +37,7 @@ public class KeyboardController : MonoBehaviour
         {
             if (Input.GetKeyUp(keys[i]))
             {
-                instrument.PlayNote(new Note(fundamentalIndex+i, 0.0f));
+                instrument.PlayNote(new Note(fundamentalIndex + i, 0.0f));
             }
             else if (Input.GetKeyDown(keys[i]))
             {

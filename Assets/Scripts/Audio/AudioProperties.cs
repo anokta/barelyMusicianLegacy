@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace BarelyMusician
+namespace BarelyAPI
 {
     public class AudioProperties : MonoBehaviour
     {
@@ -22,8 +22,6 @@ namespace BarelyMusician
             // For testing purposes (is it more precise?)
             //BufferSize = 512;
             //AudioSettings.SetDSPBufferSize(BufferSize, numBuffers);
-
-            Note.Initialize();
         }
     }
 }

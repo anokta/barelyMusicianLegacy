@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace BarelyMusician
+namespace BarelyAPI
 {
     public class Cell
     {
@@ -19,6 +19,13 @@ namespace BarelyMusician
         {
             get { return previousState; }
             set { state = value; }
+        }
+
+        public Cell(int state)
+        {
+            State = state;
+
+            Update();
         }
 
         public Cell(Vector2 position, int state)

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace BarelyMusician
+namespace BarelyAPI
 {
     public class PercussiveInstrument : Instrument
     {
@@ -27,10 +27,10 @@ namespace BarelyMusician
         // TODO: Note structure should be restructured!
         protected override void noteOn(Note note)
         {
-            int index = note.Index - rootNote.Index;
+            int index = (int)(note.Index - rootNote.Index);
             if (index >= 0 && index < voices.Count)
             {
-                voices[index].Gain = note.Velocity;
+                voices[index].Gain = note.Loudness;
                 voices[index].Start();
             }
         }
@@ -39,7 +39,7 @@ namespace BarelyMusician
         {
             if (sustained)
             {
-                int index = note.Index - rootNote.Index;
+                int index = (int)(note.Index - rootNote.Index);
                 if (index >= 0 && index < voices.Count)
                 {
                     voices[index].Stop();
