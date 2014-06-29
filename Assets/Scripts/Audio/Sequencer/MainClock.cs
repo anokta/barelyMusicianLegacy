@@ -124,5 +124,11 @@ namespace BarelyAPI
         {
             get { return _instance.BEATS; }
         }
+
+        public static int Tempo
+        {
+            get { return _instance.BPM; }
+            set { _instance.BPM = value; } 
+        }
     }
 }

@@ -194,7 +194,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: .625, g: .625, b: .625, a: .0196078438}
+  m_BackGroundColor: {r: .91911763, g: .91911763, b: .91911763, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -443,7 +443,7 @@ GUIText:
   m_GameObject: {fileID: 1144085595}
   m_Enabled: 1
   serializedVersion: 3
-  m_Text: "0\t/\t0"
+  m_Text: 6
   m_Anchor: 4
   m_Alignment: 1
   m_PixelOffset: {x: 0, y: 0}
@@ -455,7 +455,7 @@ GUIText:
   m_FontStyle: 1
   m_Color:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4291282892
   m_PixelCorrect: 1
   m_RichText: 1
 --- !u!4 &1144085597

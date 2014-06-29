@@ -26,9 +26,14 @@ public class GUIManager : MonoBehaviour
 
         GUILayout.FlexibleSpace();
 
-        GUILayout.BeginHorizontal();
-
         GUILayout.BeginVertical();
+
+        GUILayout.BeginHorizontal();
+        GUILayout.Box("BPM: " + MainClock.Tempo.ToString());
+        MainClock.Tempo = (int)GUILayout.HorizontalSlider(MainClock.Tempo, 72, 220);
+        GUILayout.EndHorizontal();
+
+        GUILayout.FlexibleSpace();
 
         if (GUILayout.Button("Play"))
         {
@@ -53,17 +58,11 @@ public class GUIManager : MonoBehaviour
 
         GUILayout.EndVertical();
 
-
-        //GUILayout.HorizontalSlider(5, 40, 300);
-
-
-        GUILayout.EndHorizontal();
-
         GUILayout.EndArea();
     }
 
     void OnNextBeat(int beat)
     {
-        timeSigText = beat.ToString();
+        timeSigText = beat.ToString() + " / " + MainClock.BeatCount;
     }
 }
