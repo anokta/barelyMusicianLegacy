@@ -19,19 +19,21 @@ namespace BarelyAPI
         {
             instrument = GetComponent<Instrument>();
 
-            score = new Dictionary<int, List<Note>[]>();
+            Reset();
         }
 
         void OnEnable()
         {
             AudioEventManager.OnNextPulse += OnNextPulse;
             AudioEventManager.OnNextBar += OnNextBar;
+            AudioEventManager.OnStop += Reset;
         }
 
         void OnDisable()
         {
             AudioEventManager.OnNextPulse -= OnNextPulse;
             AudioEventManager.OnNextBar -= OnNextBar;
+            AudioEventManager.OnStop += Reset;
         }
 
         void OnNextBar(int bar)
@@ -50,6 +52,11 @@ namespace BarelyAPI
                     instrument.PlayNote(note);
                 }
             }
+        }
+
+        void Reset()
+        {
+            score = new Dictionary<int, List<Note>[]>();
         }
 
         public void AddNote(Note note, float start, float duration)

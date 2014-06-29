@@ -101,7 +101,7 @@ namespace BarelyAPI
             {
                 if (melodyGenerator.GetState(i) == 1)
                 {
-                    melodyPerformer.AddNote(new Note(fundamentalNote + notes[(nextKey + RandomNumber.NextInt(-1, 2) + notes.Length) % notes.Length], Mathf.Max(0.85f, RandomNumber.NextFloat())), bar + (float)i / MainClock.BeatCount, 1.0f / MainClock.BeatCount); 
+                    melodyPerformer.AddNote(new Note(fundamentalNote + notes[(nextKey + RandomNumber.NextInt(-2, 3) + notes.Length) % notes.Length], Mathf.Max(0.85f, RandomNumber.NextFloat())), bar + (float)i / MainClock.BeatCount, 1.0f / MainClock.BeatCount); 
                 }
             }
         }
