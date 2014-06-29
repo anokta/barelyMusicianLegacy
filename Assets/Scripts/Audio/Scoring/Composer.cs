@@ -21,6 +21,7 @@ namespace BarelyAPI
         void Start()
         {
             automaton = new Automaton1D(81, 90);
+
             performer = GetComponent<Performer>();
 
             // up & down test

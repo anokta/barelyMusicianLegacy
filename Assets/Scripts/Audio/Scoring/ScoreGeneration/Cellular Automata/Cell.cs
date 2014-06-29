@@ -6,12 +6,12 @@ namespace BarelyAPI
     public class Cell
     {
         // Position
-        Vector2 position;
-        public Vector2 Position
-        {
-            get { return position; }
-            set { position = value; }
-        }
+        //Vector2 position;
+        //public Vector2 Position
+        //{
+        //    get { return position; }
+        //    set { position = value; }
+        //}
 
         // State
         int state, previousState;
@@ -23,14 +23,6 @@ namespace BarelyAPI
 
         public Cell(int state)
         {
-            State = state;
-
-            Update();
-        }
-
-        public Cell(Vector2 position, int state)
-        {
-            Position = position;
             State = state;
 
             Update();

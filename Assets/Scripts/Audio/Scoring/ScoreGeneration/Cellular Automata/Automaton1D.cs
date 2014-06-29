@@ -6,19 +6,45 @@ namespace BarelyAPI
     public class Automaton1D
     {
         Cell[] cells;
-
-        int[] ruleset;
-        int r;
-
         public int Size
         {
             get { return cells.Length; }
         }
 
+        int r;
         public int R
         {
             get { return r; }
             set { r = value; }
+        }
+
+        int[] ruleset;
+        public int Ruleset
+        {
+            get 
+            {
+                string ruleString = "";
+                for (int i = ruleset.Length - 1; i >= 0; --i)
+                    ruleString += ruleset[i];
+
+                return System.Convert.ToInt32(ruleString, 2); 
+            }
+
+            set
+            {
+                ruleset = new int[(int)Mathf.Pow(2, 2 * r + 1)];
+
+                string ruleString = System.Convert.ToString(value, 2).PadLeft(ruleset.Length, '0');
+                for (int i = 0; i < ruleset.Length; ++i)
+                    ruleset[i] = int.Parse(ruleString[ruleset.Length - 1 - i].ToString());
+            }
+        }
+
+        float mutationRate;
+        public float MutationRate
+        {
+            get { return mutationRate; }
+            set { mutationRate = value; }
         }
 
 
@@ -31,15 +57,7 @@ namespace BarelyAPI
             }
 
             R = r;
-
-            ruleset = new int[(int)Mathf.Pow(2, 2 * r + 1)];
-
-            string ruleString = System.Convert.ToString(rule, 2).PadLeft(ruleset.Length, '0');
-            for (int i = 0; i < ruleset.Length; ++i)
-            {
-                ruleset[i] = int.Parse(ruleString[ruleset.Length - 1 - i].ToString());
-            }
-            
+            Ruleset = rule;
         }
 
         public void Update()
@@ -69,7 +87,10 @@ namespace BarelyAPI
                 }
 
                 // Apply transition
-                cells[i].State = ruleset[System.Convert.ToInt32(neighbourCount, 2)];
+                if (Random.Range(0.0f, 1.0f) < mutationRate)
+                    cells[i].State = Random.Range(0, 2);
+                else
+                    cells[i].State = ruleset[System.Convert.ToInt32(neighbourCount, 2)];
             }
         }
     }
