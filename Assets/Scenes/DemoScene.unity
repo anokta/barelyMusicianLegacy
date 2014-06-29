@@ -670,6 +670,7 @@ GameObject:
   - 4: {fileID: 1768703047}
   - 114: {fileID: 1768703050}
   - 114: {fileID: 1768703049}
+  - 114: {fileID: 1768703048}
   m_Layer: 0
   m_Name: Sampler
   m_TagString: Untagged
@@ -689,6 +690,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 287838160}
   m_RootOrder: 2
+--- !u!114 &1768703048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1768703046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f9e107ef298fb548ae8db77af9f6cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1768703049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -701,14 +713,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaaf4b3e2ea333645b8c7c3e04e4a01c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attack: .100000001
-  decay: .239999995
+  attack: 0
+  decay: 0
   sustain: 1
-  release: .119999997
+  release: .5
   volume: 2
   voiceCount: 16
-  sample: {fileID: 8300000, guid: 8b8415cf9354b444c91960e72339d92e, type: 3}
-  loop: 1
+  sample: {fileID: 8300000, guid: 1c08986e68b40d94987938586307d45a, type: 3}
+  loop: 0
   rootIndex: 0
 --- !u!114 &1768703050
 MonoBehaviour:
@@ -722,7 +734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96110f2c31412cc4ea75fe86d51786d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fundamentalIndex: 0
+  fundamentalIndex: -3
 --- !u!1 &1825056060
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,7 +800,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1825056060}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96110f2c31412cc4ea75fe86d51786d3, type: 3}
   m_Name: 
@@ -859,7 +871,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1860144478}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96110f2c31412cc4ea75fe86d51786d3, type: 3}
   m_Name: 

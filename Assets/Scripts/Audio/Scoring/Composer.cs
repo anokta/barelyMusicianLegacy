@@ -24,7 +24,7 @@ namespace BarelyAPI
 
         void Start()
         {
-            fundamentalNote = -9;
+            fundamentalNote = -3;
             melodyGenerator = new Automaton1D(81, 90);
 
             chordGenerator = new MarkovChainO1(8, 1);
@@ -89,7 +89,7 @@ namespace BarelyAPI
 
         void OnNextBar(int bar)
         {
-            int nextKey = chordGenerator.GetNextState();
+            int nextKey = chordGenerator.CurrentState;
 
             performer.AddNote(new Note(fundamentalNote + notes[nextKey], 1.0f), bar, 1.0f);
             performer.AddNote(new Note(fundamentalNote + notes[(nextKey + 2) % notes.Length], 0.8f), bar, 1.0f);
@@ -101,9 +101,12 @@ namespace BarelyAPI
             {
                 if (melodyGenerator.GetState(i) == 1)
                 {
-                    melodyPerformer.AddNote(new Note(fundamentalNote + notes[(nextKey + RandomNumber.NextInt(-2, 3) + notes.Length) % notes.Length], Mathf.Max(0.85f, RandomNumber.NextFloat())), bar + (float)i / MainClock.BeatCount, 1.0f / MainClock.BeatCount); 
+                    int keyIndex = (nextKey + RandomNumber.NextInt(0, 3));
+                    melodyPerformer.AddNote(new Note(fundamentalNote + notes[keyIndex % notes.Length] + (keyIndex / notes.Length) * 12, Mathf.Max(0.85f, RandomNumber.NextFloat())), bar + (float)i / MainClock.BeatCount, 1.0f / MainClock.BeatCount); 
                 }
             }
+
+            chordGenerator.GenerateNextState();
         }
     }
 }

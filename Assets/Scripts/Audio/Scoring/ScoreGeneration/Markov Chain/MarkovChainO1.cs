@@ -7,7 +7,12 @@ namespace BarelyAPI
     public class MarkovChainO1
     {
         float[,] states;
+
         int currentStateIndex;
+        public int CurrentState
+        {
+            get { return currentStateIndex; }
+        }
 
         static float[,] majorStates =
         {
@@ -38,7 +43,7 @@ namespace BarelyAPI
             currentStateIndex = 0;
         }
 
-        public int GetNextState()
+        public void GenerateNextState()
         {
             double p = RandomNumber.NextFloat();
 
@@ -52,8 +57,6 @@ namespace BarelyAPI
                     break;
                 }
             }
-
-            return currentStateIndex;
         }
     }
 }
