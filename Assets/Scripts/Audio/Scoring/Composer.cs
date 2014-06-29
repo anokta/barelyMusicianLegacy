@@ -10,9 +10,13 @@ namespace BarelyAPI
             IONIAN = 0, DORIAN = 1, PHRYGIAN = 2, LYDIAN = 3, MIXOLYDIAN = 4, AEOLIAN = 5, LOCRIAN = 6
         };
 
-        Performer performer;
+        //public float stress;
 
-        public Automaton1D automaton;
+        Performer performer;
+        Performer melodyPerformer;
+
+        public MarkovChainO1 chordGenerator;
+        public Automaton1D melodyGenerator;
 
         int fundamentalNote;
         
@@ -20,24 +24,31 @@ namespace BarelyAPI
 
         void Start()
         {
-            automaton = new Automaton1D(81, 90);
+            fundamentalNote = -9;
+            melodyGenerator = new Automaton1D(81, 90);
 
-            performer = GetComponent<Performer>();
+            chordGenerator = new MarkovChainO1(8, 1);
 
+            performer = GameObject.FindGameObjectWithTag("Chord").GetComponent<Performer>();
+            melodyPerformer = GameObject.FindGameObjectWithTag("Melody").GetComponent<Performer>();
+            
+            //performer.stress = stress;
+            //melodyPerformer.stress = stress;
+            
             // up & down test
-            for (int i = 0; i < notes.Length; ++i)
-            {
-                performer.AddNote(new Note(notes[i], 1.0f), 1.0f + i / 4.0f, 0.25f);
-                performer.AddNote(new Note(notes[notes.Length - 1 - i], 1.0f), notes.Length / 4.0f + 1.0f + i / 4.0f, 0.25f);
+            //for (int i = 0; i < notes.Length; ++i)
+            //{
+            //    performer.AddNote(new Note(notes[i], 1.0f), 1.0f + i / 4.0f, 0.25f);
+            //    performer.AddNote(new Note(notes[notes.Length - 1 - i], 1.0f), notes.Length / 4.0f + 1.0f + i / 4.0f, 0.25f);
 
-                performer.AddNote(new Note(notes[i], 1.0f), notes.Length / 2.0f + 1.0f + i / 2.0f, 0.5f);
-                performer.AddNote(new Note(notes[(i + 2) % notes.Length], 1.0f), notes.Length / 2.0f + 1.0f + i / 2.0f, 0.5f);
-                performer.AddNote(new Note(notes[(i + 4) % notes.Length], 1.0f), notes.Length / 2.0f + 1.0f + i / 2.0f, 0.5f);
+            //    performer.AddNote(new Note(notes[i], 1.0f), notes.Length / 2.0f + 1.0f + i / 2.0f, 0.5f);
+            //    performer.AddNote(new Note(notes[(i + 2) % notes.Length], 1.0f), notes.Length / 2.0f + 1.0f + i / 2.0f, 0.5f);
+            //    performer.AddNote(new Note(notes[(i + 4) % notes.Length], 1.0f), notes.Length / 2.0f + 1.0f + i / 2.0f, 0.5f);
 
-                performer.AddNote(new Note(notes[notes.Length - 1 - i], 1.0f), notes.Length + 1.0f + i / 2.0f, 0.5f);
-                performer.AddNote(new Note(notes[(notes.Length - 1 - i + 4) % notes.Length], 1.0f), notes.Length + 1.0f + i / 2.0f, 0.5f);
-                performer.AddNote(new Note(notes[(notes.Length - 1 - i + 8) % notes.Length], 1.0f), notes.Length + 1.0f + i / 2.0f, 0.5f);
-            }
+            //    performer.AddNote(new Note(notes[notes.Length - 1 - i], 1.0f), notes.Length + 1.0f + i / 2.0f, 0.5f);
+            //    performer.AddNote(new Note(notes[(notes.Length - 1 - i + 4) % notes.Length], 1.0f), notes.Length + 1.0f + i / 2.0f, 0.5f);
+            //    performer.AddNote(new Note(notes[(notes.Length - 1 - i + 8) % notes.Length], 1.0f), notes.Length + 1.0f + i / 2.0f, 0.5f);
+            //}
 
             //for (int i = 0; i < 16; ++i)
             //{
@@ -60,10 +71,9 @@ namespace BarelyAPI
 
         void Update()
         {
-
             if (Input.GetKeyDown(KeyCode.A))
             {
-                automaton.Update();
+                melodyGenerator.Update();
             }
         }
 
@@ -79,21 +89,21 @@ namespace BarelyAPI
 
         void OnNextBar(int bar)
         {
-            //scoreGenerator.Update();
+            int nextKey = chordGenerator.GetNextState();
 
-            //for (int i = 0; i < MainClock.BarLength / MainClock.BeatLength; ++i)
-            //{
-            //    int voiceCount = 0;
-            //    for (int j = 0; j < 8; ++j)
-            //    {
-            //        if (j >0 && j < 7 && scoreGenerator.GetCell(i, j).State == 1)
-            //        {
-            //            if (++voiceCount > 3)
-            //                break;
-            //            performer.AddNote(new Note(notes[j - 1], 1.0f), bar + (float)i / MainClock.BeatCount, 1.0f / MainClock.BeatCount);
-            //        }
-            //    }
-            //}
+            performer.AddNote(new Note(fundamentalNote + notes[nextKey], 1.0f), bar, 1.0f);
+            performer.AddNote(new Note(fundamentalNote + notes[(nextKey + 2) % notes.Length], 0.8f), bar, 1.0f);
+            performer.AddNote(new Note(fundamentalNote + notes[(nextKey + 2) % notes.Length], 0.9f), bar, 1.0f);
+
+            melodyGenerator.Update();
+
+            for (int i = 0; i < MainClock.BeatCount; ++i)
+            {
+                if (melodyGenerator.GetState(i) == 1)
+                {
+                    melodyPerformer.AddNote(new Note(fundamentalNote + notes[(nextKey + RandomNumber.NextInt(-1, 2) + notes.Length) % notes.Length], Mathf.Max(0.85f, RandomNumber.NextFloat())), bar + (float)i / MainClock.BeatCount, 1.0f / MainClock.BeatCount); 
+                }
+            }
         }
     }
 }

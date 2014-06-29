@@ -6,14 +6,18 @@ namespace BarelyAPI
 {
     public class Performer : MonoBehaviour
     {
+        // TODO refactor!
+        //static System.Random random = new System.Random();
+        //public float stress;
+
         Instrument instrument;
-  
+
         Dictionary<int, List<Note>[]> score;
         int currentBarIndex;
 
         void Awake()
         {
-            instrument = FindObjectOfType<SynthIntstrument>();
+            instrument = GetComponent<Instrument>();
 
             score = new Dictionary<int, List<Note>[]>();
         }
@@ -39,7 +43,7 @@ namespace BarelyAPI
         {
             List<Note>[] currentBar;
 
-            if (score.TryGetValue(MainClock.currentBar, out currentBar) && currentBar[pulse-1] != null)
+            if (score.TryGetValue(MainClock.currentBar, out currentBar) && currentBar[pulse - 1] != null)
             {
                 foreach (Note note in currentBar[pulse - 1])
                 {
@@ -50,9 +54,12 @@ namespace BarelyAPI
 
         public void AddNote(Note note, float start, float duration)
         {
+            // TODO Performance variance 
+            //note.Index += ((float)random.NextDouble() - 0.5f) * stress;
+
             // Note On
             addNote(note, start);
-            
+
             // Note Off
             Note noteOff = new Note(note.Index, 0.0f);
             addNote(noteOff, start + duration);
@@ -62,7 +69,7 @@ namespace BarelyAPI
         {
             List<Note>[] currentBar;
             int barLength = MainClock.BarLength;
-            
+
             int pulse = Mathf.RoundToInt(onset * barLength);
             int bar = pulse / barLength;
             pulse %= barLength;

@@ -85,9 +85,35 @@ namespace BarelyAPI
             initialize();
         }
 
-        protected virtual void Start()
+        protected virtual void OnEnable()
+        {
+            AudioEventManager.OnPlay += Play;
+            AudioEventManager.OnPause += Pause;
+            AudioEventManager.OnStop += Stop;
+        }
+
+        protected virtual void OnDisable()
+        {
+            AudioEventManager.OnPlay -= Play;
+            AudioEventManager.OnPause -= Pause;
+            AudioEventManager.OnStop -= Stop;
+        }
+
+        protected virtual void Play()
         {
             audioSource.Play();
+        }
+
+        protected virtual void Pause()
+        {
+            audioSource.Pause();
+        }
+
+        protected virtual void Stop()
+        {
+            StopAllNotes();
+
+            audioSource.Stop();
         }
 
         protected virtual void OnAudioFilterRead(float[] data, int channels)

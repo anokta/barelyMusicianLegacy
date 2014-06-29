@@ -78,6 +78,8 @@ namespace BarelyAPI
             if (!_instance.audioSource.isPlaying)
             {
                 _instance.audioSource.Play();
+
+                AudioEventManager.TriggerOnPlay();
             }
         }
 
@@ -86,6 +88,8 @@ namespace BarelyAPI
             if (_instance.audioSource.isPlaying)
             {
                 _instance.audioSource.Pause();
+
+                AudioEventManager.TriggerOnPause();
             }
         }
 
@@ -94,6 +98,8 @@ namespace BarelyAPI
             if (_instance.audioSource.isPlaying)
             {
                 _instance.audioSource.Stop();
+
+                AudioEventManager.TriggerOnStop();
             }
 
             _instance.Reset();

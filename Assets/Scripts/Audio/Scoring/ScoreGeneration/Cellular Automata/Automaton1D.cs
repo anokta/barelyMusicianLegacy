@@ -62,12 +62,10 @@ namespace BarelyAPI
 
         public void Update()
         {
-            foreach (Cell cell in cells)
-            {
-                cell.Update();
-            }
-
             applyTransitions();
+
+            foreach (Cell cell in cells)
+                cell.Update();
         }
 
         public int GetState(int index)
@@ -87,8 +85,8 @@ namespace BarelyAPI
                 }
 
                 // Apply transition
-                if (Random.Range(0.0f, 1.0f) < mutationRate)
-                    cells[i].State = Random.Range(0, 2);
+                if (RandomNumber.NextFloat() < mutationRate)
+                    cells[i].State = RandomNumber.NextInt(0, 2);
                 else
                     cells[i].State = ruleset[System.Convert.ToInt32(neighbourCount, 2)];
             }
