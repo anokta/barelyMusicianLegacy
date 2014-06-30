@@ -24,7 +24,7 @@ namespace BarelyAPI
             {
                 currentBar[0][i] = new Note((i % 4 == 0) ? 36 : 0, 1.0f);
                 currentBar[1][i] = new Note((i % 8 == 4) ? 37 : 0, 1.0f);
-                currentBar[2][i] = new Note((i % 4 == 2) ? 38 : 0, Random.Range(0.5f, 1.0f));
+                currentBar[2][i] = new Note((i % 4 == 2) ? 38 : 0, RandomNumber.NextFloat(0.5f, 1.0f));
                 currentBar[3][i] = new Note((i % 16 == 15) ? 39 : 0, 1.0f);
             }
         }
@@ -36,10 +36,10 @@ namespace BarelyAPI
                 change = false;
                 for (int i = 0; i < currentBar[0].Length; ++i)
                 {
-                    currentBar[0][i] = new Note((Random.Range(0.0f, 1.0f) < 0.025f || (Random.Range(0.0f, 1.0f) < 0.96f && (i % 4 == 0))) ? 36 : 0, 1.0f);
-                    currentBar[1][i] = new Note((Random.Range(0.0f, 1.0f) < 0.025f || (i % 8 == 4)) ? 37 : 0, 1.0f);
-                    currentBar[2][i] = new Note((Random.Range(0.0f, 1.0f) < 0.01f || (i % 4 == 2)) ? 38 : 0, Random.Range(0.5f, 1.0f));
-                    currentBar[3][i] = new Note((Random.Range(0.0f, 1.0f) < 0.01f || (i % 16 == 15)) ? 39 : 0, 1.0f);
+                    currentBar[0][i] = new Note((RandomNumber.NextFloat(0.0f, 1.0f) < 0.025f || (RandomNumber.NextFloat(0.0f, 1.0f) < 0.96f && (i % 4 == 0))) ? 36 : 0, 1.0f);
+                    currentBar[1][i] = new Note((RandomNumber.NextFloat(0.0f, 1.0f) < 0.025f || (i % 8 == 4)) ? 37 : 0, 1.0f);
+                    currentBar[2][i] = new Note((RandomNumber.NextFloat(0.0f, 1.0f) < 0.01f || (i % 4 == 2)) ? 38 : 0, RandomNumber.NextFloat(0.5f, 1.0f));
+                    currentBar[3][i] = new Note((RandomNumber.NextFloat(0.0f, 1.0f) < 0.01f || (i % 16 == 15)) ? 39 : 0, 1.0f);
                 }
             }
         }

@@ -53,7 +53,7 @@ namespace BarelyAPI
             cells = new Cell[length];
             for (int i = 0; i < cells.Length; ++i)
             {
-                cells[i] = new Cell(Random.Range(0, 2));
+                cells[i] = new Cell(RandomNumber.NextInt());
             }
 
             R = r;

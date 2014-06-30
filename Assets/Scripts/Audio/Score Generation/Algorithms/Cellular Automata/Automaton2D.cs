@@ -19,7 +19,7 @@ namespace BarelyAPI
             {
                 for (int x = 0; x < width; ++x)
                 {
-                    cells[x, y] = new Cell(Random.Range(0, 2));
+                    cells[x, y] = new Cell(RandomNumber.NextInt());
                 }
             }
         }

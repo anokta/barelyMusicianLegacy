@@ -15,19 +15,18 @@ namespace BarelyAPI
         Performer performer;
         Performer melodyPerformer;
 
-        public MarkovChainO1 chordGenerator;
+        public MarkovChain chordGenerator;
         public Automaton1D melodyGenerator;
 
-        int fundamentalNote;
+        public int fundamentalNote;
         
         int[] notes = { 0, 2, 4, 5, 7, 9, 11, 12 };
 
         void Start()
         {
-            fundamentalNote = -3;
             melodyGenerator = new Automaton1D(81, 90);
 
-            chordGenerator = new MarkovChainO1(8, 1);
+            chordGenerator = new MarkovChain(8, 1);
 
             performer = GameObject.FindGameObjectWithTag("Chord").GetComponent<Performer>();
             melodyPerformer = GameObject.FindGameObjectWithTag("Melody").GetComponent<Performer>();
@@ -90,10 +89,11 @@ namespace BarelyAPI
         void OnNextBar(int bar)
         {
             int nextKey = chordGenerator.CurrentState;
-
+            
             performer.AddNote(new Note(fundamentalNote + notes[nextKey], 1.0f), bar, 1.0f);
-            performer.AddNote(new Note(fundamentalNote + notes[(nextKey + 2) % notes.Length], 0.8f), bar, 1.0f);
-            performer.AddNote(new Note(fundamentalNote + notes[(nextKey + 2) % notes.Length], 0.9f), bar, 1.0f);
+            performer.AddNote(new Note(fundamentalNote + notes[(nextKey + 2) % (notes.Length - 1)] + ((nextKey + 2) / (notes.Length - 1)) * 12, 0.95f), bar, 1.0f);
+            performer.AddNote(new Note(fundamentalNote + notes[(nextKey + 4) % (notes.Length - 1)] + ((nextKey + 4) / (notes.Length - 1)) * 12, 0.78f), bar, 1.0f);
+
 
             melodyGenerator.Update();
 
@@ -102,7 +102,7 @@ namespace BarelyAPI
                 if (melodyGenerator.GetState(i) == 1)
                 {
                     int keyIndex = (nextKey + RandomNumber.NextInt(0, 3));
-                    melodyPerformer.AddNote(new Note(fundamentalNote + notes[keyIndex % notes.Length] + (keyIndex / notes.Length) * 12, Mathf.Max(0.85f, RandomNumber.NextFloat())), bar + (float)i / MainClock.BeatCount, 1.0f / MainClock.BeatCount); 
+                    melodyPerformer.AddNote(new Note(fundamentalNote + notes[keyIndex % (notes.Length - 1)] + (keyIndex / (notes.Length - 1)) * 12, Mathf.Max(0.85f, RandomNumber.NextFloat())), bar + (float)i / MainClock.BeatCount, 1.0f / MainClock.BeatCount); 
                 }
             }
 
