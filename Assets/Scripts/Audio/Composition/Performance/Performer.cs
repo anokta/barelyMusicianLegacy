@@ -59,6 +59,11 @@ namespace BarelyAPI
             score = new Dictionary<int, List<Note>[]>();
         }
 
+        public void AddBar(int index, List<Note>[] bar)
+        {
+            score[index] = bar;
+        }
+
         public void AddNote(Note note, float start, float duration)
         {
             // TODO Performance variance 

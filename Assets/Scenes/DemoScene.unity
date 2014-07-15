@@ -640,7 +640,7 @@ MonoBehaviour:
   decay: 0
   sustain: 1
   release: 0
-  volume: 1.5
+  volume: 1
   sustained: 0
   samples:
   - {fileID: 8300000, guid: 836f6a87c27a2004990660e1c324dfd4, type: 3}
@@ -792,7 +792,7 @@ MonoBehaviour:
   decay: .25
   sustain: .75
   release: .25
-  volume: .5
+  volume: .400000006
   voiceCount: 16
   oscType: 2
 --- !u!114 &1825056064
@@ -863,7 +863,7 @@ MonoBehaviour:
   decay: .100000001
   sustain: .75
   release: .25
-  volume: .800000012
+  volume: .600000024
   voiceCount: 16
   oscType: 3
 --- !u!114 &1860144483

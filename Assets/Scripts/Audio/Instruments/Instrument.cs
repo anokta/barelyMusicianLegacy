@@ -77,6 +77,7 @@ namespace BarelyAPI
         {
             audioSource = gameObject.AddComponent<AudioSource>();
             audioSource.hideFlags = HideFlags.HideInInspector;
+            audioSource.panLevel = 0.0f;
             audioSource.Stop();
 
             voices = new List<Voice>();
