@@ -17,18 +17,19 @@ namespace BarelyAPI
             pattern = new int[length];
         }
 
-        public void GeneratePattern(int harmonic)
+        public int[] GeneratePattern(int harmonic)
         {
-            harmonic += 3;
             pattern[0] = harmonic;
-  
-            pattern[1] = -1;
+
+            pattern[1] = harmonic;
             pattern[2] = harmonic + 2;
-            pattern[3] = -1;
+            pattern[3] = harmonic;
             pattern[4] = harmonic + 4;
-            pattern[5] = -1;
-            pattern[6] = harmonic + 5;
-            pattern[7] = -1;
+            pattern[5] = harmonic;
+            pattern[6] = harmonic + 7;
+            pattern[7] = harmonic + 4;
+
+            return pattern;
 
             //for (int i = 0; i < pattern.Length; ++i)
             //{
@@ -36,30 +37,30 @@ namespace BarelyAPI
             //}
         }
 
-        public List<Note>[] GetGeneratedBar()
-        {
-            List<Note>[] bar = new List<Note>[MainClock.BarLength];
+        //public List<Note>[] GetGeneratedBar()
+        //{
+        //    List<Note>[] bar = new List<Note>[MainClock.BarLength];
             
-            bar[0] = new List<Note>();
-            bar[0].Add(new Note(pattern[0]-12, 0.5f));
-            bar[bar.Length-2] = new List<Note>();
-            bar[bar.Length-2].Add(new Note(pattern[0]-12, 0.0f));
+        //    bar[0] = new List<Note>();
+        //    bar[0].Add(new Note(pattern[0]-12, 0.5f));
+        //    bar[bar.Length-2] = new List<Note>();
+        //    bar[bar.Length-2].Add(new Note(pattern[0]-12, 0.0f));
 
-            for (int i = 0; i < pattern.Length; ++i)
-            {
-                if (pattern[i] >= 0)
-                {
-                    if (bar[i * MainClock.BeatLength] == null)
-                        bar[i * MainClock.BeatLength] = new List<Note>();
-                    bar[i * MainClock.BeatLength].Add(new Note(pattern[i], 1.0f));
+        //    for (int i = 0; i < pattern.Length; ++i)
+        //    {
+        //        if (pattern[i] >= 0)
+        //        {
+        //            if (bar[i * MainClock.BeatLength] == null)
+        //                bar[i * MainClock.BeatLength] = new List<Note>();
+        //            bar[i * MainClock.BeatLength].Add(new Note(pattern[i], 1.0f));
 
-                    if (bar[(int)((i + 0.5f) * MainClock.BeatLength)] == null)
-                        bar[(int)((i + 0.5f) * MainClock.BeatLength)] = new List<Note>();
-                    bar[(int)((i + 0.5f) * MainClock.BeatLength)].Add(new Note(pattern[i], 0.0f));
-                }
-            }
+        //            if (bar[(int)((i + 0.5f) * MainClock.BeatLength)] == null)
+        //                bar[(int)((i + 0.5f) * MainClock.BeatLength)] = new List<Note>();
+        //            bar[(int)((i + 0.5f) * MainClock.BeatLength)].Add(new Note(pattern[i], 0.0f));
+        //        }
+        //    }
 
-            return bar;
-        }
+        //    return bar;
+        //}
     }
 }

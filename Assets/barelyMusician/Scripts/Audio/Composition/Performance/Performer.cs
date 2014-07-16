@@ -56,7 +56,9 @@ namespace BarelyAPI
 
         void Reset()
         {
-            score = new Dictionary<int, List<Note>[]>();
+            if(score == null) // TODO is this necessary?
+                score = new Dictionary<int, List<Note>[]>();
+            currentBarIndex = 0;
         }
 
         public void AddBar(int index, List<Note>[] bar)
