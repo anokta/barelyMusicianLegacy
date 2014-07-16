@@ -5,10 +5,6 @@ namespace BarelyAPI
 {
     public class Composer : MonoBehaviour
     {
-        public enum MusicalMode
-        {
-            IONIAN = 0, DORIAN = 1, PHRYGIAN = 2, LYDIAN = 3, MIXOLYDIAN = 4, AEOLIAN = 5, LOCRIAN = 6
-        };
 
         //public float stress;
 
@@ -19,8 +15,6 @@ namespace BarelyAPI
         public Automaton1D melodyGenerator;
 
         public int fundamentalNote;
-        
-        int[] notes = { 0, 2, 4, 5, 7, 9, 11, 12 };
 
         void Start()
         {
@@ -34,7 +28,9 @@ namespace BarelyAPI
             MacroGenerator macro = new MacroGenerator();
             MesoGenerator meso = new MesoGenerator(4);
             MicroGenerator micro = new MicroGenerator(MainClock.BeatCount);
-
+            ModeGenerator mode = new ModeGenerator();
+            
+            mode.GenerateScale();
             macro.GenerateSequence();
 
             for (int i = 0; i < macro.SequenceLength; ++i)
@@ -43,7 +39,7 @@ namespace BarelyAPI
    
                 for (int j = 0; j < meso.ProgressionLength; ++j)
                 {
-                    micro.GeneratePattern(notes[meso.GetHarmonic(j)]);
+                    micro.GeneratePattern(mode.GetNote(meso.GetHarmonic(j)));
                     melodyPerformer.AddBar(i * meso.ProgressionLength + j + 1, micro.GetGeneratedBar());
                 }
             }
