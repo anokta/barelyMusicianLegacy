@@ -111,7 +111,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 287838160}
-  - 114: {fileID: 287838161}
   m_Layer: 0
   m_Name: Melodic
   m_TagString: Untagged
@@ -134,18 +133,6 @@ Transform:
   - {fileID: 1768703047}
   m_Father: {fileID: 2004341748}
   m_RootOrder: 0
---- !u!114 &287838161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 287838159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f276f08c2a6b64f4d815e2aa19fd32a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fundamentalNote: -9
 --- !u!1 &434941140
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,34 +285,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fundamentalIndex: 36
---- !u!1 &975618265
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 975618266}
-  m_Layer: 0
-  m_Name: Thrash
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &975618266
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 975618265}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1446465718}
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
 --- !u!1 &993552975
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,8 +295,9 @@ GameObject:
   - 4: {fileID: 993552976}
   - 114: {fileID: 993552977}
   - 114: {fileID: 993552979}
+  - 114: {fileID: 993552978}
   m_Layer: 0
-  m_Name: Audio Manager
+  m_Name: Musician
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -353,8 +313,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1939825595}
   - {fileID: 2004341748}
+  - {fileID: 1369899214}
   m_Father: {fileID: 0}
   m_RootOrder: 2
 --- !u!114 &993552977
@@ -368,6 +328,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 381d5199194f65d4182337753e335c13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &993552978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 993552975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e02bf5d7d2d4f7e47bab7a2611555337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  composers:
+  - {fileID: 2004341749}
+  performers:
+  - {fileID: 1860144480}
 --- !u!114 &993552979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,9 +351,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 993552975}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0acecaec33a90a341be3f4d0d50a14a3, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a6bc81b5de29d848adb1695392d19ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BPM: 110
+  BEATS: 8
+  NOTE_TYPE: 8
+  CLOCK_FREQ: 32
 --- !u!1 &1117552450
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,8 +477,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1939825595}
-  m_RootOrder: 0
+  m_Father: {fileID: 993552976}
+  m_RootOrder: 1
 --- !u!114 &1369899216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,9 +492,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attack: 0
   decay: 0
-  sustain: 0
+  sustain: 1
   release: 0
-  volume: 0
+  volume: .5
   sustained: 0
   samples:
   - {fileID: 8300000, guid: 136feda69c8f7454082f64a0cbfd393b, type: 3}
@@ -532,69 +511,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d02e13f63b473504db7e6ab13df44c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1446465717
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1446465718}
-  - 108: {fileID: 1446465719}
-  m_Layer: 0
-  m_Name: Directional light
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1446465718
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1446465717}
-  m_LocalRotation: {x: .408217937, y: -.234569728, z: .109381661, w: .875426114}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 975618266}
-  m_RootOrder: 0
---- !u!108 &1446465719
-Light:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1446465717}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Type: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: .5
-  m_Range: 10
-  m_SpotAngle: 30
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 0
-    m_Resolution: -1
-    m_Strength: 1
-    m_Bias: .0500000007
-    m_Softness: 4
-    m_SoftnessFade: 1
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_ActuallyLightmapped: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_Lightmapping: 1
-  m_ShadowSamples: 1
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
-  m_IndirectIntensity: 1
-  m_AreaSize: {x: 1, y: 1}
 --- !u!1 &1452604497
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,7 +646,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1768703046}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96110f2c31412cc4ea75fe86d51786d3, type: 3}
   m_Name: 
@@ -872,56 +788,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1860144478}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96110f2c31412cc4ea75fe86d51786d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fundamentalIndex: -9
---- !u!1 &1939825594
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1939825595}
-  - 114: {fileID: 1939825596}
-  m_Layer: 0
-  m_Name: Sequencer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1939825595
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1939825594}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1369899214}
-  m_Father: {fileID: 993552976}
-  m_RootOrder: 0
---- !u!114 &1939825596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1939825594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a6bc81b5de29d848adb1695392d19ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BPM: 110
-  BEATS: 8
-  NOTE_TYPE: 8
-  CLOCK_FREQ: 32
 --- !u!1 &2004341747
 GameObject:
   m_ObjectHideFlags: 0
@@ -930,6 +802,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 2004341748}
+  - 114: {fileID: 2004341749}
   m_Layer: 0
   m_Name: Instruments
   m_TagString: Untagged
@@ -950,4 +823,16 @@ Transform:
   - {fileID: 287838160}
   - {fileID: 61104687}
   m_Father: {fileID: 993552976}
-  m_RootOrder: 1
+  m_RootOrder: 0
+--- !u!114 &2004341749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2004341747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f276f08c2a6b64f4d815e2aa19fd32a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressionLength: 4

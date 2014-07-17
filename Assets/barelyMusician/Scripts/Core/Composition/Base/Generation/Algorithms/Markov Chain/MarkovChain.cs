@@ -40,7 +40,7 @@ namespace BarelyAPI
                 }
             }
 
-            currentStateIndex = 0;
+            Reset();
         }
 
         public void GenerateNextState()
@@ -57,6 +57,11 @@ namespace BarelyAPI
                     break;
                 }
             }
+        }
+
+        public void Reset()
+        {
+            currentStateIndex = 0;
         }
     }
 }

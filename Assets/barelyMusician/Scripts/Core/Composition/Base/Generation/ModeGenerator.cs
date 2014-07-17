@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class ModeGenerator
+public abstract class ModeGenerator
 {
     public enum MusicalScale
     {
@@ -23,21 +23,9 @@ public class ModeGenerator
             { MusicalScale.NATURAL_MINOR, naturalMinorScale }
         };
 
-    //MusicalScale scaleType;
-    //MusicalMode modeType;
     int[] currentScale;
 
-    public ModeGenerator()
-    {
-
-    }
-
-    public void GenerateScale()
-    {
-        SelectScale(MusicalScale.MAJOR, MusicalMode.IONIAN);
-    }
-
-    public void SelectScale(MusicalScale scaleType, MusicalMode modeType)
+    protected void setScale(MusicalScale scaleType, MusicalMode modeType)
     {
         int[] scale = Scales[scaleType];
         int offset = (int)modeType;
@@ -54,7 +42,9 @@ public class ModeGenerator
     {
         int octaveOffset = Mathf.FloorToInt((float)index / currentScale.Length);
         int scaleOffset = index - octaveOffset * currentScale.Length;
-        
+
         return currentScale[scaleOffset] + octaveOffset * 12;
     }
+
+    public abstract void GenerateScale(float energy, float stress);
 }

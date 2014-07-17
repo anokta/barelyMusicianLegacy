@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Distortion : AudioEffect {
+public class Distortion : AudioEffect
+{
 
     // Distortion level
     private float level;

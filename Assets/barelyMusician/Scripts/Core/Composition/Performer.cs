@@ -13,7 +13,7 @@ namespace BarelyAPI
         Instrument instrument;
 
         Dictionary<int, List<Note>[]> score;
-        int currentBarIndex;
+        public int currentBarIndex;
 
         void Awake()
         {
@@ -56,8 +56,7 @@ namespace BarelyAPI
 
         void Reset()
         {
-            if(score == null) // TODO is this necessary?
-                score = new Dictionary<int, List<Note>[]>();
+            score = new Dictionary<int, List<Note>[]>();
             currentBarIndex = 0;
         }
 

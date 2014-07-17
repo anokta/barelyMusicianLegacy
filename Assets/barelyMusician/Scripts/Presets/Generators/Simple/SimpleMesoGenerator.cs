@@ -3,20 +3,14 @@ using System.Collections;
 
 namespace BarelyAPI
 {
-    public class MesoGenerator
+    public class SimpleMesoGenerator : MesoGenerator
     {
-        protected int[] harmonicProgression;
-        public int ProgressionLength
+        public SimpleMesoGenerator(int length)
+            : base(length)
         {
-            get { return harmonicProgression.Length; }
         }
 
-        public MesoGenerator(int length)
-        {
-            harmonicProgression = new int[length];    
-        }
-
-        public void GenerateProgression(char section)
+        public override void GenerateProgression(char section)
         {
             if (section == 'A')
             {
@@ -25,6 +19,13 @@ namespace BarelyAPI
                 harmonicProgression[2] = 2;
                 harmonicProgression[3] = 5;
             }
+            else if (section == 'B')
+            {
+                harmonicProgression[0] = 1;
+                harmonicProgression[1] = 4;
+                harmonicProgression[2] = 2;
+                harmonicProgression[3] = 1;
+            }
             else
             {
                 harmonicProgression[0] = 1;
@@ -32,11 +33,6 @@ namespace BarelyAPI
                 harmonicProgression[2] = 5;
                 harmonicProgression[3] = 1;
             }
-        }
-
-        public int GetHarmonic(int index)
-        {
-            return harmonicProgression[index];
         }
     }
 }

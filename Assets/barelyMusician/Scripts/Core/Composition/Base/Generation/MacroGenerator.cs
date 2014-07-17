@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace BarelyAPI
 {
-    public class MacroGenerator
+    public abstract class MacroGenerator
     {
         protected string sectionSequence;
         public int SequenceLength
@@ -11,18 +11,11 @@ namespace BarelyAPI
             get { return sectionSequence.Length; }
         }
 
-        public MacroGenerator()
-        {
-        }
-
-        public void GenerateSequence()
-        {
-            sectionSequence = "AAAB";
-        }
-
         public char GetSectionName(int index)
         {
             return sectionSequence[index];
         }
+
+        public abstract void GenerateSequence();
     }
 }
