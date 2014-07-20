@@ -11,7 +11,6 @@ namespace BarelyAPI
         Instrument instrument;
 
         Dictionary<int, List<Note>[]> score;
-        public int currentBarIndex;
 
         void Awake()
         {
@@ -23,20 +22,13 @@ namespace BarelyAPI
         void OnEnable()
         {
             AudioEventManager.OnNextPulse += OnNextPulse;
-            AudioEventManager.OnNextBar += OnNextBar;
             AudioEventManager.OnStop += Reset;
         }
 
         void OnDisable()
         {
             AudioEventManager.OnNextPulse -= OnNextPulse;
-            AudioEventManager.OnNextBar -= OnNextBar;
             AudioEventManager.OnStop += Reset;
-        }
-
-        void OnNextBar(int bar)
-        {
-            currentBarIndex++;
         }
 
         void OnNextPulse(int pulse)
@@ -55,7 +47,6 @@ namespace BarelyAPI
         void Reset()
         {
             score = new Dictionary<int, List<Note>[]>();
-            currentBarIndex = 0;
         }
 
         public void AddBar(int index, List<Note>[] bar)
@@ -67,7 +58,7 @@ namespace BarelyAPI
         {
             // Conduct note
             Note note = new Note(conductor.GetNote(meta.Index), meta.Loudness * conductor.loudness);
-            float start = currentBarIndex + meta.Offset;
+            float start = MainClock.currentBar + meta.Offset;
             float end = start + meta.Duration * conductor.articulation;
             
             instrument.Attack = conductor.noteOnset;

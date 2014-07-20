@@ -6,17 +6,15 @@ namespace BarelyAPI
 {
     public abstract class MicroGenerator
     {
-        protected int[] pattern;
-        public int PatternLength
-        {
-            get { return pattern.Length; }
-        }
+        protected List<NoteMeta> line;
+        protected int lineLength;
 
         protected MicroGenerator(int length)
         {
-            pattern = new int[length];
+            line = new List<NoteMeta>();
+            lineLength = length;
         }
 
-        public abstract int[] GeneratePattern(int harmonic);
+        public abstract List<NoteMeta> GenerateLine(char section, int harmonic);
     }
 }

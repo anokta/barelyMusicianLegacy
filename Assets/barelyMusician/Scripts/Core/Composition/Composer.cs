@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BarelyAPI
 {
-    public class Composer : MonoBehaviour
+    public class Composer
     {
         public MacroGenerator macro;
         public MesoGenerator meso;
@@ -12,97 +12,59 @@ namespace BarelyAPI
 
         public int progressionLength;
 
-        Dictionary<char, List<NoteMeta>> scoreSections;
+        Dictionary<char, List<NoteMeta>[]> scoreSections;
 
-        void Awake()
+        public Composer()//MacroGenerator macroGenerator, MesoGenerator mesoGenerator, MicroGenerator microGenerator)
         {
-            scoreSections = new Dictionary<char, List<NoteMeta>>();
-        }
+            scoreSections = new Dictionary<char, List<NoteMeta>[]>();
+            progressionLength = 4;
 
-        void Start()
-        {
             macro = new SimpleMacroGenerator();
             meso = new SimpleMesoGenerator(progressionLength);
-            micro = new CA1DMicroGenerator(MainClock.BeatCount);
+            micro = new SimpleMicroGenerator(MainClock.BeatCount);
 
             macro.GenerateSequence();
+        }
 
-            for (int i = 0; i < macro.SequenceLength; ++i)
+        public void GenerateNextSection(int currentBar)
+        {
+            int section = (currentBar-1) / progressionLength;
+
+            if (section >= macro.SequenceLength) return;
+
+            List<NoteMeta>[] currentSection;
+            char currentSectionName = macro.GetSectionName(section);
+
+            if (!scoreSections.TryGetValue(currentSectionName, out currentSection))
             {
-                List<NoteMeta> currentSection;
-                char currentSectionName = macro.GetSectionName(i);
+                currentSection = new List<NoteMeta>[progressionLength];
 
-                if (!scoreSections.TryGetValue(currentSectionName, out currentSection))
+                meso.GenerateProgression(currentSectionName);
+
+                for (int i = 0; i < meso.ProgressionLength; ++i)
                 {
-                    scoreSections[currentSectionName] = currentSection = new List<NoteMeta>();
-
-                    meso.GenerateProgression(currentSectionName);
-
-                    for (int j = 0; j < meso.ProgressionLength; ++j)
-                    {
-                        int[] pattern = micro.GeneratePattern(meso.GetHarmonic(j) - 1);
-
-                        currentSection.Add(new NoteMeta(meso.GetHarmonic(j) - 1 - 7, j + 1, 1.0f, 0.5f));
-                        for (int k = 0; k < pattern.Length; ++k)
-                        {
-                            if(pattern[k] > -100)
-                                currentSection.Add(new NoteMeta(pattern[k], j + 1 + (float)k / MainClock.BeatCount, 1.0f / MainClock.BeatCount));
-                        }
-                    }
+                    currentSection[i] = micro.GenerateLine(currentSectionName, meso.GetHarmonic(i));
                 }
+
+                scoreSections[currentSectionName] = currentSection;
             }
         }
 
-
-        //void OnEnable()
-        //{
-        //    AudioEventManager.OnNextBar += OnNextBar;
-        //}
-
-        //void OnDisable()
-        //{
-        //    AudioEventManager.OnNextBar -= OnNextBar;
-        //}
-
-        //void OnNextBar(int bar)
-        //{
-        //    //int nextKey = chordGenerator.CurrentState;
-
-        //    //performer.AddNote(new Note(fundamentalNote + notes[nextKey], 1.0f), bar, 1.0f);
-        //    //performer.AddNote(new Note(fundamentalNote + notes[(nextKey + 2) % (notes.Length - 1)] + ((nextKey + 2) / (notes.Length - 1)) * 12, 0.95f), bar, 1.0f);
-        //    //performer.AddNote(new Note(fundamentalNote + notes[(nextKey + 4) % (notes.Length - 1)] + ((nextKey + 4) / (notes.Length - 1)) * 12, 0.78f), bar, 1.0f);
-
-
-        //    //melodyGenerator.Update();
-
-        //    //for (int i = 0; i < MainClock.BeatCount; ++i)
-        //    //{
-        //    //    if (melodyGenerator.GetState(i) == 1)
-        //    //    {
-        //    //        int keyIndex = (nextKey + RandomNumber.NextInt(0, 3));
-        //    //        melodyPerformer.AddNote(new Note(fundamentalNote + notes[keyIndex % (notes.Length - 1)] + (keyIndex / (notes.Length - 1)) * 12, Mathf.Max(0.85f, RandomNumber.NextFloat())), bar + (float)i / MainClock.BeatCount, 1.0f / MainClock.BeatCount); 
-        //    //    }
-        //    //}
-
-        //    //chordGenerator.GenerateNextState();
-        //}
-
-        public void GenerateNextBar(Performer performer)
+        public void AddNextBeat(Performer performer, int currentBar, int beat)
         {
-            int currentBar = performer.currentBarIndex;
+            int section = (currentBar - 1) / progressionLength;
 
-            if (currentBar % progressionLength == 0)
+            if (section >= macro.SequenceLength) return;
+
+            List<NoteMeta>[] currentSection;
+            char currentSectionName = macro.GetSectionName(section);
+
+            if (scoreSections.TryGetValue(currentSectionName, out currentSection))
             {
-                int i = currentBar / progressionLength;
-                if (i < macro.SequenceLength)
+                foreach (NoteMeta meta in currentSection[(currentBar - 1) % progressionLength])
                 {
-                    char currentSectionName = macro.GetSectionName(i);
-                    List<NoteMeta> currentSection = scoreSections[currentSectionName];
-
-                    foreach (NoteMeta meta in scoreSections[currentSectionName])
-                    {
+                    if (meta.Offset >= (float)(beat) / MainClock.BeatCount && meta.Offset < (float)(beat + 1) / MainClock.BeatCount)
                         performer.AddNote(meta);
-                    }
                 }
             }
         }

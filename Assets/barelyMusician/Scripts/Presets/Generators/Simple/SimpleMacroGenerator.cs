@@ -7,7 +7,7 @@ namespace BarelyAPI
     {
         public override void GenerateSequence()
         {
-            sectionSequence = "AAABAAAC";
+            sectionSequence = "ABAC";//"AAABAAAC";
         }
     }
 }

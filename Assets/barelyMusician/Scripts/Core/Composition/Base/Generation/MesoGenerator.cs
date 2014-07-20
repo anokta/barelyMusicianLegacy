@@ -18,7 +18,7 @@ namespace BarelyAPI
 
         public int GetHarmonic(int index)
         {
-            return harmonicProgression[index];
+            return harmonicProgression[index] - 1;
         }
 
         public abstract void GenerateProgression(char section);

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace BarelyAPI
 {
@@ -13,23 +14,23 @@ namespace BarelyAPI
             ca = new Automaton1D(81, 90);
         }
 
-        public override int[] GeneratePattern(int harmonic)
+        public override List<NoteMeta> GenerateLine(char section, int harmonic)
         {
+            line = new List<NoteMeta>();
+
             int keyIndex = harmonic;
 
             ca.Update();
 
-            for (int i = 0; i < MainClock.BeatCount; ++i)
+            for (int i = 0; i < lineLength; ++i)
             {
                 if (ca.GetState(i) == 1)
                 {
-                    pattern[i] = keyIndex++;
+                    line.Add(new NoteMeta(keyIndex++, (float)i / lineLength, 1.0f / lineLength, 1.0f));
                 }
-                else
-                    pattern[i] = -100;
             }
             
-            return pattern;
+            return line;
         }
     }
 }

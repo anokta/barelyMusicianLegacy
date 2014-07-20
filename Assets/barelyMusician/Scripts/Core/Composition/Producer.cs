@@ -91,7 +91,8 @@ namespace BarelyAPI
         {
             conductor = new Conductor();
 
-            composerTest = composers[0];
+            composers = new Composer[1];
+            composerTest = composers[0] = new Composer();
             performerTest = performers[0];
             performerTest.conductor = conductor;
 
@@ -111,16 +112,23 @@ namespace BarelyAPI
         void OnEnable()
         {
             AudioEventManager.OnNextBar += OnNextBar;
+            AudioEventManager.OnNextBeat += OnNextBeat;
         }
 
         void OnDisable()
         {
             AudioEventManager.OnNextBar -= OnNextBar;
+            AudioEventManager.OnNextBeat += OnNextBeat;
         }
 
         void OnNextBar(int bar)
         {
-            composerTest.GenerateNextBar(performerTest);
+            composerTest.GenerateNextSection(bar);
+        }
+
+        void OnNextBeat(int beat)
+        {
+            composerTest.AddNextBeat(performerTest, MainClock.currentBar, beat-1);
         }
 
         public void PrintValues()
