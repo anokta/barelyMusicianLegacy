@@ -22,7 +22,7 @@ public class GUIManager : MonoBehaviour
     void OnGUI()
     {
         timeSignutare.text = timeSigText;
-        GUILayout.BeginArea(new Rect(Screen.width * 0.25f, Screen.height * 0.25f, Screen.width * 0.5f, Screen.height * 0.5f));
+        GUILayout.BeginArea(new Rect(Screen.width * 0.25f, Screen.height * 0.2f, Screen.width * 0.5f, Screen.height * 0.75f));
 
         GUILayout.FlexibleSpace();
 
@@ -53,6 +53,28 @@ public class GUIManager : MonoBehaviour
         {
             MainClock.Stop();
         }
+
+        GUILayout.FlexibleSpace();
+        GUILayout.FlexibleSpace();
+        
+        //
+        Producer producer = FindObjectOfType<Producer>();
+       // GUILayout.BeginHorizontal();
+
+        //GUILayout.BeginVertical();
+        GUILayout.Box("Energy");
+        producer.Energy = GUILayout.HorizontalSlider(producer.Energy, 0.0f, 1.0f);
+        GUILayout.Box("Stress");
+        producer.Stress = GUILayout.HorizontalSlider(producer.Stress, 0.0f, 1.0f);
+        //GUILayout.EndVertical();
+
+        
+        GUILayout.BeginVertical();
+        producer.PrintValues();
+        GUILayout.EndVertical();
+        
+        //GUILayout.EndHorizontal();
+        //
 
         GUILayout.FlexibleSpace();
 

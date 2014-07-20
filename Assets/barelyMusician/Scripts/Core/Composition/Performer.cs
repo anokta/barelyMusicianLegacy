@@ -6,9 +6,7 @@ namespace BarelyAPI
 {
     public class Performer : MonoBehaviour
     {
-        // TODO refactor!
-        //static System.Random random = new System.Random();
-        //public float stress;
+        public Conductor conductor;
 
         Instrument instrument;
 
@@ -65,17 +63,21 @@ namespace BarelyAPI
             score[index] = bar;
         }
 
-        public void AddNote(Note note, float start, float duration)
+        public void AddNote(NoteMeta meta)
         {
-            // TODO Performance variance 
-            //note.Index += ((float)random.NextDouble() - 0.5f) * stress;
+            // Conduct note
+            Note note = new Note(conductor.GetNote(meta.Index), meta.Loudness * conductor.loudness);
+            float start = currentBarIndex + meta.Offset;
+            float end = start + meta.Duration * conductor.articulation;
+            
+            instrument.Attack = conductor.noteOnset;
 
             // Note On
             addNote(note, start);
 
             // Note Off
             Note noteOff = new Note(note.Index, 0.0f);
-            addNote(noteOff, start + duration);
+            addNote(noteOff, end);
         }
 
         void addNote(Note note, float onset)

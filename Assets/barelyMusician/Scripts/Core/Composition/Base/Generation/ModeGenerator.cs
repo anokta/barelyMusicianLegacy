@@ -13,24 +13,24 @@ public abstract class ModeGenerator
         IONIAN = 0, DORIAN = 1, PHRYGIAN = 2, LYDIAN = 3, MIXOLYDIAN = 4, AEOLIAN = 5, LOCRIAN = 6
     };
 
-    static int[] majorScale = { 0, 2, 4, 5, 7, 9, 11 };
-    static int[] harmonicMinorScale = { 0, 2, 3, 5, 7, 8, 11 };
-    static int[] naturalMinorScale = { 0, 2, 3, 5, 7, 8, 10 };
-    static Dictionary<MusicalScale, int[]> Scales = new Dictionary<MusicalScale, int[]>()
+    static float[] majorScale = { 0, 2, 4, 5, 7, 9, 11 };
+    static float[] harmonicMinorScale = { 0, 2, 3, 5, 7, 8, 11 };
+    static float[] naturalMinorScale = { 0, 2, 3, 5, 7, 8, 10 };
+    static Dictionary<MusicalScale, float[]> Scales = new Dictionary<MusicalScale, float[]>()
         {
             { MusicalScale.MAJOR, majorScale },
             { MusicalScale.HARMONIC_MINOR, harmonicMinorScale },
             { MusicalScale.NATURAL_MINOR, naturalMinorScale }
         };
 
-    int[] currentScale;
+    float[] currentScale;
 
-    protected void setScale(MusicalScale scaleType, MusicalMode modeType)
+    protected void setScale(MusicalScale scaleType, MusicalMode modeType = MusicalMode.IONIAN)
     {
-        int[] scale = Scales[scaleType];
+        float[] scale = Scales[scaleType];
         int offset = (int)modeType;
 
-        currentScale = new int[scale.Length];
+        currentScale = new float[scale.Length];
 
         for (int i = 0; i < currentScale.Length; ++i)
         {
@@ -38,7 +38,7 @@ public abstract class ModeGenerator
         }
     }
 
-    public int GetNote(int index)
+    public float GetNoteOffset(int index)
     {
         int octaveOffset = Mathf.FloorToInt((float)index / currentScale.Length);
         int scaleOffset = index - octaveOffset * currentScale.Length;

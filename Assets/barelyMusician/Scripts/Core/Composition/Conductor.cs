@@ -14,7 +14,7 @@ namespace BarelyAPI
 
         public float noteOnset;
 
-        public int keySignutare;
+        public float keyIndex;
 
         public ModeGenerator mode;
 
@@ -22,6 +22,11 @@ namespace BarelyAPI
         {
             mode = new SimpleModeGenerator();
             mode.GenerateScale(0.0f, -1.0f);
+        }
+
+        public float GetNote(int index)
+        {
+            return keyIndex + mode.GetNoteOffset(index);
         }
     }
 }
