@@ -8,10 +8,12 @@ public class GUIManager : MonoBehaviour
     public GUIText timeSignutare;
     private string timeSigText;
 
+    public Ensemble producer;
+
     // Use this for initialization
     void Start()
     {
-        AudioEventManager.OnNextBeat += OnNextBeat;
+        //AudioEventManager.OnNextBeat += OnNextBeat;
     }
 
     // Update is called once per frame
@@ -28,37 +30,35 @@ public class GUIManager : MonoBehaviour
 
         GUILayout.BeginVertical();
 
-        GUILayout.BeginHorizontal();
-        GUILayout.Box("BPM: " + MainClock.Tempo.ToString());
-        MainClock.Tempo = (int)GUILayout.HorizontalSlider(MainClock.Tempo, 72, 220);
-        GUILayout.EndHorizontal();
+        //GUILayout.BeginHorizontal();
+        //GUILayout.Box("BPM: " + Sequencer.Tempo.ToString());
+        //Sequencer.Tempo = (int)GUILayout.HorizontalSlider(Sequencer.Tempo, 72, 220);
+        //GUILayout.EndHorizontal();
 
         GUILayout.FlexibleSpace();
 
         if (GUILayout.Button("Play"))
         {
-            MainClock.Play();
+            producer.Play();
         }
 
         GUILayout.FlexibleSpace();
 
         if (GUILayout.Button("Pause"))
         {
-            MainClock.Pause();
+            producer.Pause();
         }
 
         GUILayout.FlexibleSpace();
 
         if (GUILayout.Button("Stop"))
         {
-            MainClock.Stop();
+            producer.Stop();
         }
 
         GUILayout.FlexibleSpace();
         GUILayout.FlexibleSpace();
         
-        //
-        Producer producer = FindObjectOfType<Producer>();
        // GUILayout.BeginHorizontal();
 
         //GUILayout.BeginVertical();
@@ -85,6 +85,6 @@ public class GUIManager : MonoBehaviour
 
     void OnNextBeat(int beat)
     {
-        timeSigText = beat.ToString() + " / " + MainClock.BeatCount;
+        //timeSigText = beat.ToString() + " / " + Sequencer.BeatCount;
     }
 }

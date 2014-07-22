@@ -7,7 +7,12 @@ namespace BarelyAPI
     public abstract class MicroGenerator
     {
         protected List<NoteMeta> line;
+        
         protected int lineLength;
+        public int LineLength
+        {
+            get { return lineLength; }
+        }
 
         protected MicroGenerator(int length)
         {

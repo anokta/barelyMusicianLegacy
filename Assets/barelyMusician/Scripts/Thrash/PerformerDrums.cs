@@ -44,17 +44,17 @@ namespace BarelyAPI
             }
         }
 
-        void OnEnable()
-        {
-            AudioEventManager.OnNextPulse += OnNextPulse;
-            AudioEventManager.OnNextBar += OnNextBar;
-        }
+        //void OnEnable()
+        //{
+        //    AudioEventManager.OnNextPulse += OnNextPulse;
+        //    AudioEventManager.OnNextBar += OnNextBar;
+        //}
 
-        void OnDisable()
-        {
-            AudioEventManager.OnNextPulse -= OnNextPulse;
-            AudioEventManager.OnNextBar -= OnNextBar;
-        }
+        //void OnDisable()
+        //{
+        //    AudioEventManager.OnNextPulse -= OnNextPulse;
+        //    AudioEventManager.OnNextBar -= OnNextBar;
+        //}
 
         void OnNextBar(int bar)
         {

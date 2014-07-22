@@ -25,7 +25,7 @@ public abstract class ModeGenerator
 
     float[] currentScale;
 
-    protected void setScale(MusicalScale scaleType, MusicalMode modeType = MusicalMode.IONIAN)
+    public void setScale(MusicalScale scaleType, MusicalMode modeType = MusicalMode.IONIAN)
     {
         float[] scale = Scales[scaleType];
         int offset = (int)modeType;

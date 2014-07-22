@@ -86,31 +86,17 @@ namespace BarelyAPI
             initialize();
         }
 
-        protected virtual void OnEnable()
-        {
-            AudioEventManager.OnPlay += Play;
-            AudioEventManager.OnPause += Pause;
-            AudioEventManager.OnStop += Stop;
-        }
-
-        protected virtual void OnDisable()
-        {
-            AudioEventManager.OnPlay -= Play;
-            AudioEventManager.OnPause -= Pause;
-            AudioEventManager.OnStop -= Stop;
-        }
-
-        protected virtual void Play()
+        public virtual void Start()
         {
             audioSource.Play();
         }
 
-        protected virtual void Pause()
+        public virtual void Pause()
         {
             audioSource.Pause();
         }
 
-        protected virtual void Stop()
+        public virtual void Stop()
         {
             StopAllNotes();
 

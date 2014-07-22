@@ -1,149 +1,92 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace BarelyAPI
 {
-    public class Producer : MonoBehaviour
+    public class Producer
     {
-        // Arousal (Passive - Active)
-        float energy = 0.5f;
-        public float Energy
+        Dictionary<char, Section> sections;
+
+        MacroGenerator macro;
+        MesoGenerator meso;
+        MicroGenerator micro;
+
+        public Conductor conductor;
+        public Performer performer;
+
+        public Producer(Instrument instrument, MacroGenerator macroGenerator, MesoGenerator mesoGenerator, MicroGenerator microGenerator)
         {
-            get { return energy; }
-            set
+            sections = new Dictionary<char, Section>();
+
+            macro = macroGenerator;
+            meso = mesoGenerator;
+            micro = microGenerator;
+
+            performer = new Performer(instrument, null);
+
+            macro.GenerateSequence();
+        }
+
+        public void RegisterSequencer(Sequencer sequencer)
+        {
+            sequencer.AddSectionListener(OnNextSection);
+            sequencer.AddBeatListener(OnNextBeat);
+            sequencer.AddPulseListener(OnNextPulse);
+        }
+
+        public void DeregisterSequencer(Sequencer sequencer)
+        {
+            sequencer.RemoveSectionListener(OnNextSection);
+            sequencer.RemoveBeatListener(OnNextBeat);
+            sequencer.RemovePulseListener(OnNextPulse);
+        }
+
+        void OnNextSection(SequencerState state)
+        {
+            // Generate next section
+            char sectionName = macro.GetSectionName(state.CurrentSection);
+            
+            Section section = null;
+            if (!sections.TryGetValue(sectionName, out section))
             {
-                energy = value;
+                sections[sectionName] = new Section(state.BarCount);
 
-                tempo = 72 + (int)((152 - 72) * energy);
-                conductor.articulation = 1.0f - energy;
-                conductor.loudness = energy;
-                conductor.noteOnset = 1.0f - energy;
-                articulationVariance = energy;
-
-                loudnessVariance = (energy + stress) / 2.0f;
-                harmonicCurve = (stress > 0.5f) ? (stress + energy) / 2.0f : 1.0f;
+                meso.GenerateProgression(sectionName);
+                for (int i = 0; i < state.BarCount; ++i)
+                {
+                    sections[sectionName].AddBar(i, micro.GenerateLine(sectionName, meso.GetHarmonic(i)));
+                }
             }
         }
 
-        // Valence (Happy - Sad) 
-        float stress = 0.5f;
-        public float Stress
+        void OnNextBeat(SequencerState state)
         {
-            get { return stress; }
-            set
-            {
-                stress = value;
+            // Add next beat to performer
+            char sectionName = macro.GetSectionName(state.CurrentSection);
 
-                harmonicComplexity = stress;
-                scale = (stress < 0.25f) ? ModeGenerator.MusicalScale.MAJOR : ((stress < 0.5f) ? ModeGenerator.MusicalScale.NATURAL_MINOR : ModeGenerator.MusicalScale.HARMONIC_MINOR);
-                
-                pitchHeight = 1.0f - stress;
-                    
-                loudnessVariance = (energy + stress) / 2.0f;
-                harmonicCurve = (stress > 0.5f) ? (stress + energy) / 2.0f : 1.0f;
+            Section section = null;
+            if (sections.TryGetValue(sectionName, out section))
+            {
+                foreach (NoteMeta meta in section.GetBar(state.CurrentBar))
+                {
+                    if (Mathf.FloorToInt(meta.Offset * state.BeatCount) - state.CurrentBeat == 0)
+                    {
+                        Note note = new Note(conductor.GetNote(meta.Index), meta.Loudness * conductor.loudness);
+                        float start = state.CurrentSection * state.BarCount + state.CurrentBar + meta.Offset;
+                        float duration = meta.Duration * conductor.articulation;
+
+                        performer.AddNote(note, start, duration, state.BarLength);
+                    }
+                }
             }
         }
 
-        // 72 - 152
-        int tempo;
-        //public int Tempo
-        //{
-        //    get { return tempo; }
-        //    set { tempo = 72 + (152 - 72) * value; }
-        //}
-
-        // 0.0f - 1.0f
-        float articulation;
-
-        // 0.0f - 1.0f
-        float loudness;
-
-        // 0.0f - 1.0f
-        float noteOnset;
-
-        // 0.0f - 1.0f
-        float loudnessVariance;
-
-        // 0.0f - 1.0f
-        float articulationVariance;
-
-        // 0.0f - 1.0f
-        float harmonicComplexity;
-
-        // 0.0f - 1.0f
-        float harmonicCurve;
-
-        // 0.0f - 1.0f
-        float pitchHeight;
-
-        ModeGenerator.MusicalScale scale;
-        ModeGenerator.MusicalMode mode;
-
-        public Composer[] composers;
-        Composer composerTest;
-
-        public Performer[] performers;
-        Performer performerTest;
-
-        Conductor conductor;
-
-        void Start()
+        void OnNextPulse(SequencerState state)
         {
-            conductor = new Conductor();
-
-            composers = new Composer[1];
-            composerTest = composers[0] = new Composer();
-            performerTest = performers[0];
-            performerTest.conductor = conductor;
-
-            //for (int i = 0; i < macro.SequenceLength; ++i)
-            //{
-            //    char currentSectionName = macro.GetSectionName(i);
-            //    List<NoteInfo> currentSection = scoreSections[currentSectionName];
-
-            //    foreach (NoteInfo noteInfo in scoreSections[currentSectionName])
-            //    {
-            //        performer.AddNote(new Note(keySignutare + noteInfo.index, noteInfo.velocity), i * progressionLength + noteInfo.start, noteInfo.duration);
-            //    }
-            //}
-
-        }
-
-        void OnEnable()
-        {
-            AudioEventManager.OnNextBar += OnNextBar;
-            AudioEventManager.OnNextBeat += OnNextBeat;
-        }
-
-        void OnDisable()
-        {
-            AudioEventManager.OnNextBar -= OnNextBar;
-            AudioEventManager.OnNextBeat += OnNextBeat;
-        }
-
-        void OnNextBar(int bar)
-        {
-            composerTest.GenerateNextSection(bar);
-        }
-
-        void OnNextBeat(int beat)
-        {
-            composerTest.AddNextBeat(performerTest, MainClock.currentBar, beat-1);
-        }
-
-        public void PrintValues()
-        {
-            GUI.color = Color.black;
-
-            GUILayout.Label("tempo: " + tempo);
-            GUILayout.Label("articulation: " + articulation);
-            GUILayout.Label("loudness: " + conductor.loudness);
-            GUILayout.Label("note onset: " + noteOnset);
-            GUILayout.Label("pitch height: " + pitchHeight);
-            GUILayout.Label("harmonic complexity: " + harmonicComplexity);
-            GUILayout.Label("harmonic curve: " + harmonicCurve);
-            GUILayout.Label("articulation variance: " + articulationVariance);
-            GUILayout.Label("loudness variance: " + loudnessVariance);
+            // Play next pulse
+            performer.Onset = conductor.noteOnset;
+            performer.Play(state.CurrentSection * state.BarCount + state.CurrentBar, state.CurrentPulse);
         }
     }
 }

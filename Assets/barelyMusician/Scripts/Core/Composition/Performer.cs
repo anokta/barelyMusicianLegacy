@@ -4,77 +4,68 @@ using System.Collections.Generic;
 
 namespace BarelyAPI
 {
-    public class Performer : MonoBehaviour
+    public class Performer
     {
-        public Conductor conductor;
-
         Instrument instrument;
 
         Dictionary<int, List<Note>[]> score;
 
-        void Awake()
+        public float Onset
         {
-            instrument = GetComponent<Instrument>();
-
-            Reset();
+            get { return instrument.Attack; }
+            set { instrument.Attack = value; }
         }
 
-        void OnEnable()
+        public Performer(Instrument instrument, Conductor conductor)
         {
-            AudioEventManager.OnNextPulse += OnNextPulse;
-            AudioEventManager.OnStop += Reset;
+            this.instrument = instrument;
+
+            Stop();
         }
 
-        void OnDisable()
+        public void Start()
         {
-            AudioEventManager.OnNextPulse -= OnNextPulse;
-            AudioEventManager.OnStop += Reset;
+            instrument.Start();
+        }
+        
+        public void Pause()
+        {
+            instrument.Pause();
         }
 
-        void OnNextPulse(int pulse)
+        public void Stop()
+        {
+            instrument.Stop();
+
+            reset();
+        }
+
+        public void Play(int bar, int pulse)
         {
             List<Note>[] currentBar;
 
-            if (score.TryGetValue(MainClock.currentBar, out currentBar) && currentBar[pulse - 1] != null)
+            if (score.TryGetValue(bar, out currentBar) && currentBar[pulse] != null)
             {
-                foreach (Note note in currentBar[pulse - 1])
+                foreach (Note note in currentBar[pulse])
                 {
                     instrument.PlayNote(note);
                 }
             }
         }
 
-        void Reset()
+        public void AddNote(Note note, float start, float duration, int barLength)
         {
-            score = new Dictionary<int, List<Note>[]>();
-        }
-
-        public void AddBar(int index, List<Note>[] bar)
-        {
-            score[index] = bar;
-        }
-
-        public void AddNote(NoteMeta meta)
-        {
-            // Conduct note
-            Note note = new Note(conductor.GetNote(meta.Index), meta.Loudness * conductor.loudness);
-            float start = MainClock.currentBar + meta.Offset;
-            float end = start + meta.Duration * conductor.articulation;
-            
-            instrument.Attack = conductor.noteOnset;
-
             // Note On
-            addNote(note, start);
+            addNote(note, start, barLength);
 
             // Note Off
             Note noteOff = new Note(note.Index, 0.0f);
-            addNote(noteOff, end);
+            addNote(noteOff, start + duration, barLength);
         }
 
-        void addNote(Note note, float onset)
+        void addNote(Note note, float onset, int barLength)
         {
             List<Note>[] currentBar;
-            int barLength = MainClock.BarLength;
 
             int pulse = Mathf.RoundToInt(onset * barLength);
             int bar = pulse / barLength;
@@ -89,5 +80,11 @@ namespace BarelyAPI
             }
             currentBar[pulse].Add(note);
         }
+
+        void reset()
+        {
+            score = new Dictionary<int, List<Note>[]>();
+        }
+
     }
 }

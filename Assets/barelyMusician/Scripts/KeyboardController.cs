@@ -8,9 +8,10 @@ public class KeyboardController : MonoBehaviour
 
     Instrument instrument;
 
-    KeyCode[] keys = { 
-                         KeyCode.A, KeyCode.W, KeyCode.S, KeyCode.E, KeyCode.D, KeyCode.F, KeyCode.T, KeyCode.G, KeyCode.Y, KeyCode.H, KeyCode.U, KeyCode.J, KeyCode.K, KeyCode.O, KeyCode.L 
-                     };
+    KeyCode[] keys = 
+    { 
+        KeyCode.A, KeyCode.W, KeyCode.S, KeyCode.E, KeyCode.D, KeyCode.F, KeyCode.T, KeyCode.G, KeyCode.Y, KeyCode.H, KeyCode.U, KeyCode.J, KeyCode.K, KeyCode.O, KeyCode.L 
+    };
 
 
     void Awake()
