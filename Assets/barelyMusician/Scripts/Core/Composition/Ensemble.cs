@@ -14,10 +14,10 @@ namespace BarelyAPI
             {
                 energy = value;
 
-                sequencer.Tempo = 72 + (int)((152 - 72) * energy);
-                conductor.articulation = 1.0f - energy;
-                conductor.loudness = energy;
-                conductor.noteOnset = 1.0f - energy;
+                sequencer.Tempo = 90 + (int)((135 - 90) * energy);
+                conductor.ArticulationMultiplier = 1.0f - energy;
+                conductor.LoudnessMultiplier = energy;
+                conductor.NoteOnsetMultiplier = 1.0f - energy;
                 articulationVariance = energy;
 
                 loudnessVariance = (energy + stress) / 2.0f;
@@ -60,12 +60,13 @@ namespace BarelyAPI
         float pitchHeight;
 
         Sequencer sequencer;
-
         Conductor conductor;
 
-        public Instrument[] instruments;
-        Producer producerTest;
+        public AudioClip sample;
+        public AudioClip[] drumKit;
 
+        public Instrument[] instruments;
+        Producer[] producers;
 
         AudioSource audioSource;
 
@@ -82,9 +83,24 @@ namespace BarelyAPI
             sequencer = new Sequencer(120, 4, 8, 8, 32);
             conductor = new Conductor();
 
-            producerTest = new Producer(instruments[0], new SimpleMacroGenerator(), new SimpleMesoGenerator(sequencer.BarCount), new SimpleMicroGenerator(sequencer.BeatCount));
-            producerTest.conductor = conductor;
-            producerTest.RegisterSequencer(sequencer);
+            instruments = new Instrument[3];
+            instruments[0] = new SamplerInstrument(sample, new Envelope(0.0f, 0.0f, 1.0f, 0.25f));
+            instruments[1] = new SynthInstrument(Oscillator.OSCType.SAW, new Envelope(0.25f, 0.5f, 1.0f, 0.25f), -5.0f);
+            instruments[2] = new PercussiveInstrument(drumKit, -4.0f);
+            
+            producers = new Producer[instruments.Length];
+            for (int i = 0; i < producers.Length; ++i)
+            {
+                if (i == 0)
+                    producers[i] = new Producer(instruments[i], new SimpleMacroGenerator(), new SimpleMesoGenerator(sequencer.BarCount), new SimpleMicroGenerator(sequencer.BeatCount));
+                else if(i == 1)
+                    producers[i] = new Producer(instruments[i], new SimpleMacroGenerator(), new SimpleMesoGenerator(sequencer.BarCount), new CA1DMicroGenerator(sequencer.BeatCount));
+                else
+                    producers[i] = new Producer(instruments[i], new SimpleMacroGenerator(), new SimpleMesoGenerator(sequencer.BarCount), new DrumsMicroGenerator(sequencer.BeatCount));
+                
+                producers[i].SetConductor(conductor);
+                producers[i].RegisterSequencer(sequencer);
+            }
         }
 
         public void Play()
@@ -92,8 +108,6 @@ namespace BarelyAPI
             if (!audioSource.isPlaying)
             {
                 audioSource.Play();
-
-                //performerTest.Start();
             }
         }
 
@@ -102,8 +116,6 @@ namespace BarelyAPI
             if (audioSource.isPlaying)
             {
                 audioSource.Pause();
-
-                //performerTest.Pause();
             }
         }
 
@@ -112,11 +124,11 @@ namespace BarelyAPI
             if (audioSource.isPlaying)
             {
                 audioSource.Stop();
-
-                //performerTest.Stop();
             }
 
             sequencer.Reset();
+            foreach (Producer producer in producers)
+                producer.Reset();
         }
 
         public bool IsPlaying()
@@ -127,6 +139,20 @@ namespace BarelyAPI
         void OnAudioFilterRead(float[] data, int channels)
         {
             sequencer.Update(data.Length / channels);
+
+            for (int i = 0; i < data.Length; i += channels)
+            {
+                float output = 0.0f;
+
+                foreach (Producer producer in producers)
+                {
+                    output += producer.GetOutput();
+                }
+                data[i] = output;
+
+                // If stereo, copy the mono data to each channel
+                if (channels == 2) data[i + 1] = data[i];
+            }
         }
 
         public void PrintValues()
@@ -134,9 +160,9 @@ namespace BarelyAPI
             GUI.color = Color.black;
 
             GUILayout.Label("tempo: " + sequencer.Tempo);
-            GUILayout.Label("articulation: " + conductor.articulation);
-            GUILayout.Label("loudness: " + conductor.loudness);
-            GUILayout.Label("note onset: " + conductor.noteOnset);
+            GUILayout.Label("articulation: " + conductor.ArticulationMultiplier);
+            GUILayout.Label("loudness: " + conductor.LoudnessMultiplier);
+            GUILayout.Label("note onset: " + conductor.NoteOnsetMultiplier);
             GUILayout.Label("pitch height: " + pitchHeight);
             GUILayout.Label("harmonic complexity: " + harmonicComplexity);
             GUILayout.Label("harmonic curve: " + harmonicCurve);

@@ -6,7 +6,7 @@ public class GUIManager : MonoBehaviour
 {
 
     public GUIText timeSignutare;
-    private string timeSigText;
+    //private string timeSigText;
 
     public Ensemble producer;
 
@@ -23,7 +23,7 @@ public class GUIManager : MonoBehaviour
 
     void OnGUI()
     {
-        timeSignutare.text = timeSigText;
+        //timeSignutare.text = timeSigText;
         GUILayout.BeginArea(new Rect(Screen.width * 0.25f, Screen.height * 0.2f, Screen.width * 0.5f, Screen.height * 0.75f));
 
         GUILayout.FlexibleSpace();
@@ -58,8 +58,8 @@ public class GUIManager : MonoBehaviour
 
         GUILayout.FlexibleSpace();
         GUILayout.FlexibleSpace();
-        
-       // GUILayout.BeginHorizontal();
+
+        // GUILayout.BeginHorizontal();
 
         //GUILayout.BeginVertical();
         GUILayout.Box("Energy");
@@ -68,11 +68,11 @@ public class GUIManager : MonoBehaviour
         producer.Stress = GUILayout.HorizontalSlider(producer.Stress, 0.0f, 1.0f);
         //GUILayout.EndVertical();
 
-        
+
         GUILayout.BeginVertical();
         producer.PrintValues();
         GUILayout.EndVertical();
-        
+
         //GUILayout.EndHorizontal();
         //
 

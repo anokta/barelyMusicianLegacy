@@ -6,38 +6,34 @@ namespace BarelyAPI
 {
     public class Performer
     {
-        Instrument instrument;
-
-        Dictionary<int, List<Note>[]> score;
-
+        private float initialOnset;
         public float Onset
         {
-            get { return instrument.Attack; }
+            get { return initialOnset; }
             set { instrument.Attack = value; }
         }
 
-        public Performer(Instrument instrument, Conductor conductor)
+        public float Output
         {
-            this.instrument = instrument;
-
-            Stop();
+            get { return instrument.ProcessNext(); }
         }
 
-        public void Start()
+        Dictionary<int, List<Note>[]> score;
+        Instrument instrument;
+
+        public Performer(Instrument performerInstrument)
         {
-            instrument.Start();
-        }
-        
-        public void Pause()
-        {
-            instrument.Pause();
+            instrument = performerInstrument;
+            initialOnset = Mathf.Max(Mathf.Epsilon, instrument.Attack);
+
+            Restart();
         }
 
-        public void Stop()
+        public void Restart()
         {
-            instrument.Stop();
+            score = new Dictionary<int, List<Note>[]>();
 
-            reset();
+            instrument.StopAllNotes();
         }
 
         public void Play(int bar, int pulse)
@@ -80,11 +76,5 @@ namespace BarelyAPI
             }
             currentBar[pulse].Add(note);
         }
-
-        void reset()
-        {
-            score = new Dictionary<int, List<Note>[]>();
-        }
-
     }
 }

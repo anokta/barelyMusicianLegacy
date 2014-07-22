@@ -5,16 +5,28 @@ namespace BarelyAPI
 {
     public class Conductor
     {
-        public enum Tempo { ANDANTE = 90, MODERATO = 120, ALLEGRO = 152 }
-        public Tempo tempo;
+        float articulation;
+        public float ArticulationMultiplier
+        {
+            get { return articulation; }
+            set { articulation = 0.5f + value; }
+        }
 
-        public float articulation;
+        float loudness;
+        public float LoudnessMultiplier
+        {
+            get { return loudness; }
+            set { loudness = 0.25f + 0.75f * value; }
+        }
 
-        public float loudness;
+        float noteOnset;
+        public float NoteOnsetMultiplier
+        {
+            get { return noteOnset; }
+            set { noteOnset = 0.5f + 1.5f * value; }
+        }
 
-        public float noteOnset;
-
-        public float keyIndex;
+        public float fundamentalKey;
 
         public ModeGenerator mode;
 
@@ -26,7 +38,7 @@ namespace BarelyAPI
 
         public float GetNote(int index)
         {
-            return keyIndex + mode.GetNoteOffset(index);
+            return fundamentalKey + mode.GetNoteOffset(index);
         }
     }
 }

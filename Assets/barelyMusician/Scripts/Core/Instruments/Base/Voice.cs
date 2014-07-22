@@ -5,11 +5,10 @@ namespace BarelyAPI
 {
     public class Voice
     {
-        // Volume
+        // Output level
         float gain;
         public float Gain
         {
-            get { return gain; }
             set { gain = value; }
         }
 
@@ -34,12 +33,10 @@ namespace BarelyAPI
             get { return Ugen; }
         }
 
-        public Voice(UGen soundGenerator, Envelope soundEnvelope, float gain = 1.0f)
+        public Voice(UGen soundGenerator, Envelope soundEnvelope)
         {
             ugen = soundGenerator;
             envelope = soundEnvelope;
-
-            Gain = gain;
         }
 
         public void Start()

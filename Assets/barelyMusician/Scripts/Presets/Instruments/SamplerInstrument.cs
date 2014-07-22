@@ -5,21 +5,27 @@ namespace BarelyAPI
 {
     public class SamplerInstrument : MelodicInstrument
     {
-        public AudioClip sample;
-        public bool loop;
-
-        // TODO: Remove these (restructuring needed!)
-        public int rootIndex;
-        Note rootNote;
-
-        protected override void initialize()
+        public bool Loop
         {
-            rootNote = new Note(rootIndex, 1.0f);
+            get { return ((Sampler)voices[0].Ugen).Loop; }
+            set    
+            {
+                foreach (Voice voice in voices)
+                {
+                    ((Sampler)voice.Ugen).Loop = value;
+                }
+            }
+        }
 
+        public SamplerInstrument(AudioClip sample, Envelope envelope, float volume = 0.0f, int rootIndex = 0, bool loop = false, int voiceCount = 16)
+            : base(volume)
+        {
             for (int i = 0; i < voiceCount; ++i)
             {
-                voices.Add(new Voice(new Sampler(sample, loop, rootNote.Pitch), new Envelope(attack, decay, sustain, release)));
+                voices.Add(new Voice(new Sampler(sample, loop, new Note(rootIndex).Pitch), new Envelope(envelope.Attack, envelope.Decay, envelope.Sustain, envelope.Release)));
             }
+
+            StopAllNotes();
         }
     }
 }

@@ -4,128 +4,87 @@ using System.Collections.Generic;
 
 namespace BarelyAPI
 {
-    public abstract class Instrument : MonoBehaviour
+    public abstract class Instrument
     {
         // Instrument Voices
         protected List<Voice> voices;
 
+        // Effects
+        protected List<AudioEffect> effects;
+
         // Envelope properties
-        [SerializeField]
-        protected float attack, decay, sustain, release;
         public float Attack
         {
-            get { return attack; }
+            get { return voices[0].Envelope.Attack; }
             set
             {
                 foreach (Voice voice in voices)
                 {
-                    voice.Envelope.Attack = attack = value;
+                    voice.Envelope.Attack = value;
                 }
             }
         }
         public float Decay
         {
-            get { return decay; }
+            get { return voices[0].Envelope.Decay; }
             set
             {
                 foreach (Voice voice in voices)
                 {
-                    voice.Envelope.Decay = decay = value;
+                    voice.Envelope.Decay = value;
                 }
             }
         }
         public float Sustain
         {
-            get { return sustain; }
+            get { return voices[0].Envelope.Sustain; }
             set
             {
                 foreach (Voice voice in voices)
                 {
-                    voice.Envelope.Sustain = sustain = value;
+                    voice.Envelope.Sustain = value;
                 }
             }
         }
         public float Release
         {
-            get { return release; }
+            get { return voices[0].Envelope.Release; }
             set
             {
                 foreach (Voice voice in voices)
                 {
-                    voice.Envelope.Release = release = value;
+                    voice.Envelope.Release = value;
                 }
             }
         }
 
-        // Effects
-        protected List<AudioEffect> effects;
-
-        // Master volume (dB)
-        [SerializeField] // TODO delete SerializeFields later
         protected float volume;
         public float Volume
         {
-            get { return (volume != 0) ? 20.0f * Mathf.Log10(volume) : -70.0f; }
+            get { return (volume != 0.0f) ? 20.0f * Mathf.Log10(volume) : -70.0f; }
             set { volume = (value > -70.0f) ? Mathf.Pow(10, 0.05f * value) : 0.0f; }
         }
 
-        // Audio output
-        protected AudioSource audioSource;
-
-
-        protected virtual void Awake()
+        public Instrument(float volume = 0.0f)
         {
-            audioSource = gameObject.AddComponent<AudioSource>();
-            audioSource.hideFlags = HideFlags.HideInInspector;
-            audioSource.panLevel = 0.0f;
-            audioSource.Stop();
-
             voices = new List<Voice>();
             effects = new List<AudioEffect>();
 
-            initialize();
+            Volume = volume;
         }
 
-        public virtual void Start()
+        public virtual float ProcessNext()
         {
-            audioSource.Play();
-        }
-
-        public virtual void Pause()
-        {
-            audioSource.Pause();
-        }
-
-        public virtual void Stop()
-        {
-            StopAllNotes();
-
-            audioSource.Stop();
-        }
-
-        protected virtual void OnAudioFilterRead(float[] data, int channels)
-        {
-            for (int i = 0; i < data.Length; i += channels)
+            float output = 0.0f;
+            
+            foreach (Voice voice in voices)
             {
-                // Fill the buffer
-                float output = 0.0f;
-                foreach (Voice voice in voices)
-                {
-                    output += voice.ProcessNext();
-                }
-                data[i] = volume * output;
-
-                // If stereo, copy the mono data to each channel
-                if (channels == 2) data[i + 1] = data[i];
+                output += voice.ProcessNext();
             }
-
-            foreach (AudioEffect effect in effects)
-            {
-                effect.Process(ref data);
-            }
+            
+            return output * volume;
         }
 
-        protected abstract void initialize();
         protected abstract void noteOn(Note note);
         protected abstract void noteOff(Note note);
 

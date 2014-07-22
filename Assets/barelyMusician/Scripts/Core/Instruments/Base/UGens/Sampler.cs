@@ -8,6 +8,11 @@ namespace BarelyAPI
         float[] sampleData;
         float samplingRatio;
 
+        public int SampleLength
+        {
+            get { return sampleData.Length; }
+        }
+
         float rootFrequency;
         public float RootFrequency
         {
@@ -29,7 +34,7 @@ namespace BarelyAPI
             sampleData = new float[sample.samples];
             sample.GetData(sampleData, 0);
 
-            RootFrequency = rootFrequency;
+            RootFrequency = Frequency = rootFrequency;
             samplingRatio = sample.frequency / AudioProperties.SampleRate;
 
             Loop = loop;

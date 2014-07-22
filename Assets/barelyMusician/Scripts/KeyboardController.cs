@@ -5,18 +5,24 @@ using BarelyAPI;
 public class KeyboardController : MonoBehaviour
 {
     public int fundamentalIndex = (int)NoteIndex.C4;
-
-    Instrument instrument;
+    public Oscillator.OSCType oscType;
 
     KeyCode[] keys = 
     { 
         KeyCode.A, KeyCode.W, KeyCode.S, KeyCode.E, KeyCode.D, KeyCode.F, KeyCode.T, KeyCode.G, KeyCode.Y, KeyCode.H, KeyCode.U, KeyCode.J, KeyCode.K, KeyCode.O, KeyCode.L 
     };
 
+    Instrument instrument;
+    AudioSource audioSource;
 
     void Awake()
     {
-        instrument = GetComponent<Instrument>();
+        instrument = new SynthInstrument(oscType, new Envelope(0.25f, 0.5f, 1.0f, 0.25f));
+
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.hideFlags = HideFlags.HideInInspector;
+        audioSource.panLevel = 0.0f;
+        audioSource.Play();
     }
 
     void Update()
@@ -44,6 +50,17 @@ public class KeyboardController : MonoBehaviour
             {
                 instrument.PlayNote(new Note(fundamentalIndex + i, 1.0f));
             }
+        }
+    }
+
+    void OnAudioFilterRead(float[] data, int channels)
+    {
+        for (int i = 0; i < data.Length; i += channels)
+        {
+            data[i] = instrument.ProcessNext();
+
+            // If stereo, copy the mono data to each channel
+            if (channels == 2) data[i + 1] = data[i];
         }
     }
 }

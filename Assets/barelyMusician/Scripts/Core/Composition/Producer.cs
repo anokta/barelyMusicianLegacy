@@ -12,20 +12,32 @@ namespace BarelyAPI
         MesoGenerator meso;
         MicroGenerator micro;
 
-        public Conductor conductor;
-        public Performer performer;
+        Conductor conductor;
+        Performer performer;
 
         public Producer(Instrument instrument, MacroGenerator macroGenerator, MesoGenerator mesoGenerator, MicroGenerator microGenerator)
         {
-            sections = new Dictionary<char, Section>();
-
             macro = macroGenerator;
             meso = mesoGenerator;
             micro = microGenerator;
 
-            performer = new Performer(instrument, null);
+            performer = new Performer(instrument);
 
             macro.GenerateSequence();
+
+            Reset();
+        }
+
+        public void Reset()
+        {
+            sections = new Dictionary<char, Section>();
+
+            performer.Restart();
+        }
+
+        public void SetConductor(Conductor conductor)
+        {
+            this.conductor = conductor;
         }
 
         public void RegisterSequencer(Sequencer sequencer)
@@ -42,6 +54,11 @@ namespace BarelyAPI
             sequencer.RemovePulseListener(OnNextPulse);
         }
 
+        public float GetOutput()
+        {
+            return performer.Output;
+        }
+
         void OnNextSection(SequencerState state)
         {
             // Generate next section
@@ -50,9 +67,9 @@ namespace BarelyAPI
             Section section = null;
             if (!sections.TryGetValue(sectionName, out section))
             {
-                sections[sectionName] = new Section(state.BarCount);
-
+                sections[sectionName] = new Section(meso.ProgressionLength);
                 meso.GenerateProgression(sectionName);
+
                 for (int i = 0; i < state.BarCount; ++i)
                 {
                     sections[sectionName].AddBar(i, micro.GenerateLine(sectionName, meso.GetHarmonic(i)));
@@ -72,9 +89,9 @@ namespace BarelyAPI
                 {
                     if (Mathf.FloorToInt(meta.Offset * state.BeatCount) - state.CurrentBeat == 0)
                     {
-                        Note note = new Note(conductor.GetNote(meta.Index), meta.Loudness * conductor.loudness);
+                        Note note = new Note(conductor.GetNote(meta.Index), meta.Loudness * conductor.LoudnessMultiplier);
                         float start = state.CurrentSection * state.BarCount + state.CurrentBar + meta.Offset;
-                        float duration = meta.Duration * conductor.articulation;
+                        float duration = meta.Duration * conductor.ArticulationMultiplier;
 
                         performer.AddNote(note, start, duration, state.BarLength);
                     }
@@ -85,7 +102,7 @@ namespace BarelyAPI
         void OnNextPulse(SequencerState state)
         {
             // Play next pulse
-            performer.Onset = conductor.noteOnset;
+            performer.Onset *= conductor.NoteOnsetMultiplier;
             performer.Play(state.CurrentSection * state.BarCount + state.CurrentBar, state.CurrentPulse);
         }
     }
