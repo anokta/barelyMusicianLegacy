@@ -10,7 +10,7 @@ namespace BarelyAPI
         public int initialTempo;
         public float TempoMultiplier
         {
-            set { sequencer.Tempo = Mathf.FloorToInt(initialTempo * (0.9f + 0.2f * value)); }
+            set { sequencer.Tempo = Mathf.FloorToInt(initialTempo * (0.875f + 0.25f * value)); }
         }
 
         // Key note
