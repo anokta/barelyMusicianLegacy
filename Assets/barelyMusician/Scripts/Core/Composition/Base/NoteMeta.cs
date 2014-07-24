@@ -5,12 +5,12 @@ namespace BarelyAPI
 {
     public class NoteMeta
     {
-        public int Index;
+        public float Index;
         public float Offset;
         public float Duration;
         public float Loudness;
 
-        public NoteMeta(int index, float offset, float duration, float loudness = 1.0f)
+        public NoteMeta(float index, float offset, float duration, float loudness = 1.0f)
         {
             Index = index;
             Offset = offset;

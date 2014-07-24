@@ -16,7 +16,7 @@ namespace BarelyAPI
         public float LoudnessMultiplier
         {
             get { return loudness; }
-            set { loudness = 0.25f + 0.75f * value; }
+            set { loudness = 0.4f + 0.6f * value; }
         }
 
         float noteOnset;
@@ -58,7 +58,7 @@ namespace BarelyAPI
             mode = new SimpleModeGenerator();
         }
 
-        public float GetNote(int index)
+        public float GetNote(float index)
         {
             return fundamentalKey + mode.GetNoteOffset(index);
         }

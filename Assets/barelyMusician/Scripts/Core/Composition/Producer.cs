@@ -85,15 +85,11 @@ namespace BarelyAPI
             Section section = null;
             if (sections.TryGetValue(sectionName, out section))
             {
-                foreach (NoteMeta meta in section.GetBar(state.CurrentBar))
+                foreach (NoteMeta noteMeta in section.GetBar(state.CurrentBar))
                 {
-                    if (Mathf.FloorToInt(meta.Offset * state.BeatCount) - state.CurrentBeat == 0)
+                    if (Mathf.FloorToInt(noteMeta.Offset * state.BeatCount) - state.CurrentBeat == 0)
                     {
-                        Note note = new Note(conductor.GetNote(meta.Index), meta.Loudness * conductor.LoudnessMultiplier);
-                        float start = state.CurrentSection * state.BarCount + state.CurrentBar + meta.Offset;
-                        float duration = meta.Duration * conductor.ArticulationMultiplier;
-
-                        performer.AddNote(note, start, duration, state.BarLength);
+                        performNote(noteMeta, state);
                     }
                 }
             }
@@ -104,6 +100,15 @@ namespace BarelyAPI
             // Play next pulse
             performer.Onset *= conductor.NoteOnsetMultiplier;
             performer.Play(state.CurrentSection * state.BarCount + state.CurrentBar, state.CurrentPulse);
+        }
+
+        void performNote(NoteMeta meta, SequencerState state)
+        {
+            Note note = new Note(conductor.GetNote(meta.Index), meta.Loudness * conductor.LoudnessMultiplier);
+            float start = state.CurrentSection * state.BarCount + state.CurrentBar + meta.Offset;
+            float duration = meta.Duration * conductor.ArticulationMultiplier; // +meta.Duration * conductor.ArticulationMultiplier * RandomNumber.NextNormal(0.0f, conductor.articulationVariance);
+
+            performer.AddNote(note, start, duration, state.BarLength);
         }
     }
 }

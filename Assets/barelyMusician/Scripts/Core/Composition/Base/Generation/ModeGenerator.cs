@@ -24,13 +24,22 @@ public abstract class ModeGenerator
         };
 
     float[] currentScale;
-
-    public float GetNoteOffset(int index)
+    public int ScaleLength
     {
-        int octaveOffset = Mathf.FloorToInt((float)index / currentScale.Length);
-        int scaleOffset = index - octaveOffset * currentScale.Length;
+        get { return currentScale.Length; }
+    }
 
-        return currentScale[scaleOffset] + octaveOffset * 12;
+    public float GetNoteOffset(float index)
+    {
+        float octaveOffset = Mathf.Floor(index / currentScale.Length);
+        float scaleOffset = index - octaveOffset * currentScale.Length;
+        int scaleIndex = Mathf.FloorToInt(scaleOffset);
+
+        float noteOffset = currentScale[scaleIndex] + octaveOffset * 12;
+        if(scaleOffset - scaleIndex > 0.0f)
+            noteOffset += (scaleOffset - scaleIndex) * (currentScale[(scaleIndex + 1) % currentScale.Length] + ((scaleIndex + 1) / currentScale.Length) * 12 - currentScale[scaleIndex]);
+
+        return noteOffset;
     }
 
     protected void setScale(MusicalScale scaleType, MusicalMode modeType = MusicalMode.IONIAN)

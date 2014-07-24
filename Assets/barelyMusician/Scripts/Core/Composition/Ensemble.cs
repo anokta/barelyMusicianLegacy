@@ -13,6 +13,7 @@ namespace BarelyAPI
             set { sequencer.Tempo = Mathf.FloorToInt(initialTempo * (0.9f + 0.2f * value)); }
         }
 
+        // Key note
         public NoteIndex fundamentalKey;
 
         // Arousal (Passive - Active)
