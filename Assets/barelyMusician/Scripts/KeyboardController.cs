@@ -5,7 +5,7 @@ using BarelyAPI;
 public class KeyboardController : MonoBehaviour
 {
     public int fundamentalIndex = (int)NoteIndex.C4;
-    public Oscillator.OSCType oscType;
+    public OscillatorType oscType;
 
     KeyCode[] keys = 
     { 

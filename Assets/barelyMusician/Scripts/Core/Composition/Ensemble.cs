@@ -5,8 +5,19 @@ namespace BarelyAPI
 {
     public class Ensemble : MonoBehaviour
     {
+        // Tempo
+        [SerializeField] [Range (72, 220)]
+        public int initialTempo;
+        public float TempoMultiplier
+        {
+            set { sequencer.Tempo = Mathf.FloorToInt(initialTempo * (0.9f + 0.2f * value)); }
+        }
+
+        public NoteIndex fundamentalKey;
+
         // Arousal (Passive - Active)
         float energy = 0.5f;
+        float energyTarget, energyInterpolationSpeed;
         public float Energy
         {
             get { return energy; }
@@ -14,19 +25,20 @@ namespace BarelyAPI
             {
                 energy = value;
 
-                sequencer.Tempo = 90 + (int)((135 - 90) * energy);
+                TempoMultiplier = energy;
                 conductor.ArticulationMultiplier = 1.0f - energy;
                 conductor.LoudnessMultiplier = energy;
                 conductor.NoteOnsetMultiplier = 1.0f - energy;
-                articulationVariance = energy;
+                conductor.articulationVariance = energy;
 
-                loudnessVariance = (energy + stress) / 2.0f;
-                harmonicCurve = (stress > 0.5f) ? (stress + energy) / 2.0f : 1.0f;
+                conductor.loudnessVariance = (energy + stress) / 2.0f;
+                conductor.harmonicCurve = (stress > 0.5f) ? (stress + energy) / 2.0f : 1.0f;
             }
         }
 
         // Valence (Happy - Sad) 
         float stress = 0.5f;
+        float stressTarget, stressInterpolationSpeed;
         public float Stress
         {
             get { return stress; }
@@ -34,30 +46,15 @@ namespace BarelyAPI
             {
                 stress = value;
 
-                harmonicComplexity = stress;
-                conductor.mode.setScale((stress < 0.25f) ? ModeGenerator.MusicalScale.MAJOR : ((stress < 0.5f) ? ModeGenerator.MusicalScale.NATURAL_MINOR : ModeGenerator.MusicalScale.HARMONIC_MINOR));
+                conductor.harmonicComplexity = stress;
+                conductor.Mode = stress;
 
-                pitchHeight = 1.0f - stress;
+                conductor.pitchHeight = 1.0f - stress;
 
-                loudnessVariance = (energy + stress) / 2.0f;
-                harmonicCurve = (stress > 0.5f) ? (stress + energy) / 2.0f : 1.0f;
+                conductor.loudnessVariance = (energy + stress) / 2.0f;
+                conductor.harmonicCurve = (stress > 0.5f) ? (stress + energy) / 2.0f : 1.0f;
             }
         }
-
-        // 0.0f - 1.0f
-        float loudnessVariance;
-
-        // 0.0f - 1.0f
-        float articulationVariance;
-
-        // 0.0f - 1.0f
-        float harmonicComplexity;
-
-        // 0.0f - 1.0f
-        float harmonicCurve;
-
-        // 0.0f - 1.0f
-        float pitchHeight;
 
         Sequencer sequencer;
         Conductor conductor;
@@ -80,13 +77,14 @@ namespace BarelyAPI
 
         void Start()
         {
-            sequencer = new Sequencer(120, 4, 8, 8, 32);
+            sequencer = new Sequencer(initialTempo, 4, 8, 8, 32);
             conductor = new Conductor();
+            conductor.fundamentalKey = (int)fundamentalKey;
 
-            instruments = new Instrument[3];
+            instruments = new Instrument[2];
             instruments[0] = new SamplerInstrument(sample, new Envelope(0.0f, 0.0f, 1.0f, 0.25f));
-            instruments[1] = new SynthInstrument(Oscillator.OSCType.SAW, new Envelope(0.25f, 0.5f, 1.0f, 0.25f), -5.0f);
-            instruments[2] = new PercussiveInstrument(drumKit, -4.0f);
+            instruments[1] = new SynthInstrument(OscillatorType.SAW, new Envelope(0.25f, 0.5f, 1.0f, 0.25f), -5.0f);
+            //instruments[2] = new PercussiveInstrument(drumKit, -4.0f);
             
             producers = new Producer[instruments.Length];
             for (int i = 0; i < producers.Length; ++i)
@@ -101,6 +99,17 @@ namespace BarelyAPI
                 producers[i].SetConductor(conductor);
                 producers[i].RegisterSequencer(sequencer);
             }
+        }
+
+        void Update()
+        {
+            if (energy != energyTarget)
+                energy = Mathf.Lerp(energy, energyTarget, energyInterpolationSpeed);
+            if (stress != stressTarget)
+                stress = Mathf.Lerp(stress, stressTarget, stressInterpolationSpeed);
+
+            //if (RandomNumber.NextFloat() < 0.01f)
+            //    SetMood(RandomNumber.NextFloat(), RandomNumber.NextFloat(), RandomNumber.NextFloat());
         }
 
         public void Play()
@@ -136,6 +145,24 @@ namespace BarelyAPI
             return audioSource.isPlaying;
         }
 
+        public void SetMood(float energy, float stress, float smoothness = 0.0f)
+        {
+            SetEnergy(energy, smoothness);
+            SetStress(stress, smoothness);
+        }
+
+        public void SetEnergy(float energy, float smoothness = 0.0f)
+        {
+            energyTarget = energy;
+            energyInterpolationSpeed = (smoothness == 0.0f) ? 1.0f : Time.deltaTime / (smoothness * smoothness);
+        }
+
+        public void SetStress(float stress, float smoothness = 0.0f)
+        {
+            stressTarget = stress;
+            stressInterpolationSpeed = (smoothness == 0.0f) ? 1.0f : Time.deltaTime / (smoothness * smoothness);
+        }
+
         void OnAudioFilterRead(float[] data, int channels)
         {
             sequencer.Update(data.Length / channels);
@@ -163,11 +190,11 @@ namespace BarelyAPI
             GUILayout.Label("articulation: " + conductor.ArticulationMultiplier);
             GUILayout.Label("loudness: " + conductor.LoudnessMultiplier);
             GUILayout.Label("note onset: " + conductor.NoteOnsetMultiplier);
-            GUILayout.Label("pitch height: " + pitchHeight);
-            GUILayout.Label("harmonic complexity: " + harmonicComplexity);
-            GUILayout.Label("harmonic curve: " + harmonicCurve);
-            GUILayout.Label("articulation variance: " + articulationVariance);
-            GUILayout.Label("loudness variance: " + loudnessVariance);
+            GUILayout.Label("pitch height: " + conductor.pitchHeight);
+            GUILayout.Label("harmonic complexity: " + conductor.harmonicComplexity);
+            GUILayout.Label("harmonic curve: " + conductor.harmonicCurve);
+            GUILayout.Label("articulation variance: " + conductor.articulationVariance);
+            GUILayout.Label("loudness variance: " + conductor.loudnessVariance);
         }
 
 

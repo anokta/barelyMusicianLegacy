@@ -5,7 +5,7 @@ namespace BarelyAPI
 {
     public class SynthInstrument : MelodicInstrument
     {
-        public Oscillator.OSCType OscType
+        public OscillatorType OscType
         {
             get { return ((Oscillator)voices[0].Ugen).Type; }
             set
@@ -17,7 +17,7 @@ namespace BarelyAPI
             }
         }
 
-        public SynthInstrument(Oscillator.OSCType oscType, Envelope envelope, float volume = -10.0f, int voiceCount = 16)
+        public SynthInstrument(OscillatorType oscType, Envelope envelope, float volume = -10.0f, int voiceCount = 16)
             : base(volume)
         {
             for (int i = 0; i < voiceCount; ++i)

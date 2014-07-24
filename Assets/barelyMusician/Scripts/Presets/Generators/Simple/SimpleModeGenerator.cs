@@ -5,19 +5,19 @@ namespace BarelyAPI
 {
     public class SimpleModeGenerator : ModeGenerator
     {
-        public override void GenerateScale(float energy, float stress)
+        public override void GenerateScale(float stress)
         {
-            if (stress < -0.5f)
+            if (stress < 0.25f)
             {
                 setScale(MusicalScale.MAJOR, MusicalMode.IONIAN);
             }
-            else if (stress > 0.5f)
+            else if (stress < 0.5f)
             {
-                setScale(MusicalScale.HARMONIC_MINOR, MusicalMode.IONIAN);
+                setScale(MusicalScale.NATURAL_MINOR, MusicalMode.IONIAN);
             }
             else
             {
-                setScale(MusicalScale.NATURAL_MINOR, MusicalMode.IONIAN);
+                setScale(MusicalScale.HARMONIC_MINOR, MusicalMode.IONIAN);
             }
         }
     }

@@ -26,14 +26,36 @@ namespace BarelyAPI
             set { noteOnset = 0.5f + 1.5f * value; }
         }
 
+        ModeGenerator mode;
+        public float Mode
+        {
+            set { mode.GenerateScale(value); }
+        }
+
+
+
+        // 0.0f - 1.0f
+        public float loudnessVariance;
+
+        // 0.0f - 1.0f
+        public float articulationVariance;
+
+        // 0.0f - 1.0f
+        public float harmonicComplexity;
+
+        // 0.0f - 1.0f
+        public float harmonicCurve;
+
+        // 0.0f - 1.0f
+        public float pitchHeight;
+
+
         public float fundamentalKey;
 
-        public ModeGenerator mode;
-
+        
         public Conductor()
         {
             mode = new SimpleModeGenerator();
-            mode.GenerateScale(0.0f, -1.0f);
         }
 
         public float GetNote(int index)
