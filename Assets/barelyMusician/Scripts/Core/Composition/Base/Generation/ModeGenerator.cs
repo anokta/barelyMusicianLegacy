@@ -6,7 +6,7 @@ namespace BarelyAPI
 {
     public abstract class ModeGenerator
     {
-        const int OCTAVE = 12;
+        public static int OCTAVE = 12;
 
         static float[] majorScale = { 0, 2, 4, 5, 7, 9, 11 };
         static float[] harmonicMinorScale = { 0, 2, 3, 5, 7, 8, 11 };

@@ -14,6 +14,8 @@ namespace BarelyAPI
 
         Conductor conductor;
         Performer performer;
+        float initialOnset;
+
 
         public Producer(Instrument instrument, MacroGenerator macroGenerator, MesoGenerator mesoGenerator, MicroGenerator microGenerator)
         {
@@ -22,6 +24,7 @@ namespace BarelyAPI
             micro = microGenerator;
 
             performer = new Performer(instrument);
+            initialOnset = instrument.Attack;
 
             macro.GenerateSequence();
 
@@ -65,7 +68,7 @@ namespace BarelyAPI
             char sectionName = macro.GetSectionName(state.CurrentSection);
             
             Section section = null;
-            if (!sections.TryGetValue(sectionName, out section))
+            if (sectionName != '.' && !sections.TryGetValue(sectionName, out section))
             {
                 sections[sectionName] = new Section(meso.ProgressionLength);
                 meso.GenerateProgression(sectionName);
@@ -98,17 +101,26 @@ namespace BarelyAPI
         void OnNextPulse(SequencerState state)
         {
             // Play next pulse
-            performer.Onset *= conductor.NoteOnsetMultiplier;
+            applyPerformerTransformation();
             performer.Play(state.CurrentSection * state.BarCount + state.CurrentBar, state.CurrentPulse);
         }
 
         void performNote(NoteMeta meta, SequencerState state)
         {
-            Note note = new Note(conductor.GetNote(meta.Index), meta.Loudness * conductor.LoudnessMultiplier);
+            float loudness = Mathf.Max(0.0f, RandomNumber.NextNormal(meta.Loudness * conductor.LoudnessMultiplier, meta.Loudness * conductor.LoudnessMultiplier * conductor.LoudnessVariance));
+            float noteIndex = conductor.GetNote(Mathf.Abs(conductor.HarmonicCurve) > RandomNumber.NextFloat() ? Mathf.Sign(conductor.HarmonicCurve) * meta.Index : meta.Index) + Mathf.RoundToInt(conductor.PitchHeight) * ModeGenerator.OCTAVE;
+            //if(Mathf.Abs(conductor.PitchHeight) > RandomNumber.NextFloat())
+            //    noteIndex += ModeGenerator.OCTAVE * Mathf.Sign(conductor.PitchHeight);
+            Note note = new Note(noteIndex, loudness);
             float start = state.CurrentSection * state.BarCount + state.CurrentBar + meta.Offset;
-            float duration = meta.Duration * conductor.ArticulationMultiplier; // +meta.Duration * conductor.ArticulationMultiplier * RandomNumber.NextNormal(0.0f, conductor.articulationVariance);
+            float duration = Mathf.Max(0.0f, RandomNumber.NextNormal(meta.Duration * conductor.ArticulationMultiplier, meta.Duration * conductor.ArticulationMultiplier * conductor.ArticulationVariance));
 
             performer.AddNote(note, start, duration, state.BarLength);
+        }
+
+        void applyPerformerTransformation()
+        {
+            performer.Onset = initialOnset * conductor.NoteOnsetMultiplier;
         }
     }
 }

@@ -8,7 +8,7 @@ public class GUIManager : MonoBehaviour
     public GUIText timeSignutare;
     //private string timeSigText;
 
-    public Ensemble producer;
+    public Ensemble ensemble;
 
     // Use this for initialization
     void Start()
@@ -39,38 +39,63 @@ public class GUIManager : MonoBehaviour
 
         if (GUILayout.Button("Play"))
         {
-            producer.Play();
+            ensemble.Play();
         }
 
         GUILayout.FlexibleSpace();
 
         if (GUILayout.Button("Pause"))
         {
-            producer.Pause();
+            ensemble.Pause();
         }
 
         GUILayout.FlexibleSpace();
 
         if (GUILayout.Button("Stop"))
         {
-            producer.Stop();
+            ensemble.Stop();
         }
 
         GUILayout.FlexibleSpace();
         GUILayout.FlexibleSpace();
 
-        // GUILayout.BeginHorizontal();
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("EXCITING"))
+        {
+            ensemble.SetMood(Mood.EXCITING, 0.5f);
+        }
+        if (GUILayout.Button("HAPPY"))
+        {
+            ensemble.SetMood(Mood.HAPPY, 0.5f);
+        }
+        if (GUILayout.Button("TENDER"))
+        {
+            ensemble.SetMood(Mood.TENDER, 0.5f);
+        }
+        if (GUILayout.Button("DEPRESSED"))
+        {
+            ensemble.SetMood(Mood.DEPRESSED, 0.5f);
+        }
+        if (GUILayout.Button("SAD"))
+        {
+            ensemble.SetMood(Mood.SAD, 0.5f);
+        }
+        if (GUILayout.Button("ANGRY"))
+        {
+            ensemble.SetMood(Mood.ANGRY, 0.5f);
+        }
+        GUILayout.EndHorizontal();
 
         //GUILayout.BeginVertical();
         GUILayout.Box("Energy");
-        producer.Energy = GUILayout.HorizontalSlider(producer.Energy, 0.0f, 1.0f);
+        ensemble.Energy = GUILayout.HorizontalSlider(ensemble.Energy, 0.0f, 1.0f);
         GUILayout.Box("Stress");
-        producer.Stress = GUILayout.HorizontalSlider(producer.Stress, 0.0f, 1.0f);
+        ensemble.Stress = GUILayout.HorizontalSlider(ensemble.Stress, 0.0f, 1.0f);
         //GUILayout.EndVertical();
 
 
         GUILayout.BeginVertical();
-        producer.PrintValues();
+        ensemble.PrintValues();
         GUILayout.EndVertical();
 
         //GUILayout.EndHorizontal();
