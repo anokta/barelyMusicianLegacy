@@ -83,7 +83,7 @@ namespace BarelyAPI
         public float PitchHeight
         {
             get { return pitchHeight; }
-            set { pitchHeight = 2.0f * value - 1.0f; }
+            set { pitchHeight = 4.0f * value - 2.0f; }
         }
 
         public Conductor(float key)

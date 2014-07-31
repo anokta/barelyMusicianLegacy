@@ -31,7 +31,7 @@ namespace BarelyAPI
                 conductor.ArticulationVariance = energy;
 
                 conductor.LoudnessVariance = (energy + stress) / 2.0f;
-                conductor.HarmonicCurve = (stress > 0.5f) ? 1.0f - (0.75f * stress + 0.25f * energy) : 1.0f;
+                conductor.HarmonicCurve = (stress > 0.5f) ? (0.75f * (1.0f - stress) + 0.25f * (1.0f - energy)) : 1.0f;
             }
         }
 
@@ -50,7 +50,7 @@ namespace BarelyAPI
 
                 conductor.PitchHeight = energy * 0.25f + (1.0f - stress) * 0.75f;
                 conductor.LoudnessVariance = (energy + stress) / 2.0f;
-                conductor.HarmonicCurve = (stress > 0.5f) ? 1.0f - (0.75f * stress + 0.25f * energy) : 1.0f;
+                conductor.HarmonicCurve = (stress > 0.5f) ? (0.75f * (1.0f - stress) + 0.25f * (1.0f - energy)) : 1.0f;
             }
         }
 

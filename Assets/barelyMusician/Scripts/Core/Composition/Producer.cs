@@ -108,9 +108,7 @@ namespace BarelyAPI
         void performNote(NoteMeta meta, SequencerState state)
         {
             float loudness = Mathf.Max(0.0f, RandomNumber.NextNormal(meta.Loudness * conductor.LoudnessMultiplier, meta.Loudness * conductor.LoudnessMultiplier * conductor.LoudnessVariance));
-            float noteIndex = conductor.GetNote(Mathf.Abs(conductor.HarmonicCurve) > RandomNumber.NextFloat() ? Mathf.Sign(conductor.HarmonicCurve) * meta.Index : meta.Index) + Mathf.RoundToInt(conductor.PitchHeight) * ModeGenerator.OCTAVE;
-            //if(Mathf.Abs(conductor.PitchHeight) > RandomNumber.NextFloat())
-            //    noteIndex += ModeGenerator.OCTAVE * Mathf.Sign(conductor.PitchHeight);
+            float noteIndex = conductor.GetNote(Mathf.RoundToInt(conductor.HarmonicCurve) != 0 ? Mathf.RoundToInt(conductor.HarmonicCurve) * meta.Index : meta.Index + Mathf.RoundToInt(conductor.PitchHeight) / 2 * ModeGenerator.SCALE_LENGTH);
             Note note = new Note(noteIndex, loudness);
             float start = state.CurrentSection * state.BarCount + state.CurrentBar + meta.Offset;
             float duration = Mathf.Max(0.0f, RandomNumber.NextNormal(meta.Duration * conductor.ArticulationMultiplier, meta.Duration * conductor.ArticulationMultiplier * conductor.ArticulationVariance));
