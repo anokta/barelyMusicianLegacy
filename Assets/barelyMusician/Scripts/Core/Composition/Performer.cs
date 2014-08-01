@@ -6,6 +6,9 @@ namespace BarelyAPI
 {
     public class Performer
     {
+        const float MIN_ONSET = 0.01f;
+
+        // Note onset
         private float initialOnset;
         public float Onset
         {
@@ -13,19 +16,22 @@ namespace BarelyAPI
             set { instrument.Attack = value; }
         }
 
+        // Audio output
         public float Output
         {
             get { return instrument.ProcessNext(); }
         }
 
+        // Score (list per bar)
         Dictionary<int, List<Note>[]> score;
-        Instrument instrument;
+        
+        // Instrument
+        public Instrument instrument;
 
         public Performer(Instrument performerInstrument)
         {
             instrument = performerInstrument;
-            initialOnset = Mathf.Max(Mathf.Epsilon, instrument.Attack);
-
+            initialOnset = Mathf.Max(MIN_ONSET, instrument.Attack);
             Restart();
         }
 
@@ -36,6 +42,10 @@ namespace BarelyAPI
             instrument.StopAllNotes();
         }
 
+        /**
+         * Play the next pulse
+         * 
+         **/
         public void Play(int bar, int pulse)
         {
             List<Note>[] currentBar;

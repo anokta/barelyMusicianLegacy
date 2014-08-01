@@ -17,11 +17,8 @@ public class Distortion : AudioEffect
         level = distortionLevel;
     }
 
-    public void Process(ref float[] data)
+    public float Process(float sample)
     {
-        for (int i = 0; i < data.Length; ++i)
-        {
-            data[i] *= level;
-        }
+        return sample * level;
     }
 }

@@ -73,7 +73,7 @@ namespace BarelyAPI
             Volume = volume;
         }
 
-        public virtual float ProcessNext()
+        public float ProcessNext()
         {
             float output = 0.0f;
             
@@ -81,7 +81,12 @@ namespace BarelyAPI
             {
                 output += voice.ProcessNext();
             }
-            
+
+            foreach (AudioEffect effect in effects)
+            {
+                output = effect.Process(output);
+            }
+
             return output * volume;
         }
 

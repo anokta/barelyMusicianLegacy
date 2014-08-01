@@ -14,38 +14,6 @@ namespace BarelyAPI
             set { fundamentalKey = value; }
         }
 
-        // Tempo
-        float tempo;
-        public float TempoMultiplier
-        {
-            get { return tempo; }
-            set { tempo = 0.875f + 0.25f * value; }
-        }
-
-        // Articulation
-        float articulation;
-        public float ArticulationMultiplier
-        {
-            get { return articulation; }
-            set { articulation = 0.5f + value; }
-        }
-
-        // Loudness
-        float loudness;
-        public float LoudnessMultiplier
-        {
-            get { return loudness; }
-            set { loudness = 0.4f + 0.6f * value; }
-        }
-
-        // Note onset
-        float noteOnset;
-        public float NoteOnsetMultiplier
-        {
-            get { return noteOnset; }
-            set { noteOnset = 0.25f + 1.75f * value; }
-        }
-
         // Musical mode
         ModeGenerator mode;
         public float Mode
@@ -53,12 +21,36 @@ namespace BarelyAPI
             set { mode.GenerateScale(value); }
         }
 
-        // Loudness Variance
-        float loudnessVariance;
-        public float LoudnessVariance
+        // Tempo
+        float tempoMult;
+        public float TempoMultiplier
         {
-            get { return loudnessVariance; }
-            set { loudnessVariance = 0.25f * value; }
+            get { return tempoMult; }
+            set { tempoMult = 0.875f + 0.25f * value; }
+        }
+
+        // Articulation
+        float articulationMult;
+        public float ArticulationMultiplier
+        {
+            get { return articulationMult; }
+            set { articulationMult = 0.5f + value; }
+        }
+
+        // Loudness
+        float loudnessMult;
+        public float LoudnessMultiplier
+        {
+            get { return loudnessMult; }
+            set { loudnessMult = 0.4f + 0.6f * value; }
+        }
+
+        // Note onset
+        float noteOnsetMult;
+        public float NoteOnsetMultiplier
+        {
+            get { return noteOnsetMult; }
+            set { noteOnsetMult = 0.25f + 1.75f * value; }
         }
 
         // Articulation variance
@@ -69,8 +61,16 @@ namespace BarelyAPI
             set { articulationVariance = 0.2f * value; }
         }
 
+        // Loudness Variance
+        float loudnessVariance;
+        public float LoudnessVariance
+        {
+            get { return loudnessVariance; }
+            set { loudnessVariance = 0.25f * value; }
+        }
+
         // 0.0f - 1.0f
-        public float harmonicComplexity;
+        //public float harmonicComplexity;
 
         float harmonicCurve;
         public float HarmonicCurve
@@ -93,7 +93,39 @@ namespace BarelyAPI
             mode = new SimpleModeGenerator();
         }
 
-        public float GetNote(float index)
+        public void SetParameters(float energy, float stress)
+        {
+            TempoMultiplier = energy;
+            ArticulationMultiplier = 1.0f - energy;
+            LoudnessMultiplier = energy;
+            NoteOnsetMultiplier = 1.0f - energy;
+            ArticulationVariance = energy;
+
+            //harmonicComplexity = stress;
+            Mode = stress;
+
+            PitchHeight = energy * 0.25f + (1.0f - stress) * 0.75f;
+            LoudnessVariance = (energy + stress) / 2.0f;
+            HarmonicCurve = (stress > 0.5f) ? (0.75f * (1.0f - stress) + 0.25f * (1.0f - energy)) : 1.0f;
+
+        }
+
+        public void ApplyPerformerTransformation(Performer performer)
+        {
+            performer.Onset *= NoteOnsetMultiplier;
+        }
+
+        public NoteMeta TransformNote(NoteMeta meta)
+        {
+            float index = getNote(Mathf.RoundToInt(harmonicCurve) != 0 ? Mathf.RoundToInt(harmonicCurve) * meta.Index : meta.Index + Mathf.RoundToInt(pitchHeight) / 2 * ModeGenerator.SCALE_LENGTH);
+            float offset = meta.Offset;
+            float duration = Mathf.Max(0.0f, RandomNumber.NextNormal(meta.Duration * articulationMult, meta.Duration * articulationMult * articulationVariance));
+            float loudness = Mathf.Max(0.0f, RandomNumber.NextNormal(meta.Loudness * loudnessMult, meta.Loudness * loudnessMult * loudnessVariance));
+
+            return new NoteMeta(index, offset, duration, loudness);
+        }
+
+        float getNote(float index)
         {
             return fundamentalKey + mode.GetNoteOffset(index);
         }
