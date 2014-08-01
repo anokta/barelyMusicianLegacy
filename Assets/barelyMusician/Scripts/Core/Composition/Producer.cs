@@ -109,7 +109,7 @@ namespace BarelyAPI
          **/
         void OnNextPulse(SequencerState state)
         {
-            conductor.ApplyPerformerTransformation(performer);
+            performer.ApplyTransformation(conductor.Timbre);
             performer.Play(state.CurrentSection * state.BarCount + state.CurrentBar, state.CurrentPulse);
         }
     }

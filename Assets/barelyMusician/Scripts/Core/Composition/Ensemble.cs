@@ -76,7 +76,11 @@ namespace BarelyAPI
             for (int i = 0; i < producers.Length; ++i)
             {
                 if (i == 0)
+                {
+                    instruments[i].AddEffect(new Distortion());
                     producers[i] = new Producer(instruments[i], new SimpleMacroGenerator(true), new SimpleMesoGenerator(sequencer.BarCount), new SimpleMicroGenerator(sequencer.BeatCount));
+                    
+                }
                 else if (i == 1)
                     producers[i] = new Producer(instruments[i], new SimpleMacroGenerator(true), new SimpleMesoGenerator(sequencer.BarCount), new CA1DMicroGenerator(sequencer.BeatCount));
                 else
@@ -201,7 +205,7 @@ namespace BarelyAPI
             GUILayout.Label("tempo: " + sequencer.Tempo);
             GUILayout.Label("articulation: " + conductor.ArticulationMultiplier);
             GUILayout.Label("loudness: " + conductor.LoudnessMultiplier);
-            GUILayout.Label("note onset: " + conductor.NoteOnsetMultiplier);
+            GUILayout.Label("note onset: " + conductor.Timbre.NoteOnsetMultiplier);
             GUILayout.Label("pitch height: " + conductor.PitchHeight);
             //GUILayout.Label("harmonic complexity: " + conductor.harmonicComplexity);
             GUILayout.Label("harmonic curve: " + conductor.HarmonicCurve);

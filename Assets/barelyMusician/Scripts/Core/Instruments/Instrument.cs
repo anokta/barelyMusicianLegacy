@@ -11,6 +11,10 @@ namespace BarelyAPI
 
         // Effects
         protected List<AudioEffect> effects;
+        public List<AudioEffect> Effects
+        {
+            get { return effects; }
+        }
 
         // Envelope properties
         public float Attack
@@ -73,6 +77,11 @@ namespace BarelyAPI
             Volume = volume;
         }
 
+        public void AddEffect(AudioEffect effect)
+        {
+            effects.Add(effect);
+        }
+
         public float ProcessNext()
         {
             float output = 0.0f;
@@ -84,15 +93,13 @@ namespace BarelyAPI
 
             foreach (AudioEffect effect in effects)
             {
-                output = effect.Process(output);
+                if(effect.Enabled)
+                    output = effect.Process(output);
             }
 
             return output * volume;
         }
-
-        protected abstract void noteOn(Note note);
-        protected abstract void noteOff(Note note);
-
+        
         public virtual void PlayNote(Note note)
         {
             if (note.IsNoteOn)
@@ -108,5 +115,8 @@ namespace BarelyAPI
                 voice.StopImmediately();
             }
         }
+
+        protected abstract void noteOn(Note note);
+        protected abstract void noteOff(Note note);
     }
 }

@@ -6,16 +6,6 @@ namespace BarelyAPI
 {
     public class Performer
     {
-        const float MIN_ONSET = 0.01f;
-
-        // Note onset
-        private float initialOnset;
-        public float Onset
-        {
-            get { return initialOnset; }
-            set { instrument.Attack = value; }
-        }
-
         // Audio output
         public float Output
         {
@@ -24,9 +14,13 @@ namespace BarelyAPI
 
         // Score (list per bar)
         Dictionary<int, List<Note>[]> score;
-        
+
         // Instrument
-        public Instrument instrument;
+        Instrument instrument;
+
+        const float MIN_ONSET = 0.01f;
+        float initialOnset;
+
 
         public Performer(Instrument performerInstrument)
         {
@@ -57,6 +51,14 @@ namespace BarelyAPI
                     instrument.PlayNote(note);
                 }
             }
+        }
+
+        public void ApplyTransformation(TimbreProperties timbre)
+        {
+            instrument.Attack = initialOnset * timbre.NoteOnsetMultiplier;
+
+            foreach (AudioEffect effect in instrument.Effects)
+                effect.Apply(timbre);
         }
 
         public void AddNote(Note note, float start, float duration, int barLength)

@@ -45,14 +45,6 @@ namespace BarelyAPI
             set { loudnessMult = 0.4f + 0.6f * value; }
         }
 
-        // Note onset
-        float noteOnsetMult;
-        public float NoteOnsetMultiplier
-        {
-            get { return noteOnsetMult; }
-            set { noteOnsetMult = 0.25f + 1.75f * value; }
-        }
-
         // Articulation variance
         float articulationVariance;
         public float ArticulationVariance
@@ -67,6 +59,12 @@ namespace BarelyAPI
         {
             get { return loudnessVariance; }
             set { loudnessVariance = 0.25f * value; }
+        }
+
+        TimbreProperties timbre;
+        public TimbreProperties Timbre
+        {
+            get { return timbre; }
         }
 
         // 0.0f - 1.0f
@@ -91,6 +89,8 @@ namespace BarelyAPI
             fundamentalKey = key;
 
             mode = new SimpleModeGenerator();
+
+            timbre = new TimbreProperties();
         }
 
         public void SetParameters(float energy, float stress)
@@ -98,7 +98,6 @@ namespace BarelyAPI
             TempoMultiplier = energy;
             ArticulationMultiplier = 1.0f - energy;
             LoudnessMultiplier = energy;
-            NoteOnsetMultiplier = 1.0f - energy;
             ArticulationVariance = energy;
 
             //harmonicComplexity = stress;
@@ -108,11 +107,7 @@ namespace BarelyAPI
             LoudnessVariance = (energy + stress) / 2.0f;
             HarmonicCurve = (stress > 0.5f) ? (0.75f * (1.0f - stress) + 0.25f * (1.0f - energy)) : 1.0f;
 
-        }
-
-        public void ApplyPerformerTransformation(Performer performer)
-        {
-            performer.Onset *= NoteOnsetMultiplier;
+            timbre.Set(energy, stress);
         }
 
         public NoteMeta TransformNote(NoteMeta meta)
