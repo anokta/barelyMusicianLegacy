@@ -174,7 +174,7 @@ GameObject:
   - 82: {fileID: 993552983}
   - 114: {fileID: 993552978}
   m_Layer: 0
-  m_Name: Musician
+  m_Name: barelyMusician
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -542,7 +542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeSignutare: {fileID: 1144085596}
-  producer: {fileID: 0}
+  producer: {fileID: 993552978}
 --- !u!4 &1117552452
 Transform:
   m_ObjectHideFlags: 0

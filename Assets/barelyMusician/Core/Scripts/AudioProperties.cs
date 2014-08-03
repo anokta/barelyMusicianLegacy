@@ -8,7 +8,7 @@ namespace BarelyAPI
         public static int SampleRate;
         public static float Interval;
 
-        public static int BufferSize;
+        //public static int BufferSize;
 
         void Awake()
         {
@@ -16,8 +16,8 @@ namespace BarelyAPI
             SampleRate = AudioSettings.outputSampleRate = 44100;
             Interval = 1.0f / SampleRate;
 
-            int numBuffers;
-            AudioSettings.GetDSPBufferSize(out BufferSize, out numBuffers);
+            //int numBuffers;
+            //AudioSettings.GetDSPBufferSize(out BufferSize, out numBuffers);
 
             // For testing purposes (is it more precise?)
             //BufferSize = 512;

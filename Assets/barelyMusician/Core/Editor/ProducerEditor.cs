@@ -35,6 +35,8 @@ public class ProducerEditor : Editor
             instrument.Volume = EditorGUILayout.Slider("Volume", instrument.Volume, Instrument.MIN_VOLUME, 6.0f);
         }
 
+        //producer.FundamentalKey = (NoteIndex)EditorGUILayout.EnumPopup("Fundamental Key", producer.FundamentalKey);
+
         //producer.initialTempo = EditorGUILayout.Slider("Tempo", producer.initialTempo, 100, 200);
 
         //producer.Energy = EditorGUILayout.Slider("Energy", producer.Energy, 0.0f, 1.0f);

@@ -17,7 +17,13 @@ namespace BarelyAPI
         [Range(1, 16)]
         public int beatsPerBar;
 
-        public NoteIndex fundamentalKey;
+        [SerializeField]
+        NoteIndex fundamentalKey;
+        public NoteIndex FundamentalKey
+        {
+            get { return fundamentalKey; }
+            set { fundamentalKey = value; conductor.Key = (float)fundamentalKey; }
+        }
 
         // Arousal (Passive - Active)
         float energy = 0.5f;
@@ -69,13 +75,9 @@ namespace BarelyAPI
             audioSource.hideFlags = HideFlags.HideInInspector;
             audioSource.panLevel = 0.0f;
             audioSource.Stop();
-        }
 
-        // Use this for initialization
-        void Start()
-        {
             sequencer = new Sequencer(initialTempo, barsPerSection, beatsPerBar);
-            conductor = new Conductor((float)fundamentalKey, new SimpleModeGenerator());
+            conductor = new Conductor((float)fundamentalKey);
 
             ensemble = new Ensemble(new SimpleMacroGenerator(true), new SimpleMesoGenerator(sequencer.State), conductor);
             ensemble.Register(sequencer);

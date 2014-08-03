@@ -84,11 +84,11 @@ namespace BarelyAPI
             get { return timbreProperties; }
         }
 
-        public Conductor(float key, ModeGenerator modeGenerator)
+        public Conductor(float key, ModeGenerator modeGenerator = null)
         {
             fundamentalKey = key;
 
-            mode = modeGenerator;
+            mode = modeGenerator == null ? new SimpleModeGenerator() : modeGenerator;
 
             timbreProperties = new TimbreProperties();
         }
