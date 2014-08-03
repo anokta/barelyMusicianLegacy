@@ -7,8 +7,8 @@ namespace BarelyAPI
     {
         MarkovChain markov;
 
-        public MarkovMesoGenerator(int length)
-            : base(length)
+        public MarkovMesoGenerator(SequencerState sequencerState)
+            : base(sequencerState)
         {
             markov = new MarkovChain(8, 1);
         }

@@ -7,19 +7,23 @@ namespace BarelyAPI
     public abstract class MicroGenerator
     {
         protected List<NoteMeta> line;
-        
-        protected int lineLength;
-        public int LineLength
+
+        SequencerState state;
+        protected int LineLength
         {
-            get { return lineLength; }
+            get { return state.BeatCount; }
+        }
+        protected int ProgressionLength
+        {
+            get { return state.BarCount; }
         }
 
-        protected MicroGenerator(int length)
+        protected MicroGenerator(SequencerState sequencerState)
         {
+            state = sequencerState;
             line = new List<NoteMeta>();
-            lineLength = length;
         }
 
-        public abstract List<NoteMeta> GenerateLine(char section, int harmonic);
+        public abstract List<NoteMeta> GenerateLine(char section, int bar, int harmonic);
     }
 }

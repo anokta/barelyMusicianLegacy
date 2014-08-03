@@ -11,9 +11,9 @@ namespace BarelyAPI
             get { return sectionSequence.Length; }
         }
 
-        protected bool loop;
+        bool loop;
 
-        public MacroGenerator(bool looping)
+        public MacroGenerator(bool looping = false)
         {
             loop = looping;
         }
@@ -29,6 +29,6 @@ namespace BarelyAPI
             return sectionSequence[index];
         }
 
-        public abstract void GenerateSequence();
+        public abstract void GenerateSequence(int length);
     }
 }

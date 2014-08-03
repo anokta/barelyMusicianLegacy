@@ -16,22 +16,20 @@ namespace BarelyAPI
             set { currentState.BPM = value; }
         }
 
-        // Number of bars per section
-        public int BarCount
-        {
-            get { return currentState.BarCount; }
-        }
-
-        // Number of beats per bar
-        public int BeatCount
-        {
-            get { return currentState.BeatCount; }
-        }
-
         SequencerState currentState;
+        public SequencerState State
+        {
+            get { return currentState; }
+        }
+
+        public int MinuteToSections(float minutes)
+        {
+            return Mathf.RoundToInt((minutes * currentState.BPM * (int)currentState.NoteType / 4.0f) / (currentState.BarCount * currentState.BeatCount));
+        }
+
         float phasor;
 
-        public Sequencer(int tempo = 120, int barCount = 4, int beatCount = 8, int noteType = 8, int pulseCount = 32)
+        public Sequencer(int tempo = 120, int barCount = 4, int beatCount = 4, NoteType noteType = NoteType.QUARTER_NOTE, int pulseCount = 32)
         {
             currentState = new SequencerState(tempo, barCount, beatCount, noteType, pulseCount);
 

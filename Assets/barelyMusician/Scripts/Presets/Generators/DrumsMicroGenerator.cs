@@ -7,19 +7,19 @@ namespace BarelyAPI
     public class DrumsMicroGenerator : MicroGenerator
     {
 
-        public DrumsMicroGenerator(int length)
-            : base(length)
+        public DrumsMicroGenerator(SequencerState sequencerState)
+            : base(sequencerState)
         {
         }
 
-        public override List<NoteMeta> GenerateLine(char section, int harmonic)
+        public override List<NoteMeta> GenerateLine(char section, int bar, int harmonic)
         {
             line = new List<NoteMeta>();
 
-            for (int i = 0; i < lineLength * 2; ++i)
+            for (int i = 0; i < LineLength * 2; ++i)
             {
-                float offset = i / (2.0f * lineLength);
-                float duration = 1.0f / (2.0f * lineLength);
+                float offset = i / (2.0f * LineLength);
+                float duration = 1.0f / (2.0f * LineLength);
 
                 // kick
                 if (RandomNumber.NextFloat(0.0f, 1.0f) < 0.025f || (RandomNumber.NextFloat(0.0f, 1.0f) < 0.96f && i % 4 == 0))

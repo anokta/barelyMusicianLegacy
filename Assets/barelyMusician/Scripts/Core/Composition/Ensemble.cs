@@ -1,218 +1,146 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace BarelyAPI
 {
-    //[ExecuteInEditMode]
-    public class Ensemble : MonoBehaviour
+    public class Ensemble
     {
-        // Tempo
-        [SerializeField]
-        [Range(72, 220)]
-        public int initialTempo;
+        Dictionary<string, Producer> producers;
 
-        // Key note
-        public NoteIndex fundamentalKey;
+        MacroGenerator macro;
+        MesoGenerator meso;
 
-        // Arousal (Passive - Active)
-        float energy = 0.5f;
-        float energyTarget, energyInterpolationSpeed;
-        public float Energy
-        {
-            get { return energy; }
-            set
-            {
-                energy = value;
+        Dictionary<char, List<NoteMeta>[,]> sections;
+        char currentSection;
 
-                conductor.SetParameters(energy, stress);
-                sequencer.Tempo = (int)(initialTempo * conductor.TempoMultiplier);
-            }
-        }
-
-        // Valence (Happy - Sad) 
-        float stress = 0.5f;
-        float stressTarget, stressInterpolationSpeed;
-        public float Stress
-        {
-            get { return stress; }
-            set
-            {
-                stress = value;
-
-                conductor.SetParameters(energy, stress);
-            }
-        }
-
-        Sequencer sequencer;
         Conductor conductor;
 
-        public AudioClip sample;
-        public AudioClip[] drumKit;
-
-        public Instrument[] instruments;
-        Producer[] producers;
-
-        AudioSource audioSource;
-
-        void Awake()
+        public Ensemble(MacroGenerator sequenceGenerator, MesoGenerator sectionGenerator, Conductor conductor)
         {
-            audioSource = gameObject.AddComponent<AudioSource>();
-            audioSource.hideFlags = HideFlags.HideInInspector;
-            audioSource.panLevel = 0.0f;
-            audioSource.Stop();
+            producers = new Dictionary<string, Producer>();
+
+            macro = sequenceGenerator;
+            meso = sectionGenerator;
+
+            currentSection = '.';
+            sections = new Dictionary<char, List<NoteMeta>[,]>();
+
+            this.conductor = conductor;
         }
 
-        void OnEnable()
+        public void Register(Sequencer sequencer)
         {
-            sequencer = new Sequencer(initialTempo, 4, 8, 8, 32);
-            conductor = new Conductor((float)fundamentalKey);
+            sequencer.AddSectionListener(OnNextSection);
+            sequencer.AddBarListener(OnNextBar);
+            sequencer.AddBeatListener(OnNextBeat);
+            sequencer.AddPulseListener(OnNextPulse);
 
-            instruments = new Instrument[2];
-            instruments[0] = new SamplerInstrument(sample, new Envelope(0.0f, 0.0f, 1.0f, 0.25f));
-            instruments[1] = new SynthInstrument(OscillatorType.SAW, new Envelope(0.25f, 0.5f, 1.0f, 0.25f), -5.0f);
-            //instruments[2] = new PercussiveInstrument(drumKit, -4.0f);
-
-            producers = new Producer[instruments.Length];
-            for (int i = 0; i < producers.Length; ++i)
-            {
-                if (i == 0)
-                {
-                    instruments[i].AddEffect(new Distortion());
-                    producers[i] = new Producer(instruments[i], new SimpleMacroGenerator(true), new SimpleMesoGenerator(sequencer.BarCount), new SimpleMicroGenerator(sequencer.BeatCount));
-                    
-                }
-                else if (i == 1)
-                    producers[i] = new Producer(instruments[i], new SimpleMacroGenerator(true), new SimpleMesoGenerator(sequencer.BarCount), new CA1DMicroGenerator(sequencer.BeatCount));
-                else
-                    producers[i] = new Producer(instruments[i], new SimpleMacroGenerator(true), new SimpleMesoGenerator(sequencer.BarCount), new DrumsMicroGenerator(sequencer.BeatCount));
-
-                producers[i].Register(conductor, sequencer);
-            }
+            float minutes = 0.25f;
+            macro.GenerateSequence(sequencer.MinuteToSections(minutes));
         }
 
-        void Update()
+        public void AddProducer(string name, Producer producer)
         {
-            if (Mathf.Abs(energy - energyTarget) < 0.01f * energyInterpolationSpeed)
-                energy = energyTarget;
-            else
-                energy = Mathf.Lerp(energy, energyTarget, energyInterpolationSpeed);
-
-            if (Mathf.Abs(stress - stressTarget) < 0.01f * stressInterpolationSpeed)
-                stress = stressTarget;
-            else
-                stress = Mathf.Lerp(stress, stressTarget, stressInterpolationSpeed);
+            producers.Add(name, producer);
         }
 
-        void OnAudioFilterRead(float[] data, int channels)
+        public void RemoveProducer(string name)
         {
-            sequencer.Update(data.Length / channels);
-
-            for (int i = 0; i < data.Length; i += channels)
-            {
-                float output = 0.0f;
-
-                foreach (Producer producer in producers)
-                {
-                    output += producer.GetOutput();
-                }
-                data[i] = output;
-
-                // If stereo, copy the mono data to each channel
-                if (channels == 2) data[i + 1] = data[i];
-            }
-        }
-
-        public void Play()
-        {
-            if (!audioSource.isPlaying)
-            {
-                audioSource.Play();
-            }
-        }
-
-        public void Pause()
-        {
-            if (audioSource.isPlaying)
-            {
-                audioSource.Pause();
-            }
+            producers.Remove(name);
         }
 
         public void Stop()
         {
-            if (audioSource.isPlaying)
+            foreach (Producer producer in producers.Values)
             {
-                audioSource.Stop();
-            }
-
-            sequencer.Reset();
-            foreach (Producer producer in producers)
                 producer.Reset();
-        }
-
-        public bool IsPlaying()
-        {
-            return audioSource.isPlaying;
-        }
-
-        public void SetMood(Mood mood, float smoothness = 0.0f)
-        {
-            switch (mood)
-            {
-                case Mood.HAPPY:
-                    SetMood(0.5f, 0.0f, smoothness);
-                    break;
-                case Mood.TENDER:
-                    SetMood(0.0f, 0.0f, smoothness);
-                    break;
-                case Mood.EXCITING:
-                    SetMood(1.0f, 0.0f, smoothness);
-                    break;
-                case Mood.SAD:
-                    SetMood(0.25f, 0.75f, smoothness);
-                    break;
-                case Mood.DEPRESSED:
-                    SetMood(0.0f, 1.0f, smoothness);
-                    break;
-                case Mood.ANGRY:
-                    SetMood(1.0f, 1.0f, smoothness);
-                    break;
             }
         }
 
-        public void SetMood(float energy, float stress, float smoothness = 0.0f)
+        public float GetNextOutput()
         {
-            SetEnergy(energy, smoothness);
-            SetStress(stress, smoothness);
+            float output = 0.0f;
+
+            foreach (Producer producer in producers.Values)
+            {
+                output += producer.GetOutput();
+            }
+
+            return output;
         }
 
-        public void SetEnergy(float energy, float smoothness = 0.0f)
+        public void MuteProducer(string name)
         {
-            energyTarget = energy;
-            energyInterpolationSpeed = (smoothness == 0.0f) ? 1.0f : Time.deltaTime / (smoothness * smoothness);
+            Producer producer = null;
+            if(producers.TryGetValue(name, out producer))
+            {
+                producer.Mute(true);
+            }
         }
 
-        public void SetStress(float stress, float smoothness = 0.0f)
+        public void UnmuteProducer(string name)
         {
-            stressTarget = stress;
-            stressInterpolationSpeed = (smoothness == 0.0f) ? 1.0f : Time.deltaTime / (smoothness * smoothness);
+            Producer producer = null;
+            if(producers.TryGetValue(name, out producer))
+            {
+                producer.Mute(false);
+            }
         }
 
-        public void PrintValues()
-        {
-            GUI.color = Color.black;
+        //public void ChangeInstrument(string name)
+        //{
+        //}
 
-            GUILayout.Label("tempo: " + sequencer.Tempo);
-            GUILayout.Label("articulation: " + conductor.ArticulationMultiplier);
-            GUILayout.Label("loudness: " + conductor.LoudnessMultiplier);
-            GUILayout.Label("note onset: " + conductor.Timbre.NoteOnsetMultiplier);
-            GUILayout.Label("pitch height: " + conductor.PitchHeight);
-            //GUILayout.Label("harmonic complexity: " + conductor.harmonicComplexity);
-            GUILayout.Label("harmonic curve: " + conductor.HarmonicCurve);
-            GUILayout.Label("articulation variance: " + conductor.ArticulationVariance);
-            GUILayout.Label("loudness variance: " + conductor.LoudnessVariance);
+        void OnNextSection(SequencerState state)
+        {
+            currentSection = macro.GetSectionName(state.CurrentSection);
+
+            List<NoteMeta>[,] section = null;
+            if (currentSection != '.' & !sections.TryGetValue(currentSection, out section))
+            {
+                meso.GenerateProgression(currentSection);
+
+                sections[currentSection] = new List<NoteMeta>[producers.Keys.Count, state.BarCount];
+            }
+        }
+
+        void OnNextBar(SequencerState state)
+        {
+            List<NoteMeta>[,] section = null;
+            if (sections.TryGetValue(currentSection, out section))
+            {
+                int i = 0;
+                if (section[i, state.CurrentBar] == null)
+                {
+                    foreach (Producer producer in producers.Values)
+                    {
+                        section[i, state.CurrentBar] = producer.GenerateBar(currentSection, state.CurrentBar, meso.GetHarmonic(state.CurrentBar));
+                        i++;
+                    }
+                }
+            }
+        }
+
+        void OnNextBeat(SequencerState state)
+        {
+            int i = 0;
+            foreach (Producer producer in producers.Values)
+            {
+                producer.AddBeat(sections[currentSection][i, state.CurrentBar], new Beat(state.CurrentSection * state.BarCount + state.CurrentBar, state.CurrentBeat, state.BeatCount, state.BarLength), conductor);
+                i++;
+            }
+        }
+
+        void OnNextPulse(SequencerState state)
+        {
+            int bar = state.CurrentSection * state.BarCount + state.CurrentBar;
+            int pulse = state.CurrentPulse;
+
+            foreach (Producer producer in producers.Values)
+            {
+                producer.PlayPulse(bar, pulse, conductor.TimbreProperties);
+            }
         }
     }
-
-    public enum Mood { HAPPY, TENDER, EXCITING, SAD, DEPRESSED, ANGRY }
 }

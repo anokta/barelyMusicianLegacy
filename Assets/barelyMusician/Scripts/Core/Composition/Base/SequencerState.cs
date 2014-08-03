@@ -68,10 +68,10 @@ namespace BarelyAPI
 
         // Note type (quarter, eigth etc.)
         int noteType;
-        public int NoteType
+        public NoteType NoteType
         {
-            get { return noteType; }
-            set { noteType = value; }
+            get { return (NoteType)noteType; }
+            set { noteType = (int)value; }
         }
 
         // Section length (in pulses)
@@ -97,7 +97,7 @@ namespace BarelyAPI
             get { return 240.0f * AudioProperties.SampleRate / pulseCount / bpm; }
         }
 
-        public SequencerState(int tempo, int barCount, int beatCount, int noteType, int pulseCount)
+        public SequencerState(int tempo, int barCount, int beatCount, NoteType noteType, int pulseCount)
         {
             BPM = tempo;
             BarCount = barCount;
@@ -116,4 +116,6 @@ namespace BarelyAPI
             currentPulse = -1;
         }
     }
+
+    public enum NoteType { WHOLE_NOTE = 1, HALF_NOTE = 2, QUARTER_NOTE = 4, EIGHTH_NOTE = 8, SIXTEENTH_NOTE = 16 }
 }

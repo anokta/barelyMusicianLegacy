@@ -62,11 +62,13 @@ namespace BarelyAPI
             }
         }
 
+        public static float MIN_VOLUME = -70.0f;
+
         protected float volume;
         public float Volume
         {
-            get { return (volume != 0.0f) ? 20.0f * Mathf.Log10(volume) : -70.0f; }
-            set { volume = (value > -70.0f) ? Mathf.Pow(10, 0.05f * value) : 0.0f; }
+            get { return (volume != 0.0f) ? 20.0f * Mathf.Log10(volume) : MIN_VOLUME; }
+            set { volume = (value > MIN_VOLUME) ? Mathf.Pow(10, 0.05f * value) : 0.0f; }
         }
 
         public Instrument(float volume = 0.0f)

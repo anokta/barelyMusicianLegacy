@@ -32,8 +32,8 @@ namespace BarelyAPI
         {
             NoteOnsetMultiplier = 1.0f - energy;
 
-            Brightness = 0.75f * energy + 0.25f * (1.0f - stress);
-            Tense = 0.75f * stress + 0.25f * energy;
+            Brightness = 0.6f * energy + 0.4f * (1.0f - stress);
+            Tense = 0.8f * stress + 0.2f * energy;
         }
     }
 }

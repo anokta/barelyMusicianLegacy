@@ -25,6 +25,11 @@ namespace BarelyAPI
             get { return currentScale.Length; }
         }
 
+        protected ModeGenerator(float stress = 0.0f)
+        {
+            GenerateScale(stress);
+        }
+
         public float GetNoteOffset(float index)
         {
             float octaveOffset = Mathf.Floor(index / currentScale.Length);

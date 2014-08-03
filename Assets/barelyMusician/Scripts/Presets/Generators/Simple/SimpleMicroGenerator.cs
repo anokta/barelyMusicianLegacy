@@ -8,12 +8,12 @@ namespace BarelyAPI
     {
         int[] pattern = { 0, 2, 4, 7, 4 };
 
-        public SimpleMicroGenerator(int length)
-            : base(length)
+        public SimpleMicroGenerator(SequencerState sequencerState)
+            : base(sequencerState)
         {
         }
 
-        public override List<NoteMeta> GenerateLine(char section, int harmonic)
+        public override List<NoteMeta> GenerateLine(char section, int bar, int harmonic)
         {
             line = new List<NoteMeta>();
 

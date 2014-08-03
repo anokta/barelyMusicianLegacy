@@ -9,7 +9,18 @@ namespace BarelyAPI
         // Audio output
         public float Output
         {
-            get { return instrument.ProcessNext(); }
+            get 
+            { 
+                float output = instrument.ProcessNext();
+                return active ? output : 0.0f;
+            }
+        }
+
+        bool active;
+        public bool Mute
+        {
+            get { return active; }
+            set { active = !value; }
         }
 
         // Score (list per bar)
@@ -34,10 +45,21 @@ namespace BarelyAPI
             score = new Dictionary<int, List<Note>[]>();
 
             instrument.StopAllNotes();
+            active = true;
+        }
+
+        public void ApplyTransformation(TimbreProperties timbre)
+        {
+            instrument.Attack = initialOnset * timbre.NoteOnsetMultiplier;
+
+            foreach (AudioEffect effect in instrument.Effects)
+            {
+                effect.Apply(timbre);
+            }
         }
 
         /**
-         * Play the next pulse
+         * Play next pulse
          * 
          **/
         public void Play(int bar, int pulse)
@@ -51,14 +73,6 @@ namespace BarelyAPI
                     instrument.PlayNote(note);
                 }
             }
-        }
-
-        public void ApplyTransformation(TimbreProperties timbre)
-        {
-            instrument.Attack = initialOnset * timbre.NoteOnsetMultiplier;
-
-            foreach (AudioEffect effect in instrument.Effects)
-                effect.Apply(timbre);
         }
 
         public void AddNote(Note note, float start, float duration, int barLength)

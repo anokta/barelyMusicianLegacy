@@ -5,15 +5,21 @@ namespace BarelyAPI
 {
     public abstract class MesoGenerator
     {
-        protected int[] harmonicProgression;
-        public int ProgressionLength
+        public int[] harmonicProgression;
+       
+        SequencerState state;
+        protected int ProgressionLength
         {
-            get { return harmonicProgression.Length; }
+            get { return state.BarCount; }
         }
 
-        protected MesoGenerator(int length)
+        protected MesoGenerator(SequencerState sequencerState)
         {
-            harmonicProgression = new int[length];    
+            state = sequencerState;
+
+            harmonicProgression = new int[ProgressionLength];
+            for (int i = 0; i < harmonicProgression.Length; ++i)
+                harmonicProgression[i] = 1;
         }
 
         public int GetHarmonic(int index)

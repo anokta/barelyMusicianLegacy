@@ -14,19 +14,19 @@ namespace BarelyAPI
             set { fundamentalKey = value; }
         }
 
-        // Musical mode
-        ModeGenerator mode;
-        public float Mode
-        {
-            set { mode.GenerateScale(value); }
-        }
-
         // Tempo
         float tempoMult;
         public float TempoMultiplier
         {
             get { return tempoMult; }
             set { tempoMult = 0.875f + 0.25f * value; }
+        }
+
+        // Musical mode
+        ModeGenerator mode;
+        public float Mode
+        {
+            set { mode.GenerateScale(value); }
         }
 
         // Articulation
@@ -61,15 +61,7 @@ namespace BarelyAPI
             set { loudnessVariance = 0.25f * value; }
         }
 
-        TimbreProperties timbre;
-        public TimbreProperties Timbre
-        {
-            get { return timbre; }
-        }
-
-        // 0.0f - 1.0f
-        //public float harmonicComplexity;
-
+        // Harmonic pitch curve
         float harmonicCurve;
         public float HarmonicCurve
         {
@@ -77,6 +69,7 @@ namespace BarelyAPI
             set { harmonicCurve = 2.0f * value - 1.0f; }
         }
 
+        // Note pitch height
         float pitchHeight;
         public float PitchHeight
         {
@@ -84,13 +77,20 @@ namespace BarelyAPI
             set { pitchHeight = 4.0f * value - 2.0f; }
         }
 
-        public Conductor(float key)
+        // Instrument timbre properties
+        TimbreProperties timbreProperties;
+        public TimbreProperties TimbreProperties
+        {
+            get { return timbreProperties; }
+        }
+
+        public Conductor(float key, ModeGenerator modeGenerator)
         {
             fundamentalKey = key;
 
-            mode = new SimpleModeGenerator();
+            mode = modeGenerator;
 
-            timbre = new TimbreProperties();
+            timbreProperties = new TimbreProperties();
         }
 
         public void SetParameters(float energy, float stress)
@@ -103,11 +103,11 @@ namespace BarelyAPI
             //harmonicComplexity = stress;
             Mode = stress;
 
-            PitchHeight = energy * 0.25f + (1.0f - stress) * 0.75f;
             LoudnessVariance = (energy + stress) / 2.0f;
+            PitchHeight = energy * 0.25f + (1.0f - stress) * 0.75f;
             HarmonicCurve = (stress > 0.5f) ? (0.75f * (1.0f - stress) + 0.25f * (1.0f - energy)) : 1.0f;
 
-            timbre.Set(energy, stress);
+            timbreProperties.Set(energy, stress);
         }
 
         public NoteMeta TransformNote(NoteMeta meta)

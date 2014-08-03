@@ -167,12 +167,12 @@ GameObject:
   m_Component:
   - 4: {fileID: 993552976}
   - 114: {fileID: 993552977}
-  - 114: {fileID: 993552978}
   - 82: {fileID: 993552979}
   - 82: {fileID: 993552980}
   - 82: {fileID: 993552981}
   - 82: {fileID: 993552982}
   - 82: {fileID: 993552983}
+  - 114: {fileID: 993552978}
   m_Layer: 0
   m_Name: Musician
   m_TagString: Untagged
@@ -211,10 +211,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 993552975}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e02bf5d7d2d4f7e47bab7a2611555337, type: 3}
+  m_Script: {fileID: 11500000, guid: 10a0e41ef9c742c409fe2a771969d624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialTempo: 123
+  initialTempo: 120
+  barsPerSection: 4
+  beatsPerBar: 4
   fundamentalKey: 3
   sample: {fileID: 8300000, guid: 1c08986e68b40d94987938586307d45a, type: 3}
   drumKit:
@@ -540,7 +542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeSignutare: {fileID: 1144085596}
-  ensemble: {fileID: 993552978}
+  musician: {fileID: 993552978}
 --- !u!4 &1117552452
 Transform:
   m_ObjectHideFlags: 0
@@ -620,7 +622,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1389430737
 MonoBehaviour:
   m_ObjectHideFlags: 0

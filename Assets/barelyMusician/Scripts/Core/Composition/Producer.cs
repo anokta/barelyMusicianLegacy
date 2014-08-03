@@ -6,50 +6,27 @@ namespace BarelyAPI
 {
     public class Producer
     {
-        Dictionary<char, Section> sections;
+        MicroGenerator lineGenerator;
 
-        MacroGenerator macro;
-        MesoGenerator meso;
-        MicroGenerator micro;
-
-        Conductor conductor;
         Performer performer;
 
-
-        public Producer(Instrument instrument, MacroGenerator macroGenerator, MesoGenerator mesoGenerator, MicroGenerator microGenerator)
+        public Producer(Instrument instrument, MicroGenerator microGenerator)
         {
             performer = new Performer(instrument);
 
-            macro = macroGenerator;
-            meso = mesoGenerator;
-            micro = microGenerator;
-
-            macro.GenerateSequence();
+            lineGenerator = microGenerator;
 
             Reset();
         }
 
         public void Reset()
         {
-            sections = new Dictionary<char, Section>();
-
             performer.Restart();
         }
 
-        public void Register(Conductor conductor, Sequencer sequencer)
+        public void Mute(bool enabled)
         {
-            this.conductor = conductor;
-
-            sequencer.AddSectionListener(OnNextSection);
-            sequencer.AddBeatListener(OnNextBeat);
-            sequencer.AddPulseListener(OnNextPulse);
-        }
-
-        public void Deregister(Sequencer sequencer)
-        {
-            sequencer.RemoveSectionListener(OnNextSection);
-            sequencer.RemoveBeatListener(OnNextBeat);
-            sequencer.RemovePulseListener(OnNextPulse);
+            performer.Mute = enabled;
         }
 
         public float GetOutput()
@@ -58,59 +35,41 @@ namespace BarelyAPI
         }
 
         /**
-         * Generate next section
+         * Generate next bar if needed.
          **/
-        void OnNextSection(SequencerState state)
+        public List<NoteMeta> GenerateBar(char section, int index, int harmonic)
         {
-            char sectionName = macro.GetSectionName(state.CurrentSection);
-            
-            Section section = null;
-            if (sectionName != '.' && !sections.TryGetValue(sectionName, out section))
-            {
-                sections[sectionName] = new Section(meso.ProgressionLength);
-                meso.GenerateProgression(sectionName);
-
-                for (int i = 0; i < state.BarCount; ++i)
-                {
-                    sections[sectionName].AddBar(i, micro.GenerateLine(sectionName, meso.GetHarmonic(i)));
-                }
-            }
+            return lineGenerator.GenerateLine(section, index, harmonic);
         }
 
         /**
          * Register next beat to performer
          **/
-        void OnNextBeat(SequencerState state)
+        public void AddBeat(List<NoteMeta> line, Beat beat, Conductor conductor)
         {
-            char sectionName = macro.GetSectionName(state.CurrentSection);
-
-            Section section = null;
-            if (sections.TryGetValue(sectionName, out section))
+            foreach (NoteMeta noteMeta in line)
             {
-                foreach (NoteMeta noteMeta in section.GetBar(state.CurrentBar))
+                if (Mathf.FloorToInt(noteMeta.Offset * beat.Length) - beat.Index == 0)
                 {
-                    if (Mathf.FloorToInt(noteMeta.Offset * state.BeatCount) - state.CurrentBeat == 0)
-                    {
-                        performNote(conductor.TransformNote(noteMeta), state);
-                    }
+                    performNote(conductor.TransformNote(noteMeta), beat);
                 }
             }
-        }
-
-        void performNote(NoteMeta meta, SequencerState state)
-        {
-            float start = state.CurrentSection * state.BarCount + state.CurrentBar + meta.Offset;
-
-            performer.AddNote(new Note(meta.Index, meta.Loudness), start, meta.Duration, state.BarLength);
-        }
+         }
 
         /**
          * Play next pulse
          **/
-        void OnNextPulse(SequencerState state)
+        public void PlayPulse(int bar, int pulse, TimbreProperties timbre)
         {
-            performer.ApplyTransformation(conductor.Timbre);
-            performer.Play(state.CurrentSection * state.BarCount + state.CurrentBar, state.CurrentPulse);
+            performer.ApplyTransformation(timbre);
+            performer.Play(bar, pulse);
+        }
+
+        void performNote(NoteMeta meta, Beat beat)
+        {
+            float start = beat.Bar + meta.Offset;
+
+            performer.AddNote(new Note(meta.Index, meta.Loudness), start, meta.Duration, beat.BarLength);
         }
     }
 }

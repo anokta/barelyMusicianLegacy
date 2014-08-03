@@ -8,7 +8,7 @@ public class GUIManager : MonoBehaviour
     public GUIText timeSignutare;
     //private string timeSigText;
 
-    public Ensemble ensemble;
+    public Musician musician;
 
     // Use this for initialization
     void Start()
@@ -39,21 +39,21 @@ public class GUIManager : MonoBehaviour
 
         if (GUILayout.Button("Play"))
         {
-            ensemble.Play();
+            musician.Play();
         }
 
         GUILayout.FlexibleSpace();
 
         if (GUILayout.Button("Pause"))
         {
-            ensemble.Pause();
+            musician.Pause();
         }
 
         GUILayout.FlexibleSpace();
 
         if (GUILayout.Button("Stop"))
         {
-            ensemble.Stop();
+            musician.Stop();
         }
 
         GUILayout.FlexibleSpace();
@@ -62,41 +62,41 @@ public class GUIManager : MonoBehaviour
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("EXCITING"))
         {
-            ensemble.SetMood(Mood.EXCITING, 0.5f);
+            musician.SetMood(Mood.EXCITING, 0.5f);
         }
         if (GUILayout.Button("HAPPY"))
         {
-            ensemble.SetMood(Mood.HAPPY, 0.5f);
+            musician.SetMood(Mood.HAPPY, 0.5f);
         }
         if (GUILayout.Button("TENDER"))
         {
-            ensemble.SetMood(Mood.TENDER, 0.5f);
+            musician.SetMood(Mood.TENDER, 0.5f);
         }
         if (GUILayout.Button("DEPRESSED"))
         {
-            ensemble.SetMood(Mood.DEPRESSED, 0.5f);
+            musician.SetMood(Mood.DEPRESSED, 0.5f);
         }
         if (GUILayout.Button("SAD"))
         {
-            ensemble.SetMood(Mood.SAD, 0.5f);
+            musician.SetMood(Mood.SAD, 0.5f);
         }
         if (GUILayout.Button("ANGRY"))
         {
-            ensemble.SetMood(Mood.ANGRY, 0.5f);
+            musician.SetMood(Mood.ANGRY, 0.5f);
         }
         GUILayout.EndHorizontal();
 
         //GUILayout.BeginVertical();
         GUILayout.Box("Energy");
-        ensemble.Energy = GUILayout.HorizontalSlider(ensemble.Energy, 0.0f, 1.0f);
+        musician.Energy = GUILayout.HorizontalSlider(musician.Energy, 0.0f, 1.0f);
         GUILayout.Box("Stress");
-        ensemble.Stress = GUILayout.HorizontalSlider(ensemble.Stress, 0.0f, 1.0f);
+        musician.Stress = GUILayout.HorizontalSlider(musician.Stress, 0.0f, 1.0f);
         //GUILayout.EndVertical();
 
 
-        GUILayout.BeginVertical();
-        ensemble.PrintValues();
-        GUILayout.EndVertical();
+        //GUILayout.BeginVertical();
+        //ensemble.PrintValues();
+        //GUILayout.EndVertical();
 
         //GUILayout.EndHorizontal();
         //

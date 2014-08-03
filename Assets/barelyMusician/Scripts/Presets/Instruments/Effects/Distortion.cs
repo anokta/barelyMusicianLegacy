@@ -20,12 +20,12 @@ namespace BarelyAPI
 
         public override void Apply(TimbreProperties timbreProperties)
         {
-            level = Mathf.Max(1.0f, (0.25f * timbreProperties.Brightness + 0.75f * timbreProperties.Tense) * 5.0f);
+            level = Mathf.Max(1.0f, (0.1f * timbreProperties.Brightness + 0.9f * timbreProperties.Tense) * 10.0f);
         }
 
         public override float Process(float sample)
         {
-            return sample * level;
+            return Mathf.Clamp(sample * level, -1.0f, 1.0f) / level;
         }
     }
 }

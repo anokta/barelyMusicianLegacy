@@ -8,13 +8,13 @@ namespace BarelyAPI
     {
         Automaton1D ca;
 
-        public CA1DMicroGenerator(int length)
-            : base(length)
+        public CA1DMicroGenerator(SequencerState sequencerState)
+            : base(sequencerState)
         {
             ca = new Automaton1D(81, 90);
         }
 
-        public override List<NoteMeta> GenerateLine(char section, int harmonic)
+        public override List<NoteMeta> GenerateLine(char section, int bar, int harmonic)
         {
             line = new List<NoteMeta>();
 
@@ -22,11 +22,11 @@ namespace BarelyAPI
 
             ca.Update();
 
-            for (int i = 0; i < lineLength; ++i)
+            for (int i = 0; i < LineLength; ++i)
             {
                 if (ca.GetState(i) == 1)
                 {
-                    line.Add(new NoteMeta(keyIndex++, (float)i / lineLength, 1.0f / lineLength, 1.0f));
+                    line.Add(new NoteMeta(keyIndex++, (float)i / LineLength, 1.0f / LineLength, 1.0f));
                 }
             }
             

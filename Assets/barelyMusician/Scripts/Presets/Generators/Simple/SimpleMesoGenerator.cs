@@ -5,8 +5,8 @@ namespace BarelyAPI
 {
     public class SimpleMesoGenerator : MesoGenerator
     {
-        public SimpleMesoGenerator(int length)
-            : base(length)
+        public SimpleMesoGenerator(SequencerState sequencerState)
+            : base(sequencerState)
         {
         }
 
