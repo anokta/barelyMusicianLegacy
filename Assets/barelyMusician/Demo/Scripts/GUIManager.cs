@@ -8,7 +8,7 @@ public class GUIManager : MonoBehaviour
     public GUIText timeSignutare;
     //private string timeSigText;
 
-    public Musician musician;
+    public Producer producer;
 
     // Use this for initialization
     void Start()
@@ -39,21 +39,21 @@ public class GUIManager : MonoBehaviour
 
         if (GUILayout.Button("Play"))
         {
-            musician.Play();
+            producer.Play();
         }
 
         GUILayout.FlexibleSpace();
 
         if (GUILayout.Button("Pause"))
         {
-            musician.Pause();
+            producer.Pause();
         }
 
         GUILayout.FlexibleSpace();
 
         if (GUILayout.Button("Stop"))
         {
-            musician.Stop();
+            producer.Stop();
         }
 
         GUILayout.FlexibleSpace();
@@ -62,35 +62,35 @@ public class GUIManager : MonoBehaviour
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("EXCITING"))
         {
-            musician.SetMood(Mood.EXCITING, 0.5f);
+            producer.SetMood(Mood.EXCITING, 0.5f);
         }
         if (GUILayout.Button("HAPPY"))
         {
-            musician.SetMood(Mood.HAPPY, 0.5f);
+            producer.SetMood(Mood.HAPPY, 0.5f);
         }
         if (GUILayout.Button("TENDER"))
         {
-            musician.SetMood(Mood.TENDER, 0.5f);
+            producer.SetMood(Mood.TENDER, 0.5f);
         }
         if (GUILayout.Button("DEPRESSED"))
         {
-            musician.SetMood(Mood.DEPRESSED, 0.5f);
+            producer.SetMood(Mood.DEPRESSED, 0.5f);
         }
         if (GUILayout.Button("SAD"))
         {
-            musician.SetMood(Mood.SAD, 0.5f);
+            producer.SetMood(Mood.SAD, 0.5f);
         }
         if (GUILayout.Button("ANGRY"))
         {
-            musician.SetMood(Mood.ANGRY, 0.5f);
+            producer.SetMood(Mood.ANGRY, 0.5f);
         }
         GUILayout.EndHorizontal();
 
         //GUILayout.BeginVertical();
         GUILayout.Box("Energy");
-        musician.Energy = GUILayout.HorizontalSlider(musician.Energy, 0.0f, 1.0f);
+        producer.Energy = GUILayout.HorizontalSlider(producer.Energy, 0.0f, 1.0f);
         GUILayout.Box("Stress");
-        musician.Stress = GUILayout.HorizontalSlider(musician.Stress, 0.0f, 1.0f);
+        producer.Stress = GUILayout.HorizontalSlider(producer.Stress, 0.0f, 1.0f);
         //GUILayout.EndVertical();
 
 

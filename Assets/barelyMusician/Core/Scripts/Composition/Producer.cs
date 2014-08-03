@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace BarelyAPI
 {
-    public class Musician : MonoBehaviour
+    public class Producer : MonoBehaviour
     {
         [SerializeField]
         [Range(72, 220)]
@@ -86,9 +86,9 @@ namespace BarelyAPI
             instruments[1] = new SynthInstrument(OscillatorType.SAW, new Envelope(0.25f, 0.5f, 1.0f, 0.25f), -5.0f);
             instruments[2] = new PercussiveInstrument(drumKit, -4.0f);
 
-            ensemble.AddProducer("Piano", new Producer(instruments[0], new SimpleMicroGenerator(sequencer.State)));
-            ensemble.AddProducer("Synth", new Producer(instruments[1], new CA1DMicroGenerator(sequencer.State)));
-            ensemble.AddProducer("Drums", new Producer(instruments[2], new DrumsMicroGenerator(sequencer.State)));
+            ensemble.AddMusician("Piano", new Musician(instruments[0], new SimpleMicroGenerator(sequencer.State)));
+            ensemble.AddMusician("Synth", new Musician(instruments[1], new CA1DMicroGenerator(sequencer.State)));
+            ensemble.AddMusician("Drums", new Musician(instruments[2], new DrumsMicroGenerator(sequencer.State)));
             #endregion TEST_ZONE
         }
 

@@ -542,7 +542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeSignutare: {fileID: 1144085596}
-  musician: {fileID: 993552978}
+  producer: {fileID: 0}
 --- !u!4 &1117552452
 Transform:
   m_ObjectHideFlags: 0

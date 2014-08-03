@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using UnityEditor;
 using BarelyAPI;
 
-[CustomEditor(typeof(Musician))]
-public class MusicianEditor : Editor
+[CustomEditor(typeof(Producer))]
+public class ProducerEditor : Editor
 {
-    Musician musician;
+    Producer producer;
     List<Instrument> instruments;
 
     void OnEnable()
     {
-        musician = (Musician)target;
+        producer = (Producer)target;
 
         instruments = new List<Instrument>();
         //instruments.Add(new SynthInstrument(OscillatorType.SAW, new Envelope(0,0,0,0)));
@@ -22,7 +22,7 @@ public class MusicianEditor : Editor
     {
         DrawDefaultInspector();
 
-        foreach(Instrument instrument in instruments)
+        foreach (Instrument instrument in instruments)
         {
             EditorGUILayout.BeginHorizontal();
             instrument.Attack = EditorGUILayout.FloatField("Attack", instrument.Attack);
@@ -34,11 +34,10 @@ public class MusicianEditor : Editor
             EditorGUILayout.EndHorizontal();
             instrument.Volume = EditorGUILayout.Slider("Volume", instrument.Volume, Instrument.MIN_VOLUME, 6.0f);
         }
-            
-        //musician.initialTempo = EditorGUILayout.Slider("Tempo", musician.initialTempo, 100, 200);
 
-        //musician.Energy = EditorGUILayout.Slider("Energy", musician.Energy, 0.0f, 1.0f);
-        //musician.Stress = EditorGUILayout.Slider("Stress", musician.Stress, 0.0f, 1.0f);
+        //producer.initialTempo = EditorGUILayout.Slider("Tempo", producer.initialTempo, 100, 200);
+
+        //producer.Energy = EditorGUILayout.Slider("Energy", producer.Energy, 0.0f, 1.0f);
+        //producer.Stress = EditorGUILayout.Slider("Stress", producer.Stress, 0.0f, 1.0f);
     }
 }
-

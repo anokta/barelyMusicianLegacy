@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BarelyAPI
 {
-    public class Performer
+    public class Musician
     {
         // Audio output
         public float Output
@@ -25,6 +25,7 @@ namespace BarelyAPI
 
         // Score (list per bar)
         Dictionary<int, List<Note>[]> score;
+        MicroGenerator lineGenerator;
 
         // Instrument
         Instrument instrument;
@@ -32,45 +33,39 @@ namespace BarelyAPI
         const float MIN_ONSET = 0.01f;
         float initialOnset;
 
-
-        public Performer(Instrument performerInstrument)
+        public Musician(Instrument instrument, MicroGenerator microGenerator)
         {
-            instrument = performerInstrument;
+            this.instrument = instrument;
             initialOnset = Mathf.Max(MIN_ONSET, instrument.Attack);
-            Restart();
+
+            lineGenerator = microGenerator;
+
+            Reset();
+
+            active = true;
         }
 
-        public void Restart()
+        public void Reset()
         {
             score = new Dictionary<int, List<Note>[]>();
 
             instrument.StopAllNotes();
-            active = true;
         }
 
-        public void ApplyTransformation(TimbreProperties timbre)
+        public List<NoteMeta> GenerateBar(char section, int index, int harmonic)
         {
-            instrument.Attack = initialOnset * timbre.NoteOnsetMultiplier;
-
-            foreach (AudioEffect effect in instrument.Effects)
-            {
-                effect.Apply(timbre);
-            }
+            return lineGenerator.GenerateLine(section, index, harmonic);
         }
 
-        /**
-         * Play next pulse
-         * 
-         **/
-        public void Play(int bar, int pulse)
+        public void AddBeat(List<NoteMeta> line, SequencerState state, Conductor conductor)
         {
-            List<Note>[] currentBar;
-
-            if (score.TryGetValue(bar, out currentBar) && currentBar[pulse] != null)
+            foreach (NoteMeta noteMeta in line)
             {
-                foreach (Note note in currentBar[pulse])
+                if (Mathf.FloorToInt(noteMeta.Offset * state.BeatCount) - state.CurrentBeat == 0)
                 {
-                    instrument.PlayNote(note);
+                    NoteMeta meta = conductor.TransformNote(noteMeta);
+
+                    AddNote(new Note(meta.Index, meta.Loudness), state.CurrentSection * state.BarCount + state.CurrentBar + meta.Offset, meta.Duration, state.BarLength);
                 }
             }
         }
@@ -83,6 +78,15 @@ namespace BarelyAPI
             // Note Off
             Note noteOff = new Note(note.Index, 0.0f);
             addNote(noteOff, start + duration, barLength);
+        }
+
+        /**
+         * Play next pulse
+         **/
+        public void PlayPulse(int bar, int pulse, TimbreProperties timbre)
+        {
+            applyTransformation(timbre);
+            play(bar, pulse);
         }
 
         void addNote(Note note, float onset, int barLength)
@@ -101,6 +105,29 @@ namespace BarelyAPI
                 currentBar[pulse] = new List<Note>();
             }
             currentBar[pulse].Add(note);
+        }
+
+        void applyTransformation(TimbreProperties timbre)
+        {
+            instrument.Attack = initialOnset * timbre.NoteOnsetMultiplier;
+
+            foreach (AudioEffect effect in instrument.Effects)
+            {
+                effect.Apply(timbre);
+            }
+        }
+
+        void play(int bar, int pulse)
+        {
+            List<Note>[] currentBar;
+
+            if (score.TryGetValue(bar, out currentBar) && currentBar[pulse] != null)
+            {
+                foreach (Note note in currentBar[pulse])
+                {
+                    instrument.PlayNote(note);
+                }
+            }
         }
     }
 }

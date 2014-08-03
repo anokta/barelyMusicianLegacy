@@ -87,7 +87,7 @@ namespace BarelyAPI
         public float ProcessNext()
         {
             float output = 0.0f;
-            
+
             foreach (Voice voice in voices)
             {
                 output += voice.ProcessNext();
@@ -95,13 +95,13 @@ namespace BarelyAPI
 
             foreach (AudioEffect effect in effects)
             {
-                if(effect.Enabled)
+                if (effect.Enabled)
                     output = effect.Process(output);
             }
 
             return output * volume;
         }
-        
+
         public virtual void PlayNote(Note note)
         {
             if (note.IsNoteOn)
