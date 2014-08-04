@@ -6,6 +6,9 @@ namespace BarelyAPI
 {
     public abstract class Instrument
     {
+        public static float MIN_VOLUME = -70.0f;
+        const float MIN_ONSET = 0.01f;
+
         // Instrument Voices
         protected List<Voice> voices;
 
@@ -22,9 +25,11 @@ namespace BarelyAPI
             get { return voices[0].Envelope.Attack; }
             set
             {
+                float attack = Mathf.Max(MIN_ONSET, value);
+
                 foreach (Voice voice in voices)
                 {
-                    voice.Envelope.Attack = value;
+                    voice.Envelope.Attack = attack;
                 }
             }
         }
@@ -61,8 +66,6 @@ namespace BarelyAPI
                 }
             }
         }
-
-        public static float MIN_VOLUME = -70.0f;
 
         protected float volume;
         public float Volume

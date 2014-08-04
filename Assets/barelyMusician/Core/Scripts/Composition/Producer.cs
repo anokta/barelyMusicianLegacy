@@ -18,11 +18,20 @@ namespace BarelyAPI
         public int beatsPerBar;
 
         [SerializeField]
-        NoteIndex fundamentalKey;
-        public NoteIndex FundamentalKey
+        NoteIndex rootNote;
+        public NoteIndex RootNote
         {
-            get { return fundamentalKey; }
-            set { fundamentalKey = value; conductor.Key = (float)fundamentalKey; }
+            get { return rootNote; }
+            set { rootNote = value; conductor.Key = (float)rootNote; }
+        }
+
+        [SerializeField]
+        [Range(0f, 1f)]
+        float masterVolume;
+        public float MasterVolume
+        {
+            get { return (masterVolume != 0.0f) ? 20.0f * Mathf.Log10(masterVolume) : Instrument.MIN_VOLUME; }
+            set { masterVolume = (value > Instrument.MIN_VOLUME) ? Mathf.Pow(10, 0.05f * value) : 0.0f; }
         }
 
         // Arousal (Passive - Active)
@@ -77,7 +86,7 @@ namespace BarelyAPI
             audioSource.Stop();
 
             sequencer = new Sequencer(initialTempo, barsPerSection, beatsPerBar);
-            conductor = new Conductor((float)fundamentalKey);
+            conductor = new Conductor((float)rootNote);
 
             ensemble = new Ensemble(new SimpleMacroGenerator(true), new SimpleMesoGenerator(sequencer.State), conductor);
             ensemble.Register(sequencer);
@@ -88,9 +97,9 @@ namespace BarelyAPI
             instruments[1] = new SynthInstrument(OscillatorType.SAW, new Envelope(0.25f, 0.5f, 1.0f, 0.25f), -5.0f);
             instruments[2] = new PercussiveInstrument(drumKit, -4.0f);
 
-            ensemble.AddMusician("Piano", new Musician(instruments[0], new SimpleMicroGenerator(sequencer.State)));
-            ensemble.AddMusician("Synth", new Musician(instruments[1], new CA1DMicroGenerator(sequencer.State)));
-            ensemble.AddMusician("Drums", new Musician(instruments[2], new DrumsMicroGenerator(sequencer.State)));
+            ensemble.AddPerformer("Piano", new Performer(instruments[0], new SimpleMicroGenerator(sequencer.State)));
+            //ensemble.AddPerformer("Synth", new Performer(instruments[1], new CA1DMicroGenerator(sequencer.State)));
+            //ensemble.AddPerformer("Drums", new Performer(instruments[2], new DrumsMicroGenerator(sequencer.State)));
             #endregion TEST_ZONE
         }
 
@@ -113,7 +122,7 @@ namespace BarelyAPI
 
             for (int i = 0; i < data.Length; i += channels)
             {
-                data[i] = ensemble.GetNextOutput();
+                data[i] = masterVolume * ensemble.GetOutput();
 
                 // If stereo, copy the mono data to each channel
                 if (channels == 2) data[i + 1] = data[i];

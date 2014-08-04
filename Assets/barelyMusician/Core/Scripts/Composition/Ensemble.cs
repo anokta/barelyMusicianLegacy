@@ -6,7 +6,7 @@ namespace BarelyAPI
 {
     public class Ensemble
     {
-        Dictionary<string, Musician> musicians;
+        Dictionary<string, Performer> performers;
 
         MacroGenerator macro;
         MesoGenerator meso;
@@ -18,7 +18,7 @@ namespace BarelyAPI
 
         public Ensemble(MacroGenerator sequenceGenerator, MesoGenerator sectionGenerator, Conductor conductor)
         {
-            musicians = new Dictionary<string, Musician>();
+            performers = new Dictionary<string, Performer>();
 
             macro = sequenceGenerator;
             meso = sectionGenerator;
@@ -36,55 +36,56 @@ namespace BarelyAPI
             sequencer.AddBeatListener(OnNextBeat);
             sequencer.AddPulseListener(OnNextPulse);
 
+            // TODO Do something proper here !
             float minutes = 0.25f;
             macro.GenerateSequence(sequencer.MinuteToSections(minutes));
         }
 
-        public void AddMusician(string name, Musician producer)
+        public void AddPerformer(string name, Performer performer)
         {
-            musicians.Add(name, producer);
+            performers.Add(name, performer);
         }
 
         public void RemovePerfomer(string name)
         {
-            musicians.Remove(name);
+            performers.Remove(name);
         }
 
         public void Stop()
         {
-            foreach (Musician musician in musicians.Values)
+            foreach (Performer performer in performers.Values)
             {
-                musician.Reset();
+                performer.Reset();
             }
         }
 
-        public float GetNextOutput()
+        public float GetOutput()
         {
             float output = 0.0f;
 
-            foreach (Musician musician in musicians.Values)
+            foreach (Performer performer in performers.Values)
             {
-                output += musician.Output;
+                output += performer.Output;
             }
 
             return output;
         }
 
-        public void MuteMusician(string name)
+        public void MutePerformer(string name)
         {
-            Musician musician = null;
-            if(musicians.TryGetValue(name, out musician))
+            Performer performer = null;
+            if(performers.TryGetValue(name, out performer))
             {
-                musician.Mute = true;
+                performer.Mute = true;
             }
         }
 
-        public void UnmuteMusician(string name)
+        public void UnmutePerformer(string name)
         {
-            Musician musician = null;
-            if (musicians.TryGetValue(name, out musician))
+            Performer performer = null;
+            if (performers.TryGetValue(name, out performer))
             {
-                musician.Mute = false;
+                performer.Mute = false;
             }
         }
 
@@ -101,7 +102,7 @@ namespace BarelyAPI
             {
                 meso.GenerateProgression(currentSection);
 
-                sections[currentSection] = new List<NoteMeta>[musicians.Keys.Count, state.BarCount];
+                sections[currentSection] = new List<NoteMeta>[performers.Keys.Count, state.BarCount];
             }
         }
 
@@ -113,9 +114,9 @@ namespace BarelyAPI
                 int i = 0;
                 if (section[i, state.CurrentBar] == null)
                 {
-                    foreach (Musician musician in musicians.Values)
+                    foreach (Performer performer in performers.Values)
                     {
-                        section[i, state.CurrentBar] = musician.GenerateBar(currentSection, state.CurrentBar, meso.GetHarmonic(state.CurrentBar));
+                        section[i, state.CurrentBar] = performer.GenerateBar(currentSection, state.CurrentBar, meso.GetHarmonic(state.CurrentBar));
                         i++;
                     }
                 }
@@ -125,9 +126,9 @@ namespace BarelyAPI
         void OnNextBeat(SequencerState state)
         {
             int i = 0;
-            foreach (Musician musician in musicians.Values)
+            foreach (Performer performer in performers.Values)
             {
-                musician.AddBeat(sections[currentSection][i, state.CurrentBar], state, conductor);
+                performer.AddBeat(sections[currentSection][i, state.CurrentBar], state, conductor);
                 i++;
             }
         }
@@ -137,9 +138,9 @@ namespace BarelyAPI
             int bar = state.CurrentSection * state.BarCount + state.CurrentBar;
             int pulse = state.CurrentPulse;
 
-            foreach (Musician musician in musicians.Values)
+            foreach (Performer performer in performers.Values)
             {
-                musician.PlayPulse(bar, pulse, conductor.TimbreProperties);
+                performer.PlayPulse(bar * state.BarLength + pulse, conductor.TimbreProperties);
             }
         }
     }
