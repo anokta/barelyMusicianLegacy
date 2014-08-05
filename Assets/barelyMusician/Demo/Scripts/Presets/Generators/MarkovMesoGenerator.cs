@@ -13,13 +13,13 @@ namespace BarelyAPI
             markov = new MarkovChain(8, 1);
         }
 
-        public override void GenerateProgression(char section)
+        protected override void generateProgression(char section, ref int[] progression)
         {
             markov.Reset();
 
-            for (int i = 0; i < ProgressionLength; ++i)
+            for (int i = 0; i < progression.Length; ++i)
             {
-                harmonicProgression[i] = markov.CurrentState + 1;
+                progression[i] = markov.CurrentState + 1;
                 markov.GenerateNextState();
             }
         }

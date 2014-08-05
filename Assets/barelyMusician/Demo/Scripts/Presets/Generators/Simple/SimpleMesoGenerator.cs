@@ -10,28 +10,28 @@ namespace BarelyAPI
         {
         }
 
-        public override void GenerateProgression(char section)
+        protected override void generateProgression(char section, ref int[] progression)
         {
             if (section == 'A')
             {
-                harmonicProgression[0] = 1;
-                harmonicProgression[1] = 4;
-                harmonicProgression[2] = 2;
-                harmonicProgression[3] = 5;
+                progression[0] = 1;
+                progression[1] = 4;
+                progression[2] = 2;
+                progression[3] = 5;
             }
             else if (section == 'B')
             {
-                harmonicProgression[0] = 1;
-                harmonicProgression[1] = 4;
-                harmonicProgression[2] = 2;
-                harmonicProgression[3] = 1;
+                progression[0] = 1;
+                progression[1] = 4;
+                progression[2] = 2;
+                progression[3] = 1;
             }
             else
             {
-                harmonicProgression[0] = 1;
-                harmonicProgression[1] = 4;
-                harmonicProgression[2] = 5;
-                harmonicProgression[3] = 1;
+                progression[0] = 1;
+                progression[1] = 4;
+                progression[2] = 5;
+                progression[3] = 1;
             }
         }
     }

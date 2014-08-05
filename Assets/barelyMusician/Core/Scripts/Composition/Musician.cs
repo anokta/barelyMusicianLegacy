@@ -3,22 +3,22 @@ using System.Collections;
 
 namespace BarelyAPI
 {
-    public class Producer : MonoBehaviour
+    public class Musician : MonoBehaviour
     {
         [SerializeField]
         [Range(72, 220)]
-        public int initialTempo;
+        public int initialTempo = 120;
 
         [SerializeField]
         [Range(1, 8)]
-        public int barsPerSection;
+        public int barsPerSection = 4;
 
         [SerializeField]
         [Range(1, 16)]
-        public int beatsPerBar;
+        public int beatsPerBar = 4;
 
         [SerializeField]
-        NoteIndex rootNote;
+        NoteIndex rootNote = NoteIndex.C4;
         public NoteIndex RootNote
         {
             get { return rootNote; }
@@ -27,7 +27,7 @@ namespace BarelyAPI
 
         [SerializeField]
         [Range(0f, 1f)]
-        float masterVolume;
+        float masterVolume = 1.0f;
         public float MasterVolume
         {
             get { return (masterVolume != 0.0f) ? 20.0f * Mathf.Log10(masterVolume) : Instrument.MIN_VOLUME; }
@@ -90,7 +90,10 @@ namespace BarelyAPI
 
             ensemble = new Ensemble(new SimpleMacroGenerator(true), new SimpleMesoGenerator(sequencer.State), conductor);
             ensemble.Register(sequencer);
+        }
 
+        void Start()
+        {
             #region TEST_ZONE
             instruments = new Instrument[3];
             instruments[0] = new SamplerInstrument(sample, new Envelope(0.0f, 0.0f, 1.0f, 0.25f));
@@ -98,7 +101,7 @@ namespace BarelyAPI
             instruments[2] = new PercussiveInstrument(drumKit, -4.0f);
 
             ensemble.AddPerformer("Piano", new Performer(instruments[0], new SimpleMicroGenerator(sequencer.State)));
-            //ensemble.AddPerformer("Synth", new Performer(instruments[1], new CA1DMicroGenerator(sequencer.State)));
+            ensemble.AddPerformer("Synth", new Performer(instruments[1], new CA1DMicroGenerator(sequencer.State)));
             //ensemble.AddPerformer("Drums", new Performer(instruments[2], new DrumsMicroGenerator(sequencer.State)));
             #endregion TEST_ZONE
         }

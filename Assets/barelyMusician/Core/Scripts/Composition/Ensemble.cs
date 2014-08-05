@@ -11,9 +11,6 @@ namespace BarelyAPI
         MacroGenerator macro;
         MesoGenerator meso;
 
-        Dictionary<char, List<NoteMeta>[,]> sections;
-        char currentSection;
-
         Conductor conductor;
 
         public Ensemble(MacroGenerator sequenceGenerator, MesoGenerator sectionGenerator, Conductor conductor)
@@ -23,15 +20,11 @@ namespace BarelyAPI
             macro = sequenceGenerator;
             meso = sectionGenerator;
 
-            currentSection = '.';
-            sections = new Dictionary<char, List<NoteMeta>[,]>();
-
             this.conductor = conductor;
         }
 
         public void Register(Sequencer sequencer)
         {
-            sequencer.AddSectionListener(OnNextSection);
             sequencer.AddBarListener(OnNextBar);
             sequencer.AddBeatListener(OnNextBeat);
             sequencer.AddPulseListener(OnNextPulse);
@@ -74,7 +67,7 @@ namespace BarelyAPI
         public void MutePerformer(string name)
         {
             Performer performer = null;
-            if(performers.TryGetValue(name, out performer))
+            if (performers.TryGetValue(name, out performer))
             {
                 performer.Mute = true;
             }
@@ -89,58 +82,31 @@ namespace BarelyAPI
             }
         }
 
-        //public void ChangeInstrument(string name)
-        //{
-        //}
-
-        void OnNextSection(SequencerState state)
-        {
-            currentSection = macro.GetSectionName(state.CurrentSection);
-
-            List<NoteMeta>[,] section = null;
-            if (currentSection != '.' & !sections.TryGetValue(currentSection, out section))
-            {
-                meso.GenerateProgression(currentSection);
-
-                sections[currentSection] = new List<NoteMeta>[performers.Keys.Count, state.BarCount];
-            }
-        }
-
         void OnNextBar(SequencerState state)
         {
-            List<NoteMeta>[,] section = null;
-            if (sections.TryGetValue(currentSection, out section))
+            char currentSection = macro.GetSectionName(state.CurrentSection);
+
+            foreach (Performer performer in performers.Values)
             {
-                int i = 0;
-                if (section[i, state.CurrentBar] == null)
-                {
-                    foreach (Performer performer in performers.Values)
-                    {
-                        section[i, state.CurrentBar] = performer.GenerateBar(currentSection, state.CurrentBar, meso.GetHarmonic(state.CurrentBar));
-                        i++;
-                    }
-                }
+                performer.GenerateBar(currentSection, state.CurrentBar, meso.GetHarmonic(currentSection, state.CurrentBar));
             }
         }
 
         void OnNextBeat(SequencerState state)
         {
-            int i = 0;
             foreach (Performer performer in performers.Values)
             {
-                performer.AddBeat(sections[currentSection][i, state.CurrentBar], state, conductor);
-                i++;
+                performer.AddBeat(state, conductor);
             }
         }
 
         void OnNextPulse(SequencerState state)
         {
             int bar = state.CurrentSection * state.BarCount + state.CurrentBar;
-            int pulse = state.CurrentPulse;
 
             foreach (Performer performer in performers.Values)
             {
-                performer.PlayPulse(bar * state.BarLength + pulse, conductor.TimbreProperties);
+                performer.Play(bar, state.CurrentPulse, conductor.TimbreProperties);
             }
         }
     }

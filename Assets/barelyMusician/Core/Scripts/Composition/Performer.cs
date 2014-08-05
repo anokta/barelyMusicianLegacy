@@ -6,8 +6,6 @@ namespace BarelyAPI
 {
     public class Performer
     {
-        Dictionary<int, List<Note>> score;
-
         // Audio output
         public float Output
         {
@@ -25,8 +23,11 @@ namespace BarelyAPI
             set { active = !value; }
         }
 
-        // Score (list per bar)
+        // Score (note list per bar)
+        Dictionary<int, List<Note>[]> score;
+
         MicroGenerator lineGenerator;
+        List<NoteMeta> currentBar;
 
         // Instrument
         Instrument instrument;
@@ -40,73 +41,67 @@ namespace BarelyAPI
 
             lineGenerator = microGenerator;
 
-            Reset();
-
             active = true;
 
+            Reset();
         }
 
         public void Reset()
         {
-            score = new Dictionary<int, List<Note>>();
+            score = new Dictionary<int, List<Note>[]>();
 
             instrument.StopAllNotes();
         }
 
-        public List<NoteMeta> GenerateBar(char section, int index, int harmonic)
+        public void GenerateBar(char section, int index, int harmonic)
         {
-            return lineGenerator.GenerateLine(section, index, harmonic);
+            currentBar = lineGenerator.GetLine(section, index, harmonic);
         }
 
-        public void AddBeat(List<NoteMeta> line, SequencerState state, Conductor conductor)
+        public void AddBeat(SequencerState state, Conductor conductor)
         {
-            foreach (NoteMeta noteMeta in line)
+            foreach (NoteMeta noteMeta in currentBar)
             {
-                if (Mathf.FloorToInt(noteMeta.Offset * state.BeatCount) == state.CurrentBeat)
+                if (Mathf.FloorToInt(noteMeta.Offset * state.BeatCount) - state.CurrentBeat == 0)
                 {
                     NoteMeta meta = conductor.TransformNote(noteMeta);
 
-                    AddNote(new Note(meta.Index, meta.Loudness), (int)(state.BarLength * (state.CurrentSection * state.BarCount + state.CurrentBar + meta.Offset)), (int)(state.BarLength * meta.Duration));
+                    float start = state.CurrentSection * state.BarCount + state.CurrentBar + meta.Offset;
+                    float end = start + meta.Duration;
+
+                    addNote(new Note(meta.Index, meta.Loudness), start, state.BarLength);
+                    addNote(new Note(meta.Index, 0.0f), end, state.BarLength);
                 }
             }
         }
 
-        /**
-         * Play next pulse
-         **/
-        public void PlayPulse(int pulse, TimbreProperties timbre)
+        public void Play(int bar, int pulse, TimbreProperties timbre)
         {
             applyTransformation(timbre);
 
-            List<Note> currentPulse;
-
-            if (score.TryGetValue(pulse, out currentPulse))
+            List<Note>[] currentBar;
+            if (score.TryGetValue(bar, out currentBar) && currentBar[pulse] != null)
             {
-                foreach (Note note in currentPulse)
+                foreach (Note note in currentBar[pulse])
                 {
                     instrument.PlayNote(note);
                 }
             }
         }
 
-        void AddNote(Note note, int start, int duration)
+        void addNote(Note note, float onset, int barLength)
         {
-            // Note On
-            addNote(note, start);
+            int pulse = Mathf.RoundToInt(onset * barLength);
+            int bar = pulse / barLength;
+            pulse %= barLength;
 
-            // Note Off
-            Note noteOff = new Note(note.Index, 0.0f);
-            addNote(noteOff, start + duration);
-        }
+            List<Note>[] currentBar = null;
+            if (!score.TryGetValue(bar, out currentBar))
+                score[bar] = currentBar = new List<Note>[barLength];
+            if (currentBar[pulse] == null)
+                currentBar[pulse] = new List<Note>();
 
-        void addNote(Note note, int onset)
-        {
-            List<Note> currentPulse;
-
-            if (!score.TryGetValue(onset, out currentPulse))
-                score[onset] = currentPulse = new List<Note>();
-
-            currentPulse.Add(note);
+            currentBar[pulse].Add(note);
         }
 
         void applyTransformation(TimbreProperties timbre)

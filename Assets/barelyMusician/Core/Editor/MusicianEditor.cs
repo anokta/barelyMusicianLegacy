@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using UnityEditor;
 using BarelyAPI;
 
-[CustomEditor(typeof(Producer))]
-public class ProducerEditor : Editor
+[CustomEditor(typeof(Musician))]
+public class MusicianEditor : Editor
 {
-    Producer producer;
+    Musician musician;
     List<Instrument> instruments;
 
     void OnEnable()
     {
-        producer = (Producer)target;
+        musician = (Musician)target;
 
         instruments = new List<Instrument>();
         //instruments.Add(new SynthInstrument(OscillatorType.SAW, new Envelope(0,0,0,0)));
@@ -35,11 +35,11 @@ public class ProducerEditor : Editor
             instrument.Volume = EditorGUILayout.Slider("Volume", instrument.Volume, Instrument.MIN_VOLUME, 6.0f);
         }
 
-        //producer.FundamentalKey = (NoteIndex)EditorGUILayout.EnumPopup("Fundamental Key", producer.FundamentalKey);
+        //musician.FundamentalKey = (NoteIndex)EditorGUILayout.EnumPopup("Fundamental Key", musician.FundamentalKey);
 
-        //producer.initialTempo = EditorGUILayout.Slider("Tempo", producer.initialTempo, 100, 200);
+        //musician.initialTempo = EditorGUILayout.Slider("Tempo", musician.initialTempo, 100, 200);
 
-        //producer.Energy = EditorGUILayout.Slider("Energy", producer.Energy, 0.0f, 1.0f);
-        //producer.Stress = EditorGUILayout.Slider("Stress", producer.Stress, 0.0f, 1.0f);
+        //musician.Energy = EditorGUILayout.Slider("Energy", musician.Energy, 0.0f, 1.0f);
+        //musician.Stress = EditorGUILayout.Slider("Stress", musician.Stress, 0.0f, 1.0f);
     }
 }

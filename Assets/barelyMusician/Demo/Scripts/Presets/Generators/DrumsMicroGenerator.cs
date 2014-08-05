@@ -12,10 +12,8 @@ namespace BarelyAPI
         {
         }
 
-        public override List<NoteMeta> GenerateLine(char section, int bar, int harmonic)
+        protected override void generateLine(char section, int bar, int harmonic, ref List<NoteMeta> line)
         {
-            line = new List<NoteMeta>();
-
             for (int i = 0; i < LineLength * 2; ++i)
             {
                 float offset = i / (2.0f * LineLength);
@@ -34,8 +32,6 @@ namespace BarelyAPI
                 if (RandomNumber.NextFloat(0.0f, 1.0f) < 0.01f || i % 16 == 15)
                     line.Add(new NoteMeta(21, offset, duration, 1.0f));
             }
-
-            return line;
         }
     }
 }

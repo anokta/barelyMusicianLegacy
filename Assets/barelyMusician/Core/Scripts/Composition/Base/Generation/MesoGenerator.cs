@@ -1,32 +1,39 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace BarelyAPI
 {
     public abstract class MesoGenerator
     {
-        public int[] harmonicProgression;
-       
         SequencerState state;
         protected int ProgressionLength
         {
             get { return state.BarCount; }
         }
 
+        Dictionary<char, int[]> progressions;
+       
         protected MesoGenerator(SequencerState sequencerState)
         {
             state = sequencerState;
 
-            harmonicProgression = new int[ProgressionLength];
-            for (int i = 0; i < harmonicProgression.Length; ++i)
-                harmonicProgression[i] = 1;
+            progressions = new Dictionary<char, int[]>();
         }
 
-        public int GetHarmonic(int index)
+        public int GetHarmonic(char section, int index)
         {
-            return harmonicProgression[index] - 1;
+            int[] progression = null;
+            if (!progressions.TryGetValue(section, out progression))
+            {
+                progression = progressions[section] = new int[ProgressionLength];
+                for (int i = 0; i < progression.Length; ++i) progression[i] = 1;
+                generateProgression(section, ref progression);
+            }
+
+            return progression[index] - 1;
         }
 
-        public abstract void GenerateProgression(char section);
+        protected abstract void generateProgression(char section, ref int[] progression);
     }
 }

@@ -14,10 +14,8 @@ namespace BarelyAPI
             ca = new Automaton1D(81, 90);
         }
 
-        public override List<NoteMeta> GenerateLine(char section, int bar, int harmonic)
+        protected override void generateLine(char section, int bar, int harmonic, ref List<NoteMeta> line)
         {
-            line = new List<NoteMeta>();
-
             int keyIndex = harmonic;
 
             ca.Update();
@@ -29,8 +27,6 @@ namespace BarelyAPI
                     line.Add(new NoteMeta(keyIndex++, (float)i / LineLength, 1.0f / LineLength, 1.0f));
                 }
             }
-            
-            return line;
         }
     }
 }
