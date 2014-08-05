@@ -29,10 +29,10 @@ namespace BarelyAPI
                 case SectionType.BRIDGE:
                     for (int i = 0; i < 3; ++i)
                     {
-                        line.Add(new NoteMeta(harmonic + chord[i], 0.0f, 0.1f));
-                        line.Add(new NoteMeta(harmonic + chord[i], 0.25f, 0.1f));
-                        line.Add(new NoteMeta(harmonic + chord[i], 0.5f, 0.1f));
-                        line.Add(new NoteMeta(harmonic + chord[i], 0.75f, 0.1f));
+                        line.Add(new NoteMeta(harmonic + chord[i], 0.0f, 0.15f));
+                        line.Add(new NoteMeta(harmonic + chord[i], 0.25f, 0.15f));
+                        line.Add(new NoteMeta(harmonic + chord[i], 0.5f, 0.15f));
+                        line.Add(new NoteMeta(harmonic + chord[i], 0.75f, 0.15f));
                     }
                     break;
             }

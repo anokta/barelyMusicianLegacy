@@ -19,7 +19,7 @@ namespace BarelyAPI
         public float TempoMultiplier
         {
             get { return tempoMult; }
-            set { tempoMult = 0.875f + 0.25f * value; }
+            set { tempoMult = 0.85f + 0.3f * value; }
         }
 
         // Musical mode

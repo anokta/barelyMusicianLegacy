@@ -6,7 +6,7 @@ namespace BarelyAPI
     public class Musician : MonoBehaviour
     {
         [SerializeField]
-        [Range(72, 220)]
+        [Range(88, 220)]
         public int initialTempo = 120;
 
         [SerializeField]
@@ -92,7 +92,7 @@ namespace BarelyAPI
             sequencer = new Sequencer(initialTempo, barsPerSection, beatsPerBar);
             conductor = new Conductor((float)rootNote);
 
-            ensemble = new Ensemble(new SimpleMacroGenerator(true), new SimpleMesoGenerator(sequencer.State), conductor);
+            ensemble = new Ensemble(new SimpleMacroGenerator(true), new MarkovMesoGenerator(sequencer.State), conductor);
             ensemble.Register(sequencer);
         }
 
@@ -105,7 +105,7 @@ namespace BarelyAPI
             instruments[2] = new SynthInstrument(OscillatorType.TRIANGLE, new Envelope(0.25f, 0.5f, 0.5f, 0.25f), -5.0f);
             instruments[3] = new PercussiveInstrument(drumKit, -3.0f);
 
-            ensemble.AddPerformer("Loop", new Performer(instruments[0], new SimpleMicroGenerator(sequencer.State)));
+            ensemble.AddPerformer("Loop", new Performer(instruments[0], new NaberMicroGenerator(sequencer.State)));
             ensemble.AddPerformer("Melody", new Performer(instruments[1], new CA1DMicroGenerator(sequencer.State)));
             ensemble.AddPerformer("Chords", new Performer(instruments[2], new ChordMicroGenerator(sequencer.State)));
             ensemble.AddPerformer("Drums", new Performer(instruments[3], new DrumsMicroGenerator(sequencer.State)));
