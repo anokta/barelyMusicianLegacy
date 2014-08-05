@@ -9,7 +9,7 @@ namespace BarelyAPI
         public static float Interval;
 
         //public static int BufferSize;
-
+        
         void Awake()
         {
             // ISSUE: Output sample rate does not correspond to the DSP sample rate for some reason by default.

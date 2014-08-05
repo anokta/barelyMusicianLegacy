@@ -86,6 +86,7 @@ GameObject:
   - 92: {fileID: 434941143}
   - 124: {fileID: 434941142}
   - 81: {fileID: 434941141}
+  - 114: {fileID: 434941146}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -158,6 +159,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &434941146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 434941140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2497a1f169642d438560b7fc0aba23b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fileName: alper
 --- !u!1 &993552975
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,11 +227,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10a0e41ef9c742c409fe2a771969d624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialTempo: 132
+  initialTempo: 135
   barsPerSection: 4
   beatsPerBar: 4
   rootNote: 3
-  masterVolume: 1
+  masterVolume: .75
   sample: {fileID: 8300000, guid: 1c08986e68b40d94987938586307d45a, type: 3}
   drumKit:
   - {fileID: 8300000, guid: 836f6a87c27a2004990660e1c324dfd4, type: 3}

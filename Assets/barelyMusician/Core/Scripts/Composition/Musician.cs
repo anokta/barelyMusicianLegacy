@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace BarelyAPI
 {
@@ -62,7 +63,6 @@ namespace BarelyAPI
                 conductor.SetParameters(energy, stress);
             }
         }
-
 
         #region TEST_ZONE
         public AudioClip sample;
@@ -132,7 +132,7 @@ namespace BarelyAPI
 
             for (int i = 0; i < data.Length; i += channels)
             {
-                data[i] = masterVolume * ensemble.GetOutput();
+                data[i] = Mathf.Clamp(masterVolume * ensemble.GetOutput(), -1.0f, 1.0f);
 
                 // If stereo, copy the mono data to each channel
                 if (channels == 2) data[i + 1] = data[i];
