@@ -51,9 +51,11 @@ namespace BarelyAPI
             score = new Dictionary<int, List<Note>[]>();
 
             instrument.StopAllNotes();
+
+            lineGenerator.Reset();
         }
 
-        public void GenerateBar(char section, int index, int harmonic)
+        public void GenerateBar(SectionType section, int index, int harmonic)
         {
             currentBar = lineGenerator.GetLine(section, index, harmonic);
         }
@@ -62,7 +64,7 @@ namespace BarelyAPI
         {
             foreach (NoteMeta noteMeta in currentBar)
             {
-                if (Mathf.FloorToInt(noteMeta.Offset * state.BeatCount) - state.CurrentBeat == 0)
+                if (Mathf.FloorToInt(noteMeta.Offset * state.BeatCount) == state.CurrentBeat)
                 {
                     NoteMeta meta = conductor.TransformNote(noteMeta);
 

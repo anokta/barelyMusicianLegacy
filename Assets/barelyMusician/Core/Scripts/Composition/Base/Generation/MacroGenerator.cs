@@ -18,17 +18,19 @@ namespace BarelyAPI
             loop = looping;
         }
 
-        public char GetSectionName(int index)
+        public SectionType GetSection(int index)
         {
             if (index >= sectionSequence.Length)
             {
                 if (loop) index %= sectionSequence.Length;
-                else return '.';
+                else return SectionType.END;
             }
 
-            return sectionSequence[index];
+            return (SectionType)sectionSequence[index];
         }
 
         public abstract void GenerateSequence(int length);
     }
+
+    public enum SectionType { INTRO = 'I', VERSE = 'V', PRE_CHORUS = 'P', CHORUS = 'C', BRIDGE = 'B', OUTRO = 'O', END = '.' } 
 }

@@ -12,16 +12,16 @@ namespace BarelyAPI
             get { return state.BarCount; }
         }
 
-        Dictionary<char, int[]> progressions;
+        Dictionary<SectionType, int[]> progressions;
        
         protected MesoGenerator(SequencerState sequencerState)
         {
             state = sequencerState;
 
-            progressions = new Dictionary<char, int[]>();
+            Reset();
         }
 
-        public int GetHarmonic(char section, int index)
+        public int GetHarmonic(SectionType section, int index)
         {
             int[] progression = null;
             if (!progressions.TryGetValue(section, out progression))
@@ -34,6 +34,11 @@ namespace BarelyAPI
             return progression[index] - 1;
         }
 
-        protected abstract void generateProgression(char section, ref int[] progression);
+        public void Reset()
+        {
+            progressions = new Dictionary<SectionType, int[]>();
+        }
+
+        protected abstract void generateProgression(SectionType section, ref int[] progression);
     }
 }

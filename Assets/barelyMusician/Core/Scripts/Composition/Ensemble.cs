@@ -50,6 +50,8 @@ namespace BarelyAPI
             {
                 performer.Reset();
             }
+
+            meso.Reset();
         }
 
         public float GetOutput()
@@ -84,11 +86,14 @@ namespace BarelyAPI
 
         void OnNextBar(SequencerState state)
         {
-            char currentSection = macro.GetSectionName(state.CurrentSection);
+            SectionType currentSection = macro.GetSection(state.CurrentSection);
 
-            foreach (Performer performer in performers.Values)
+            if (currentSection != SectionType.END)
             {
-                performer.GenerateBar(currentSection, state.CurrentBar, meso.GetHarmonic(currentSection, state.CurrentBar));
+                foreach (Performer performer in performers.Values)
+                {
+                    performer.GenerateBar(currentSection, state.CurrentBar, meso.GetHarmonic(currentSection, state.CurrentBar));
+                }
             }
         }
 

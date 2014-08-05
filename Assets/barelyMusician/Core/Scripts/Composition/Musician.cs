@@ -71,12 +71,16 @@ namespace BarelyAPI
         Instrument[] instruments;
         #endregion TEST_ZONE
 
-        AudioSource audioSource;
-
         Sequencer sequencer;
+        public Sequencer Sequencer
+        {
+            get { return sequencer; }
+        }
 
         Ensemble ensemble;
         Conductor conductor;
+
+        AudioSource audioSource;
 
         void Awake()
         {
@@ -95,18 +99,21 @@ namespace BarelyAPI
         void Start()
         {
             #region TEST_ZONE
-            instruments = new Instrument[3];
+            instruments = new Instrument[4];
             instruments[0] = new SamplerInstrument(sample, new Envelope(0.0f, 0.0f, 1.0f, 0.25f));
-            instruments[1] = new SynthInstrument(OscillatorType.SAW, new Envelope(0.25f, 0.5f, 1.0f, 0.25f), -5.0f);
-            instruments[2] = new PercussiveInstrument(drumKit, -4.0f);
+            instruments[1] = new SynthInstrument(OscillatorType.COS, new Envelope(0.1f, 0.25f, 1.0f, 0.2f), -3.0f);
+            instruments[2] = new SynthInstrument(OscillatorType.TRIANGLE, new Envelope(0.25f, 0.5f, 0.5f, 0.25f), -5.0f);
+            instruments[3] = new PercussiveInstrument(drumKit, -3.0f);
 
-            ensemble.AddPerformer("Piano", new Performer(instruments[0], new SimpleMicroGenerator(sequencer.State)));
-            ensemble.AddPerformer("Synth", new Performer(instruments[1], new CA1DMicroGenerator(sequencer.State)));
-            //ensemble.AddPerformer("Drums", new Performer(instruments[2], new DrumsMicroGenerator(sequencer.State)));
+            ensemble.AddPerformer("Loop", new Performer(instruments[0], new SimpleMicroGenerator(sequencer.State)));
+            ensemble.AddPerformer("Melody", new Performer(instruments[1], new CA1DMicroGenerator(sequencer.State)));
+            ensemble.AddPerformer("Chords", new Performer(instruments[2], new ChordMicroGenerator(sequencer.State)));
+            ensemble.AddPerformer("Drums", new Performer(instruments[3], new DrumsMicroGenerator(sequencer.State)));
+
             #endregion TEST_ZONE
         }
 
-        void Update()
+        void FixedUpdate()
         {
             if (Mathf.Abs(energy - energyTarget) < 0.01f * energyInterpolationSpeed)
                 energy = energyTarget;

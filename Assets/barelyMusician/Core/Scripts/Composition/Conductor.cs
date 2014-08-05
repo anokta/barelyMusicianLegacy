@@ -50,7 +50,7 @@ namespace BarelyAPI
         public float ArticulationVariance
         {
             get { return articulationVariance; }
-            set { articulationVariance = 0.2f * value; }
+            set { articulationVariance = 0.15f * value; }
         }
 
         // Loudness Variance
@@ -74,7 +74,7 @@ namespace BarelyAPI
         public float PitchHeight
         {
             get { return pitchHeight; }
-            set { pitchHeight = 4.0f * value - 2.0f; }
+            set { pitchHeight = 3.0f * value - 2.0f; }
         }
 
         // Instrument timbre properties
@@ -112,7 +112,7 @@ namespace BarelyAPI
 
         public NoteMeta TransformNote(NoteMeta meta)
         {
-            float index = getNote(Mathf.RoundToInt(harmonicCurve) != 0 ? Mathf.RoundToInt(harmonicCurve) * meta.Index : meta.Index + Mathf.RoundToInt(pitchHeight) / 2 * ModeGenerator.SCALE_LENGTH);
+            float index = getNote((Mathf.RoundToInt(harmonicCurve) != 0 ? Mathf.RoundToInt(harmonicCurve) * meta.Index : meta.Index) + Mathf.RoundToInt(pitchHeight) / 2 * ModeGenerator.SCALE_LENGTH);
             float offset = meta.Offset;
             float duration = Mathf.Max(0.0f, RandomNumber.NextNormal(meta.Duration * articulationMult, meta.Duration * articulationMult * articulationVariance));
             float loudness = Mathf.Max(0.0f, RandomNumber.NextNormal(meta.Loudness * loudnessMult, meta.Loudness * loudnessMult * loudnessVariance));

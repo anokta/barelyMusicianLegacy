@@ -13,7 +13,7 @@ public class GUIManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //AudioEventManager.OnNextBeat += OnNextBeat;
+        musician.Sequencer.AddBeatListener(OnNextBeat);
     }
 
     // Update is called once per frame
@@ -92,8 +92,7 @@ public class GUIManager : MonoBehaviour
         GUILayout.Box("Stress");
         musician.Stress = GUILayout.HorizontalSlider(musician.Stress, 0.0f, 1.0f);
         //GUILayout.EndVertical();
-
-
+        
         //GUILayout.BeginVertical();
         //ensemble.PrintValues();
         //GUILayout.EndVertical();
@@ -108,8 +107,9 @@ public class GUIManager : MonoBehaviour
         GUILayout.EndArea();
     }
 
-    void OnNextBeat(int beat)
+    void OnNextBeat(SequencerState state)
     {
+        //Camera.main.backgroundColor += new Color(RandomNumber.NextFloat(-0.01f, 0.01f), RandomNumber.NextFloat(-0.01f, 0.01f), RandomNumber.NextFloat(-0.01f, 0.01f));
         //timeSigText = beat.ToString() + " / " + Sequencer.BeatCount;
     }
 }

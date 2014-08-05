@@ -14,17 +14,20 @@ namespace BarelyAPI
             ca = new Automaton1D(81, 90);
         }
 
-        protected override void generateLine(char section, int bar, int harmonic, ref List<NoteMeta> line)
+        protected override void generateLine(SectionType section, int bar, int harmonic, ref List<NoteMeta> line)
         {
-            int keyIndex = harmonic;
+            int keyIndex = (section == SectionType.CHORUS) ? harmonic : 0;
 
-            ca.Update();
-
-            for (int i = 0; i < LineLength; ++i)
+            if (section == SectionType.VERSE || section == SectionType.PRE_CHORUS || section == SectionType.CHORUS || section == SectionType.BRIDGE)
             {
-                if (ca.GetState(i) == 1)
+                ca.Update();
+
+                for (int i = 0; i < LineLength; ++i)
                 {
-                    line.Add(new NoteMeta(keyIndex++, (float)i / LineLength, 1.0f / LineLength, 1.0f));
+                    if (ca.GetState(i) == 1)
+                    {
+                        line.Add(new NoteMeta(keyIndex++, (float)i / LineLength, 1.0f / LineLength, 1.0f));
+                    }
                 }
             }
         }

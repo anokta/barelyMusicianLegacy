@@ -16,16 +16,14 @@ namespace BarelyAPI
             get { return state.BarCount; }
         }
 
-        Dictionary<char, List<NoteMeta>[]> lines;
+        Dictionary<SectionType, List<NoteMeta>[]> lines;
 
         protected MicroGenerator(SequencerState sequencerState)
         {
             state = sequencerState;
-
-            lines = new Dictionary<char,List<NoteMeta>[]>();
         }
 
-        public List<NoteMeta> GetLine(char section, int bar, int harmonic)
+        public List<NoteMeta> GetLine(SectionType section, int bar, int harmonic)
         {
             List<NoteMeta>[] lineSection = null;
             if(!lines.TryGetValue(section, out lineSection))
@@ -40,6 +38,11 @@ namespace BarelyAPI
             return lineSection[bar];
         }
 
-        protected abstract void generateLine(char section, int bar, int harmonic, ref List<NoteMeta> line);
+        public void Reset()
+        {
+            lines = new Dictionary<SectionType, List<NoteMeta>[]>();
+        }
+
+        protected abstract void generateLine(SectionType section, int bar, int harmonic, ref List<NoteMeta> line);
     }
 }

@@ -12,7 +12,23 @@ namespace BarelyAPI
 
         public override void GenerateSequence(int length)
         {
-            sectionSequence = "AAABAAAC";
+            sectionSequence += (char)SectionType.INTRO;
+            sectionSequence += (char)SectionType.VERSE;
+            sectionSequence += (char)SectionType.VERSE;
+            sectionSequence += (char)SectionType.VERSE;
+            sectionSequence += (char)SectionType.PRE_CHORUS;
+            sectionSequence += (char)SectionType.CHORUS;
+            sectionSequence += (char)SectionType.CHORUS;
+            sectionSequence += (char)SectionType.VERSE;
+            sectionSequence += (char)SectionType.PRE_CHORUS;
+            sectionSequence += (char)SectionType.CHORUS;
+            sectionSequence += (char)SectionType.BRIDGE;
+            sectionSequence += (char)SectionType.PRE_CHORUS;
+            sectionSequence += (char)SectionType.CHORUS;
+            sectionSequence += (char)SectionType.CHORUS;
+            sectionSequence += (char)SectionType.OUTRO;
+
+            Debug.Log(sectionSequence);
         }
     }
 }

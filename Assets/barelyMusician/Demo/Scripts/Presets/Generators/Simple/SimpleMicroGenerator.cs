@@ -6,20 +6,34 @@ namespace BarelyAPI
 {
     public class SimpleMicroGenerator : MicroGenerator
     {
-        int[] pattern = { 0, 2, 4, 7, 4 };
+        int[] pattern = { 0, 2, 4, 7, 4, 8 };
 
         public SimpleMicroGenerator(SequencerState sequencerState)
             : base(sequencerState)
         {
         }
 
-        protected override void generateLine(char section, int bar, int harmonic, ref List<NoteMeta> line)
+        protected override void generateLine(SectionType section, int bar, int harmonic, ref List<NoteMeta> line)
         {
-            line.Add(new NoteMeta(harmonic + pattern[0], 0.0f, 1.0f / 4.0f, 1.0f));
-            line.Add(new NoteMeta(harmonic + pattern[1], 1.0f / 4.0f, 1.0f / 4.0f, 0.9f));
-            line.Add(new NoteMeta(harmonic + pattern[2], 2.0f / 4.0f, 1.0f / 4.0f, 0.95f));
-            line.Add(new NoteMeta(harmonic + pattern[3], 3.0f / 4.0f, 1.0f / 8.0f, 0.9f));
-            line.Add(new NoteMeta(harmonic + pattern[4], 3.5f / 4.0f, 1.0f / 8.0f, 0.8f));
+            switch (bar)
+            {
+                case 0:
+                case 1:
+                case 3:
+                    line.Add(new NoteMeta(harmonic + pattern[0], 0.0f, 1.0f / 4.0f, 1.0f));
+                    line.Add(new NoteMeta(harmonic + pattern[1], 1.0f / 4.0f, 1.0f / 4.0f, 0.9f));
+                    line.Add(new NoteMeta(harmonic + pattern[2], 2.0f / 4.0f, 1.0f / 4.0f, 0.95f));
+                    line.Add(new NoteMeta(harmonic + pattern[3], 3.0f / 4.0f, 1.0f / 8.0f, 0.9f));
+                    line.Add(new NoteMeta(harmonic + pattern[4], 3.5f / 4.0f, 1.0f / 8.0f, 0.8f));
+                    break;
+                case 2:
+                    line.Add(new NoteMeta(harmonic + pattern[0], 0.0f, 1.0f / 4.0f, 1.0f));
+                    line.Add(new NoteMeta(harmonic + pattern[1], 1.0f / 4.0f, 1.0f / 4.0f, 0.9f));
+                    line.Add(new NoteMeta(harmonic + pattern[2], 2.0f / 4.0f, 1.0f / 4.0f, 0.95f));
+                    line.Add(new NoteMeta(harmonic + pattern[3], 3.0f / 4.0f, 1.0f / 8.0f, 0.9f));
+                    line.Add(new NoteMeta(harmonic + pattern[5], 3.5f / 4.0f, 1.0f / 8.0f, 0.8f));
+                    break;
+            }
         }
     }
 }
