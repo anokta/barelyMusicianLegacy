@@ -16,6 +16,14 @@ namespace BarelyAPI
             markov = new MarkovChain(ModeGenerator.SCALE_LENGTH);
         }
 
+        public override void Restart()
+        {
+            base.Restart();
+
+            if(markov != null)
+                markov.Reset();
+        }
+
         protected override void generateLine(SectionType section, int bar, int harmonic, ref List<NoteMeta> line)
         {
             int keyIndex = (section == SectionType.CHORUS) ? harmonic : 0;

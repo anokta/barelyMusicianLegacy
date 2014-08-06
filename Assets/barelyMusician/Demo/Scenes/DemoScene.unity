@@ -227,11 +227,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10a0e41ef9c742c409fe2a771969d624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialTempo: 135
+  initialTempo: 132
   barsPerSection: 4
   beatsPerBar: 4
   rootNote: 3
-  masterVolume: .75
+  masterVolume: .5
   sample: {fileID: 8300000, guid: 1c08986e68b40d94987938586307d45a, type: 3}
   drumKit:
   - {fileID: 8300000, guid: 836f6a87c27a2004990660e1c324dfd4, type: 3}

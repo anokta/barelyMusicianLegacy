@@ -38,7 +38,7 @@ namespace BarelyAPI
             return lineSection[bar];
         }
 
-        public void Reset()
+        public virtual void Restart()
         {
             lines = new Dictionary<SectionType, List<NoteMeta>[]>();
         }

@@ -13,6 +13,14 @@ namespace BarelyAPI
             markov = new MarkovChain(8, 1);
         }
 
+        public override void Restart()
+        {
+            base.Restart();
+
+            if(markov != null)
+                markov.Reset();
+        }
+
         protected override void generateProgression(SectionType section, ref int[] progression)
         {
             markov.Reset();

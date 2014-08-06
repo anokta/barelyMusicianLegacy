@@ -51,7 +51,7 @@ namespace BarelyAPI
                 performer.Reset();
             }
 
-            meso.Reset();
+            meso.Restart();
         }
 
         public float GetOutput()

@@ -52,7 +52,7 @@ namespace BarelyAPI
 
             instrument.StopAllNotes();
 
-            lineGenerator.Reset();
+            lineGenerator.Restart();
         }
 
         public void GenerateBar(SectionType section, int index, int harmonic)

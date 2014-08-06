@@ -18,7 +18,7 @@ namespace BarelyAPI
         {
             state = sequencerState;
 
-            Reset();
+            Restart();
         }
 
         public int GetHarmonic(SectionType section, int index)
@@ -34,7 +34,7 @@ namespace BarelyAPI
             return progression[index] - 1;
         }
 
-        public void Reset()
+        public virtual void Restart()
         {
             progressions = new Dictionary<SectionType, int[]>();
         }

@@ -1,0 +1,708 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="LeftToRight" Layout="Sugiyama" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="(@1)" Category="CodeSchema_Assembly" ErrorMessage="Unreferenced node detected:(Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/mscorlib.dll) ((Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/mscorlib.dll))" IsUnreferenced="True" Visibility="Hidden" />
+    <Node Id="(@2)" Category="CodeSchema_Assembly" ErrorMessage="Unreferenced node detected:(Assembly=&quot;file:///C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll&quot;) ((Assembly=&quot;file:///C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll&quot;))" IsUnreferenced="True" Visibility="Hidden" />
+    <Node Id="(@3)" Category="CodeSchema_Assembly" ErrorMessage="Unreferenced node detected:(Assembly=&quot;file:///C:/Program Files (x86)/Reference Assemblies/Microsoft/Framework/v3.5/System.Core.dll&quot;) ((Assembly=&quot;file:///C:/Program Files (x86)/Reference Assemblies/Microsoft/Framework/v3.5/System.Core.dll&quot;))" IsUnreferenced="True" Visibility="Hidden" />
+    <Node Id="(@4)" Category="CodeSchema_Assembly" ErrorMessage="Unreferenced node detected:(Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/System.dll) ((Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/System.dll))" IsUnreferenced="True" Visibility="Hidden" />
+    <Node Id="(@5 @6 @10 Member=get_ArticulationMultiplier)" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:get_ArticulationMultiplier ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Conductor Member=get_ArticulationMultiplier))" IsUnreferenced="True" Label="get_ArticulationMultiplier" />
+    <Node Id="(@5 @6 @10 Member=get_ArticulationVariance)" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:get_ArticulationVariance ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Conductor Member=get_ArticulationVariance))" IsUnreferenced="True" Label="get_ArticulationVariance" />
+    <Node Id="(@5 @6 @10 Member=get_HarmonicCurve)" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:get_HarmonicCurve ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Conductor Member=get_HarmonicCurve))" IsUnreferenced="True" Label="get_HarmonicCurve" />
+    <Node Id="(@5 @6 @10 Member=get_Key)" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:get_Key ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Conductor Member=get_Key))" IsUnreferenced="True" Label="get_Key" />
+    <Node Id="(@5 @6 @10 Member=get_LoudnessMultiplier)" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:get_LoudnessMultiplier ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Conductor Member=get_LoudnessMultiplier))" IsUnreferenced="True" Label="get_LoudnessMultiplier" />
+    <Node Id="(@5 @6 @10 Member=get_LoudnessVariance)" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:get_LoudnessVariance ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Conductor Member=get_LoudnessVariance))" IsUnreferenced="True" Label="get_LoudnessVariance" />
+    <Node Id="(@5 @6 @10 Member=get_PitchHeight)" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:get_PitchHeight ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Conductor Member=get_PitchHeight))" IsUnreferenced="True" Label="get_PitchHeight" />
+    <Node Id="(@5 @6 @10 Member=get_TimbreProperties)" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:get_TimbreProperties ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Conductor Member=get_TimbreProperties))" IsUnreferenced="True" Label="get_TimbreProperties" />
+    <Node Id="(@5 @6 @12 Member=(Name=AddPerformer OverloadingParameters=[(@1 @48 Type=String),@27]))" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" ErrorMessage="Unreferenced node detected:AddPerformer ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Ensemble Member=(Name=AddPerformer OverloadingParameters=[(Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/mscorlib.dll Namespace=System Type=String),(Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Performer)])))" IsUnreferenced="True" Label="AddPerformer" />
+    <Node Id="(@5 @6 @12 Member=(Name=RemovePerfomer OverloadingParameters=[(@1 @48 Type=String)]))" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" ErrorMessage="Unreferenced node detected:RemovePerfomer ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Ensemble Member=(Name=RemovePerfomer OverloadingParameters=[(Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/mscorlib.dll Namespace=System Type=String)])))" IsUnreferenced="True" Label="RemovePerfomer" />
+    <Node Id="(@5 @6 @14 Member=(Name=AddEffect OverloadingParameters=[(@5 @6 Type=AudioEffect)]))" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" ErrorMessage="Unreferenced node detected:AddEffect ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Instrument Member=(Name=AddEffect OverloadingParameters=[(Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=AudioEffect)])))" IsUnreferenced="True" Label="AddEffect" />
+    <Node Id="(@5 @6 @14 Member=(Name=set_Decay @66))" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:set_Decay ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Instrument Member=(Name=set_Decay OverloadingParameters=[(Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/mscorlib.dll Namespace=System Type=Single)])))" IsUnreferenced="True" Label="set_Decay" />
+    <Node Id="(@5 @6 @14 Member=(Name=set_Release @66))" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:set_Release ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Instrument Member=(Name=set_Release OverloadingParameters=[(Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/mscorlib.dll Namespace=System Type=Single)])))" IsUnreferenced="True" Label="set_Release" />
+    <Node Id="(@5 @6 @14 Member=(Name=set_Sustain @66))" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:set_Sustain ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Instrument Member=(Name=set_Sustain OverloadingParameters=[(Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/mscorlib.dll Namespace=System Type=Single)])))" IsUnreferenced="True" Label="set_Sustain" />
+    <Node Id="(@5 @6 @14 Member=.cctor)" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:static Instrument ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Instrument Member=.cctor))" IsUnreferenced="True" Label="static Instrument" />
+    <Node Id="(@5 @6 @14 Member=get_Decay)" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:get_Decay ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Instrument Member=get_Decay))" IsUnreferenced="True" Label="get_Decay" />
+    <Node Id="(@5 @6 @14 Member=get_Release)" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:get_Release ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Instrument Member=get_Release))" IsUnreferenced="True" Label="get_Release" />
+    <Node Id="(@5 @6 @14 Member=get_Sustain)" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:get_Sustain ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Instrument Member=get_Sustain))" IsUnreferenced="True" Label="get_Sustain" />
+    <Node Id="(@5 @6 @14 Member=get_Volume)" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:get_Volume ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Instrument Member=get_Volume))" IsUnreferenced="True" Label="get_Volume" />
+    <Node Id="(@5 @6 @16 Member=(@47 OverloadingParameters=[(@1 @48 Type=Boolean)]))" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:MacroGenerator ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=MacroGenerator Member=(Name=.ctor OverloadingParameters=[(Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/mscorlib.dll Namespace=System Type=Boolean)])))" IsUnreferenced="True" Label="MacroGenerator" />
+    <Node Id="(@5 @6 @16 Member=(Name=GenerateSequence @51))" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" ErrorMessage="Unreferenced node detected:GenerateSequence ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=MacroGenerator Member=(Name=GenerateSequence OverloadingParameters=[(Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/mscorlib.dll Namespace=System Type=Int32)])))" IsUnreferenced="True" Label="GenerateSequence" />
+    <Node Id="(@5 @6 @16 Member=get_SequenceLength)" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:get_SequenceLength ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=MacroGenerator Member=get_SequenceLength))" IsUnreferenced="True" Label="get_SequenceLength" />
+    <Node Id="(@5 @6 @20 Member=(@47 @60))" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsProtected="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:MicroGenerator ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=MicroGenerator Member=(Name=.ctor OverloadingParameters=[(Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=SequencerState)])))" IsUnreferenced="True" Label="MicroGenerator" />
+    <Node Id="(@5 @6 @20 Member=get_LineLength)" Category="CodeSchema_Method" CodeSchemaProperty_IsProtected="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:get_LineLength ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=MicroGenerator Member=get_LineLength))" IsUnreferenced="True" Label="get_LineLength" />
+    <Node Id="(@5 @6 @22 Member=(Name=setScale OverloadingParameters=[(@5 @6 Type=MusicalScale),(@5 @6 Type=MusicalMode)]))" Category="CodeSchema_Method" CodeSchemaProperty_IsProtected="True" ErrorMessage="Unreferenced node detected:setScale ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=ModeGenerator Member=(Name=setScale OverloadingParameters=[(Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=MusicalScale),(Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=MusicalMode)])))" IsUnreferenced="True" Label="setScale" />
+    <Node Id="(@5 @6 @22 Member=.cctor)" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:static ModeGenerator ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=ModeGenerator Member=.cctor))" IsUnreferenced="True" Label="static ModeGenerator" />
+    <Node Id="(@5 @6 @22 Member=get_ScaleLength)" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:get_ScaleLength ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=ModeGenerator Member=get_ScaleLength))" IsUnreferenced="True" Label="get_ScaleLength" />
+    <Node Id="(@5 @6 @24 Member=.ctor)" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:Musician ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Musician Member=.ctor))" IsUnreferenced="True" Label="Musician" />
+    <Node Id="(@5 @6 @24 Member=FixedUpdate)" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" ErrorMessage="Unreferenced node detected:FixedUpdate ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Musician Member=FixedUpdate))" IsUnreferenced="True" Label="FixedUpdate" />
+    <Node Id="(@5 @6 @24 Member=IsPlaying)" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" ErrorMessage="Unreferenced node detected:IsPlaying ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Musician Member=IsPlaying))" IsUnreferenced="True" Label="IsPlaying" />
+    <Node Id="(@5 @6 @24 Member=Pause)" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" ErrorMessage="Unreferenced node detected:Pause ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Musician Member=Pause))" IsUnreferenced="True" Label="Pause" />
+    <Node Id="(@5 @6 @24 Member=Play)" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" ErrorMessage="Unreferenced node detected:Play ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Musician Member=Play))" IsUnreferenced="True" Label="Play" />
+    <Node Id="(@5 @6 @24 Member=get_Energy)" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:get_Energy ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Musician Member=get_Energy))" IsUnreferenced="True" Label="get_Energy" />
+    <Node Id="(@5 @6 @24 Member=get_RootNote)" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:get_RootNote ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Musician Member=get_RootNote))" IsUnreferenced="True" Label="get_RootNote" />
+    <Node Id="(@5 @6 @24 Member=get_Stress)" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:get_Stress ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Musician Member=get_Stress))" IsUnreferenced="True" Label="get_Stress" />
+    <Node Id="(@5 @6 @26 Member=get_Mute)" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:get_Mute ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Performer Member=get_Mute))" IsUnreferenced="True" Label="get_Mute" />
+    <Node Id="(@5 @6 @28 Member=(Name=MinuteToSections @66))" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" ErrorMessage="Unreferenced node detected:MinuteToSections ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Sequencer Member=(Name=MinuteToSections OverloadingParameters=[(Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/mscorlib.dll Namespace=System Type=Single)])))" IsUnreferenced="True" Label="MinuteToSections" />
+    <Node Id="(@5 @6 @28 Member=get_Tempo)" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:get_Tempo ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Sequencer Member=get_Tempo))" IsUnreferenced="True" Label="get_Tempo" />
+    <Node Id="(@5 @6 @8 Member=(@47 OverloadingParameters=[(@1 @48 Type=Object),(@1 @48 Type=IntPtr)]))" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:SequencerEvent ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=(Name=SequencerEvent ParentType=Sequencer) Member=(Name=.ctor OverloadingParameters=[(Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/mscorlib.dll Namespace=System Type=Object),(Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/mscorlib.dll Namespace=System Type=IntPtr)])))" IsUnreferenced="True" Label="SequencerEvent" />
+    <Node Id="(@5 @6 @8 Member=(Name=BeginInvoke OverloadingParameters=[(@5 @6 Type=SequencerState),(@1 @48 Type=AsyncCallback),(@1 @48 Type=Object)]))" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" ErrorMessage="Unreferenced node detected:BeginInvoke ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=(Name=SequencerEvent ParentType=Sequencer) Member=(Name=BeginInvoke OverloadingParameters=[(Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=SequencerState),(Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/mscorlib.dll Namespace=System Type=AsyncCallback),(Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/mscorlib.dll Namespace=System Type=Object)])))" IsUnreferenced="True" Label="BeginInvoke" />
+    <Node Id="(@5 @6 @8 Member=(Name=EndInvoke OverloadingParameters=[(@1 @48 Type=IAsyncResult)]))" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" ErrorMessage="Unreferenced node detected:EndInvoke ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=(Name=SequencerEvent ParentType=Sequencer) Member=(Name=EndInvoke OverloadingParameters=[(Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/mscorlib.dll Namespace=System Type=IAsyncResult)])))" IsUnreferenced="True" Label="EndInvoke" />
+    <Node Id="(@5)" Category="CodeSchema_Assembly" ErrorMessage="Unreferenced node detected:(Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll) ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll))" IsUnreferenced="True" Visibility="Hidden" />
+    <Node Id="@100" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="GenerateBar" />
+    <Node Id="@101" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="GetLine" />
+    <Node Id="@102" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" Label="addNote" />
+    <Node Id="@103" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="SetMood" />
+    <Node Id="@104" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" ErrorMessage="Unreferenced node detected:Play ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Performer Member=(Name=Play OverloadingParameters=[(Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/mscorlib.dll Namespace=System Type=Int32),(Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/mscorlib.dll Namespace=System Type=Int32),(Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=TimbreProperties)])))" IsUnreferenced="True" Label="Play" />
+    <Node Id="@105" Category="CodeSchema_Method" CodeSchemaProperty_IsProtected="True" Label="generateLine" />
+    <Node Id="@106" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Sequencer" />
+    <Node Id="@107" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" ErrorMessage="Unreferenced node detected:Awake ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Musician Member=Awake))" IsUnreferenced="True" Label="Awake" />
+    <Node Id="@108" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_Attack" />
+    <Node Id="@109" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_Effects" />
+    <Node Id="@11" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Conductor">
+      <Category Ref="Category3" />
+      <Category Ref="Category4" />
+    </Node>
+    <Node Id="@110" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_Output" />
+    <Node Id="@111" Category="CodeSchema_Method" CodeSchemaProperty_IsProtected="True" CodeSchemaProperty_IsSpecialName="True" Label="get_ProgressionLength" />
+    <Node Id="@112" Category="CodeSchema_Method" CodeSchemaProperty_IsProtected="True" CodeSchemaProperty_IsSpecialName="True" Label="get_ProgressionLength" />
+    <Node Id="@113" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:get_Sequencer ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Musician Member=get_Sequencer))" IsUnreferenced="True" Label="get_Sequencer" />
+    <Node Id="@114" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_State" />
+    <Node Id="@115" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="get_TempoMultiplier" />
+    <Node Id="@116" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="GetOutput" />
+    <Node Id="@117" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="ProcessNext" />
+    <Node Id="@118" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="Reset" />
+    <Node Id="@119" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="Reset" />
+    <Node Id="@120" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="Restart" />
+    <Node Id="@121" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="Restart" />
+    <Node Id="@122" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="Stop" />
+    <Node Id="@123" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" ErrorMessage="Unreferenced node detected:Stop ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Musician Member=Stop))" IsUnreferenced="True" Label="Stop" />
+    <Node Id="@124" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="StopAllNotes" />
+    <Node Id="@125" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" Label="triggerNextBar" />
+    <Node Id="@126" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" Label="triggerNextBeat" />
+    <Node Id="@127" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" Label="triggerNextPulse" />
+    <Node Id="@128" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" Label="triggerNextSection" />
+    <Node Id="@13" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Ensemble">
+      <Category Ref="Category3" />
+      <Category Ref="Category8" />
+      <Category Ref="Category9" />
+    </Node>
+    <Node Id="@15" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Instrument">
+      <Category Ref="Category3" />
+      <Category Ref="Category8" />
+      <Category Ref="Category9" />
+    </Node>
+    <Node Id="@17" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="MacroGenerator">
+      <Category Ref="Category6" />
+    </Node>
+    <Node Id="@19" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="MesoGenerator">
+      <Category Ref="Category6" />
+    </Node>
+    <Node Id="@21" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="MicroGenerator">
+      <Category Ref="Category6" />
+    </Node>
+    <Node Id="@23" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="ModeGenerator">
+      <Category Ref="Category6" />
+    </Node>
+    <Node Id="@25" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" ErrorMessage="Unreferenced node detected:Musician ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Musician))" Group="Collapsed" IsUnreferenced="True" Label="Musician" />
+    <Node Id="@27" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Performer">
+      <Category Ref="Category3" />
+      <Category Ref="Category8" />
+      <Category Ref="Category9" />
+    </Node>
+    <Node Id="@29" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" Group="Collapsed" IsHub="True" Label="Sequencer" />
+    <Node Id="@31" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" CodeSchemaProperty_IsSpecialName="True" Label="add_OnNextBar" />
+    <Node Id="@32" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" CodeSchemaProperty_IsSpecialName="True" Label="add_OnNextBeat" />
+    <Node Id="@33" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" CodeSchemaProperty_IsSpecialName="True" Label="add_OnNextPulse" />
+    <Node Id="@34" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" CodeSchemaProperty_IsSpecialName="True" Label="add_OnNextSection" />
+    <Node Id="@35" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" ErrorMessage="Unreferenced node detected:AddBarListener ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Sequencer Member=(Name=AddBarListener OverloadingParameters=[(Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=(Name=SequencerEvent ParentType=Sequencer))])))" IsUnreferenced="True" Label="AddBarListener" />
+    <Node Id="@36" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" ErrorMessage="Unreferenced node detected:AddBeatListener ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Sequencer Member=(Name=AddBeatListener OverloadingParameters=[(Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=(Name=SequencerEvent ParentType=Sequencer))])))" IsUnreferenced="True" Label="AddBeatListener" />
+    <Node Id="@37" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" ErrorMessage="Unreferenced node detected:AddPulseListener ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Sequencer Member=(Name=AddPulseListener OverloadingParameters=[(Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=(Name=SequencerEvent ParentType=Sequencer))])))" IsUnreferenced="True" Label="AddPulseListener" />
+    <Node Id="@38" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" ErrorMessage="Unreferenced node detected:AddSectionListener ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Sequencer Member=(Name=AddSectionListener OverloadingParameters=[(Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=(Name=SequencerEvent ParentType=Sequencer))])))" IsUnreferenced="True" Label="AddSectionListener" />
+    <Node Id="@39" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" CodeSchemaProperty_IsSpecialName="True" Label="remove_OnNextBar" />
+    <Node Id="@40" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" CodeSchemaProperty_IsSpecialName="True" Label="remove_OnNextBeat" />
+    <Node Id="@41" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" CodeSchemaProperty_IsSpecialName="True" Label="remove_OnNextPulse" />
+    <Node Id="@42" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" CodeSchemaProperty_IsSpecialName="True" Label="remove_OnNextSection" />
+    <Node Id="@43" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" ErrorMessage="Unreferenced node detected:RemoveBarListener ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Sequencer Member=(Name=RemoveBarListener OverloadingParameters=[(Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=(Name=SequencerEvent ParentType=Sequencer))])))" IsUnreferenced="True" Label="RemoveBarListener" />
+    <Node Id="@44" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" ErrorMessage="Unreferenced node detected:RemoveBeatListener ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Sequencer Member=(Name=RemoveBeatListener OverloadingParameters=[(Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=(Name=SequencerEvent ParentType=Sequencer))])))" IsUnreferenced="True" Label="RemoveBeatListener" />
+    <Node Id="@45" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" ErrorMessage="Unreferenced node detected:RemovePulseListener ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Sequencer Member=(Name=RemovePulseListener OverloadingParameters=[(Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=(Name=SequencerEvent ParentType=Sequencer))])))" IsUnreferenced="True" Label="RemovePulseListener" />
+    <Node Id="@46" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" ErrorMessage="Unreferenced node detected:RemoveSectionListener ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Sequencer Member=(Name=RemoveSectionListener OverloadingParameters=[(Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=(Name=SequencerEvent ParentType=Sequencer))])))" IsUnreferenced="True" Label="RemoveSectionListener" />
+    <Node Id="@49" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="set_Mute" />
+    <Node Id="@52" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="GetSection" />
+    <Node Id="@53" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="set_Tempo" />
+    <Node Id="@54" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="Update" />
+    <Node Id="@55" Category="CodeSchema_Method" CodeSchemaProperty_IsProtected="True" Label="noteOff" />
+    <Node Id="@56" Category="CodeSchema_Method" CodeSchemaProperty_IsProtected="True" Label="noteOn" />
+    <Node Id="@57" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="PlayNote" />
+    <Node Id="@58" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:set_RootNote ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Musician Member=(Name=set_RootNote OverloadingParameters=[(Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=NoteIndex)])))" IsUnreferenced="True" Label="set_RootNote" />
+    <Node Id="@59" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="TransformNote" />
+    <Node Id="@61" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsProtected="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:MesoGenerator ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=MesoGenerator Member=(Name=.ctor OverloadingParameters=[(Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=SequencerState)])))" IsUnreferenced="True" Label="MesoGenerator" />
+    <Node Id="@62" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="Invoke" />
+    <Node Id="@63" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" ErrorMessage="Unreferenced node detected:OnNextBar ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Ensemble Member=(Name=OnNextBar OverloadingParameters=[(Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=SequencerState)])))" IsUnreferenced="True" Label="OnNextBar" />
+    <Node Id="@64" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" ErrorMessage="Unreferenced node detected:OnNextBeat ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Ensemble Member=(Name=OnNextBeat OverloadingParameters=[(Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=SequencerState)])))" IsUnreferenced="True" Label="OnNextBeat" />
+    <Node Id="@67" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:Instrument ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Instrument Member=(Name=.ctor OverloadingParameters=[(Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/mscorlib.dll Namespace=System Type=Single)])))" IsUnreferenced="True" Label="Instrument" />
+    <Node Id="@68" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsProtected="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:ModeGenerator ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=ModeGenerator Member=(Name=.ctor OverloadingParameters=[(Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/mscorlib.dll Namespace=System Type=Single)])))" IsUnreferenced="True" Label="ModeGenerator" />
+    <Node Id="@69" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="GenerateScale" />
+    <Node Id="@7" ErrorMessage="Unreferenced node detected:BarelyAPI ((Namespace=BarelyAPI))" Group="Expanded" IsHub="True" IsUnreferenced="True" Label="BarelyAPI" />
+    <Node Id="@70" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" Label="getNote" />
+    <Node Id="@71" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="GetNoteOffset" />
+    <Node Id="@72" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="set_ArticulationMultiplier" />
+    <Node Id="@73" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="set_ArticulationVariance" />
+    <Node Id="@74" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="set_Attack" />
+    <Node Id="@75" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:set_Energy ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Musician Member=(Name=set_Energy OverloadingParameters=[(Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/mscorlib.dll Namespace=System Type=Single)])))" IsUnreferenced="True" Label="set_Energy" />
+    <Node Id="@76" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="set_HarmonicCurve" />
+    <Node Id="@77" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="set_Key" />
+    <Node Id="@78" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="set_LoudnessMultiplier" />
+    <Node Id="@79" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="set_LoudnessVariance" />
+    <Node Id="@80" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="set_Mode" />
+    <Node Id="@81" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="set_PitchHeight" />
+    <Node Id="@82" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:set_Stress ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Musician Member=(Name=set_Stress OverloadingParameters=[(Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/mscorlib.dll Namespace=System Type=Single)])))" IsUnreferenced="True" Label="set_Stress" />
+    <Node Id="@83" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="set_TempoMultiplier" />
+    <Node Id="@84" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="set_Volume" />
+    <Node Id="@85" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" ErrorMessage="Unreferenced node detected:MutePerformer ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Ensemble Member=(Name=MutePerformer OverloadingParameters=[(Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/mscorlib.dll Namespace=System Type=String)])))" IsUnreferenced="True" Label="MutePerformer" />
+    <Node Id="@86" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" ErrorMessage="Unreferenced node detected:UnmutePerformer ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Ensemble Member=(Name=UnmutePerformer OverloadingParameters=[(Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/mscorlib.dll Namespace=System Type=String)])))" IsUnreferenced="True" Label="UnmutePerformer" />
+    <Node Id="@87" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" Label="applyTransformation" />
+    <Node Id="@88" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="AddBeat" />
+    <Node Id="@89" Category="CodeSchema_Method" CodeSchemaProperty_IsPrivate="True" ErrorMessage="Unreferenced node detected:OnAudioFilterRead ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Musician Member=(Name=OnAudioFilterRead OverloadingParameters=[(Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/mscorlib.dll Namespace=System Type=(Name=Single ArrayRank=1 ParentType=Single)),(Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/mscorlib.dll Namespace=System Type=Int32)])))" IsUnreferenced="True" Label="OnAudioFilterRead" />
+    <Node Id="@9" Category="CodeSchema_Delegate" CodeSchemaProperty_IsPublic="True" Group="Collapsed" Label="Sequencer.SequencerEvent" />
+    <Node Id="@91" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="GetHarmonic" />
+    <Node Id="@92" Category="CodeSchema_Method" CodeSchemaProperty_IsProtected="True" Label="generateProgression" />
+    <Node Id="@93" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" ErrorMessage="Unreferenced node detected:Performer ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Performer Member=(Name=.ctor OverloadingParameters=[(Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Instrument),(Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=MicroGenerator)])))" IsUnreferenced="True" Label="Performer" />
+    <Node Id="@94" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Conductor" />
+    <Node Id="@95" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" ErrorMessage="Unreferenced node detected:SetMood ((Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Musician Member=(Name=SetMood OverloadingParameters=[(Assembly=file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll Namespace=BarelyAPI Type=Mood),(Assembly=file:///C:/Windows/Microsoft.NET/Framework/v2.0.50727/mscorlib.dll Namespace=System Type=Single)])))" IsUnreferenced="True" Label="SetMood" />
+    <Node Id="@96" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="SetEnergy" />
+    <Node Id="@97" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="SetParameters" />
+    <Node Id="@98" Category="CodeSchema_Method" CodeSchemaProperty_IsPublic="True" Label="SetStress" />
+    <Node Id="@99" Category="CodeSchema_Method" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="Ensemble" />
+  </Nodes>
+  <Links>
+    <Link Source="(@5)" Target="@7" Category="Contains" />
+    <Link Source="@100" Target="@101" Category="CodeSchema_Calls" />
+    <Link Source="@101" Target="@105" Category="CodeSchema_Calls" />
+    <Link Source="@101" Target="@112" Category="CodeSchema_Calls" />
+    <Link Source="@103" Target="@96" Category="CodeSchema_Calls" />
+    <Link Source="@103" Target="@98" Category="CodeSchema_Calls" />
+    <Link Source="@104" Target="@57" Category="CodeSchema_Calls" />
+    <Link Source="@104" Target="@87" Category="CodeSchema_Calls" />
+    <Link Source="@106" Target="@119" Category="CodeSchema_Calls" />
+    <Link Source="@107" Target="@106" Category="CodeSchema_Calls" />
+    <Link Source="@107" Target="@114" Category="CodeSchema_Calls" />
+    <Link Source="@107" Target="@94" Category="CodeSchema_Calls" />
+    <Link Source="@107" Target="@99" Category="CodeSchema_Calls" />
+    <Link Source="@11" Target="(@5 @6 @10 Member=get_ArticulationMultiplier)" Category="Contains" />
+    <Link Source="@11" Target="(@5 @6 @10 Member=get_ArticulationVariance)" Category="Contains" />
+    <Link Source="@11" Target="(@5 @6 @10 Member=get_HarmonicCurve)" Category="Contains" />
+    <Link Source="@11" Target="(@5 @6 @10 Member=get_Key)" Category="Contains" />
+    <Link Source="@11" Target="(@5 @6 @10 Member=get_LoudnessMultiplier)" Category="Contains" />
+    <Link Source="@11" Target="(@5 @6 @10 Member=get_LoudnessVariance)" Category="Contains" />
+    <Link Source="@11" Target="(@5 @6 @10 Member=get_PitchHeight)" Category="Contains" />
+    <Link Source="@11" Target="(@5 @6 @10 Member=get_TimbreProperties)" Category="Contains" />
+    <Link Source="@11" Target="@115" Category="Contains" />
+    <Link Source="@11" Target="@23" Category="References">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@11" Target="@59" Category="Contains" />
+    <Link Source="@11" Target="@70" Category="Contains" />
+    <Link Source="@11" Target="@72" Category="Contains" />
+    <Link Source="@11" Target="@73" Category="Contains" />
+    <Link Source="@11" Target="@76" Category="Contains" />
+    <Link Source="@11" Target="@77" Category="Contains" />
+    <Link Source="@11" Target="@78" Category="Contains" />
+    <Link Source="@11" Target="@79" Category="Contains" />
+    <Link Source="@11" Target="@80" Category="Contains" />
+    <Link Source="@11" Target="@81" Category="Contains" />
+    <Link Source="@11" Target="@83" Category="Contains" />
+    <Link Source="@11" Target="@94" Category="Contains" />
+    <Link Source="@11" Target="@97" Category="Contains" />
+    <Link Source="@110" Target="@117" Category="CodeSchema_Calls" />
+    <Link Source="@113" Target="@29" Category="References">
+      <Category Ref="CodeSchema_ReturnTypeLink" />
+    </Link>
+    <Link Source="@116" Target="@110" Category="CodeSchema_Calls" />
+    <Link Source="@116" Target="@27" Category="References" />
+    <Link Source="@118" Target="@121" Category="CodeSchema_Calls" />
+    <Link Source="@118" Target="@124" Category="CodeSchema_Calls" />
+    <Link Source="@122" Target="@118" Category="CodeSchema_Calls" />
+    <Link Source="@122" Target="@120" Category="CodeSchema_Calls" />
+    <Link Source="@122" Target="@27" Category="References" />
+    <Link Source="@123" Target="@119" Category="CodeSchema_Calls" />
+    <Link Source="@123" Target="@122" Category="CodeSchema_Calls" />
+    <Link Source="@125" Target="@62" Category="CodeSchema_Calls" />
+    <Link Source="@126" Target="@62" Category="CodeSchema_Calls" />
+    <Link Source="@127" Target="@62" Category="CodeSchema_Calls" />
+    <Link Source="@128" Target="@62" Category="CodeSchema_Calls" />
+    <Link Source="@13" Target="(@5 @6 @12 Member=(Name=AddPerformer OverloadingParameters=[(@1 @48 Type=String),@27]))" Category="Contains" />
+    <Link Source="@13" Target="(@5 @6 @12 Member=(Name=RemovePerfomer OverloadingParameters=[(@1 @48 Type=String)]))" Category="Contains" />
+    <Link Source="@13" Target="@116" Category="Contains" />
+    <Link Source="@13" Target="@122" Category="Contains" />
+    <Link Source="@13" Target="@17" Category="References">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@13" Target="@19" Category="References">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@13" Target="@63" Category="Contains" />
+    <Link Source="@13" Target="@64" Category="Contains" />
+    <Link Source="@13" Target="@85" Category="Contains" />
+    <Link Source="@13" Target="@86" Category="Contains" />
+    <Link Source="@13" Target="@99" Category="Contains" />
+    <Link Source="@15" Target="(@5 @6 @14 Member=(Name=AddEffect OverloadingParameters=[(@5 @6 Type=AudioEffect)]))" Category="Contains" />
+    <Link Source="@15" Target="(@5 @6 @14 Member=(Name=set_Decay @66))" Category="Contains" />
+    <Link Source="@15" Target="(@5 @6 @14 Member=(Name=set_Release @66))" Category="Contains" />
+    <Link Source="@15" Target="(@5 @6 @14 Member=(Name=set_Sustain @66))" Category="Contains" />
+    <Link Source="@15" Target="(@5 @6 @14 Member=.cctor)" Category="Contains" />
+    <Link Source="@15" Target="(@5 @6 @14 Member=get_Decay)" Category="Contains" />
+    <Link Source="@15" Target="(@5 @6 @14 Member=get_Release)" Category="Contains" />
+    <Link Source="@15" Target="(@5 @6 @14 Member=get_Sustain)" Category="Contains" />
+    <Link Source="@15" Target="(@5 @6 @14 Member=get_Volume)" Category="Contains" />
+    <Link Source="@15" Target="@108" Category="Contains" />
+    <Link Source="@15" Target="@109" Category="Contains" />
+    <Link Source="@15" Target="@117" Category="Contains" />
+    <Link Source="@15" Target="@124" Category="Contains" />
+    <Link Source="@15" Target="@55" Category="Contains" />
+    <Link Source="@15" Target="@56" Category="Contains" />
+    <Link Source="@15" Target="@57" Category="Contains" />
+    <Link Source="@15" Target="@67" Category="Contains" />
+    <Link Source="@15" Target="@74" Category="Contains" />
+    <Link Source="@15" Target="@84" Category="Contains" />
+    <Link Source="@17" Target="(@5 @6 @16 Member=(@47 OverloadingParameters=[(@1 @48 Type=Boolean)]))" Category="Contains" />
+    <Link Source="@17" Target="(@5 @6 @16 Member=(Name=GenerateSequence @51))" Category="Contains" />
+    <Link Source="@17" Target="(@5 @6 @16 Member=get_SequenceLength)" Category="Contains" />
+    <Link Source="@17" Target="@52" Category="Contains" />
+    <Link Source="@19" Target="@111" Category="Contains" />
+    <Link Source="@19" Target="@120" Category="Contains" />
+    <Link Source="@19" Target="@61" Category="Contains" />
+    <Link Source="@19" Target="@91" Category="Contains" />
+    <Link Source="@19" Target="@92" Category="Contains" />
+    <Link Source="@21" Target="(@5 @6 @20 Member=(@47 @60))" Category="Contains" />
+    <Link Source="@21" Target="(@5 @6 @20 Member=get_LineLength)" Category="Contains" />
+    <Link Source="@21" Target="@101" Category="Contains" />
+    <Link Source="@21" Target="@105" Category="Contains" />
+    <Link Source="@21" Target="@112" Category="Contains" />
+    <Link Source="@21" Target="@121" Category="Contains" />
+    <Link Source="@23" Target="(@5 @6 @22 Member=(Name=setScale OverloadingParameters=[(@5 @6 Type=MusicalScale),(@5 @6 Type=MusicalMode)]))" Category="Contains" />
+    <Link Source="@23" Target="(@5 @6 @22 Member=.cctor)" Category="Contains" />
+    <Link Source="@23" Target="(@5 @6 @22 Member=get_ScaleLength)" Category="Contains" />
+    <Link Source="@23" Target="@68" Category="Contains" />
+    <Link Source="@23" Target="@69" Category="Contains" />
+    <Link Source="@23" Target="@71" Category="Contains" />
+    <Link Source="@25" Target="(@5 @6 @24 Member=.ctor)" Category="Contains" />
+    <Link Source="@25" Target="(@5 @6 @24 Member=FixedUpdate)" Category="Contains" />
+    <Link Source="@25" Target="(@5 @6 @24 Member=IsPlaying)" Category="Contains" />
+    <Link Source="@25" Target="(@5 @6 @24 Member=Pause)" Category="Contains" />
+    <Link Source="@25" Target="(@5 @6 @24 Member=Play)" Category="Contains" />
+    <Link Source="@25" Target="(@5 @6 @24 Member=get_Energy)" Category="Contains" />
+    <Link Source="@25" Target="(@5 @6 @24 Member=get_RootNote)" Category="Contains" />
+    <Link Source="@25" Target="(@5 @6 @24 Member=get_Stress)" Category="Contains" />
+    <Link Source="@25" Target="@103" Category="Contains" />
+    <Link Source="@25" Target="@107" Category="Contains" />
+    <Link Source="@25" Target="@11" Category="References">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@25" Target="@113" Category="Contains" />
+    <Link Source="@25" Target="@123" Category="Contains" />
+    <Link Source="@25" Target="@13" Category="References">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@25" Target="@29" Category="References">
+      <Category Ref="CodeSchema_Calls" />
+      <Category Ref="CodeSchema_ReturnTypeLink" />
+    </Link>
+    <Link Source="@25" Target="@58" Category="Contains" />
+    <Link Source="@25" Target="@75" Category="Contains" />
+    <Link Source="@25" Target="@82" Category="Contains" />
+    <Link Source="@25" Target="@89" Category="Contains" />
+    <Link Source="@25" Target="@95" Category="Contains" />
+    <Link Source="@25" Target="@96" Category="Contains" />
+    <Link Source="@25" Target="@98" Category="Contains" />
+    <Link Source="@27" Target="(@5 @6 @26 Member=get_Mute)" Category="Contains" />
+    <Link Source="@27" Target="@100" Category="Contains" />
+    <Link Source="@27" Target="@102" Category="Contains" />
+    <Link Source="@27" Target="@104" Category="Contains" />
+    <Link Source="@27" Target="@110" Category="Contains" />
+    <Link Source="@27" Target="@118" Category="Contains" />
+    <Link Source="@27" Target="@15" Category="References">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@27" Target="@21" Category="References">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@27" Target="@49" Category="Contains" />
+    <Link Source="@27" Target="@87" Category="Contains" />
+    <Link Source="@27" Target="@88" Category="Contains" />
+    <Link Source="@27" Target="@93" Category="Contains" />
+    <Link Source="@29" Target="(@5 @6 @28 Member=(Name=MinuteToSections @66))" Category="Contains" />
+    <Link Source="@29" Target="(@5 @6 @28 Member=get_Tempo)" Category="Contains" />
+    <Link Source="@29" Target="@106" Category="Contains" />
+    <Link Source="@29" Target="@114" Category="Contains" />
+    <Link Source="@29" Target="@119" Category="Contains" />
+    <Link Source="@29" Target="@125" Category="Contains" />
+    <Link Source="@29" Target="@126" Category="Contains" />
+    <Link Source="@29" Target="@127" Category="Contains" />
+    <Link Source="@29" Target="@128" Category="Contains" />
+    <Link Source="@29" Target="@31" Category="Contains" />
+    <Link Source="@29" Target="@32" Category="Contains" />
+    <Link Source="@29" Target="@33" Category="Contains" />
+    <Link Source="@29" Target="@34" Category="Contains" />
+    <Link Source="@29" Target="@35" Category="Contains" />
+    <Link Source="@29" Target="@36" Category="Contains" />
+    <Link Source="@29" Target="@37" Category="Contains" />
+    <Link Source="@29" Target="@38" Category="Contains" />
+    <Link Source="@29" Target="@39" Category="Contains" />
+    <Link Source="@29" Target="@40" Category="Contains" />
+    <Link Source="@29" Target="@41" Category="Contains" />
+    <Link Source="@29" Target="@42" Category="Contains" />
+    <Link Source="@29" Target="@43" Category="Contains" />
+    <Link Source="@29" Target="@44" Category="Contains" />
+    <Link Source="@29" Target="@45" Category="Contains" />
+    <Link Source="@29" Target="@46" Category="Contains" />
+    <Link Source="@29" Target="@53" Category="Contains" />
+    <Link Source="@29" Target="@54" Category="Contains" />
+    <Link Source="@29" Target="@9" Category="References">
+      <Category Ref="Contains" />
+    </Link>
+    <Link Source="@31" Target="@9" Category="References" />
+    <Link Source="@32" Target="@9" Category="References" />
+    <Link Source="@33" Target="@9" Category="References" />
+    <Link Source="@34" Target="@9" Category="References" />
+    <Link Source="@35" Target="@31" Category="CodeSchema_Calls" />
+    <Link Source="@36" Target="@32" Category="CodeSchema_Calls" />
+    <Link Source="@37" Target="@33" Category="CodeSchema_Calls" />
+    <Link Source="@38" Target="@34" Category="CodeSchema_Calls" />
+    <Link Source="@39" Target="@9" Category="References" />
+    <Link Source="@40" Target="@9" Category="References" />
+    <Link Source="@41" Target="@9" Category="References" />
+    <Link Source="@42" Target="@9" Category="References" />
+    <Link Source="@43" Target="@39" Category="CodeSchema_Calls" />
+    <Link Source="@44" Target="@40" Category="CodeSchema_Calls" />
+    <Link Source="@45" Target="@41" Category="CodeSchema_Calls" />
+    <Link Source="@46" Target="@42" Category="CodeSchema_Calls" />
+    <Link Source="@54" Target="@125" Category="CodeSchema_Calls" />
+    <Link Source="@54" Target="@126" Category="CodeSchema_Calls" />
+    <Link Source="@54" Target="@127" Category="CodeSchema_Calls" />
+    <Link Source="@54" Target="@128" Category="CodeSchema_Calls" />
+    <Link Source="@57" Target="@55" Category="CodeSchema_Calls" />
+    <Link Source="@57" Target="@56" Category="CodeSchema_Calls" />
+    <Link Source="@58" Target="@77" Category="CodeSchema_Calls" />
+    <Link Source="@59" Target="@70" Category="CodeSchema_Calls" />
+    <Link Source="@61" Target="@120" Category="CodeSchema_Calls" />
+    <Link Source="@63" Target="@100" Category="CodeSchema_Calls" />
+    <Link Source="@63" Target="@27" Category="References" />
+    <Link Source="@63" Target="@52" Category="CodeSchema_Calls" />
+    <Link Source="@63" Target="@91" Category="CodeSchema_Calls" />
+    <Link Source="@64" Target="@27" Category="References" />
+    <Link Source="@64" Target="@88" Category="CodeSchema_Calls" />
+    <Link Source="@67" Target="@84" Category="CodeSchema_Calls" />
+    <Link Source="@68" Target="@69" Category="CodeSchema_Calls" />
+    <Link Source="@7" Target="@11" Category="Contains" />
+    <Link Source="@7" Target="@13" Category="Contains" />
+    <Link Source="@7" Target="@15" Category="Contains" />
+    <Link Source="@7" Target="@17" Category="Contains" />
+    <Link Source="@7" Target="@19" Category="Contains" />
+    <Link Source="@7" Target="@21" Category="Contains" />
+    <Link Source="@7" Target="@23" Category="Contains" />
+    <Link Source="@7" Target="@25" Category="Contains" />
+    <Link Source="@7" Target="@27" Category="Contains" />
+    <Link Source="@7" Target="@29" Category="Contains" />
+    <Link Source="@7" Target="@9" Category="Contains" />
+    <Link Source="@70" Target="@71" Category="CodeSchema_Calls" />
+    <Link Source="@75" Target="@115" Category="CodeSchema_Calls" />
+    <Link Source="@75" Target="@53" Category="CodeSchema_Calls" />
+    <Link Source="@75" Target="@97" Category="CodeSchema_Calls" />
+    <Link Source="@80" Target="@69" Category="CodeSchema_Calls" />
+    <Link Source="@82" Target="@97" Category="CodeSchema_Calls" />
+    <Link Source="@85" Target="@27" Category="References" />
+    <Link Source="@85" Target="@49" Category="CodeSchema_Calls" />
+    <Link Source="@86" Target="@27" Category="References" />
+    <Link Source="@86" Target="@49" Category="CodeSchema_Calls" />
+    <Link Source="@87" Target="@109" Category="CodeSchema_Calls" />
+    <Link Source="@87" Target="@74" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@102" Category="CodeSchema_Calls" />
+    <Link Source="@88" Target="@59" Category="CodeSchema_Calls" />
+    <Link Source="@89" Target="@116" Category="CodeSchema_Calls" />
+    <Link Source="@89" Target="@54" Category="CodeSchema_Calls" />
+    <Link Source="@9" Target="(@5 @6 @8 Member=(@47 OverloadingParameters=[(@1 @48 Type=Object),(@1 @48 Type=IntPtr)]))" Category="Contains" />
+    <Link Source="@9" Target="(@5 @6 @8 Member=(Name=BeginInvoke OverloadingParameters=[(@5 @6 Type=SequencerState),(@1 @48 Type=AsyncCallback),(@1 @48 Type=Object)]))" Category="Contains" />
+    <Link Source="@9" Target="(@5 @6 @8 Member=(Name=EndInvoke OverloadingParameters=[(@1 @48 Type=IAsyncResult)]))" Category="Contains" />
+    <Link Source="@9" Target="@62" Category="Contains" />
+    <Link Source="@91" Target="@111" Category="CodeSchema_Calls" />
+    <Link Source="@91" Target="@92" Category="CodeSchema_Calls" />
+    <Link Source="@93" Target="@108" Category="CodeSchema_Calls" />
+    <Link Source="@93" Target="@118" Category="CodeSchema_Calls" />
+    <Link Source="@95" Target="@103" Category="CodeSchema_Calls" />
+    <Link Source="@97" Target="@72" Category="CodeSchema_Calls" />
+    <Link Source="@97" Target="@73" Category="CodeSchema_Calls" />
+    <Link Source="@97" Target="@76" Category="CodeSchema_Calls" />
+    <Link Source="@97" Target="@78" Category="CodeSchema_Calls" />
+    <Link Source="@97" Target="@79" Category="CodeSchema_Calls" />
+    <Link Source="@97" Target="@80" Category="CodeSchema_Calls" />
+    <Link Source="@97" Target="@81" Category="CodeSchema_Calls" />
+    <Link Source="@97" Target="@83" Category="CodeSchema_Calls" />
+  </Links>
+  <Categories>
+    <Category Id="Category3" Label="Category 3" Background="#FF7FC9FF" IsTag="True" />
+    <Category Id="Category4" Label="Category 4" Background="#FF7F92FF" IsTag="True" />
+    <Category Id="Category6" Label="Category 6" Background="#FF7F0037" IsTag="True" />
+    <Category Id="Category8" Label="Category 8" Background="#FF008080" IsTag="True" />
+    <Category Id="Category9" Label="Category 9" Background="#FF004A7F" IsTag="True" />
+    <Category Id="CodeSchema_Assembly" Label="Assembly" BasedOn="File" CanBeDataDriven="True" DefaultAction="Microsoft.Contains" Icon="CodeSchema_Assembly" IsProviderRoot="False" NavigationActionLabel="Assemblies" />
+    <Category Id="CodeSchema_Block" Label="Block" BasedOn="CodeSchema_Statement" CanBeDataDriven="True" DefaultAction="Microsoft.Contains" IsProviderRoot="False" NavigationActionLabel="Blocks" />
+    <Category Id="CodeSchema_Calls" Label="Calls" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Called By" OutgoingActionLabel="Calls" />
+    <Category Id="CodeSchema_Class" Label="Class" BasedOn="CodeSchema_Type" CanBeDataDriven="True" DefaultAction="Node:Both:CodeSchema_Member" Icon="CodeSchema_Class" IsProviderRoot="False" NavigationActionLabel="Classes" />
+    <Category Id="CodeSchema_Delegate" Label="Delegate" BasedOn="CodeSchema_Class" CanBeDataDriven="True" DefaultAction="Microsoft.Contains" Icon="CodeSchema_Delegate" IsProviderRoot="False" NavigationActionLabel="Delegates" />
+    <Category Id="CodeSchema_Member" Label="Member" BasedOn="CodeSchema_Block" CanBeDataDriven="True" DefaultAction="Microsoft.Contains" Icon="CodeSchema_Field" IsProviderRoot="False" NavigationActionLabel="Members" />
+    <Category Id="CodeSchema_Method" Label="Method" BasedOn="CodeSchema_Member" CanBeDataDriven="True" DefaultAction="Link:Forward:CodeSchema_Calls" Icon="CodeSchema_Method" IsProviderRoot="False" NavigationActionLabel="Methods" />
+    <Category Id="CodeSchema_ReturnTypeLink" Label="Return" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Return types" OutgoingActionLabel="Return types" />
+    <Category Id="CodeSchema_Statement" Label="Statement" CanBeDataDriven="True" DefaultAction="Microsoft.Contains" IsProviderRoot="False" NavigationActionLabel="Statement" />
+    <Category Id="CodeSchema_Type" Label="Type" BasedOn="CodeSchema_Block" CanBeDataDriven="True" DefaultAction="Node:Both:CodeSchema_Member" Icon="CodeSchema_Class" IsProviderRoot="False" NavigationActionLabel="Types" />
+    <Category Id="Contains" Label="Contains" CanBeDataDriven="False" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Contained By" IsContainment="True" OutgoingActionLabel="Contains" />
+    <Category Id="File" Label="File" CanBeDataDriven="True" DefaultAction="Microsoft.Contains" Icon="File" IsProviderRoot="False" NavigationActionLabel="Files" />
+    <Category Id="References" Label="References" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Referenced By" OutgoingActionLabel="References" />
+  </Categories>
+  <Properties>
+    <Property Id="Background" Label="Background" Description="The background color" DataType="System.Windows.Media.Brush" />
+    <Property Id="CanBeDataDriven" Label="CanBeDataDriven" Description="CanBeDataDriven" DataType="System.Boolean" />
+    <Property Id="CanLinkedNodesBeDataDriven" Label="CanLinkedNodesBeDataDriven" Description="CanLinkedNodesBeDataDriven" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsConstructor" Label="IsConstructor" Description="IsConstructor" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsPrivate" Label="IsPrivate" Description="IsPrivate" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsProtected" Label="IsProtected" Description="IsProtected" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsPublic" Label="IsPublic" Description="IsPublic" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsSpecialName" Label="IsSpecialName" Description="IsSpecialName" DataType="System.Boolean" />
+    <Property Id="DefaultAction" Label="DefaultAction" Description="DefaultAction" DataType="System.String" />
+    <Property Id="ErrorMessage" Label="Error" Description="Error" DataType="System.String" />
+    <Property Id="GraphDirection" DataType="Microsoft.VisualStudio.Progression.Layout.GraphDirection" />
+    <Property Id="Group" Label="Group" Description="Display the node as a group" DataType="Microsoft.VisualStudio.Progression.GraphModel.GroupStyle" />
+    <Property Id="Icon" Label="Icon" Description="Icon" DataType="System.String" />
+    <Property Id="IncomingActionLabel" Label="IncomingActionLabel" Description="IncomingActionLabel" DataType="System.String" />
+    <Property Id="IsContainment" DataType="System.Boolean" />
+    <Property Id="IsHub" Label="Hub" Description="Node is in the top 25% of highly connected nodes.  Other nodes not directly connecting these hubs have been hidden to simplify the graph." DataType="System.Boolean" />
+    <Property Id="IsProviderRoot" Label="IsProviderRoot" Description="IsProviderRoot" DataType="System.Boolean" />
+    <Property Id="IsTag" DataType="System.Boolean" />
+    <Property Id="IsUnreferenced" Label="Unreferenced" Description="Node has no links pointing to it from other nodes in the graph" DataType="System.Boolean" />
+    <Property Id="Label" Label="Label" Description="Displayable label of an Annotatable object" DataType="System.String" />
+    <Property Id="Layout" DataType="System.String" />
+    <Property Id="NavigationActionLabel" Label="NavigationActionLabel" Description="NavigationActionLabel" DataType="System.String" />
+    <Property Id="OutgoingActionLabel" Label="OutgoingActionLabel" Description="OutgoingActionLabel" DataType="System.String" />
+    <Property Id="Visibility" Label="Visibility" Description="Defines whether a node in the graph is visible or not" DataType="System.Windows.Visibility" />
+  </Properties>
+  <QualifiedNames>
+    <Name Id="ArrayRank" Label="Array Rank" ValueType="System.String" />
+    <Name Id="Assembly" Label="Assembly" ValueType="Uri" />
+    <Name Id="Member" Label="Member" ValueType="System.Object" />
+    <Name Id="Name" Label="Name" ValueType="System.String" />
+    <Name Id="Namespace" Label="Namespace" ValueType="System.String" />
+    <Name Id="OverloadingParameters" Label="Parameter" ValueType="Microsoft.VisualStudio.Progression.GraphModel.QualifiedIdentifierArrayCollection" Formatter="NameValueNoEscape" />
+    <Name Id="ParentType" Label="Parent Type" ValueType="System.Object" />
+    <Name Id="Type" Label="Type" ValueType="System.Object" />
+  </QualifiedNames>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="Strongly Connected" ToolTip="Node is part of a strongly coupled component" ValueLabel="Nodes">
+      <Condition Expression="IsStronglyConnected" />
+      <Setter Property="Stroke" Value="#D02030" />
+      <Setter Property="StrokeThickness" Value="2" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Strongly Connected" ToolTip="Node is part of a strongly coupled component" ValueLabel="Links">
+      <Condition Expression="IsCircularLink" />
+      <Setter Property="Stroke" Value="#D02030" />
+      <Setter Property="StrokeThickness" Value="2" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Category 6" ValueLabel="Has category">
+      <Condition Expression="HasCategory('Category6')" />
+      <Setter Property="Background" Value="#FF7F0037" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Category 4" ValueLabel="Has category">
+      <Condition Expression="HasCategory('Category4')" />
+      <Setter Property="Background" Value="#FF7F92FF" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Category 2" ValueLabel="Has category">
+      <Condition Expression="HasCategory('Category2')" />
+      <Setter Property="Background" Value="#FF7DC633" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Category 9" ValueLabel="Has category">
+      <Condition Expression="HasCategory('Category9')" />
+      <Setter Property="Background" Value="#FF004A7F" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Category 8" ValueLabel="Has category">
+      <Condition Expression="HasCategory('Category8')" />
+      <Setter Property="Background" Value="#FF008080" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Category 5" ValueLabel="Has category">
+      <Condition Expression="HasCategory('Category5')" />
+      <Setter Property="Background" Value="#FFA17FFF" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Category 3" ValueLabel="Has category">
+      <Condition Expression="HasCategory('Category3')" />
+      <Setter Property="Background" Value="#FF7FC9FF" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Hub" ToolTip="Node is in the top 25% of highly connected nodes.  Other nodes not directly connecting these hubs have been hidden to simplify the graph." ValueLabel="True">
+      <Condition Expression="IsHub" />
+      <Setter Property="Background" Value="#FF008080" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Unreferenced" ToolTip="Node has no links pointing to it from other nodes in the graph" ValueLabel="True">
+      <Condition Expression="IsUnreferenced" />
+      <Setter Property="Background" Value="Purple" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Assembly" ValueLabel="Has category">
+      <Condition Expression="HasCategory('CodeSchema_Assembly')" />
+      <Setter Property="Background" Value="#1C3068" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Namespace" ValueLabel="Has category">
+      <Condition Expression="HasCategory('CodeSchema_Namespace')" />
+      <Setter Property="Background" Value="#4A65A0" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Type" ValueLabel="Has category">
+      <Condition Expression="HasCategory('CodeSchema_Type')" />
+      <Setter Property="Background" Value="#D3DCEF" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Method" ValueLabel="Has category">
+      <Condition Expression="HasCategory('CodeSchema_Method')" />
+      <Setter Property="Background" Value="#FFE0E0E0" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Generics" ValueLabel="Has category">
+      <Condition Expression="HasCategory('Generics')" />
+      <Setter Property="Background" Value="#FFA080A0" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Externals" ValueLabel="Has category">
+      <Condition Expression="HasCategory('Externals')" />
+      <Setter Property="Background" Value="#FFA08080" />
+    </Style>
+  </Styles>
+  <IdentifierAliases>
+    <Alias n="1" Uri="Assembly=$(FxRootUri)/v2.0.50727/mscorlib.dll" />
+    <Alias n="2" Uri="Assembly=$(ProgramFilesUri)/Unity/Editor/Data/Managed/UnityEngine.dll" />
+    <Alias n="3" Uri="Assembly=$(FxReferenceAssembliesUri)/v3.5/System.Core.dll" />
+    <Alias n="4" Uri="Assembly=$(FxRootUri)/v2.0.50727/System.dll" />
+    <Alias n="5" Uri="Assembly=$(e52964be-07d5-cf2a-1d59-3eb1cab06141.OutputPathUri)" />
+    <Alias n="6" Id="Namespace=BarelyAPI" />
+    <Alias n="7" Id="(@6)" />
+    <Alias n="8" Id="Type=(Name=SequencerEvent ParentType=Sequencer)" />
+    <Alias n="9" Id="(@5 @6 @8)" />
+    <Alias n="10" Id="Type=Conductor" />
+    <Alias n="11" Id="(@5 @6 @10)" />
+    <Alias n="12" Id="Type=Ensemble" />
+    <Alias n="13" Id="(@5 @6 @12)" />
+    <Alias n="14" Id="Type=Instrument" />
+    <Alias n="15" Id="(@5 @6 @14)" />
+    <Alias n="16" Id="Type=MacroGenerator" />
+    <Alias n="17" Id="(@5 @6 @16)" />
+    <Alias n="18" Id="Type=MesoGenerator" />
+    <Alias n="19" Id="(@5 @6 @18)" />
+    <Alias n="20" Id="Type=MicroGenerator" />
+    <Alias n="21" Id="(@5 @6 @20)" />
+    <Alias n="22" Id="Type=ModeGenerator" />
+    <Alias n="23" Id="(@5 @6 @22)" />
+    <Alias n="24" Id="Type=Musician" />
+    <Alias n="25" Id="(@5 @6 @24)" />
+    <Alias n="26" Id="Type=Performer" />
+    <Alias n="27" Id="(@5 @6 @26)" />
+    <Alias n="28" Id="Type=Sequencer" />
+    <Alias n="29" Id="(@5 @6 @28)" />
+    <Alias n="30" Id="OverloadingParameters=[@9]" />
+    <Alias n="31" Id="(@5 @6 @28 Member=(Name=add_OnNextBar @30))" />
+    <Alias n="32" Id="(@5 @6 @28 Member=(Name=add_OnNextBeat @30))" />
+    <Alias n="33" Id="(@5 @6 @28 Member=(Name=add_OnNextPulse @30))" />
+    <Alias n="34" Id="(@5 @6 @28 Member=(Name=add_OnNextSection @30))" />
+    <Alias n="35" Id="(@5 @6 @28 Member=(Name=AddBarListener @30))" />
+    <Alias n="36" Id="(@5 @6 @28 Member=(Name=AddBeatListener @30))" />
+    <Alias n="37" Id="(@5 @6 @28 Member=(Name=AddPulseListener @30))" />
+    <Alias n="38" Id="(@5 @6 @28 Member=(Name=AddSectionListener @30))" />
+    <Alias n="39" Id="(@5 @6 @28 Member=(Name=remove_OnNextBar @30))" />
+    <Alias n="40" Id="(@5 @6 @28 Member=(Name=remove_OnNextBeat @30))" />
+    <Alias n="41" Id="(@5 @6 @28 Member=(Name=remove_OnNextPulse @30))" />
+    <Alias n="42" Id="(@5 @6 @28 Member=(Name=remove_OnNextSection @30))" />
+    <Alias n="43" Id="(@5 @6 @28 Member=(Name=RemoveBarListener @30))" />
+    <Alias n="44" Id="(@5 @6 @28 Member=(Name=RemoveBeatListener @30))" />
+    <Alias n="45" Id="(@5 @6 @28 Member=(Name=RemovePulseListener @30))" />
+    <Alias n="46" Id="(@5 @6 @28 Member=(Name=RemoveSectionListener @30))" />
+    <Alias n="47" Id="Name=.ctor" />
+    <Alias n="48" Id="Namespace=System" />
+    <Alias n="49" Id="(@5 @6 @26 Member=(Name=set_Mute OverloadingParameters=[(@1 @48 Type=Boolean)]))" />
+    <Alias n="50" Id="(@1 @48 Type=Int32)" />
+    <Alias n="51" Id="OverloadingParameters=[@50]" />
+    <Alias n="52" Id="(@5 @6 @16 Member=(Name=GetSection @51))" />
+    <Alias n="53" Id="(@5 @6 @28 Member=(Name=set_Tempo @51))" />
+    <Alias n="54" Id="(@5 @6 @28 Member=(Name=Update @51))" />
+    <Alias n="55" Id="(@5 @6 @14 Member=(Name=noteOff OverloadingParameters=[(@5 @6 Type=Note)]))" />
+    <Alias n="56" Id="(@5 @6 @14 Member=(Name=noteOn OverloadingParameters=[(@5 @6 Type=Note)]))" />
+    <Alias n="57" Id="(@5 @6 @14 Member=(Name=PlayNote OverloadingParameters=[(@5 @6 Type=Note)]))" />
+    <Alias n="58" Id="(@5 @6 @24 Member=(Name=set_RootNote OverloadingParameters=[(@5 @6 Type=NoteIndex)]))" />
+    <Alias n="59" Id="(@5 @6 @10 Member=(Name=TransformNote OverloadingParameters=[(@5 @6 Type=NoteMeta)]))" />
+    <Alias n="60" Id="OverloadingParameters=[(@5 @6 Type=SequencerState)]" />
+    <Alias n="61" Id="(@5 @6 @18 Member=(@47 @60))" />
+    <Alias n="62" Id="(@5 @6 @8 Member=(Name=Invoke @60))" />
+    <Alias n="63" Id="(@5 @6 @12 Member=(Name=OnNextBar @60))" />
+    <Alias n="64" Id="(@5 @6 @12 Member=(Name=OnNextBeat @60))" />
+    <Alias n="65" Id="(@1 @48 Type=Single)" />
+    <Alias n="66" Id="OverloadingParameters=[@65]" />
+    <Alias n="67" Id="(@5 @6 @14 Member=(@47 @66))" />
+    <Alias n="68" Id="(@5 @6 @22 Member=(@47 @66))" />
+    <Alias n="69" Id="(@5 @6 @22 Member=(Name=GenerateScale @66))" />
+    <Alias n="70" Id="(@5 @6 @10 Member=(Name=getNote @66))" />
+    <Alias n="71" Id="(@5 @6 @22 Member=(Name=GetNoteOffset @66))" />
+    <Alias n="72" Id="(@5 @6 @10 Member=(Name=set_ArticulationMultiplier @66))" />
+    <Alias n="73" Id="(@5 @6 @10 Member=(Name=set_ArticulationVariance @66))" />
+    <Alias n="74" Id="(@5 @6 @14 Member=(Name=set_Attack @66))" />
+    <Alias n="75" Id="(@5 @6 @24 Member=(Name=set_Energy @66))" />
+    <Alias n="76" Id="(@5 @6 @10 Member=(Name=set_HarmonicCurve @66))" />
+    <Alias n="77" Id="(@5 @6 @10 Member=(Name=set_Key @66))" />
+    <Alias n="78" Id="(@5 @6 @10 Member=(Name=set_LoudnessMultiplier @66))" />
+    <Alias n="79" Id="(@5 @6 @10 Member=(Name=set_LoudnessVariance @66))" />
+    <Alias n="80" Id="(@5 @6 @10 Member=(Name=set_Mode @66))" />
+    <Alias n="81" Id="(@5 @6 @10 Member=(Name=set_PitchHeight @66))" />
+    <Alias n="82" Id="(@5 @6 @24 Member=(Name=set_Stress @66))" />
+    <Alias n="83" Id="(@5 @6 @10 Member=(Name=set_TempoMultiplier @66))" />
+    <Alias n="84" Id="(@5 @6 @14 Member=(Name=set_Volume @66))" />
+    <Alias n="85" Id="(@5 @6 @12 Member=(Name=MutePerformer OverloadingParameters=[(@1 @48 Type=String)]))" />
+    <Alias n="86" Id="(@5 @6 @12 Member=(Name=UnmutePerformer OverloadingParameters=[(@1 @48 Type=String)]))" />
+    <Alias n="87" Id="(@5 @6 @26 Member=(Name=applyTransformation OverloadingParameters=[(@5 @6 Type=TimbreProperties)]))" />
+    <Alias n="88" Id="(@5 @6 @26 Member=(Name=AddBeat OverloadingParameters=[(@5 @6 Type=SequencerState),@11]))" />
+    <Alias n="89" Id="(@5 @6 @24 Member=(Name=OnAudioFilterRead OverloadingParameters=[(@1 @48 Type=(Name=Single ArrayRank=1 ParentType=Single)),@50]))" />
+    <Alias n="90" Id="(@5 @6 Type=SectionType)" />
+    <Alias n="91" Id="(@5 @6 @18 Member=(Name=GetHarmonic OverloadingParameters=[@90,@50]))" />
+    <Alias n="92" Id="(@5 @6 @18 Member=(Name=generateProgression OverloadingParameters=[@90,(@1 @48 Type=&quot;Int32[]&amp;&quot;)]))" />
+    <Alias n="93" Id="(@5 @6 @26 Member=(@47 OverloadingParameters=[@15,@21]))" />
+    <Alias n="94" Id="(@5 @6 @10 Member=(@47 OverloadingParameters=[@65,@23]))" />
+    <Alias n="95" Id="(@5 @6 @24 Member=(Name=SetMood OverloadingParameters=[(@5 @6 Type=Mood),@65]))" />
+    <Alias n="96" Id="(@5 @6 @24 Member=(Name=SetEnergy OverloadingParameters=[@65,@65]))" />
+    <Alias n="97" Id="(@5 @6 @10 Member=(Name=SetParameters OverloadingParameters=[@65,@65]))" />
+    <Alias n="98" Id="(@5 @6 @24 Member=(Name=SetStress OverloadingParameters=[@65,@65]))" />
+    <Alias n="99" Id="(@5 @6 @12 Member=(@47 OverloadingParameters=[@17,@19,@11]))" />
+    <Alias n="100" Id="(@5 @6 @26 Member=(Name=GenerateBar OverloadingParameters=[@90,@50,@50]))" />
+    <Alias n="101" Id="(@5 @6 @20 Member=(Name=GetLine OverloadingParameters=[@90,@50,@50]))" />
+    <Alias n="102" Id="(@5 @6 @26 Member=(Name=addNote OverloadingParameters=[(@5 @6 Type=Note),@65,@50]))" />
+    <Alias n="103" Id="(@5 @6 @24 Member=(Name=SetMood OverloadingParameters=[@65,@65,@65]))" />
+    <Alias n="104" Id="(@5 @6 @26 Member=(Name=Play OverloadingParameters=[@50,@50,(@5 @6 Type=TimbreProperties)]))" />
+    <Alias n="105" Id="(@5 @6 @20 Member=(Name=generateLine OverloadingParameters=[@90,@50,@50,(@1 Namespace=System.Collections.Generic Type=List`1&amp;)]))" />
+    <Alias n="106" Id="(@5 @6 @28 Member=(@47 OverloadingParameters=[@50,@50,@50,(@5 @6 Type=NoteType),@50]))" />
+    <Alias n="107" Id="(@5 @6 @24 Member=Awake)" />
+    <Alias n="108" Id="(@5 @6 @14 Member=get_Attack)" />
+    <Alias n="109" Id="(@5 @6 @14 Member=get_Effects)" />
+    <Alias n="110" Id="(@5 @6 @26 Member=get_Output)" />
+    <Alias n="111" Id="(@5 @6 @18 Member=get_ProgressionLength)" />
+    <Alias n="112" Id="(@5 @6 @20 Member=get_ProgressionLength)" />
+    <Alias n="113" Id="(@5 @6 @24 Member=get_Sequencer)" />
+    <Alias n="114" Id="(@5 @6 @28 Member=get_State)" />
+    <Alias n="115" Id="(@5 @6 @10 Member=get_TempoMultiplier)" />
+    <Alias n="116" Id="(@5 @6 @12 Member=GetOutput)" />
+    <Alias n="117" Id="(@5 @6 @14 Member=ProcessNext)" />
+    <Alias n="118" Id="(@5 @6 @26 Member=Reset)" />
+    <Alias n="119" Id="(@5 @6 @28 Member=Reset)" />
+    <Alias n="120" Id="(@5 @6 @18 Member=Restart)" />
+    <Alias n="121" Id="(@5 @6 @20 Member=Restart)" />
+    <Alias n="122" Id="(@5 @6 @12 Member=Stop)" />
+    <Alias n="123" Id="(@5 @6 @24 Member=Stop)" />
+    <Alias n="124" Id="(@5 @6 @14 Member=StopAllNotes)" />
+    <Alias n="125" Id="(@5 @6 @28 Member=triggerNextBar)" />
+    <Alias n="126" Id="(@5 @6 @28 Member=triggerNextBeat)" />
+    <Alias n="127" Id="(@5 @6 @28 Member=triggerNextPulse)" />
+    <Alias n="128" Id="(@5 @6 @28 Member=triggerNextSection)" />
+  </IdentifierAliases>
+  <Paths>
+    <Path Id="e52964be-07d5-cf2a-1d59-3eb1cab06141.OutputPath" Value="C:\Users\anokta\Documents\GitHub\barelyMusician\Temp\bin\Debug\Assembly-CSharp.dll" />
+    <Path Id="e52964be-07d5-cf2a-1d59-3eb1cab06141.OutputPathUri" Value="file:///C:/Users/anokta/Documents/GitHub/barelyMusician/Temp/bin/Debug/Assembly-CSharp.dll" />
+    <Path Id="FxReferenceAssemblies" Value="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework" />
+    <Path Id="FxReferenceAssembliesUri" Value="file:///C:/Program Files (x86)/Reference Assemblies/Microsoft/Framework" />
+    <Path Id="FxRoot" Value="C:\Windows\Microsoft.NET\Framework" />
+    <Path Id="FxRootUri" Value="file:///C:/Windows/Microsoft.NET/Framework" />
+    <Path Id="ProgramFiles" Value="C:\Program Files (x86)" />
+    <Path Id="ProgramFilesUri" Value="file:///C:/Program Files (x86)" />
+  </Paths>
+</DirectedGraph>
