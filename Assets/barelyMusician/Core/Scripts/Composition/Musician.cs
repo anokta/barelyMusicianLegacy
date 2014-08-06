@@ -99,7 +99,7 @@ namespace BarelyAPI
         {            
             #region TEST_ZONE
             Instrument[] instruments = new Instrument[4];
-            instruments[0] = new SamplerInstrument(sample, new Envelope(0.0f, 0.0f, 1.0f, 0.25f));
+            instruments[0] = new SamplerInstrument(sample, new Envelope(0.0f, 0.0f, 1.0f, 0.25f)); instruments[0].AddEffect(new Distortion(2.0f));
             instruments[1] = new SynthInstrument(OscillatorType.COS, new Envelope(0.1f, 0.25f, 1.0f, 0.2f), -3.0f);
             instruments[2] = new SynthInstrument(OscillatorType.TRIANGLE, new Envelope(0.25f, 0.5f, 0.5f, 0.25f), -5.0f);
             instruments[3] = new PercussiveInstrument(drumKit, -3.0f);

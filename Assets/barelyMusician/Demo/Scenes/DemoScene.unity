@@ -231,7 +231,7 @@ MonoBehaviour:
   barsPerSection: 4
   beatsPerBar: 4
   rootNote: 3
-  masterVolume: .5
+  masterVolume: .400000006
   sample: {fileID: 8300000, guid: 1c08986e68b40d94987938586307d45a, type: 3}
   drumKit:
   - {fileID: 8300000, guid: 836f6a87c27a2004990660e1c324dfd4, type: 3}
