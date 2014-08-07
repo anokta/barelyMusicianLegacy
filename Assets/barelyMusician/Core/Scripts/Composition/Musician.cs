@@ -65,7 +65,7 @@ namespace BarelyAPI
         }
 
         #region TEST_ZONE
-        public AudioClip sample;
+        public AudioClip sample, sampleBass;
         public AudioClip[] drumKit;
 
         #endregion TEST_ZONE
@@ -98,16 +98,24 @@ namespace BarelyAPI
         void Start()
         {            
             #region TEST_ZONE
-            Instrument[] instruments = new Instrument[4];
+            Instrument[] instruments = new Instrument[7];
             instruments[0] = new SamplerInstrument(sample, new Envelope(0.0f, 0.0f, 1.0f, 0.25f)); instruments[0].AddEffect(new Distortion(2.0f));
             instruments[1] = new SynthInstrument(OscillatorType.COS, new Envelope(0.1f, 0.25f, 1.0f, 0.2f), -3.0f);
             instruments[2] = new SynthInstrument(OscillatorType.TRIANGLE, new Envelope(0.25f, 0.5f, 0.5f, 0.25f), -5.0f);
             instruments[3] = new PercussiveInstrument(drumKit, -3.0f);
 
+            instruments[4] = new SamplerInstrument(sampleBass, new Envelope(0.0f, 0.0f, 1.0f, 0.25f));
+            //instruments[5] = new SynthInstrument(OscillatorType.SAW, new Envelope(0.1f, 0.25f, 1.0f, 0.2f), -8.0f);
+            //instruments[6] = new SynthInstrument(OscillatorType.SQUARE, new Envelope(0.25f, 0.5f, 0.5f, 0.25f), -10.0f);
+
             ensemble.AddPerformer("Loop", new Performer(instruments[0], new NaberMicroGenerator(sequencer.State)));
             ensemble.AddPerformer("Melody", new Performer(instruments[1], new CA1DMicroGenerator(sequencer.State)));
             ensemble.AddPerformer("Chords", new Performer(instruments[2], new ChordMicroGenerator(sequencer.State)));
             ensemble.AddPerformer("Drums", new Performer(instruments[3], new DrumsMicroGenerator(sequencer.State)));
+
+            //ensemble.AddPerformer("Bass", new Performer(instruments[4], new NaberMicroGenerator(sequencer.State)));
+            //ensemble.AddPerformer("Melody 2", new Performer(instruments[5], new NaberMicroGenerator(sequencer.State)));
+            //ensemble.AddPerformer("Chords 2", new Performer(instruments[6], new ChordMicroGenerator(sequencer.State)));
 
             #endregion TEST_ZONE
         }
@@ -115,14 +123,14 @@ namespace BarelyAPI
         void FixedUpdate()
         {
             if (Mathf.Abs(energy - energyTarget) < 0.01f * energyInterpolationSpeed)
-                energy = energyTarget;
+                Energy = energyTarget;
             else
-                energy = Mathf.Lerp(energy, energyTarget, energyInterpolationSpeed);
+                Energy = Mathf.Lerp(energy, energyTarget, energyInterpolationSpeed);
 
             if (Mathf.Abs(stress - stressTarget) < 0.01f * stressInterpolationSpeed)
-                stress = stressTarget;
+                Stress = stressTarget;
             else
-                stress = Mathf.Lerp(stress, stressTarget, stressInterpolationSpeed);
+                Stress = Mathf.Lerp(stress, stressTarget, stressInterpolationSpeed);
         }
 
         void OnAudioFilterRead(float[] data, int channels)

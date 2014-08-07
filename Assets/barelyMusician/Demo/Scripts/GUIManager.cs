@@ -86,12 +86,16 @@ public class GUIManager : MonoBehaviour
         }
         GUILayout.EndHorizontal();
 
-        //GUILayout.BeginVertical();
+        GUILayout.BeginVertical();
         GUILayout.Box("Energy");
-        musician.Energy = GUILayout.HorizontalSlider(musician.Energy, 0.0f, 1.0f);
+        float energy = GUILayout.HorizontalSlider(musician.Energy, 0.0f, 1.0f);
+        if (energy != musician.Energy)
+            musician.SetEnergy(energy);
         GUILayout.Box("Stress");
-        musician.Stress = GUILayout.HorizontalSlider(musician.Stress, 0.0f, 1.0f);
-        //GUILayout.EndVertical();
+        float stress = GUILayout.HorizontalSlider(musician.Stress, 0.0f, 1.0f);
+        if (stress != musician.Stress)
+            musician.SetStress(stress);
+        GUILayout.EndVertical();
         
         //GUILayout.BeginVertical();
         //ensemble.PrintValues();

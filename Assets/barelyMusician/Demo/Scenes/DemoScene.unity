@@ -233,6 +233,7 @@ MonoBehaviour:
   rootNote: 3
   masterVolume: .400000006
   sample: {fileID: 8300000, guid: 1c08986e68b40d94987938586307d45a, type: 3}
+  sampleBass: {fileID: 8300000, guid: 8bcbe59f19103f14a9886fc743896004, type: 3}
   drumKit:
   - {fileID: 8300000, guid: 836f6a87c27a2004990660e1c324dfd4, type: 3}
   - {fileID: 8300000, guid: 027264c19660ff84b86a6b4445b9dfaa, type: 3}
