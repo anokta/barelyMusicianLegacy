@@ -228,8 +228,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialTempo: 132
-  barsPerSection: 4
-  beatsPerBar: 4
+  songDuration: 1
+  barsPerSection: 2
+  beatsPerBar: 8
   rootNote: 3
   masterVolume: .400000006
   sample: {fileID: 8300000, guid: 1c08986e68b40d94987938586307d45a, type: 3}
@@ -538,6 +539,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1117552452}
   - 114: {fileID: 1117552451}
+  - 114: {fileID: 1117552453}
   m_Layer: 0
   m_Name: GUI
   m_TagString: Untagged
@@ -571,6 +573,19 @@ Transform:
   - {fileID: 1144085597}
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!114 &1117552453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1117552450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3da53d10ead8b94993e86586ed27104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musician: {fileID: 993552978}
+  pixel: {fileID: 2800000, guid: 653c7d782287eaa418ff045464acf8b2, type: 3}
 --- !u!1 &1144085595
 GameObject:
   m_ObjectHideFlags: 0

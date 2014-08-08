@@ -8,14 +8,18 @@ namespace BarelyAPI
     {
         public string fileName;
 
+        FileStream fileStream;
+        string folderPath;
+
+        bool recording;
+
         const int HEADER_SIZE = 44;
         const int RESCALE_FACTOR = 32767;
 
-        static string FOLDER_PATH = Application.dataPath + "/../Records/";
-
-        FileStream fileStream;
-
-        bool recording;
+        void Awake()
+        {
+            folderPath = Application.dataPath + "/../Records/";
+        }
 
         void Update()
         {
@@ -31,7 +35,7 @@ namespace BarelyAPI
                 {
                     StopRecord();
 
-                    Debug.Log("Recording stopped. File saved to: " + Path.Combine(FOLDER_PATH, fileName));
+                    Debug.Log("Recording stopped. File saved to: " + Path.Combine(folderPath, fileName));
                 }
             }
         }
@@ -65,7 +69,7 @@ namespace BarelyAPI
                 fileName += ".wav";
             }
 
-            fileStream = new FileStream(Path.Combine(FOLDER_PATH, fileName), FileMode.Create);
+            fileStream = new FileStream(Path.Combine(folderPath, fileName), FileMode.Create);
             byte emptyByte = new byte();
 
             for (int i = 0; i < HEADER_SIZE; i++) //preparing the header
