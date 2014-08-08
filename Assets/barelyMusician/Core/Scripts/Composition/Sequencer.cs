@@ -22,11 +22,6 @@ namespace BarelyAPI
             get { return currentState; }
         }
 
-        public int MinuteToSections(float minutes)
-        {
-            return Mathf.RoundToInt((minutes * currentState.BPM * (int)currentState.NoteType / 4.0f) / (currentState.BarCount * currentState.BeatCount));
-        }
-
         float phasor;
 
         public Sequencer(int tempo = 120, int barCount = 4, int beatCount = 4, NoteType noteType = NoteType.QUARTER_NOTE, int pulseCount = 32)

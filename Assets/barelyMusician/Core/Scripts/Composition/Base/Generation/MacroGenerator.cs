@@ -11,15 +11,22 @@ namespace BarelyAPI
             get { return sectionSequence.Length; }
         }
 
+        int targetLength;
         bool loop;
 
-        public MacroGenerator(bool looping = false)
+        public MacroGenerator(int length, bool looping = false)
         {
+            targetLength = length;
             loop = looping;
+
+            Restart();
         }
 
         public SectionType GetSection(int index)
         {
+            if (sectionSequence.Length == 0)
+                generateSequence(targetLength);
+
             if (index >= sectionSequence.Length)
             {
                 if (loop) index %= sectionSequence.Length;
@@ -29,7 +36,12 @@ namespace BarelyAPI
             return (SectionType)sectionSequence[index];
         }
 
-        public abstract void GenerateSequence(int length);
+        public void Restart()
+        {
+            sectionSequence = "";
+        }
+
+        protected abstract void generateSequence(int length);
     }
 
     public enum SectionType { INTRO = 'I', VERSE = 'V', PRE_CHORUS = 'P', CHORUS = 'C', BRIDGE = 'B', OUTRO = 'O', END = '.' } 

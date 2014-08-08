@@ -11,6 +11,10 @@ namespace BarelyAPI
         public int initialTempo = 120;
 
         [SerializeField]
+        [Range(0.0f, 10.0f)]
+        public float songDuration = 1.0f;
+
+        [SerializeField]
         [Range(1, 8)]
         public int barsPerSection = 4;
 
@@ -91,7 +95,7 @@ namespace BarelyAPI
             sequencer = new Sequencer(initialTempo, barsPerSection, beatsPerBar);
             conductor = new Conductor((float)rootNote);
 
-            ensemble = new Ensemble(new SimpleMacroGenerator(true), new MarkovMesoGenerator(sequencer.State), conductor);
+            ensemble = new Ensemble(new GrammarMacroGenerator(sequencer.State.MinuteToSections(songDuration), true), new MarkovMesoGenerator(sequencer.State), conductor);
             ensemble.Register(sequencer);
         }
 

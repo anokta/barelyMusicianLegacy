@@ -45,7 +45,7 @@ namespace BarelyAPI
 
         public void GenerateNextState()
         {
-            double p = RandomNumber.NextFloat();
+            float p = RandomNumber.NextFloat();
 
             float cumulative = 0.0f;
             for (int i = 0; i < states.GetLength(1); ++i)

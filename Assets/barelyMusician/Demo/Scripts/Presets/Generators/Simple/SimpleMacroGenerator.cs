@@ -5,12 +5,12 @@ namespace BarelyAPI
 {
     public class SimpleMacroGenerator : MacroGenerator
     {
-        public SimpleMacroGenerator(bool looping = false)
-            : base(looping)
+        public SimpleMacroGenerator(int length, bool looping = false)
+            : base(length, looping)
         {
         }
 
-        public override void GenerateSequence(int length)
+        protected override void generateSequence(int length)
         {
             sectionSequence += (char)SectionType.INTRO;
             sectionSequence += (char)SectionType.VERSE;
@@ -27,8 +27,6 @@ namespace BarelyAPI
             sectionSequence += (char)SectionType.CHORUS;
             sectionSequence += (char)SectionType.CHORUS;
             sectionSequence += (char)SectionType.OUTRO;
-
-            Debug.Log(sectionSequence);
         }
     }
 }

@@ -115,6 +115,11 @@ namespace BarelyAPI
             currentBeat = -1;
             currentPulse = -1;
         }
+
+        public int MinuteToSections(float minutes)
+        {
+            return Mathf.RoundToInt((minutes * bpm * noteType / 4.0f) / (barCount * beatCount));
+        }
     }
 
     public enum NoteType { WHOLE_NOTE = 1, HALF_NOTE = 2, QUARTER_NOTE = 4, EIGHTH_NOTE = 8, SIXTEENTH_NOTE = 16 }
