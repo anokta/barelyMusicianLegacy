@@ -28,10 +28,6 @@ namespace BarelyAPI
             sequencer.AddBarListener(OnNextBar);
             sequencer.AddBeatListener(OnNextBeat);
             sequencer.AddPulseListener(OnNextPulse);
-
-            // TODO Do something proper here !
-            float minutes = 0.25f;
-            macro.GenerateSequence(sequencer.MinuteToSections(minutes));
         }
 
         public void AddPerformer(string name, Performer performer)
@@ -51,6 +47,7 @@ namespace BarelyAPI
                 performer.Reset();
             }
 
+            macro.Restart();
             meso.Restart();
         }
 
