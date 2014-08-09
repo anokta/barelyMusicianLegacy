@@ -84,6 +84,10 @@ namespace BarelyAPI
         Conductor conductor;
 
         AudioSource audioSource;
+        public bool IsPlaying
+        {
+            get { return audioSource.isPlaying; }
+        }
 
         void Awake()
         {
@@ -175,11 +179,6 @@ namespace BarelyAPI
 
             ensemble.Stop();
             sequencer.Reset();
-        }
-
-        public bool IsPlaying()
-        {
-            return audioSource.isPlaying;
         }
 
         public void SetMood(Mood moodType, float smoothness = 0.0f)

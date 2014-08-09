@@ -35,6 +35,8 @@ public class VfxManager : MonoBehaviour {
             currentBackgroundColor = Color.Lerp(currentBackgroundColor, targetBackgroundColor, 4.0f * Time.deltaTime);
         if (currentStrokeColor != targetStrokeColor)
             currentStrokeColor = Color.Lerp(currentStrokeColor, targetStrokeColor, 2.0f * Time.deltaTime);
+
+        Camera.main.backgroundColor = currentBackgroundColor;
     }
 
     void OnGUI()
@@ -42,7 +44,7 @@ public class VfxManager : MonoBehaviour {
         GUI.depth = 100;
 
         GUI.color = currentBackgroundColor;
-        GUI.DrawTexture(new Rect(0.0f, 0.0f, Screen.width, Screen.height), pixel);
+        //GUI.DrawTexture(new Rect(0.0f, 0.0f, Screen.width, Screen.height), pixel);
 
         GUI.color = currentStrokeColor;
         if (currentBeat >= 0)
