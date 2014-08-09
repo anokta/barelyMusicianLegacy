@@ -30,11 +30,11 @@ namespace BarelyAPI
 
             ca.Update();
 
-            for (int i = 0; i < LineLength; ++i)
+            for (int i = 0; i < 2 * LineLength; ++i)
             {
                 if (ca.GetState(i) == 1)
                 {
-                    line.Add(new NoteMeta(keyIndex + markov.CurrentState, (float)i / LineLength, 1.0f / LineLength, 1.0f));
+                    line.Add(new NoteMeta(keyIndex + markov.CurrentState, (float)i / LineLength / 2.0f, 1.0f / LineLength, 1.0f));
                     markov.GenerateNextState();
                 }
             }

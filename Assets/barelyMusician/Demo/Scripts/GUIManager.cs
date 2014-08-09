@@ -62,27 +62,27 @@ public class GUIManager : MonoBehaviour
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("EXCITING"))
         {
-            musician.SetMood(Mood.EXCITING, 0.5f);
+            musician.SetMood(Mood.Exciting, 0.5f);
         }
         if (GUILayout.Button("HAPPY"))
         {
-            musician.SetMood(Mood.HAPPY, 0.5f);
+            musician.SetMood(Mood.Happy, 0.5f);
         }
         if (GUILayout.Button("TENDER"))
         {
-            musician.SetMood(Mood.TENDER, 0.5f);
+            musician.SetMood(Mood.Tender, 0.5f);
         }
         if (GUILayout.Button("DEPRESSED"))
         {
-            musician.SetMood(Mood.DEPRESSED, 0.5f);
+            musician.SetMood(Mood.Depressed, 0.5f);
         }
         if (GUILayout.Button("SAD"))
         {
-            musician.SetMood(Mood.SAD, 0.5f);
+            musician.SetMood(Mood.Sad, 0.5f);
         }
         if (GUILayout.Button("ANGRY"))
         {
-            musician.SetMood(Mood.ANGRY, 0.5f);
+            musician.SetMood(Mood.Angry, 0.5f);
         }
         GUILayout.EndHorizontal();
 

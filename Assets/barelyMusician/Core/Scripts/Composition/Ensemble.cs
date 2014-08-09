@@ -9,6 +9,12 @@ namespace BarelyAPI
         Dictionary<string, Performer> performers;
 
         MacroGenerator macro;
+        public int SongDurationInSections
+        {
+            get { return macro.SequenceLength; }
+            set { macro.SequenceLength = value; }
+        }
+
         MesoGenerator meso;
 
         Conductor conductor;

@@ -34,7 +34,7 @@ public class BunnyController : MonoBehaviour {
 
         if (speed == 0.0f)
         {
-            transform.position = Vector3.left * boundX * (1.0f - 2.0f / musician.Sequencer.State.BeatCount);
+            transform.position = new Vector3(-boundX * (1.0f - 2.0f / musician.Sequencer.State.BeatCount), transform.position.y, transform.position.z);
         }
 	}
 

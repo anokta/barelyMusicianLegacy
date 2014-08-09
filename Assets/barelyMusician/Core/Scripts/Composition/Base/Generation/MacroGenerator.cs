@@ -9,6 +9,7 @@ namespace BarelyAPI
         public int SequenceLength
         {
             get { return sectionSequence.Length; }
+            set { targetLength = value; }
         }
 
         int targetLength;

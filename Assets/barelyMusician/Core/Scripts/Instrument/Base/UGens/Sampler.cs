@@ -35,7 +35,7 @@ namespace BarelyAPI
             sample.GetData(sampleData, 0);
 
             RootFrequency = Frequency = rootFrequency;
-            samplingRatio = sample.frequency / AudioProperties.SampleRate;
+            samplingRatio = sample.frequency / AudioProperties.SAMPLE_RATE;
 
             Loop = loop;
 

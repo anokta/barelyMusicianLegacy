@@ -6,22 +6,47 @@ namespace BarelyAPI
 {
     public class Musician : MonoBehaviour
     {
+        // Tempo (BPM)
         [SerializeField]
-        [Range(88, 220)]
-        public int initialTempo = 120;
+        int initialTempo = 120;
+        public int Tempo
+        {
+            get { return initialTempo; }
+            set
+            {
+                initialTempo = value;
+                sequencer.Tempo = (int)(initialTempo * conductor.TempoMultiplier);
+            }
+        }
 
+        // Song duration in minutes
         [SerializeField]
-        [Range(0.0f, 10.0f)]
-        public float songDuration = 1.0f;
+        float songDuration = 1.0f;
+        public float SongDuration
+        {
+            get { return songDuration; }
+            set { songDuration = value; ensemble.SongDurationInSections = sequencer.State.MinuteToSections(songDuration); }
+        }
 
+        // Bars per section
         [SerializeField]
-        [Range(1, 8)]
-        public int barsPerSection = 4;
+        int barsPerSection = 4;
+        public int BarsPerSection
+        {
+            get { return barsPerSection; }
+            set { barsPerSection = value; sequencer.State.BarCount = barsPerSection; }
+        }
 
+        // Beats per bar
         [SerializeField]
-        [Range(1, 16)]
         public int beatsPerBar = 4;
+        public int BeatsPerBar
+        {
+            get { return beatsPerBar; }
+            set { beatsPerBar = value; sequencer.State.BeatCount = beatsPerBar; }
+        }
 
+        // Fundamental key of the song
         [SerializeField]
         NoteIndex rootNote = NoteIndex.C4;
         public NoteIndex RootNote
@@ -30,16 +55,37 @@ namespace BarelyAPI
             set { rootNote = value; conductor.Key = (float)rootNote; }
         }
 
+        // Master volume
         [SerializeField]
-        [Range(0f, 1f)]
         float masterVolume = 1.0f;
         public float MasterVolume
         {
-            get { return (masterVolume != 0.0f) ? 20.0f * Mathf.Log10(masterVolume) : Instrument.MIN_VOLUME; }
-            set { masterVolume = (value > Instrument.MIN_VOLUME) ? Mathf.Pow(10, 0.05f * value) : 0.0f; }
+            get { return (masterVolume != 0.0f) ? 20.0f * Mathf.Log10(masterVolume) : float.NegativeInfinity; }
+            set { masterVolume = (value > AudioProperties.MIN_VOLUME_DB) ? Mathf.Pow(10, 0.05f * value) : 0.0f; }
         }
 
+        // Mood selection
+        [SerializeField]
+        MoodSelectionMode moodSelection;
+        public MoodSelectionMode MoodSelection
+        {
+            get { return moodSelection; }
+            set { moodSelection = value; }
+        }
+
+        // Basic (Auto)
+        // Pre-defined moods 
+        [SerializeField]
+        Mood mood;
+        public Mood Mood
+        {
+            get { return mood; }
+            set { mood = value; }
+        }
+
+        // Advanced (Manual)
         // Arousal (Passive - Active)
+        [SerializeField]
         float energy = 0.5f;
         float energyTarget, energyInterpolationSpeed;
         public float Energy
@@ -53,8 +99,8 @@ namespace BarelyAPI
                 sequencer.Tempo = (int)(initialTempo * conductor.TempoMultiplier);
             }
         }
-
         // Valence (Happy - Sad) 
+        [SerializeField]
         float stress = 0.5f;
         float stressTarget, stressInterpolationSpeed;
         public float Stress
@@ -74,6 +120,7 @@ namespace BarelyAPI
 
         #endregion TEST_ZONE
 
+        [SerializeField]
         Sequencer sequencer;
         public Sequencer Sequencer
         {
@@ -95,12 +142,6 @@ namespace BarelyAPI
             audioSource.hideFlags = HideFlags.HideInInspector;
             audioSource.panLevel = 0.0f;
             audioSource.Stop();
-
-            sequencer = new Sequencer(initialTempo, barsPerSection, beatsPerBar);
-            conductor = new Conductor((float)rootNote);
-
-            ensemble = new Ensemble(new GrammarMacroGenerator(sequencer.State.MinuteToSections(songDuration), true), new MarkovMesoGenerator(sequencer.State), conductor);
-            ensemble.Register(sequencer);
         }
 
         void Start()
@@ -130,15 +171,20 @@ namespace BarelyAPI
 
         void FixedUpdate()
         {
-            if (Mathf.Abs(energy - energyTarget) < 0.01f * energyInterpolationSpeed)
-                Energy = energyTarget;
-            else
-                Energy = Mathf.Lerp(energy, energyTarget, energyInterpolationSpeed);
-
-            if (Mathf.Abs(stress - stressTarget) < 0.01f * stressInterpolationSpeed)
-                Stress = stressTarget;
-            else
-                Stress = Mathf.Lerp(stress, stressTarget, stressInterpolationSpeed);
+            if (energy != energyTarget)
+            {
+                if (Mathf.Abs(energy - energyTarget) < 0.01f * energyInterpolationSpeed)
+                    Energy = energyTarget;
+                else
+                    Energy = Mathf.Lerp(energy, energyTarget, energyInterpolationSpeed);
+            }
+            if (stress != stressTarget)
+            {
+                if (Mathf.Abs(stress - stressTarget) < 0.01f * stressInterpolationSpeed)
+                    Stress = stressTarget;
+                else
+                    Stress = Mathf.Lerp(stress, stressTarget, stressInterpolationSpeed);
+            }
         }
 
         void OnAudioFilterRead(float[] data, int channels)
@@ -152,6 +198,15 @@ namespace BarelyAPI
                 // If stereo, copy the mono data to each channel
                 if (channels == 2) data[i + 1] = data[i];
             }
+        }
+
+        public void Init()
+        {
+            sequencer = new Sequencer(initialTempo, barsPerSection, beatsPerBar);
+            conductor = new Conductor((float)rootNote);
+
+            ensemble = new Ensemble(new GrammarMacroGenerator(sequencer.State.MinuteToSections(songDuration), true), new MarkovMesoGenerator(sequencer.State), conductor);
+            ensemble.Register(sequencer);
         }
 
         public void Play()
@@ -183,25 +238,29 @@ namespace BarelyAPI
 
         public void SetMood(Mood moodType, float smoothness = 0.0f)
         {
-            switch (moodType)
+            Mood = moodType;
+            switch (Mood)
             {
-                case Mood.HAPPY:
+                case Mood.Happy:
                     SetMood(0.5f, 0.0f, smoothness);
                     break;
-                case Mood.TENDER:
+                case Mood.Tender:
                     SetMood(0.0f, 0.0f, smoothness);
                     break;
-                case Mood.EXCITING:
+                case Mood.Exciting:
                     SetMood(1.0f, 0.0f, smoothness);
                     break;
-                case Mood.SAD:
+                case Mood.Sad:
                     SetMood(0.25f, 0.75f, smoothness);
                     break;
-                case Mood.DEPRESSED:
+                case Mood.Depressed:
                     SetMood(0.0f, 1.0f, smoothness);
                     break;
-                case Mood.ANGRY:
+                case Mood.Angry:
                     SetMood(1.0f, 1.0f, smoothness);
+                    break;
+                default:
+                    SetMood(0.5f, 0.5f, smoothness);
                     break;
             }
         }
@@ -216,14 +275,19 @@ namespace BarelyAPI
         {
             energyTarget = energy;
             energyInterpolationSpeed = (smoothness == 0.0f) ? 1.0f : Time.deltaTime / (smoothness * smoothness);
+
+            if (smoothness == 0.0f & Energy != energy) Energy = energyTarget;
         }
 
         public void SetStress(float stress, float smoothness = 0.0f)
         {
             stressTarget = stress;
             stressInterpolationSpeed = (smoothness == 0.0f) ? 1.0f : Time.deltaTime / (smoothness * smoothness);
+
+            if (smoothness == 0.0f & Stress != stress) Stress = stressTarget;
         }
     }
 
-    public enum Mood { HAPPY, TENDER, EXCITING, SAD, DEPRESSED, ANGRY }
+    public enum Mood { Happy, Tender, Exciting, Sad, Depressed, Angry }
+    public enum MoodSelectionMode { Basic, Advanced }
 }

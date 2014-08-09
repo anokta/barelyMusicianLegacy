@@ -75,7 +75,7 @@ namespace BarelyAPI
             output = Mathf.Sin(phase * TWO_PI);
 
             if (phase >= 1.0f) phase -= 1.0f;
-            phase += frequency * AudioProperties.Interval;
+            phase += frequency * AudioProperties.INTERVAL;
 
             return output;
         }
@@ -85,7 +85,7 @@ namespace BarelyAPI
             output = Mathf.Cos(phase * TWO_PI);
 
             if (phase >= 1.0f) phase -= 1.0f;
-            phase += frequency * AudioProperties.Interval;
+            phase += frequency * AudioProperties.INTERVAL;
 
             return output;
         }
@@ -95,7 +95,7 @@ namespace BarelyAPI
             output = phase;
 
             if (phase >= 1.0f) phase -= 2.0f;
-            phase += frequency * AudioProperties.Interval;
+            phase += frequency * AudioProperties.INTERVAL;
 
             return output;
         }
@@ -106,7 +106,7 @@ namespace BarelyAPI
             if (phase > 0.5f) output = 1.0f;
 
             if (phase >= 1.0f) phase -= 1.0f;
-            phase += frequency * AudioProperties.Interval;
+            phase += frequency * AudioProperties.INTERVAL;
 
             return output;
         }
@@ -119,7 +119,7 @@ namespace BarelyAPI
             if (phase > duty) output = 1.0f;
 
             if (phase >= 1.0f) phase -= 1.0f;
-            phase += frequency * AudioProperties.Interval;
+            phase += frequency * AudioProperties.INTERVAL;
 
             return output;
         }
@@ -130,7 +130,7 @@ namespace BarelyAPI
             else output = ((1.0f - phase) - 0.25f) * 4.0f;
 
             if (phase >= 1.0f) phase -= 1.0f;
-            phase += frequency * AudioProperties.Interval;
+            phase += frequency * AudioProperties.INTERVAL;
 
             return output;
         }

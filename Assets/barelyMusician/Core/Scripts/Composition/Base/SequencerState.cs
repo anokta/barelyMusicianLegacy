@@ -94,7 +94,7 @@ namespace BarelyAPI
 
         public float PulseInterval
         {
-            get { return 240.0f * AudioProperties.SampleRate / pulseCount / bpm; }
+            get { return 240.0f * AudioProperties.SAMPLE_RATE / pulseCount / bpm; }
         }
 
         public SequencerState(int tempo, int barCount, int beatCount, NoteType noteType, int pulseCount)
