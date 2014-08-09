@@ -17,7 +17,6 @@ public class BunnyController : MonoBehaviour {
 
         Vector3 screen = Camera.main.WorldToScreenPoint(transform.position);
         boundX = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Camera.main.transform.position.y - screen.y, Camera.main.transform.position.z - screen.z)).x;
-        transform.position = Vector3.left * boundX * 0.75f;
 
         musician.Sequencer.AddBarListener(OnNextBar);
     }
@@ -31,11 +30,11 @@ public class BunnyController : MonoBehaviour {
         {
             transform.Translate(Vector3.left * 2.0f * boundX);
         }
-        transform.Translate(Vector3.right * Time.deltaTime * speed * boundX / 4.0f);
+        transform.Translate(Vector3.right * Time.deltaTime * speed * boundX / (musician.Sequencer.State.BeatCount / 2.0f));
 
         if (speed == 0.0f)
         {
-            transform.position = Vector3.left * boundX * 0.75f;
+            transform.position = Vector3.left * boundX * (1.0f - 2.0f / musician.Sequencer.State.BeatCount);
         }
 	}
 

@@ -177,7 +177,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -271,8 +271,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialTempo: 132
   songDuration: 1
-  barsPerSection: 2
-  beatsPerBar: 8
+  barsPerSection: 4
+  beatsPerBar: 4
   rootNote: 3
   masterVolume: .400000006
   sample: {fileID: 8300000, guid: 1c08986e68b40d94987938586307d45a, type: 3}
@@ -731,7 +731,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1670224503}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 220406249}
