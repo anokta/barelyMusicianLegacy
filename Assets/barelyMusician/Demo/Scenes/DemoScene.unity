@@ -316,16 +316,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10a0e41ef9c742c409fe2a771969d624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  macroGeneratorType: GrammarMacroGenerator
+  mesoGeneratorType: MarkovMesoGenerator
+  moodSelectionMode: 0
+  mood: 3
   initialTempo: 120
   songDuration: 2.5
   barsPerSection: 2
   beatsPerBar: 8
   rootNote: 8
   masterVolume: 1
-  moodSelection: 1
-  mood: 0
-  energy: .5
-  stress: 0
+  energy: .25
+  stress: .75
+  instrumentNames: []
   sample: {fileID: 8300000, guid: 1c08986e68b40d94987938586307d45a, type: 3}
   sampleBass: {fileID: 8300000, guid: 8bcbe59f19103f14a9886fc743896004, type: 3}
   drumKit:

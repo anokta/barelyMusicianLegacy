@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -6,6 +7,13 @@ namespace BarelyAPI
 {
     public class Musician : MonoBehaviour
     {
+        // Editor-only parameters
+        public string macroGeneratorType;
+        public string mesoGeneratorType;
+
+        public MoodSelectionMode moodSelectionMode;
+        public Mood mood;
+
         // Tempo (BPM)
         [SerializeField]
         int initialTempo = 120;
@@ -64,26 +72,6 @@ namespace BarelyAPI
             set { masterVolume = (value > AudioProperties.MIN_VOLUME_DB) ? Mathf.Pow(10, 0.05f * value) : 0.0f; }
         }
 
-        // Mood selection
-        [SerializeField]
-        MoodSelectionMode moodSelection;
-        public MoodSelectionMode MoodSelection
-        {
-            get { return moodSelection; }
-            set { moodSelection = value; }
-        }
-
-        // Basic (Auto)
-        // Pre-defined moods 
-        [SerializeField]
-        Mood mood;
-        public Mood Mood
-        {
-            get { return mood; }
-            set { mood = value; }
-        }
-
-        // Advanced (Manual)
         // Arousal (Passive - Active)
         [SerializeField]
         float energy = 0.5f;
@@ -114,13 +102,17 @@ namespace BarelyAPI
             }
         }
 
+        [SerializeField]
+        List<string> instrumentNames;
+        [SerializeField]
+        List<Instrument> instruments;
+
         #region TEST_ZONE
         public AudioClip sample, sampleBass;
         public AudioClip[] drumKit;
 
         #endregion TEST_ZONE
 
-        [SerializeField]
         Sequencer sequencer;
         public Sequencer Sequencer
         {
@@ -138,6 +130,8 @@ namespace BarelyAPI
 
         void Awake()
         {
+            Init();
+
             audioSource = gameObject.AddComponent<AudioSource>();
             audioSource.hideFlags = HideFlags.HideInInspector;
             audioSource.panLevel = 0.0f;
@@ -145,7 +139,7 @@ namespace BarelyAPI
         }
 
         void Start()
-        {            
+        {
             #region TEST_ZONE
             Instrument[] instruments = new Instrument[7];
             instruments[0] = new SamplerInstrument(sample, new Envelope(0.0f, 0.0f, 1.0f, 0.25f)); instruments[0].AddEffect(new Distortion(2.0f));
@@ -202,11 +196,20 @@ namespace BarelyAPI
 
         public void Init()
         {
-            sequencer = new Sequencer(initialTempo, barsPerSection, beatsPerBar);
-            conductor = new Conductor((float)rootNote);
+            if (sequencer == null) sequencer = new Sequencer(initialTempo, barsPerSection, beatsPerBar);
+            if (conductor == null) conductor = new Conductor((float)rootNote);
 
-            ensemble = new Ensemble(new GrammarMacroGenerator(sequencer.MinuteToSections(songDuration), true), new MarkovMesoGenerator(sequencer), conductor);
-            ensemble.Register(sequencer);
+            if (ensemble == null)
+            {
+                Type macroType = Type.GetType("BarelyAPI." + macroGeneratorType); if (macroType == null) macroType = Type.GetType("BarelyAPI.SimpleMacroGenerator");
+                MacroGenerator macro = (MacroGenerator)System.Activator.CreateInstance(macroType, sequencer.MinuteToSections(songDuration), true);
+
+                Type mesoType = Type.GetType("BarelyAPI." + mesoGeneratorType); if (mesoType == null) mesoType = Type.GetType("BarelyAPI.SimpleMesoGenerator");
+                MesoGenerator meso = (MesoGenerator)System.Activator.CreateInstance(mesoType, sequencer);
+
+                ensemble = new Ensemble(macro, meso, conductor);
+                ensemble.Register(sequencer);
+            }
         }
 
         public void Play()
@@ -238,8 +241,8 @@ namespace BarelyAPI
 
         public void SetMood(Mood moodType, float smoothness = 0.0f)
         {
-            Mood = moodType;
-            switch (Mood)
+            mood = moodType;
+            switch (mood)
             {
                 case Mood.Happy:
                     SetMood(0.5f, 0.0f, smoothness);
