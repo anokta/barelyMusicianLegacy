@@ -2,7 +2,8 @@
 using System.Collections;
 using BarelyAPI;
 
-public class BunnyController : MonoBehaviour {
+public class BunnyController : MonoBehaviour
+{
 
     public Musician musician;
 
@@ -17,11 +18,9 @@ public class BunnyController : MonoBehaviour {
 
         Vector3 screen = Camera.main.WorldToScreenPoint(transform.position);
         boundX = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Camera.main.transform.position.y - screen.y, Camera.main.transform.position.z - screen.z)).x;
-
-        musician.Sequencer.AddBarListener(OnNextBar);
     }
-	
-    void Update () 
+
+    void Update()
     {
         speed = musician.IsPlaying ? musician.Sequencer.Tempo / 60.0f : 0.0f;
         animator.speed = speed;
@@ -30,15 +29,11 @@ public class BunnyController : MonoBehaviour {
         {
             transform.Translate(Vector3.left * 2.0f * boundX);
         }
-        transform.Translate(Vector3.right * Time.deltaTime * speed * boundX / (musician.Sequencer.State.BeatCount / 2.0f));
+        transform.Translate(Vector3.right * Time.deltaTime * speed * boundX / (musician.Sequencer.BeatCount / 2.0f));
 
         if (speed == 0.0f)
         {
-            transform.position = new Vector3(-boundX * (1.0f - 2.0f / musician.Sequencer.State.BeatCount), transform.position.y, transform.position.z);
+            transform.position = new Vector3(-boundX * (1.0f - 2.0f / musician.Sequencer.BeatCount), transform.position.y, transform.position.z);
         }
-	}
-
-    void OnNextBar(SequencerState state)
-    {
     }
 }

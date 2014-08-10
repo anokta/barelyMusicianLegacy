@@ -60,19 +60,19 @@ namespace BarelyAPI
             currentBar = lineGenerator.GetLine(section, index, harmonic);
         }
 
-        public void AddBeat(SequencerState state, Conductor conductor)
+        public void AddBeat(Sequencer sequencer, Conductor conductor)
         {
             foreach (NoteMeta noteMeta in currentBar)
             {
-                if (Mathf.FloorToInt(noteMeta.Offset * state.BeatCount) == state.CurrentBeat)
+                if (Mathf.FloorToInt(noteMeta.Offset * sequencer.BeatCount) == sequencer.CurrentBeat)
                 {
                     NoteMeta meta = conductor.TransformNote(noteMeta);
 
-                    float start = state.CurrentSection * state.BarCount + state.CurrentBar + meta.Offset;
+                    float start = sequencer.CurrentSection * sequencer.BarCount + sequencer.CurrentBar + meta.Offset;
                     float end = start + meta.Duration;
 
-                    addNote(new Note(meta.Index, meta.Loudness), start, state.BarLength);
-                    addNote(new Note(meta.Index, 0.0f), end, state.BarLength);
+                    addNote(new Note(meta.Index, meta.Loudness), start, sequencer.BarLength);
+                    addNote(new Note(meta.Index, 0.0f), end, sequencer.BarLength);
                 }
             }
         }

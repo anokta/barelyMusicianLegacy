@@ -17,6 +17,8 @@ public class MusicianEditor : Editor
 
     public override void OnInspectorGUI()
     {
+        DrawDefaultInspector();
+
         //foreach (Instrument instrument in instruments)
         //{
         //    EditorGUILayout.BeginHorizontal();

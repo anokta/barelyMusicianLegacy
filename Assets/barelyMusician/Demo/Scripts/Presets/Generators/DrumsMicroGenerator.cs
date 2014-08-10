@@ -7,8 +7,8 @@ namespace BarelyAPI
     public class DrumsMicroGenerator : MicroGenerator
     {
 
-        public DrumsMicroGenerator(SequencerState sequencerState)
-            : base(sequencerState)
+        public DrumsMicroGenerator(Sequencer sequencer)
+            : base(sequencer)
         {
         }
 

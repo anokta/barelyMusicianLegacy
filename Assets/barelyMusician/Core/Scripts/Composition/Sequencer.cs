@@ -6,36 +6,127 @@ namespace BarelyAPI
     public class Sequencer
     {
         // Event dispatcher
-        public delegate void SequencerEvent(SequencerState state);
+        public delegate void SequencerEvent(Sequencer sequencer);
         event SequencerEvent OnNextSection, OnNextBar, OnNextBeat, OnNextPulse;
         
-        // Tempo
+        // Beats per minute
+        int bpm;
         public int Tempo
         {
-            get { return currentState.BPM; }
-            set { currentState.BPM = value; }
+            get { return bpm; }
+            set { bpm = value; }
         }
 
-        SequencerState currentState;
-        public SequencerState State
+        // Bars per section
+        int barCount;
+        public int BarCount
         {
-            get { return currentState; }
+            get { return barCount; }
+            set { barCount = value; }
+        }
+
+        // Beats per bar
+        int beatCount;
+        public int BeatCount
+        {
+            get { return beatCount; }
+            set { beatCount = value; }
+        }
+
+        // Clock frequency per bar
+        int pulseCount;
+        public int PulseCount
+        {
+            get { return pulseCount; }
+            set { pulseCount = value; }
+        }
+
+        // Note type (quarter, eigth etc.)
+        int noteType;
+        public NoteType NoteType
+        {
+            get { return (NoteType)noteType; }
+            set { noteType = (int)value; }
+        }
+
+        // Current state
+        int currentSection;
+        public int CurrentSection
+        {
+            get { return currentSection; }
+            set { currentSection = value; }
+        }
+
+        int currentBar;
+        public int CurrentBar
+        {
+            get { return currentBar; }
+            set { currentBar = value % barCount; }
+        }
+
+        int currentBeat;
+        public int CurrentBeat
+        {
+            get { return currentBeat; }
+            set { currentBeat = value % beatCount; }
+        }
+
+        int currentPulse;
+        public int CurrentPulse
+        {
+            get { return currentPulse; }
+            set { currentPulse = value % BarLength; }
+        }
+
+        // Section length (in pulses)
+        public int SectionLength
+        {
+            get { return barCount * BarLength; }
+        }
+
+        // Bar length (in pulses)
+        public int BarLength
+        {
+            get { return beatCount * BeatLength; }
+        }
+
+        // Beat length (in pulses)
+        public int BeatLength
+        {
+            get { return pulseCount / noteType; }
+        }
+        
+        public int MinuteToSections(float minutes)
+        {
+            return Mathf.RoundToInt((minutes * bpm * noteType / 4.0f) / (barCount * beatCount));
+        }
+
+        float pulseInterval
+        {
+            get { return 240.0f * AudioProperties.SAMPLE_RATE / pulseCount / bpm; }
         }
 
         float phasor;
 
         public Sequencer(int tempo = 120, int barCount = 4, int beatCount = 4, NoteType noteType = NoteType.QUARTER_NOTE, int pulseCount = 32)
         {
-            currentState = new SequencerState(tempo, barCount, beatCount, noteType, pulseCount);
+            Tempo = tempo;
+            BarCount = barCount;
+            BeatCount = beatCount;
+            NoteType = noteType;
+            PulseCount = pulseCount;
 
             Reset();
         }
 
         public void Reset()
         {
-            currentState.Reset();
+            currentSection = -1;
+            currentBar = -1;
+            currentBeat = -1;
+            currentPulse = -1;
 
-            phasor = currentState.PulseInterval;
+            phasor = pulseInterval;
         }
 
         // Event registration
@@ -84,21 +175,21 @@ namespace BarelyAPI
         {
             for (int i = 0; i < bufferSize; ++i)
             {
-                if (phasor++ >= currentState.PulseInterval)
+                if (phasor++ >= pulseInterval)
                 {
-                    currentState.CurrentPulse++;
+                    CurrentPulse++;
 
-                    if (currentState.CurrentPulse % currentState.BeatLength == 0)
+                    if (CurrentPulse % BeatLength == 0)
                     {
-                        currentState.CurrentBeat++;
+                        CurrentBeat++;
 
-                        if (currentState.CurrentBeat == 0)
+                        if (CurrentBeat == 0)
                         {
-                            currentState.CurrentBar++;
+                            CurrentBar++;
 
-                            if (currentState.CurrentBar == 0)
+                            if (CurrentBar == 0)
                             {
-                                currentState.CurrentSection++;
+                                CurrentSection++;
 
                                 triggerNextSection();
                             }
@@ -111,7 +202,7 @@ namespace BarelyAPI
 
                     triggerNextPulse();
 
-                    phasor -= currentState.PulseInterval;
+                    phasor -= pulseInterval;
                 }
             }
         }
@@ -121,7 +212,7 @@ namespace BarelyAPI
         {
             if (OnNextSection != null)
             {
-                OnNextSection(currentState);
+                OnNextSection(this);
             }
         }
 
@@ -129,7 +220,7 @@ namespace BarelyAPI
         {
             if (OnNextBar != null)
             {
-                OnNextBar(currentState);
+                OnNextBar(this);
             }
         }
 
@@ -137,7 +228,7 @@ namespace BarelyAPI
         {
             if (OnNextBeat != null)
             {
-                OnNextBeat(currentState);
+                OnNextBeat(this);
             }
         }
 
@@ -145,8 +236,10 @@ namespace BarelyAPI
         {
             if (OnNextPulse != null)
             {
-                OnNextPulse(currentState);
+                OnNextPulse(this);
             }
         }
     }
+
+    public enum NoteType { WHOLE_NOTE = 1, HALF_NOTE = 2, QUARTER_NOTE = 4, EIGHTH_NOTE = 8, SIXTEENTH_NOTE = 16 }
 }

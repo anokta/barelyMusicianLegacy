@@ -8,8 +8,8 @@ namespace BarelyAPI
     {
         int[] pattern = { 0, 2, 4, 7, 4, 8 };
 
-        public SimpleMicroGenerator(SequencerState sequencerState)
-            : base(sequencerState)
+        public SimpleMicroGenerator(Sequencer sequencer)
+            : base(sequencer)
         {
         }
 

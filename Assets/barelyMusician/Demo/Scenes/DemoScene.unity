@@ -102,7 +102,7 @@ Transform:
   m_Children:
   - {fileID: 1373494953}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!114 &220406250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,8 +244,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1389430738}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
 --- !u!82 &993552977
@@ -323,7 +322,7 @@ MonoBehaviour:
   beatsPerBar: 8
   rootNote: 8
   masterVolume: 1
-  moodSelection: 0
+  moodSelection: 1
   mood: 0
   energy: .5
   stress: 0
@@ -831,8 +830,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1389430736}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.1309118, y: 6.83033752, z: -8.39225674}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 993552976}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 3

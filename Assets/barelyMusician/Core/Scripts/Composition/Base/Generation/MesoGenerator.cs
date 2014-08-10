@@ -6,17 +6,17 @@ namespace BarelyAPI
 {
     public abstract class MesoGenerator
     {
-        SequencerState state;
+        Sequencer sequencer;
         protected int ProgressionLength
         {
-            get { return state.BarCount; }
+            get { return sequencer.BarCount; }
         }
 
         Dictionary<SectionType, int[]> progressions;
        
-        protected MesoGenerator(SequencerState sequencerState)
+        protected MesoGenerator(Sequencer sequencer)
         {
-            state = sequencerState;
+            this.sequencer = sequencer;
 
             Restart();
         }

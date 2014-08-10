@@ -6,21 +6,21 @@ namespace BarelyAPI
 {
     public abstract class MicroGenerator
     {
-        SequencerState state;
+        Sequencer sequencer;
         protected int LineLength
         {
-            get { return state.BeatCount; }
+            get { return sequencer.BeatCount; }
         }
         protected int ProgressionLength
         {
-            get { return state.BarCount; }
+            get { return sequencer.BarCount; }
         }
 
         Dictionary<SectionType, List<NoteMeta>[]> lines;
 
-        protected MicroGenerator(SequencerState sequencerState)
+        protected MicroGenerator(Sequencer sequencer)
         {
-            state = sequencerState;
+            this.sequencer = sequencer;
         }
 
         public List<NoteMeta> GetLine(SectionType section, int bar, int harmonic)

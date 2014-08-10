@@ -9,8 +9,8 @@ namespace BarelyAPI
         Automaton1D ca;
         MarkovChain markov;
 
-        public NaberMicroGenerator(SequencerState sequencerState)
-            : base(sequencerState)
+        public NaberMicroGenerator(Sequencer sequencer)
+            : base(sequencer)
         {
             ca = new Automaton1D(81, 90);
             markov = new MarkovChain(ModeGenerator.SCALE_LENGTH);

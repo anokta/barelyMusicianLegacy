@@ -25,7 +25,7 @@ namespace BarelyAPI
         public float SongDuration
         {
             get { return songDuration; }
-            set { songDuration = value; ensemble.SongDurationInSections = sequencer.State.MinuteToSections(songDuration); }
+            set { songDuration = value; ensemble.SongDurationInSections = sequencer.MinuteToSections(songDuration); }
         }
 
         // Bars per section
@@ -34,7 +34,7 @@ namespace BarelyAPI
         public int BarsPerSection
         {
             get { return barsPerSection; }
-            set { barsPerSection = value; sequencer.State.BarCount = barsPerSection; }
+            set { barsPerSection = value; sequencer.BarCount = barsPerSection; }
         }
 
         // Beats per bar
@@ -43,7 +43,7 @@ namespace BarelyAPI
         public int BeatsPerBar
         {
             get { return beatsPerBar; }
-            set { beatsPerBar = value; sequencer.State.BeatCount = beatsPerBar; }
+            set { beatsPerBar = value; sequencer.BeatCount = beatsPerBar; }
         }
 
         // Fundamental key of the song
@@ -157,14 +157,14 @@ namespace BarelyAPI
             //instruments[5] = new SynthInstrument(OscillatorType.SAW, new Envelope(0.1f, 0.25f, 1.0f, 0.2f), -8.0f);
             //instruments[6] = new SynthInstrument(OscillatorType.SQUARE, new Envelope(0.25f, 0.5f, 0.5f, 0.25f), -10.0f);
 
-            ensemble.AddPerformer("Loop", new Performer(instruments[0], new NaberMicroGenerator(sequencer.State)));
-            ensemble.AddPerformer("Melody", new Performer(instruments[1], new CA1DMicroGenerator(sequencer.State)));
-            ensemble.AddPerformer("Chords", new Performer(instruments[2], new ChordMicroGenerator(sequencer.State)));
-            ensemble.AddPerformer("Drums", new Performer(instruments[3], new DrumsMicroGenerator(sequencer.State)));
+            ensemble.AddPerformer("Loop", new Performer(instruments[0], new NaberMicroGenerator(sequencer)));
+            ensemble.AddPerformer("Melody", new Performer(instruments[1], new CA1DMicroGenerator(sequencer)));
+            ensemble.AddPerformer("Chords", new Performer(instruments[2], new ChordMicroGenerator(sequencer)));
+            ensemble.AddPerformer("Drums", new Performer(instruments[3], new DrumsMicroGenerator(sequencer)));
 
-            //ensemble.AddPerformer("Bass", new Performer(instruments[4], new NaberMicroGenerator(sequencer.State)));
-            //ensemble.AddPerformer("Melody 2", new Performer(instruments[5], new NaberMicroGenerator(sequencer.State)));
-            //ensemble.AddPerformer("Chords 2", new Performer(instruments[6], new ChordMicroGenerator(sequencer.State)));
+            //ensemble.AddPerformer("Bass", new Performer(instruments[4], new NaberMicroGenerator(sequencer)));
+            //ensemble.AddPerformer("Melody 2", new Performer(instruments[5], new NaberMicroGenerator(sequencer)));
+            //ensemble.AddPerformer("Chords 2", new Performer(instruments[6], new ChordMicroGenerator(sequencer)));
 
             #endregion TEST_ZONE
         }
@@ -205,7 +205,7 @@ namespace BarelyAPI
             sequencer = new Sequencer(initialTempo, barsPerSection, beatsPerBar);
             conductor = new Conductor((float)rootNote);
 
-            ensemble = new Ensemble(new GrammarMacroGenerator(sequencer.State.MinuteToSections(songDuration), true), new MarkovMesoGenerator(sequencer.State), conductor);
+            ensemble = new Ensemble(new GrammarMacroGenerator(sequencer.MinuteToSections(songDuration), true), new MarkovMesoGenerator(sequencer), conductor);
             ensemble.Register(sequencer);
         }
 

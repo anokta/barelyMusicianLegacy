@@ -8,8 +8,8 @@ namespace BarelyAPI
     {
         Automaton1D ca;
 
-        public CA1DMicroGenerator(SequencerState sequencerState)
-            : base(sequencerState)
+        public CA1DMicroGenerator(Sequencer sequencer)
+            : base(sequencer)
         {
             ca = new Automaton1D(81, 90);
         }

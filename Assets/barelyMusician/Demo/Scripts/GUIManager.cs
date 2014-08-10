@@ -13,7 +13,6 @@ public class GUIManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        musician.Sequencer.AddBeatListener(OnNextBeat);
     }
 
     // Update is called once per frame
@@ -109,11 +108,5 @@ public class GUIManager : MonoBehaviour
         GUILayout.EndVertical();
 
         GUILayout.EndArea();
-    }
-
-    void OnNextBeat(SequencerState state)
-    {
-        //Camera.main.backgroundColor += new Color(RandomNumber.NextFloat(-0.01f, 0.01f), RandomNumber.NextFloat(-0.01f, 0.01f), RandomNumber.NextFloat(-0.01f, 0.01f));
-        //timeSigText = beat.ToString() + " / " + Sequencer.BeatCount;
     }
 }

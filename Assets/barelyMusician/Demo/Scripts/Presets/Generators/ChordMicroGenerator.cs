@@ -8,8 +8,8 @@ namespace BarelyAPI
     {
         int[] chord = { 0, 2, 4, 6, 7 };
 
-        public ChordMicroGenerator(SequencerState sequencerState)
-            : base(sequencerState)
+        public ChordMicroGenerator(Sequencer sequencer)
+            : base(sequencer)
         {
         }
 

@@ -2,7 +2,8 @@
 using System.Collections;
 using BarelyAPI;
 
-public class VfxManager : MonoBehaviour {
+public class VfxManager : MonoBehaviour
+{
 
     public Musician musician;
 
@@ -15,7 +16,7 @@ public class VfxManager : MonoBehaviour {
     float currentBeat;
     float beatCount;
 
-	// Use this for initialization
+    // Use this for initialization
     void Start()
     {
         musician.Sequencer.AddSectionListener(OnNextSection);
@@ -26,9 +27,9 @@ public class VfxManager : MonoBehaviour {
         currentStrokeColor = targetStrokeColor = Color.red;
         currentBackgroundColor = targetBackgroundColor = Color.white;
         currentBeat = -1;
-	}
-	
-	// Update is called once per frame
+    }
+
+    // Update is called once per frame
     void Update()
     {
         if (currentBackgroundColor != targetBackgroundColor)
@@ -51,26 +52,26 @@ public class VfxManager : MonoBehaviour {
             GUI.DrawTexture(new Rect(Screen.width * currentBeat / beatCount, 0.0f, Screen.width / beatCount, Screen.height), pixel);
     }
 
-    void OnNextSection(SequencerState state)
+    void OnNextSection(Sequencer sequencer)
     {
-        targetBackgroundColor = new Color(RandomNumber.NextFloat(), RandomNumber.NextFloat(), RandomNumber.NextFloat()); 
+        targetBackgroundColor = new Color(RandomNumber.NextFloat(), RandomNumber.NextFloat(), RandomNumber.NextFloat());
     }
 
-    void OnNextBar(SequencerState state)
+    void OnNextBar(Sequencer sequencer)
     {
         barColor = new Color(RandomNumber.NextFloat(), RandomNumber.NextFloat(), RandomNumber.NextFloat());
     }
 
-    void OnNextBeat(SequencerState state)
+    void OnNextBeat(Sequencer sequencer)
     {
-        beatCount = state.BeatCount;
-        currentBeat = state.CurrentBeat;
+        beatCount = sequencer.BeatCount;
+        currentBeat = sequencer.CurrentBeat;
 
         currentStrokeColor = barColor;
         targetStrokeColor = Color.clear;
     }
 
-    void OnNextPulse(SequencerState state)
+    void OnNextPulse(Sequencer sequencer)
     {
         //currentBeat += 1.0f / state.BeatLength;
     }

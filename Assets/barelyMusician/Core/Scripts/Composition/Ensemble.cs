@@ -87,34 +87,34 @@ namespace BarelyAPI
             }
         }
 
-        void OnNextBar(SequencerState state)
+        void OnNextBar(Sequencer sequencer)
         {
-            SectionType currentSection = macro.GetSection(state.CurrentSection);
+            SectionType currentSection = macro.GetSection(sequencer.CurrentSection);
 
             if (currentSection != SectionType.END)
             {
                 foreach (Performer performer in performers.Values)
                 {
-                    performer.GenerateBar(currentSection, state.CurrentBar, meso.GetHarmonic(currentSection, state.CurrentBar));
+                    performer.GenerateBar(currentSection, sequencer.CurrentBar, meso.GetHarmonic(currentSection, sequencer.CurrentBar));
                 }
             }
         }
 
-        void OnNextBeat(SequencerState state)
+        void OnNextBeat(Sequencer sequencer)
         {
             foreach (Performer performer in performers.Values)
             {
-                performer.AddBeat(state, conductor);
+                performer.AddBeat(sequencer, conductor);
             }
         }
 
-        void OnNextPulse(SequencerState state)
+        void OnNextPulse(Sequencer sequencer)
         {
-            int bar = state.CurrentSection * state.BarCount + state.CurrentBar;
+            int bar = sequencer.CurrentSection * sequencer.BarCount + sequencer.CurrentBar;
 
             foreach (Performer performer in performers.Values)
             {
-                performer.Play(bar, state.CurrentPulse, conductor.TimbreProperties);
+                performer.Play(bar, sequencer.CurrentPulse, conductor.TimbreProperties);
             }
         }
     }
