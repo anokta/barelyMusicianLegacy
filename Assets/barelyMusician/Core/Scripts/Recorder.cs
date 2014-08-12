@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace BarelyAPI
 {
+    [AddComponentMenu("BarelyAPI/Recorder")]
     public class Recorder : MonoBehaviour
     {
         public string fileName;
@@ -60,6 +61,8 @@ namespace BarelyAPI
             recording = false;
 
             WriteHeader();
+
+            //UnityEditor.FileUtil.MoveFileOrDirectory(Path.Combine(folderPath, fileName), UnityEditor.EditorUtility.SaveFilePanel("Save file to:", Application.persistentDataPath, "NewRecord", "wav"));
         }
 
         void StartWriting()

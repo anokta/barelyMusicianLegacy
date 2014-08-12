@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 using System;
 using System.Collections;
 
@@ -14,9 +13,9 @@ namespace BarelyAPI
 
         void OnEnable()
         {
-            findGeneratorTypes("MacroGenerator");
-            findGeneratorTypes("MesoGenerator");
-            findGeneratorTypes("MicroGenerator");
+            getGeneratorTypes("MacroGenerators");
+            getGeneratorTypes("MesoGenerators");
+            getGeneratorTypes("MicroGenerators");
         }
 
         public MacroGenerator CreateMacroGenerator(int typeIndex, int sequenceLength, bool loop = true)
@@ -52,15 +51,14 @@ namespace BarelyAPI
             return (MicroGenerator)System.Activator.CreateInstance(microType, sequencer);
         }
 
-        void findGeneratorTypes(string type)
+        void getGeneratorTypes(string type)
         {
-            string[] folderMacro = { "Assets/barelyMusician/Demo/Scripts/Presets/Generators/" + type + "s" };
+            UnityEngine.Object[] assets = Resources.LoadAll("Presets/Generators/" + type);
 
-            string[] types = AssetDatabase.FindAssets("", folderMacro);
+            string[] types = new string[assets.Length];
             for (int i = 0; i < types.Length; ++i)
             {
-                string fullPath = AssetDatabase.GUIDToAssetPath(types[i]);
-                types[i] = fullPath.Substring(fullPath.LastIndexOf('/') + 1, fullPath.LastIndexOf('.') - fullPath.LastIndexOf('/') - 1);
+                types[i] = assets[i].name;
             }
 
             switch (type)
@@ -75,6 +73,8 @@ namespace BarelyAPI
                     MicroGeneratorTypes = types;
                     break;
             }
+
+            Resources.UnloadUnusedAssets();
         }
     }
 }

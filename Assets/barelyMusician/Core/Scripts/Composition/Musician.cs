@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace BarelyAPI
 {
+    [AddComponentMenu("BarelyAPI/Musician")]
     public class Musician : MonoBehaviour
     {
         public GeneratorFactory GeneratorFactory;
