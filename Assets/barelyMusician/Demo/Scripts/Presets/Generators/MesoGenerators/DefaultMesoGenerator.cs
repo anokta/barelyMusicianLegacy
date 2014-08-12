@@ -3,9 +3,9 @@ using System.Collections;
 
 namespace BarelyAPI
 {
-    public class SimpleMesoGenerator : MesoGenerator
+    public class DefaultMesoGenerator : MesoGenerator
     {
-        public SimpleMesoGenerator(Sequencer sequencer)
+        public DefaultMesoGenerator(Sequencer sequencer)
             : base(sequencer)
         {
         }

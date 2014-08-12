@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace BarelyAPI
 {
-    public class SimpleModeGenerator : ModeGenerator
+    public class DefaultModeGenerator : ModeGenerator
     {
         public override void GenerateScale(float stress)
         {

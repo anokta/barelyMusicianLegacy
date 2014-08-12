@@ -69,21 +69,23 @@ namespace BarelyAPI
             return output;
         }
 
-        public void MutePerformer(string name)
+        public bool IsPerformerActive(string name)
         {
             Performer performer = null;
             if (performers.TryGetValue(name, out performer))
             {
-                performer.Mute = true;
+                return performer.Active;
             }
+
+            return false;
         }
 
-        public void UnmutePerformer(string name)
+        public void TogglePeformer(string name, bool active)
         {
             Performer performer = null;
             if (performers.TryGetValue(name, out performer))
             {
-                performer.Mute = false;
+                performer.Active = active;
             }
         }
 

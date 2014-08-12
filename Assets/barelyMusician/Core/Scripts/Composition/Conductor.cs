@@ -88,7 +88,7 @@ namespace BarelyAPI
         {
             fundamentalKey = key;
 
-            mode = modeGenerator == null ? new SimpleModeGenerator() : modeGenerator;
+            mode = modeGenerator == null ? new DefaultModeGenerator() : modeGenerator;
 
             timbreProperties = new TimbreProperties();
         }

@@ -7,12 +7,18 @@ namespace BarelyAPI
 {
     public class Musician : MonoBehaviour
     {
-        // Editor-only parameters
-        public string macroGeneratorType;
-        public string mesoGeneratorType;
+        public GeneratorFactory GeneratorFactory;
+        public InstrumentFactory InstrumentFactory;
 
-        public MoodSelectionMode moodSelectionMode;
-        public Mood mood;
+        public int MacroGeneratorTypeIndex = 0;
+        public int MesoGeneratorTypeIndex = 0;
+
+        public MoodSelectionMode MoodSelectionMode;
+        public Mood Mood;
+
+        public List<string> InstrumentName;
+        public List<int> InstrumentType;
+        public List<int> MicroGeneratorType;
 
         // Tempo (BPM)
         [SerializeField]
@@ -102,11 +108,6 @@ namespace BarelyAPI
             }
         }
 
-        [SerializeField]
-        List<string> instrumentNames;
-        [SerializeField]
-        List<Instrument> instruments;
-
         #region TEST_ZONE
         public AudioClip sample, sampleBass;
         public AudioClip[] drumKit;
@@ -120,6 +121,11 @@ namespace BarelyAPI
         }
 
         Ensemble ensemble;
+        public Ensemble Ensemble
+        {
+            get { return ensemble; }
+        }
+
         Conductor conductor;
 
         AudioSource audioSource;
@@ -151,16 +157,34 @@ namespace BarelyAPI
             //instruments[5] = new SynthInstrument(OscillatorType.SAW, new Envelope(0.1f, 0.25f, 1.0f, 0.2f), -8.0f);
             //instruments[6] = new SynthInstrument(OscillatorType.SQUARE, new Envelope(0.25f, 0.5f, 0.5f, 0.25f), -10.0f);
 
-            ensemble.AddPerformer("Loop", new Performer(instruments[0], new NaberMicroGenerator(sequencer)));
-            ensemble.AddPerformer("Melody", new Performer(instruments[1], new CA1DMicroGenerator(sequencer)));
-            ensemble.AddPerformer("Chords", new Performer(instruments[2], new ChordMicroGenerator(sequencer)));
-            ensemble.AddPerformer("Drums", new Performer(instruments[3], new DrumsMicroGenerator(sequencer)));
+            //ensemble.AddPerformer("Loop", new Performer(instruments[0], new NaberMicroGenerator(sequencer)));
+            //ensemble.AddPerformer("Melody", new Performer(instruments[1], new CA1DMicroGenerator(sequencer)));
+            //ensemble.AddPerformer("Chords", new Performer(instruments[2], new ChordMicroGenerator(sequencer)));
+            //ensemble.AddPerformer("Drums", new Performer(instruments[3], new DrumsMicroGenerator(sequencer)));
 
             //ensemble.AddPerformer("Bass", new Performer(instruments[4], new NaberMicroGenerator(sequencer)));
             //ensemble.AddPerformer("Melody 2", new Performer(instruments[5], new NaberMicroGenerator(sequencer)));
             //ensemble.AddPerformer("Chords 2", new Performer(instruments[6], new ChordMicroGenerator(sequencer)));
 
             #endregion TEST_ZONE
+        }
+
+        public void RegisterPerformer(string instrumentName, int instrumentType, int microGeneratorTypeIndex)
+        {
+            InstrumentName.Add(instrumentName);
+            InstrumentType.Add(instrumentType);
+            MicroGeneratorType.Add(microGeneratorTypeIndex);
+        }
+
+        public void DeregisterPerformer(string instrumentName)
+        {
+            int index = InstrumentName.IndexOf(instrumentName);
+            if (index > -1)
+            {
+                InstrumentName.RemoveAt(index);
+                InstrumentType.RemoveAt(index);
+                MicroGeneratorType.RemoveAt(index);
+            }
         }
 
         void FixedUpdate()
@@ -199,16 +223,31 @@ namespace BarelyAPI
             if (sequencer == null) sequencer = new Sequencer(initialTempo, barsPerSection, beatsPerBar);
             if (conductor == null) conductor = new Conductor((float)rootNote);
 
+            if (GeneratorFactory == null) GeneratorFactory = ScriptableObject.CreateInstance<GeneratorFactory>();
+            if (InstrumentFactory == null) InstrumentFactory = ScriptableObject.CreateInstance<InstrumentFactory>();
+
             if (ensemble == null)
             {
-                Type macroType = Type.GetType("BarelyAPI." + macroGeneratorType); if (macroType == null) macroType = Type.GetType("BarelyAPI.SimpleMacroGenerator");
-                MacroGenerator macro = (MacroGenerator)System.Activator.CreateInstance(macroType, sequencer.MinuteToSections(songDuration), true);
-
-                Type mesoType = Type.GetType("BarelyAPI." + mesoGeneratorType); if (mesoType == null) mesoType = Type.GetType("BarelyAPI.SimpleMesoGenerator");
-                MesoGenerator meso = (MesoGenerator)System.Activator.CreateInstance(mesoType, sequencer);
+                MacroGenerator macro = GeneratorFactory.CreateMacroGenerator(MacroGeneratorTypeIndex, sequencer.MinuteToSections(songDuration), true);
+                MesoGenerator meso = GeneratorFactory.CreateMesoGenerator(MesoGeneratorTypeIndex, sequencer);
 
                 ensemble = new Ensemble(macro, meso, conductor);
                 ensemble.Register(sequencer);
+                
+                // performers
+                if (InstrumentName == null) InstrumentName = new List<string>();
+                if (InstrumentType == null) InstrumentType = new List<int>();
+                if (MicroGeneratorType == null) MicroGeneratorType = new List<int>();
+
+                for (int i = 0; i < InstrumentName.Count; ++i)
+                {
+                    string name = InstrumentName[i];
+
+                    Instrument instrument = InstrumentFactory.CreateInstrument(InstrumentType[i]);
+                    MicroGenerator micro = GeneratorFactory.CreateMicroGenerator(MicroGeneratorType[i], sequencer);
+
+                    ensemble.AddPerformer(name, new Performer(instrument, micro));
+                }
             }
         }
 
@@ -241,8 +280,8 @@ namespace BarelyAPI
 
         public void SetMood(Mood moodType, float smoothness = 0.0f)
         {
-            mood = moodType;
-            switch (mood)
+            Mood = moodType;
+            switch (Mood)
             {
                 case Mood.Happy:
                     SetMood(0.5f, 0.0f, smoothness);

@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace BarelyAPI
 {
-    public class SimpleMicroGenerator : MicroGenerator
+    public class DefaultMicroGenerator : MicroGenerator
     {
         int[] pattern = { 0, 2, 4, 7, 4, 8 };
 
-        public SimpleMicroGenerator(Sequencer sequencer)
+        public DefaultMicroGenerator(Sequencer sequencer)
             : base(sequencer)
         {
         }

@@ -3,9 +3,9 @@ using System.Collections;
 
 namespace BarelyAPI
 {
-    public class SimpleMacroGenerator : MacroGenerator
+    public class DefaultMacroGenerator : MacroGenerator
     {
-        public SimpleMacroGenerator(int length, bool looping = false)
+        public DefaultMacroGenerator(int length, bool looping = false)
             : base(length, looping)
         {
         }

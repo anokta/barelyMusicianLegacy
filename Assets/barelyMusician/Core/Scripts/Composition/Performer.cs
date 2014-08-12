@@ -17,29 +17,39 @@ namespace BarelyAPI
         }
 
         bool active;
-        public bool Mute
+        public bool Active
         {
             get { return active; }
-            set { active = !value; }
+            set { active = value; }
+        }
+
+        // Line generator
+        MicroGenerator microGenerator;
+        public MicroGenerator MicroGenerator
+        {
+            get { return microGenerator; }
+            set { microGenerator = value; }
+        }
+
+        // Instrument
+        Instrument instrument;
+        public Instrument Instrument
+        {
+            get { return instrument; }
+            set { instrument = value; initialOnset = instrument.Attack;  }
         }
 
         // Score (note list per bar)
         Dictionary<int, List<Note>[]> score;
-
-        MicroGenerator lineGenerator;
         List<NoteMeta> currentBar;
 
-        // Instrument
-        Instrument instrument;
 
         float initialOnset;
 
         public Performer(Instrument instrument, MicroGenerator microGenerator)
         {
-            this.instrument = instrument;
-            initialOnset = instrument.Attack;
-
-            lineGenerator = microGenerator;
+            Instrument = instrument;
+            MicroGenerator = microGenerator;
 
             active = true;
 
@@ -52,12 +62,12 @@ namespace BarelyAPI
 
             instrument.StopAllNotes();
 
-            lineGenerator.Restart();
+            microGenerator.Restart();
         }
 
         public void GenerateBar(SectionType section, int index, int harmonic)
         {
-            currentBar = lineGenerator.GetLine(section, index, harmonic);
+            currentBar = microGenerator.GetLine(section, index, harmonic);
         }
 
         public void AddBeat(Sequencer sequencer, Conductor conductor)
