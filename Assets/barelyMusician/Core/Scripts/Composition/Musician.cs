@@ -15,7 +15,7 @@ namespace BarelyAPI
         public Mood Mood;
 
         public List<string> InstrumentName;
-        public List<int> InstrumentType;
+        public List<InstrumentMeta> InstrumentType;
         public List<int> MicroGeneratorType;
 
         // Tempo (BPM)
@@ -167,7 +167,7 @@ namespace BarelyAPI
             #endregion TEST_ZONE
         }
 
-        public void RegisterPerformer(string instrumentName, int instrumentType, int microGeneratorTypeIndex)
+        public void RegisterPerformer(string instrumentName, InstrumentMeta instrumentType, int microGeneratorTypeIndex)
         {
             InstrumentName.Add(instrumentName);
             InstrumentType.Add(instrumentType);
@@ -231,7 +231,7 @@ namespace BarelyAPI
                 
                 // performers
                 if (InstrumentName == null) InstrumentName = new List<string>();
-                if (InstrumentType == null) InstrumentType = new List<int>();
+                if (InstrumentType == null) InstrumentType = new List<InstrumentMeta>();
                 if (MicroGeneratorType == null) MicroGeneratorType = new List<int>();
 
                 for (int i = 0; i < InstrumentName.Count; ++i)

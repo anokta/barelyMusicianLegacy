@@ -85,7 +85,7 @@ namespace BarelyAPI
                     EditorGUILayout.EndHorizontal();
 
                     EditorGUI.indentLevel++;
-                    EditorGUILayout.BeginHorizontal(); EditorGUILayout.PrefixLabel("Instrument Type"); EditorGUILayout.LabelField(InstrumentFactory.InstrumentTypes[musician.InstrumentType[i]]); EditorGUILayout.EndHorizontal();
+                    EditorGUILayout.BeginHorizontal(); EditorGUILayout.PrefixLabel("Instrument Type"); EditorGUILayout.LabelField(InstrumentFactory.InstrumentTypes[musician.InstrumentType[i].type]); EditorGUILayout.EndHorizontal();
                     EditorGUILayout.BeginHorizontal(); EditorGUILayout.PrefixLabel("Micro Generator"); EditorGUILayout.LabelField(GeneratorFactory.MicroGeneratorTypes[musician.MicroGeneratorType[i]]); EditorGUILayout.EndHorizontal();
                     EditorGUI.indentLevel--;
 
@@ -98,7 +98,7 @@ namespace BarelyAPI
                 GUILayout.FlexibleSpace();
                 if (GUILayout.Button("Add New Performer") && performerWindow == null)
                 {
-                    performerWindow = (PerformerWindow)EditorWindow.GetWindow(typeof(PerformerWindow), true, "Performers");
+                    performerWindow = (PerformerWindow)EditorWindow.GetWindow(typeof(PerformerWindow), true, "Performer");
                     performerWindow.musician = musician;
                 }
                 EditorGUILayout.EndHorizontal();
