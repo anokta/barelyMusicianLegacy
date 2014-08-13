@@ -22,8 +22,8 @@ namespace BarelyAPI
         void OnGUI()
         {
             instrumentName = EditorGUILayout.TextField(new GUIContent("Instrument Name", "String identifier of the instrument."), instrumentName);
-            instrumentType = EditorGUILayout.Popup("Instrument Type", instrumentType, musician.InstrumentFactory.InstrumentTypes);
-            microGeneratorType = EditorGUILayout.Popup("Micro Generator", microGeneratorType, musician.GeneratorFactory.MicroGeneratorTypes);
+            instrumentType = EditorGUILayout.Popup("Instrument Type", instrumentType, InstrumentFactory.InstrumentTypes);
+            microGeneratorType = EditorGUILayout.Popup("Micro Generator", microGeneratorType, GeneratorFactory.MicroGeneratorTypes);
 
             EditorGUILayout.BeginHorizontal();
             attack = EditorGUILayout.FloatField("Attack", attack);

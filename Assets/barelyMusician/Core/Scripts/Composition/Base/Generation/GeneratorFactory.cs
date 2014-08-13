@@ -4,54 +4,48 @@ using System.Collections;
 
 namespace BarelyAPI
 {
-    [Serializable]
-    public class GeneratorFactory : ScriptableObject
+    public class GeneratorFactory
     {
-        public string[] MacroGeneratorTypes;
-        public string[] MesoGeneratorTypes;
-        public string[] MicroGeneratorTypes;
-
-        void OnEnable()
+        private string[] macroGeneratorTypes;
+        public static string[] MacroGeneratorTypes
         {
-            getGeneratorTypes("MacroGenerators");
-            getGeneratorTypes("MesoGenerators");
-            getGeneratorTypes("MicroGenerators");
+            get { return instance.macroGeneratorTypes; }
         }
 
-        public MacroGenerator CreateMacroGenerator(int typeIndex, int sequenceLength, bool loop = true)
+        private string[] mesoGeneratorTypes;
+        public static string[] MesoGeneratorTypes
         {
-            return createMacroGenerator(MacroGeneratorTypes[typeIndex], sequenceLength, loop);
+            get { return instance.mesoGeneratorTypes; }
         }
 
-        public MesoGenerator CreateMesoGenerator(int typeIndex, Sequencer sequencer)
+        private string[] microGeneratorTypes;
+        public static string[] MicroGeneratorTypes
         {
-            return createMesoGenerator(MesoGeneratorTypes[typeIndex], sequencer);
+            get { return instance.microGeneratorTypes; }
         }
 
-        public MicroGenerator CreateMicroGenerator(int typeIndex, Sequencer sequencer)
+        private static GeneratorFactory _instance;
+        private static GeneratorFactory instance
         {
-            return createMicroGenerator(MicroGeneratorTypes[typeIndex], sequencer);
+            get
+            {
+                if (_instance == null)
+                    _instance = new GeneratorFactory();
+
+                return _instance;
+            }
         }
 
-        MacroGenerator createMacroGenerator(string type, int sequenceLength, bool loop)
+        GeneratorFactory()
         {
-            Type macroType = Type.GetType("BarelyAPI." + type); if (macroType == null) macroType = Type.GetType("BarelyAPI.SimpleMacroGenerator");
-            return (MacroGenerator)System.Activator.CreateInstance(macroType, sequenceLength, loop);
+            setGeneratorTypes("MacroGenerators");
+            setGeneratorTypes("MesoGenerators");
+            setGeneratorTypes("MicroGenerators");
+
+            Resources.UnloadUnusedAssets();
         }
 
-        MesoGenerator createMesoGenerator(string type, Sequencer sequencer)
-        {
-            Type mesoType = Type.GetType("BarelyAPI." + type); if (mesoType == null) mesoType = Type.GetType("BarelyAPI.SimpleMesoGenerator");
-            return (MesoGenerator)System.Activator.CreateInstance(mesoType, sequencer);
-        }
-
-        MicroGenerator createMicroGenerator(string type, Sequencer sequencer)
-        {
-            Type microType = Type.GetType("BarelyAPI." + type); if (microType == null) microType = Type.GetType("BarelyAPI.SimpleMicroGenerator");
-            return (MicroGenerator)System.Activator.CreateInstance(microType, sequencer);
-        }
-
-        void getGeneratorTypes(string type)
+        void setGeneratorTypes(string type)
         {
             UnityEngine.Object[] assets = Resources.LoadAll("Presets/Generators/" + type);
 
@@ -63,18 +57,55 @@ namespace BarelyAPI
 
             switch (type)
             {
-                case "MacroGenerator":
-                    MacroGeneratorTypes = types;
+                case "MacroGenerators":
+                    macroGeneratorTypes = types;
                     break;
-                case "MesoGenerator":
-                    MesoGeneratorTypes = types;
+                case "MesoGenerators":
+                    mesoGeneratorTypes = types;
                     break;
-                case "MicroGenerator":
-                    MicroGeneratorTypes = types;
+                case "MicroGenerators":
+                    microGeneratorTypes = types;
                     break;
             }
+        }
 
-            Resources.UnloadUnusedAssets();
+        public static MacroGenerator CreateMacroGenerator(int typeIndex, int sequenceLength, bool loop = true)
+        {
+            return createMacroGenerator(MacroGeneratorTypes[typeIndex], sequenceLength, loop);
+        }
+
+        public static MesoGenerator CreateMesoGenerator(int typeIndex, Sequencer sequencer)
+        {
+            return createMesoGenerator(MesoGeneratorTypes[typeIndex], sequencer);
+        }
+
+        public static MicroGenerator CreateMicroGenerator(int typeIndex, Sequencer sequencer)
+        {
+            return createMicroGenerator(MicroGeneratorTypes[typeIndex], sequencer);
+        }
+
+        static MacroGenerator createMacroGenerator(string type, int sequenceLength, bool loop)
+        {
+            Type macroType = Type.GetType("BarelyAPI." + type);
+            if (macroType == null) macroType = Type.GetType("BarelyAPI.DefaultMacroGenerator");
+
+            return (MacroGenerator)Activator.CreateInstance(macroType, sequenceLength, loop);
+        }
+
+        static MesoGenerator createMesoGenerator(string type, Sequencer sequencer)
+        {
+            Type mesoType = Type.GetType("BarelyAPI." + type);
+            if (mesoType == null) mesoType = Type.GetType("BarelyAPI.DefaultMesoGenerator");
+
+            return (MesoGenerator)Activator.CreateInstance(mesoType, sequencer);
+        }
+
+        static MicroGenerator createMicroGenerator(string type, Sequencer sequencer)
+        {
+            Type microType = Type.GetType("BarelyAPI." + type);
+            if (microType == null) microType = Type.GetType("BarelyAPI.DefaultMicroGenerator");
+
+            return (MicroGenerator)Activator.CreateInstance(microType, sequencer);
         }
     }
 }

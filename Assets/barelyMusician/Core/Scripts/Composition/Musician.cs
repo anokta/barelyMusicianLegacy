@@ -8,9 +8,6 @@ namespace BarelyAPI
     [AddComponentMenu("BarelyAPI/Musician")]
     public class Musician : MonoBehaviour
     {
-        public GeneratorFactory GeneratorFactory;
-        public InstrumentFactory InstrumentFactory;
-
         public int MacroGeneratorTypeIndex = 0;
         public int MesoGeneratorTypeIndex = 0;
 
@@ -223,9 +220,6 @@ namespace BarelyAPI
         {
             if (sequencer == null) sequencer = new Sequencer(initialTempo, barsPerSection, beatsPerBar);
             if (conductor == null) conductor = new Conductor((float)rootNote);
-
-            if (GeneratorFactory == null) GeneratorFactory = ScriptableObject.CreateInstance<GeneratorFactory>();
-            if (InstrumentFactory == null) InstrumentFactory = ScriptableObject.CreateInstance<InstrumentFactory>();
 
             if (ensemble == null)
             {

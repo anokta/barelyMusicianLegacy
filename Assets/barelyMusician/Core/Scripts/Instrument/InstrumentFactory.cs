@@ -4,38 +4,53 @@ using System.Collections;
 
 namespace BarelyAPI
 {
-    [Serializable]
-    public class InstrumentFactory : ScriptableObject
+    public class InstrumentFactory
     {
-        public string[] InstrumentTypes;
-
-        void OnEnable()
+        private string[] instrumentTypes;
+        public static string[] InstrumentTypes
         {
-            getInstrumentTypes();
+            get { return instance.instrumentTypes; }
         }
 
-        public Instrument CreateInstrument(int typeIndex)
+        private static InstrumentFactory _instance;
+        private static InstrumentFactory instance
+        {
+            get
+            {
+                if (_instance == null) 
+                    _instance = new InstrumentFactory();
+
+                return _instance;
+            }
+        }
+
+        InstrumentFactory()
+        {
+            setInstrumentTypes();
+
+            Resources.UnloadUnusedAssets();
+        }
+
+        public static Instrument CreateInstrument(int typeIndex)
         {
             return createInstrument(InstrumentTypes[typeIndex]);
         }
 
-        Instrument createInstrument(string type)
+        static Instrument createInstrument(string type)
         {
             Type instrumentType = Type.GetType("BarelyAPI." + type); if (instrumentType == null) instrumentType = Type.GetType("BarelyAPI.SynthInstrument");
             return (Instrument)System.Activator.CreateInstance(instrumentType, OscillatorType.SQUARE, new Envelope(0.1f, 0.25f, 1.0f, 0.2f), -3.0f, 16);
         }
 
-        void getInstrumentTypes()
+        void setInstrumentTypes()
         {
             UnityEngine.Object[] assets = Resources.LoadAll("Presets/Instruments");
 
-            InstrumentTypes = new string[assets.Length];
-            for (int i = 0; i < InstrumentTypes.Length; ++i)
+            instrumentTypes = new string[assets.Length];
+            for (int i = 0; i < instrumentTypes.Length; ++i)
             {
-                InstrumentTypes[i] = assets[i].name;
+                instrumentTypes[i] = assets[i].name;
             }
-
-            Resources.UnloadUnusedAssets();
         }
     }
 }

@@ -54,8 +54,8 @@ namespace BarelyAPI
             GUILayout.Box("Ensemble");
 
             if (Application.isPlaying) GUI.enabled = false;
-            musician.MacroGeneratorTypeIndex = EditorGUILayout.Popup("Macro Generator", musician.MacroGeneratorTypeIndex, musician.GeneratorFactory.MacroGeneratorTypes);
-            musician.MesoGeneratorTypeIndex = EditorGUILayout.Popup("Meso Generator", musician.MesoGeneratorTypeIndex, musician.GeneratorFactory.MesoGeneratorTypes);
+            musician.MacroGeneratorTypeIndex = EditorGUILayout.Popup("Macro Generator", musician.MacroGeneratorTypeIndex, GeneratorFactory.MacroGeneratorTypes);
+            musician.MesoGeneratorTypeIndex = EditorGUILayout.Popup("Meso Generator", musician.MesoGeneratorTypeIndex, GeneratorFactory.MesoGeneratorTypes);
             // = EditorGUILayout.TextField(new GUIContent("Macro Generator", "For the musical form (sequence of sections)."), musician.MacroGeneratorType);
             //musician.MesoGeneratorType = EditorGUILayout.TextField(new GUIContent("Meso Generator", "For harmonic progressions (sequence of bars per section)."), musician.MesoGeneratorType);
             if (Application.isPlaying) GUI.enabled = true;
@@ -85,8 +85,8 @@ namespace BarelyAPI
                     EditorGUILayout.EndHorizontal();
 
                     EditorGUI.indentLevel++;
-                    EditorGUILayout.BeginHorizontal(); EditorGUILayout.PrefixLabel("Instrument Type"); EditorGUILayout.LabelField(musician.InstrumentFactory.InstrumentTypes[musician.InstrumentType[i]]); EditorGUILayout.EndHorizontal();
-                    EditorGUILayout.BeginHorizontal(); EditorGUILayout.PrefixLabel("Micro Generator"); EditorGUILayout.LabelField(musician.GeneratorFactory.MicroGeneratorTypes[musician.MicroGeneratorType[i]]); EditorGUILayout.EndHorizontal();
+                    EditorGUILayout.BeginHorizontal(); EditorGUILayout.PrefixLabel("Instrument Type"); EditorGUILayout.LabelField(InstrumentFactory.InstrumentTypes[musician.InstrumentType[i]]); EditorGUILayout.EndHorizontal();
+                    EditorGUILayout.BeginHorizontal(); EditorGUILayout.PrefixLabel("Micro Generator"); EditorGUILayout.LabelField(GeneratorFactory.MicroGeneratorTypes[musician.MicroGeneratorType[i]]); EditorGUILayout.EndHorizontal();
                     EditorGUI.indentLevel--;
 
                     if (!active) GUI.enabled = true;

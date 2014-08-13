@@ -116,29 +116,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musician: {fileID: 993552978}
   pixel: {fileID: 2800000, guid: 653c7d782287eaa418ff045464acf8b2, type: 3}
---- !u!114 &329769956
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02bf4405ccacace46b78112349edfee1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MacroGeneratorTypes:
-  - DefaultMacroGenerator
-  - GrammarMacroGenerator
-  MesoGeneratorTypes:
-  - DefaultMesoGenerator
-  - MarkovMesoGenerator
-  MicroGeneratorTypes:
-  - CA1DMicroGenerator
-  - ChordMicroGenerator
-  - DefaultMicroGenerator
-  - DrumsMicroGenerator
-  - NaberMicroGenerator
 --- !u!1 &434941140
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,7 +128,6 @@ GameObject:
   - 92: {fileID: 434941143}
   - 124: {fileID: 434941142}
   - 81: {fileID: 434941141}
-  - 114: {fileID: 434941146}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -224,18 +200,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &434941146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 434941140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2497a1f169642d438560b7fc0aba23b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fileName: alper
 --- !u!1 &993552975
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,18 +303,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10a0e41ef9c742c409fe2a771969d624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GeneratorFactory: {fileID: 329769956}
-  InstrumentFactory: {fileID: 2068286138}
   MacroGeneratorTypeIndex: 0
   MesoGeneratorTypeIndex: 1
   MoodSelectionMode: 0
   Mood: 0
   InstrumentName:
-  - Melody
   - Chord
   - Naber
-  InstrumentType: 020000000200000002000000
-  MicroGeneratorType: 020000000100000004000000
+  InstrumentType: 0200000002000000
+  MicroGeneratorType: 0100000004000000
   initialTempo: 120
   songDuration: 2.5
   barsPerSection: 4
@@ -793,6 +754,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!212 &1373494952
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -868,18 +830,3 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
---- !u!114 &2068286138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d8c418feaf08d4409c60a7b9523923e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InstrumentTypes:
-  - PercussiveInstrument
-  - SamplerInstrument
-  - SynthInstrument
