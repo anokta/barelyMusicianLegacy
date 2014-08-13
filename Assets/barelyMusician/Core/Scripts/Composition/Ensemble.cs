@@ -7,6 +7,10 @@ namespace BarelyAPI
     public class Ensemble
     {
         Dictionary<string, Performer> performers;
+        public int PerformersCount
+        {
+            get { if (performers != null) return performers.Count; return 0; }
+        }
 
         MacroGenerator macro;
         public int SongDurationInSections

@@ -6,6 +6,7 @@ public class KeyboardController : MonoBehaviour
 {
     public int fundamentalIndex = (int)NoteIndex.C4;
     public OscillatorType oscType;
+    public float attack, decay, sustain, release;
 
     KeyCode[] keys = 
     { 
@@ -17,7 +18,15 @@ public class KeyboardController : MonoBehaviour
 
     void Awake()
     {
-        instrument = new SynthInstrument(oscType, new Envelope(0.25f, 0.5f, 1.0f, 0.25f));
+        InstrumentMeta meta = ScriptableObject.CreateInstance<InstrumentMeta>();
+        meta.RootIndex = fundamentalIndex;
+        meta.Type = 2;
+        meta.OscType = oscType;
+        meta.Attack = attack;
+        meta.Decay = decay;
+        meta.Sustain = sustain;
+        meta.Release = release;
+        instrument = InstrumentFactory.CreateInstrument(meta);
 
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.hideFlags = HideFlags.HideInInspector;

@@ -13,10 +13,11 @@ namespace BarelyAPI
 
         public MoodSelectionMode MoodSelectionMode;
         public Mood Mood;
+        public bool performerFoldout;
 
-        public List<string> InstrumentName;
-        public List<InstrumentMeta> InstrumentType;
-        public List<int> MicroGeneratorType;
+        public List<string> PerformerNames;
+        public List<InstrumentMeta> Instruments;
+        public List<int> MicroGeneratorTypes;
 
         // Tempo (BPM)
         [SerializeField]
@@ -142,46 +143,36 @@ namespace BarelyAPI
             audioSource.Stop();
         }
 
-        void Start()
+        public void RegisterPerformer(string performerName, InstrumentMeta instrumentType, int microGeneratorTypeIndex)
         {
-            #region TEST_ZONE
-            Instrument[] instruments = new Instrument[7];
-            instruments[0] = new SamplerInstrument(sample, new Envelope(0.0f, 0.0f, 1.0f, 0.25f)); instruments[0].AddEffect(new Distortion(2.0f));
-            instruments[1] = new SynthInstrument(OscillatorType.COS, new Envelope(0.1f, 0.25f, 1.0f, 0.2f), -3.0f);
-            instruments[2] = new SynthInstrument(OscillatorType.TRIANGLE, new Envelope(0.25f, 0.5f, 0.5f, 0.25f), -5.0f);
-            instruments[3] = new PercussiveInstrument(drumKit, -3.0f);
+            DeregisterPerformer(performerName);
 
-            instruments[4] = new SamplerInstrument(sampleBass, new Envelope(0.0f, 0.0f, 1.0f, 0.25f));
-            //instruments[5] = new SynthInstrument(OscillatorType.SAW, new Envelope(0.1f, 0.25f, 1.0f, 0.2f), -8.0f);
-            //instruments[6] = new SynthInstrument(OscillatorType.SQUARE, new Envelope(0.25f, 0.5f, 0.5f, 0.25f), -10.0f);
+            PerformerNames.Add(performerName);
+            Instruments.Add(instrumentType);
+            MicroGeneratorTypes.Add(microGeneratorTypeIndex);
 
-            //ensemble.AddPerformer("Loop", new Performer(instruments[0], new NaberMicroGenerator(sequencer)));
-            //ensemble.AddPerformer("Melody", new Performer(instruments[1], new CA1DMicroGenerator(sequencer)));
-            //ensemble.AddPerformer("Chords", new Performer(instruments[2], new ChordMicroGenerator(sequencer)));
-            //ensemble.AddPerformer("Drums", new Performer(instruments[3], new DrumsMicroGenerator(sequencer)));
+            if (ensemble != null)
+            {
+                int index = PerformerNames.IndexOf(performerName);
 
-            //ensemble.AddPerformer("Bass", new Performer(instruments[4], new NaberMicroGenerator(sequencer)));
-            //ensemble.AddPerformer("Melody 2", new Performer(instruments[5], new NaberMicroGenerator(sequencer)));
-            //ensemble.AddPerformer("Chords 2", new Performer(instruments[6], new ChordMicroGenerator(sequencer)));
-
-            #endregion TEST_ZONE
+                Instrument instrument = InstrumentFactory.CreateInstrument(Instruments[index]);
+                MicroGenerator micro = GeneratorFactory.CreateMicroGenerator(MicroGeneratorTypes[index], sequencer);
+                
+                ensemble.AddPerformer(performerName, new Performer(instrument, micro));
+            }
         }
 
-        public void RegisterPerformer(string instrumentName, InstrumentMeta instrumentType, int microGeneratorTypeIndex)
+        public void DeregisterPerformer(string performerName)
         {
-            InstrumentName.Add(instrumentName);
-            InstrumentType.Add(instrumentType);
-            MicroGeneratorType.Add(microGeneratorTypeIndex);
-        }
-
-        public void DeregisterPerformer(string instrumentName)
-        {
-            int index = InstrumentName.IndexOf(instrumentName);
+            int index = PerformerNames.IndexOf(performerName);
             if (index > -1)
             {
-                InstrumentName.RemoveAt(index);
-                InstrumentType.RemoveAt(index);
-                MicroGeneratorType.RemoveAt(index);
+                PerformerNames.RemoveAt(index);
+                Instruments.RemoveAt(index);
+                MicroGeneratorTypes.RemoveAt(index);
+
+                if (ensemble != null)
+                    ensemble.RemovePerfomer(performerName);
             }
         }
 
@@ -201,6 +192,8 @@ namespace BarelyAPI
                 else
                     Stress = Mathf.Lerp(stress, stressTarget, stressInterpolationSpeed);
             }
+
+            Debug.Log(PerformerNames.Count + " " + ensemble.PerformersCount);
         }
 
         void OnAudioFilterRead(float[] data, int channels)
@@ -230,16 +223,16 @@ namespace BarelyAPI
                 ensemble.Register(sequencer);
                 
                 // performers
-                if (InstrumentName == null) InstrumentName = new List<string>();
-                if (InstrumentType == null) InstrumentType = new List<InstrumentMeta>();
-                if (MicroGeneratorType == null) MicroGeneratorType = new List<int>();
+                if (PerformerNames == null) PerformerNames = new List<string>();
+                if (Instruments == null) Instruments = new List<InstrumentMeta>();
+                if (MicroGeneratorTypes == null) MicroGeneratorTypes = new List<int>();
 
-                for (int i = 0; i < InstrumentName.Count; ++i)
+                for (int i = 0; i < PerformerNames.Count; ++i)
                 {
-                    string name = InstrumentName[i];
+                    string name = PerformerNames[i];
 
-                    Instrument instrument = InstrumentFactory.CreateInstrument(InstrumentType[i]);
-                    MicroGenerator micro = GeneratorFactory.CreateMicroGenerator(MicroGeneratorType[i], sequencer);
+                    Instrument instrument = InstrumentFactory.CreateInstrument(Instruments[i]);
+                    MicroGenerator micro = GeneratorFactory.CreateMicroGenerator(MicroGeneratorTypes[i], sequencer);
 
                     ensemble.AddPerformer(name, new Performer(instrument, micro));
                 }

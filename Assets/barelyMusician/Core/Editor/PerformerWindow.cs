@@ -8,16 +8,17 @@ namespace BarelyAPI
     {
         public Musician musician;
 
-        string performerName;
-        InstrumentMeta instrumentMeta;
-        int microGeneratorType;
-
+        public string performerName;
+        public int microGeneratorType;
+        public InstrumentMeta instrumentMeta;
+        
         bool advanced;
-        bool sampleListFoldout;
+        bool sampleListFoldout = true;
 
         void OnEnable()
         {
             instrumentMeta = ScriptableObject.CreateInstance<InstrumentMeta>();
+
             //ShowAsDropDown(position, new Vector2(position.width, position.height));
         }
 
@@ -30,65 +31,66 @@ namespace BarelyAPI
 
             EditorGUILayout.LabelField("Instrument");
             EditorGUI.indentLevel++;
-            instrumentMeta.volume = EditorGUILayout.Slider("Volume", instrumentMeta.volume, AudioProperties.MIN_VOLUME_DB, AudioProperties.MAX_VOLUME_DB);
+            instrumentMeta.Volume = EditorGUILayout.Slider("Volume", instrumentMeta.Volume, AudioProperties.MIN_VOLUME_DB, AudioProperties.MAX_VOLUME_DB);
             EditorGUILayout.Space();
-            instrumentMeta.type = EditorGUILayout.Popup("Type", instrumentMeta.type, InstrumentFactory.InstrumentTypes);
-            switch (InstrumentFactory.InstrumentTypes[instrumentMeta.type])
+            instrumentMeta.Type = EditorGUILayout.Popup("Type", instrumentMeta.Type, InstrumentFactory.InstrumentTypes);
+            EditorGUILayout.Space();
+            switch (InstrumentFactory.InstrumentTypes[instrumentMeta.Type])
             {
                 case "PercussiveInstrument":
-                    if (instrumentMeta.samples == null) instrumentMeta.samples = new AudioClip[4];
+                    if (instrumentMeta.Samples == null) instrumentMeta.Samples = new AudioClip[4];
 
                     sampleListFoldout = EditorGUILayout.Foldout(sampleListFoldout, "Samples");
                     if (sampleListFoldout)
                     {
                         EditorGUI.indentLevel++;
-                        for (int i = 0; i < instrumentMeta.samples.Length; ++i)
-                            instrumentMeta.samples[i] = (AudioClip)EditorGUILayout.ObjectField(i.ToString(), instrumentMeta.samples[i], typeof(AudioClip));
+                        for (int i = 0; i < instrumentMeta.Samples.Length; ++i)
+                            instrumentMeta.Samples[i] = (AudioClip)EditorGUILayout.ObjectField(((DRUM_KIT)i).ToString(), instrumentMeta.Samples[i], typeof(AudioClip), false);
                         EditorGUI.indentLevel--;
                     }
 
-                        instrumentMeta.sustained = EditorGUILayout.Toggle("Sustained", instrumentMeta.sustained);
+                        instrumentMeta.Sustained = EditorGUILayout.Toggle("Sustained", instrumentMeta.Sustained);
 
                     break;
 
                 case "SamplerInstrument":
-                    instrumentMeta.sample = (AudioClip)EditorGUILayout.ObjectField("Sample", instrumentMeta.sample, typeof(AudioClip));
-                    instrumentMeta.sustained = EditorGUILayout.Toggle("Loop", instrumentMeta.sustained);
+                    instrumentMeta.Sample = (AudioClip)EditorGUILayout.ObjectField("Sample", instrumentMeta.Sample, typeof(AudioClip), false);
+                    instrumentMeta.Sustained = EditorGUILayout.Toggle("Loop", instrumentMeta.Sustained);
                     EditorGUILayout.Space();
 
                     advanced = EditorGUILayout.Foldout(advanced, "Advanced");
                     if (advanced)
                     {
-                        instrumentMeta.voiceCount = EditorGUILayout.IntSlider("Voice Count", instrumentMeta.voiceCount, 1, 32);
+                        instrumentMeta.VoiceCount = EditorGUILayout.IntSlider("Voice Count", instrumentMeta.VoiceCount, 1, 32);
 
                         EditorGUILayout.BeginHorizontal();
-                        instrumentMeta.attack = EditorGUILayout.FloatField("Attack", instrumentMeta.attack);
-                        instrumentMeta.decay = EditorGUILayout.FloatField("Decay", instrumentMeta.decay);
+                        instrumentMeta.Attack = EditorGUILayout.FloatField("Attack", instrumentMeta.Attack);
+                        instrumentMeta.Decay = EditorGUILayout.FloatField("Decay", instrumentMeta.Decay);
                         EditorGUILayout.EndHorizontal();
                         EditorGUILayout.BeginHorizontal();
-                        instrumentMeta.sustain = EditorGUILayout.FloatField("Sustain", instrumentMeta.sustain);
-                        instrumentMeta.release = EditorGUILayout.FloatField("Release", instrumentMeta.release);
+                        instrumentMeta.Sustain = EditorGUILayout.FloatField("Sustain", instrumentMeta.Sustain);
+                        instrumentMeta.Release = EditorGUILayout.FloatField("Release", instrumentMeta.Release);
                         EditorGUILayout.EndHorizontal();
                     }
                     break;
 
                 case "SynthInstrument":
-                    instrumentMeta.oscType = (OscillatorType)EditorGUILayout.EnumPopup("Oscillator Type", instrumentMeta.oscType);
+                    instrumentMeta.OscType = (OscillatorType)EditorGUILayout.EnumPopup("Oscillator Type", instrumentMeta.OscType);
 
                     EditorGUILayout.Space();
 
                     advanced = EditorGUILayout.Foldout(advanced, "Advanced");
                     if (advanced)
                     {
-                        instrumentMeta.voiceCount = EditorGUILayout.IntSlider("Voice Count", instrumentMeta.voiceCount, 1, 32);
+                        instrumentMeta.VoiceCount = EditorGUILayout.IntSlider("Voice Count", instrumentMeta.VoiceCount, 1, 32);
 
                         EditorGUILayout.BeginHorizontal();
-                        instrumentMeta.attack = EditorGUILayout.FloatField("Attack", instrumentMeta.attack);
-                        instrumentMeta.decay = EditorGUILayout.FloatField("Decay", instrumentMeta.decay);
+                        instrumentMeta.Attack = EditorGUILayout.FloatField("Attack", instrumentMeta.Attack);
+                        instrumentMeta.Decay = EditorGUILayout.FloatField("Decay", instrumentMeta.Decay);
                         EditorGUILayout.EndHorizontal();
                         EditorGUILayout.BeginHorizontal();
-                        instrumentMeta.sustain = EditorGUILayout.FloatField("Sustain", instrumentMeta.sustain);
-                        instrumentMeta.release = EditorGUILayout.FloatField("Release", instrumentMeta.release);
+                        instrumentMeta.Sustain = EditorGUILayout.FloatField("Sustain", instrumentMeta.Sustain);
+                        instrumentMeta.Release = EditorGUILayout.FloatField("Release", instrumentMeta.Release);
                         EditorGUILayout.EndHorizontal();
                     }
                     break;
@@ -122,4 +124,5 @@ namespace BarelyAPI
             EditorGUILayout.Space();
         }
     }
+
 }

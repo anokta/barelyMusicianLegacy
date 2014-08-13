@@ -18,23 +18,42 @@ namespace BarelyAPI
             }
         }
 
-        Note rootNote;
+        int rootIndex;
 
-        public PercussiveInstrument(AudioClip[] samples, float volume = 0.0f, bool sustained = false, int rootIndex = 0)
-            : base(volume)
+        public PercussiveInstrument(InstrumentMeta meta)
+            : base(meta)
         {
-            rootNote = new Note(rootIndex);
+            rootIndex = meta.RootIndex;
+        }
 
-            for (int i = 0; i < samples.Length; ++i)
+        public override void SetInstrumentProperties(InstrumentMeta meta)
+        {
+            base.SetInstrumentProperties(meta);
+
+            if (voices.Count != meta.VoiceCount)
             {
-                voices.Add(new Voice(new Sampler(samples[i], false, rootNote.Pitch), new Envelope(0.0f, 0.0f, 1.0f, sustained ? 0.0f : samples.Length)));
+                voices.Clear();
+
+                for (int i = 0; i < meta.Samples.Length; ++i)
+                {
+                    voices.Add(new Voice(new Sampler(meta.Samples[i], false, new Note(meta.RootIndex).Pitch), new Envelope(0.0f, 0.0f, 1.0f, meta.Sustained ? 0.0f : (meta.Samples[i].length / meta.Samples[i].channels))));
+                }
+            }
+            else
+            {
+                for (int i = 0; i < meta.Samples.Length; ++i)
+                {
+                    ((Sampler)voices[i].Ugen).Sample = meta.Samples[i];
+                    ((Sampler)voices[i].Ugen).RootFrequency = new Note(meta.RootIndex).Pitch;
+                    voices[i].Envelope.Release = meta.Sustained ? 0.0f : (meta.Samples[i].length / meta.Samples[i].channels);
+                }
             }
         }
 
         // TODO: Note structure should be restructured!
         protected override void noteOn(Note note)
         {
-            int index = (int)(note.Index - rootNote.Index) / 12;
+            int index = (int)(note.Index - rootIndex) / 12;
             if (index >= 0 && index < voices.Count)
             {
                 voices[index].Gain = note.Loudness;
@@ -46,7 +65,7 @@ namespace BarelyAPI
         {
             if (Sustained)
             {
-                int index = (int)(note.Index - rootNote.Index);
+                int index = (int)(note.Index - rootIndex);
                 if (index >= 0 && index < voices.Count)
                 {
                     voices[index].Stop();
@@ -54,4 +73,6 @@ namespace BarelyAPI
             }
         }
     }
+
+    public enum DRUM_KIT { Kick = 0, Snare = 1, Hihat = 2, Cymbal = 3 }; 
 }

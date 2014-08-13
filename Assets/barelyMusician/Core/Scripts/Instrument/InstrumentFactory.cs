@@ -33,21 +33,10 @@ namespace BarelyAPI
 
         public static Instrument CreateInstrument(InstrumentMeta meta)
         {
-            Type instrumentType = Type.GetType("BarelyAPI." + InstrumentTypes[meta.type]);
+            Type instrumentType = Type.GetType("BarelyAPI." + InstrumentTypes[meta.Type]);
             if (instrumentType == null) instrumentType = Type.GetType("BarelyAPI.SynthInstrument");
 
-            switch (InstrumentTypes[meta.type])
-            {
-                case "PercussiveInstrument":
-                    return (Instrument)System.Activator.CreateInstance(instrumentType, meta.samples, meta.volume, meta.sustained, 0);
-
-                case "SamplerInstrument":
-                    return (Instrument)System.Activator.CreateInstance(instrumentType, meta.sample, new Envelope(meta.attack, meta.decay, meta.sustain, meta.release), meta.volume, 0, meta.sustained, meta.voiceCount);
-
-                case "SynthInstrument":
-                default:
-                    return (Instrument)System.Activator.CreateInstance(instrumentType, meta.oscType, new Envelope(meta.attack, meta.decay, meta.sustain, meta.release), meta.volume, meta.voiceCount);
-            }
+            return (Instrument)Activator.CreateInstance(instrumentType, (System.Object)meta);
         }
 
         void setInstrumentTypes()

@@ -17,15 +17,37 @@ namespace BarelyAPI
             }
         }
 
-        public SamplerInstrument(AudioClip sample, Envelope envelope, float volume = 0.0f, int rootIndex = 0, bool loop = false, int voiceCount = 16)
-            : base(volume)
+        public SamplerInstrument(InstrumentMeta meta)
+            : base(meta)
         {
-            for (int i = 0; i < voiceCount; ++i)
-            {
-                voices.Add(new Voice(new Sampler(sample, loop, new Note(rootIndex).Pitch), new Envelope(envelope.Attack, envelope.Decay, envelope.Sustain, envelope.Release)));
-            }
+        }
 
-            StopAllNotes();
+        public override void SetInstrumentProperties(InstrumentMeta meta)
+        {
+            base.SetInstrumentProperties(meta);
+
+            if (voices.Count != meta.VoiceCount)
+            {
+                voices.Clear();
+
+                for (int i = 0; i < meta.VoiceCount; ++i)
+                {
+                    voices.Add(new Voice(new Sampler(meta.Sample, meta.Sustained, new Note(meta.RootIndex).Pitch), new Envelope(meta.Attack, meta.Decay, meta.Sustain, meta.Release)));
+                }
+            }
+            else
+            {
+                foreach (Voice voice in voices)
+                {
+                    ((Sampler)voice.Ugen).Sample = meta.Sample;
+                    ((Sampler)voice.Ugen).Loop = meta.Sustained;
+                    ((Sampler)voice.Ugen).RootFrequency = new Note(meta.RootIndex).Pitch;
+                    voice.Envelope.Attack = meta.Attack;
+                    voice.Envelope.Decay = meta.Decay;
+                    voice.Envelope.Sustain = meta.Sustain;
+                    voice.Envelope.Release = meta.Release;
+                }
+            }
         }
     }
 }

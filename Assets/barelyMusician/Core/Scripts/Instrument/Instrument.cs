@@ -73,12 +73,12 @@ namespace BarelyAPI
             set { volume = (value > AudioProperties.MIN_VOLUME_DB) ? Mathf.Pow(10, 0.05f * value) : 0.0f; }
         }
 
-        public Instrument(float volume = 0.0f)
+        public Instrument(InstrumentMeta meta)
         {
             voices = new List<Voice>();
             effects = new List<AudioEffect>();
 
-            Volume = volume;
+            SetInstrumentProperties(meta);
         }
 
         public void AddEffect(AudioEffect effect)
@@ -102,6 +102,11 @@ namespace BarelyAPI
             }
 
             return output * volume;
+        }
+
+        public virtual void SetInstrumentProperties(InstrumentMeta meta)
+        {
+            Volume = meta.Volume;
         }
 
         public virtual void PlayNote(Note note)

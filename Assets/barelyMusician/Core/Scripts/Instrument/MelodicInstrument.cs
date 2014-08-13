@@ -8,9 +8,10 @@ namespace BarelyAPI
     {
         LinkedList<Voice> activeList, freeList;
 
-        public MelodicInstrument(float volume)
-            : base(volume)
+        public MelodicInstrument(InstrumentMeta meta)
+            : base(meta)
         {
+            StopAllNotes();
         }
 
         protected override void noteOn(Note note)

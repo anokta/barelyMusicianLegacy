@@ -7,6 +7,16 @@ namespace BarelyAPI
         // Sample raw data
         float[] sampleData;
         float samplingRatio;
+        public AudioClip Sample
+        {
+            set
+            {
+                sampleData = new float[value.samples];
+                value.GetData(sampleData, 0);
+
+                samplingRatio = value.frequency / AudioProperties.SAMPLE_RATE;
+            }
+        }
 
         public int SampleLength
         {
@@ -30,12 +40,9 @@ namespace BarelyAPI
 
         public Sampler(AudioClip sample, bool loop = false, float rootFrequency = 440.0f)
         {
-            // Supports MONO samples only (for now)
-            sampleData = new float[sample.samples];
-            sample.GetData(sampleData, 0);
+            Sample = sample;
 
             RootFrequency = Frequency = rootFrequency;
-            samplingRatio = sample.frequency / AudioProperties.SAMPLE_RATE;
 
             Loop = loop;
 

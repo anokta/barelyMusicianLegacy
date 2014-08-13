@@ -11,8 +11,7 @@ namespace BarelyAPI
         Musician musician;
 
         PerformerWindow performerWindow;
-        bool performerFoldout;
-
+        
         int selection;
 
         void OnEnable()
@@ -63,30 +62,40 @@ namespace BarelyAPI
             EditorGUILayout.Space();
 
             // Performers
-            performerFoldout = EditorGUILayout.Foldout(performerFoldout, "Performers");
-            if (performerFoldout)
+            musician.performerFoldout = EditorGUILayout.Foldout(musician.performerFoldout, "Performers");
+            if (musician.performerFoldout)
             {
-                for (int i = 0; i < musician.InstrumentName.Count; ++i)
+                EditorGUI.indentLevel++;
+                for (int i = 0; i < musician.PerformerNames.Count; ++i)
                 {
-                    bool active = musician.Ensemble.IsPerformerActive(musician.InstrumentName[i]);
+                    bool active = musician.Ensemble.IsPerformerActive(musician.PerformerNames[i]);
                     if (!active) GUI.enabled = false;
 
                     EditorGUILayout.BeginHorizontal();
-                    EditorGUILayout.LabelField(musician.InstrumentName[i]);
+                    EditorGUILayout.LabelField(musician.PerformerNames[i]);
                     GUILayout.FlexibleSpace();
                     if (!active) GUI.enabled = true;
-                    musician.Ensemble.TogglePeformer(musician.InstrumentName[i], GUILayout.Toggle(active, ""));
+                    musician.Ensemble.TogglePeformer(musician.PerformerNames[i], GUILayout.Toggle(active, ""));
+                    if (GUILayout.Button("Edit"))
+                    {
+                        performerWindow = (PerformerWindow)EditorWindow.GetWindow(typeof(PerformerWindow), true, "Performer");
+                        performerWindow.performerName = musician.PerformerNames[i];
+                        performerWindow.instrumentMeta = musician.Instruments[i];
+                        performerWindow.microGeneratorType = musician.MicroGeneratorTypes[i];
+                        performerWindow.musician = musician;
+                        break;
+                    } 
                     if (GUILayout.Button("Delete"))
                     {
-                        musician.DeregisterPerformer(musician.InstrumentName[i]);
+                        musician.DeregisterPerformer(musician.PerformerNames[i]);
                         break;
                     }
                     if (!active) GUI.enabled = false;
                     EditorGUILayout.EndHorizontal();
 
                     EditorGUI.indentLevel++;
-                    EditorGUILayout.BeginHorizontal(); EditorGUILayout.PrefixLabel("Instrument Type"); EditorGUILayout.LabelField(InstrumentFactory.InstrumentTypes[musician.InstrumentType[i].type]); EditorGUILayout.EndHorizontal();
-                    EditorGUILayout.BeginHorizontal(); EditorGUILayout.PrefixLabel("Micro Generator"); EditorGUILayout.LabelField(GeneratorFactory.MicroGeneratorTypes[musician.MicroGeneratorType[i]]); EditorGUILayout.EndHorizontal();
+                    EditorGUILayout.BeginHorizontal(); EditorGUILayout.PrefixLabel("Instrument Type"); EditorGUILayout.LabelField(InstrumentFactory.InstrumentTypes[musician.Instruments[i].Type]); EditorGUILayout.EndHorizontal();
+                    EditorGUILayout.BeginHorizontal(); EditorGUILayout.PrefixLabel("Micro Generator"); EditorGUILayout.LabelField(GeneratorFactory.MicroGeneratorTypes[musician.MicroGeneratorTypes[i]]); EditorGUILayout.EndHorizontal();
                     EditorGUI.indentLevel--;
 
                     if (!active) GUI.enabled = true;
@@ -100,8 +109,10 @@ namespace BarelyAPI
                 {
                     performerWindow = (PerformerWindow)EditorWindow.GetWindow(typeof(PerformerWindow), true, "Performer");
                     performerWindow.musician = musician;
+                    performerWindow.performerName = "Performer" + (musician.PerformerNames.Count + 1).ToString();
                 }
                 EditorGUILayout.EndHorizontal();
+                EditorGUI.indentLevel--;
             }
 
             EditorGUILayout.Space();
@@ -113,7 +124,8 @@ namespace BarelyAPI
             switch (musician.MoodSelectionMode)
             {
                 case MoodSelectionMode.Basic:
-                    musician.SetMood((Mood)EditorGUILayout.EnumPopup(musician.Mood));
+                    Mood mood = (Mood)EditorGUILayout.EnumPopup(musician.Mood);
+                    if (mood != musician.Mood) musician.SetMood(mood);
                     break;
 
                 case MoodSelectionMode.Advanced:
