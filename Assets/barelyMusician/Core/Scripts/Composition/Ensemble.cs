@@ -19,6 +19,12 @@ namespace BarelyAPI
             set { macro.SequenceLength = value; }
         }
 
+        SectionType currentSection;
+        public SectionType CurrentSection
+        {
+            get { return currentSection; }
+        }
+
         MesoGenerator meso;
 
         Conductor conductor;
@@ -30,11 +36,14 @@ namespace BarelyAPI
             macro = sequenceGenerator;
             meso = sectionGenerator;
 
+            currentSection = SectionType.NONE;
+
             this.conductor = conductor;
         }
 
         public void Register(Sequencer sequencer)
         {
+            sequencer.AddSectionListener(OnNextSection);
             sequencer.AddBarListener(OnNextBar);
             sequencer.AddBeatListener(OnNextBeat);
             sequencer.AddPulseListener(OnNextPulse);
@@ -59,6 +68,8 @@ namespace BarelyAPI
 
             macro.Restart();
             meso.Restart();
+
+            currentSection = SectionType.NONE;
         }
 
         public float GetOutput()
@@ -93,10 +104,13 @@ namespace BarelyAPI
             }
         }
 
+        void OnNextSection(Sequencer sequencer)
+        {
+            currentSection = macro.GetSection(sequencer.CurrentSection);
+        }
+
         void OnNextBar(Sequencer sequencer)
         {
-            SectionType currentSection = macro.GetSection(sequencer.CurrentSection);
-
             if (currentSection != SectionType.END)
             {
                 foreach (Performer performer in performers.Values)

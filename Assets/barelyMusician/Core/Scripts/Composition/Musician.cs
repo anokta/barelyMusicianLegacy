@@ -11,7 +11,6 @@ namespace BarelyAPI
         public int MacroGeneratorTypeIndex = 0;
         public int MesoGeneratorTypeIndex = 0;
 
-        public MoodSelectionMode MoodSelectionMode;
         public Mood Mood;
         public bool performerFoldout;
 
@@ -107,17 +106,12 @@ namespace BarelyAPI
             }
         }
 
-        #region TEST_ZONE
-        public AudioClip sample, sampleBass;
-        public AudioClip[] drumKit;
-
-        #endregion TEST_ZONE
-
         Sequencer sequencer;
         public Sequencer Sequencer
         {
             get { return sequencer; }
         }
+
 
         Ensemble ensemble;
         public Ensemble Ensemble
@@ -130,7 +124,7 @@ namespace BarelyAPI
         AudioSource audioSource;
         public bool IsPlaying
         {
-            get { return audioSource.isPlaying; }
+            get { return (audioSource == null) ? false : audioSource.isPlaying; }
         }
 
         void Awake()
@@ -141,39 +135,6 @@ namespace BarelyAPI
             audioSource.hideFlags = HideFlags.HideInInspector;
             audioSource.panLevel = 0.0f;
             audioSource.Stop();
-        }
-
-        public void RegisterPerformer(string performerName, InstrumentMeta instrumentType, int microGeneratorTypeIndex)
-        {
-            DeregisterPerformer(performerName);
-
-            PerformerNames.Add(performerName);
-            Instruments.Add(instrumentType);
-            MicroGeneratorTypes.Add(microGeneratorTypeIndex);
-
-            if (ensemble != null)
-            {
-                int index = PerformerNames.IndexOf(performerName);
-
-                Instrument instrument = InstrumentFactory.CreateInstrument(Instruments[index]);
-                MicroGenerator micro = GeneratorFactory.CreateMicroGenerator(MicroGeneratorTypes[index], sequencer);
-                
-                ensemble.AddPerformer(performerName, new Performer(instrument, micro));
-            }
-        }
-
-        public void DeregisterPerformer(string performerName)
-        {
-            int index = PerformerNames.IndexOf(performerName);
-            if (index > -1)
-            {
-                PerformerNames.RemoveAt(index);
-                Instruments.RemoveAt(index);
-                MicroGeneratorTypes.RemoveAt(index);
-
-                if (ensemble != null)
-                    ensemble.RemovePerfomer(performerName);
-            }
         }
 
         void FixedUpdate()
@@ -192,8 +153,6 @@ namespace BarelyAPI
                 else
                     Stress = Mathf.Lerp(stress, stressTarget, stressInterpolationSpeed);
             }
-
-            Debug.Log(PerformerNames.Count + " " + ensemble.PerformersCount);
         }
 
         void OnAudioFilterRead(float[] data, int channels)
@@ -234,8 +193,42 @@ namespace BarelyAPI
                     Instrument instrument = InstrumentFactory.CreateInstrument(Instruments[i]);
                     MicroGenerator micro = GeneratorFactory.CreateMicroGenerator(MicroGeneratorTypes[i], sequencer);
 
-                    ensemble.AddPerformer(name, new Performer(instrument, micro));
+                    Performer performer = new Performer(instrument, micro);
+                    performer.Active = Instruments[i].Active;
+                    ensemble.AddPerformer(name, performer);
                 }
+            }
+        }
+        public void RegisterPerformer(string performerName, InstrumentMeta instrumentType, int microGeneratorTypeIndex)
+        {
+            DeregisterPerformer(performerName);
+
+            PerformerNames.Add(performerName);
+            Instruments.Add(instrumentType);
+            MicroGeneratorTypes.Add(microGeneratorTypeIndex);
+
+            if (ensemble != null)
+            {
+                Instrument instrument = InstrumentFactory.CreateInstrument(instrumentType);
+                MicroGenerator micro = GeneratorFactory.CreateMicroGenerator(microGeneratorTypeIndex, sequencer);
+
+                Performer performer = new Performer(instrument, micro);
+                performer.Active = instrumentType.Active;
+                ensemble.AddPerformer(performerName, performer);
+            }
+        }
+
+        public void DeregisterPerformer(string performerName)
+        {
+            int index = PerformerNames.IndexOf(performerName);
+            if (index > -1)
+            {
+                PerformerNames.RemoveAt(index);
+                Instruments.RemoveAt(index);
+                MicroGeneratorTypes.RemoveAt(index);
+
+                if (ensemble != null)
+                    ensemble.RemovePerfomer(performerName);
             }
         }
 
@@ -289,6 +282,8 @@ namespace BarelyAPI
                 case Mood.Angry:
                     SetMood(1.0f, 1.0f, smoothness);
                     break;
+                case Mood.Custom:
+                    break;
                 default:
                     SetMood(0.5f, 0.5f, smoothness);
                     break;
@@ -318,6 +313,5 @@ namespace BarelyAPI
         }
     }
 
-    public enum Mood { Happy, Tender, Exciting, Sad, Depressed, Angry }
-    public enum MoodSelectionMode { Basic, Advanced }
+    public enum Mood { Happy, Tender, Exciting, Sad, Depressed, Angry, Custom }
 }

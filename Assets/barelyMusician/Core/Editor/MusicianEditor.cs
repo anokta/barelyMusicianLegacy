@@ -11,7 +11,7 @@ namespace BarelyAPI
         Musician musician;
 
         PerformerWindow performerWindow;
-        
+
         int selection;
 
         void OnEnable()
@@ -34,6 +34,7 @@ namespace BarelyAPI
 
             // Sequencer properties
             GUILayout.Box("Sequencer");
+            EditorGUILayout.Space();
             musician.Tempo = EditorGUILayout.IntSlider(new GUIContent("Tempo", "BPM."), musician.Tempo, 88, 220);
 
             if (Application.isPlaying) GUI.enabled = false;
@@ -51,13 +52,13 @@ namespace BarelyAPI
 
             // Ensemble
             GUILayout.Box("Ensemble");
+            EditorGUILayout.Space();
 
-            if (Application.isPlaying) GUI.enabled = false;
+            if (musician.Ensemble.CurrentSection != SectionType.NONE) GUI.enabled = false;
             musician.MacroGeneratorTypeIndex = EditorGUILayout.Popup("Macro Generator", musician.MacroGeneratorTypeIndex, GeneratorFactory.MacroGeneratorTypes);
             musician.MesoGeneratorTypeIndex = EditorGUILayout.Popup("Meso Generator", musician.MesoGeneratorTypeIndex, GeneratorFactory.MesoGeneratorTypes);
             // = EditorGUILayout.TextField(new GUIContent("Macro Generator", "For the musical form (sequence of sections)."), musician.MacroGeneratorType);
             //musician.MesoGeneratorType = EditorGUILayout.TextField(new GUIContent("Meso Generator", "For harmonic progressions (sequence of bars per section)."), musician.MesoGeneratorType);
-            if (Application.isPlaying) GUI.enabled = true;
 
             EditorGUILayout.Space();
 
@@ -68,14 +69,19 @@ namespace BarelyAPI
                 EditorGUI.indentLevel++;
                 for (int i = 0; i < musician.PerformerNames.Count; ++i)
                 {
-                    bool active = musician.Ensemble.IsPerformerActive(musician.PerformerNames[i]);
-                    if (!active) GUI.enabled = false;
+                    if (!musician.Instruments[i].Active) GUI.enabled = false;
 
                     EditorGUILayout.BeginHorizontal();
                     EditorGUILayout.LabelField(musician.PerformerNames[i]);
                     GUILayout.FlexibleSpace();
-                    if (!active) GUI.enabled = true;
-                    musician.Ensemble.TogglePeformer(musician.PerformerNames[i], GUILayout.Toggle(active, ""));
+                    if (!musician.Instruments[i].Active && musician.Ensemble.CurrentSection == SectionType.NONE) GUI.enabled = true;
+
+                    bool active = GUILayout.Toggle(musician.Instruments[i].Active, "");
+                    if (musician.Instruments[i].Active != active)
+                    {
+                        musician.Instruments[i].Active = active;
+                        musician.Ensemble.TogglePeformer(musician.PerformerNames[i], musician.Instruments[i].Active);
+                    }
                     if (GUILayout.Button("Edit"))
                     {
                         performerWindow = (PerformerWindow)EditorWindow.GetWindow(typeof(PerformerWindow), true, "Performer");
@@ -84,7 +90,7 @@ namespace BarelyAPI
                         performerWindow.microGeneratorType = musician.MicroGeneratorTypes[i];
                         performerWindow.musician = musician;
                         break;
-                    } 
+                    }
                     if (GUILayout.Button("Delete"))
                     {
                         musician.DeregisterPerformer(musician.PerformerNames[i]);
@@ -98,7 +104,7 @@ namespace BarelyAPI
                     EditorGUILayout.BeginHorizontal(); EditorGUILayout.PrefixLabel("Micro Generator"); EditorGUILayout.LabelField(GeneratorFactory.MicroGeneratorTypes[musician.MicroGeneratorTypes[i]]); EditorGUILayout.EndHorizontal();
                     EditorGUI.indentLevel--;
 
-                    if (!active) GUI.enabled = true;
+                    if (!active && musician.Ensemble.CurrentSection == SectionType.NONE) GUI.enabled = true;
 
                     EditorGUILayout.Space();
                 }
@@ -114,32 +120,29 @@ namespace BarelyAPI
                 EditorGUILayout.EndHorizontal();
                 EditorGUI.indentLevel--;
             }
+            if (musician.Ensemble.CurrentSection != SectionType.NONE) GUI.enabled = true;
 
             EditorGUILayout.Space();
 
             // Mood selection
             GUILayout.Box("Conductor");
-            musician.MoodSelectionMode = (MoodSelectionMode)EditorGUILayout.EnumPopup("Mood", musician.MoodSelectionMode);
-            EditorGUI.indentLevel++;
-            switch (musician.MoodSelectionMode)
-            {
-                case MoodSelectionMode.Basic:
-                    Mood mood = (Mood)EditorGUILayout.EnumPopup(musician.Mood);
-                    if (mood != musician.Mood) musician.SetMood(mood);
-                    break;
+            EditorGUILayout.Space();
+            Mood mood = (Mood)EditorGUILayout.EnumPopup("Mood", musician.Mood);
+            if (mood != musician.Mood) musician.SetMood(mood);
 
-                case MoodSelectionMode.Advanced:
-                    float energy = EditorGUILayout.Slider("Energy", musician.Energy, 0.0f, 1.0f);
-                    if (energy != musician.Energy)
-                    {
-                        musician.SetEnergy(energy);
-                    }
-                    float stress = EditorGUILayout.Slider("Stress", musician.Stress, 0.0f, 1.0f);
-                    if (stress != musician.Stress)
-                        musician.SetStress(stress);
-                    break;
+            if (musician.Mood == Mood.Custom)
+            {
+               EditorGUI.indentLevel++;
+                float energy = EditorGUILayout.Slider("Energy", musician.Energy, 0.0f, 1.0f);
+                if (energy != musician.Energy)
+                {
+                    musician.SetEnergy(energy);
+                }
+                float stress = EditorGUILayout.Slider("Stress", musician.Stress, 0.0f, 1.0f);
+                if (stress != musician.Stress)
+                    musician.SetStress(stress);
+                EditorGUI.indentLevel--;
             }
-            EditorGUI.indentLevel--;
         }
     }
 }
