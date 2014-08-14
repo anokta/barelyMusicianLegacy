@@ -23,6 +23,7 @@ namespace BarelyAPI
         public SectionType CurrentSection
         {
             get { return currentSection; }
+            set { currentSection = value; }
         }
 
         MesoGenerator meso;

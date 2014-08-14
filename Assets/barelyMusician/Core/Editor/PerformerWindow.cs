@@ -55,13 +55,14 @@ namespace BarelyAPI
 
                 case "SamplerInstrument":
                     instrumentMeta.Sample = (AudioClip)EditorGUILayout.ObjectField("Sample", instrumentMeta.Sample, typeof(AudioClip), false);
+                    instrumentMeta.RootIndex = (int)(NoteIndex)EditorGUILayout.EnumPopup("Root Note", (NoteIndex)instrumentMeta.RootIndex);
                     instrumentMeta.Sustained = EditorGUILayout.Toggle("Loop", instrumentMeta.Sustained);
                     EditorGUILayout.Space();
 
                     advanced = EditorGUILayout.Foldout(advanced, "Advanced");
                     if (advanced)
                     {
-                        instrumentMeta.VoiceCount = EditorGUILayout.IntSlider("Voice Count", instrumentMeta.VoiceCount, 1, 32);
+                        instrumentMeta.VoiceCount = EditorGUILayout.IntSlider("Voice Count", instrumentMeta.VoiceCount, 1, 16);
 
                         EditorGUILayout.BeginHorizontal();
                         instrumentMeta.Attack = EditorGUILayout.FloatField("Attack", instrumentMeta.Attack);

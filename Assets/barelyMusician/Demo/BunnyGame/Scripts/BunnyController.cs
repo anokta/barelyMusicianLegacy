@@ -8,6 +8,7 @@ public class BunnyController : MonoBehaviour
     public Musician musician;
 
     Animator animator;
+    int animationState;
     float speed;
 
     float boundX;
@@ -23,8 +24,8 @@ public class BunnyController : MonoBehaviour
 
     void Update()
     {
-        speed = musician.IsPlaying ? musician.Sequencer.Tempo / 60.0f : 0.0f;
-        animator.speed = direction.magnitude * speed;
+        speed = musician.Sequencer.Tempo / 60.0f;
+        animator.speed = speed;
 
         if (Camera.main.WorldToScreenPoint(transform.position).x > Screen.width)
         {
@@ -65,9 +66,14 @@ public class BunnyController : MonoBehaviour
         {
             direction = "Left";
         }
+        else if(directionVector == Vector2.zero)
+        {
+            animator.SetInteger("State", 0);
+        }
 
         if (direction != null)
         {
+            animator.SetInteger("State", 1);
             animator.CrossFade("Bunny_Running_" + direction, 0.0f);
         }
     }

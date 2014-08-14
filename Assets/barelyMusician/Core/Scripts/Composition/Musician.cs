@@ -313,5 +313,5 @@ namespace BarelyAPI
         }
     }
 
-    public enum Mood { Happy, Tender, Exciting, Sad, Depressed, Angry, Custom }
+    public enum Mood { Neutral, Happy, Tender, Exciting, Sad, Depressed, Angry, Custom }
 }
