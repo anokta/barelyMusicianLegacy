@@ -2,36 +2,47 @@
 using System.Collections;
 using BarelyAPI;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
-    public Musician musician;
+    Musician musician;
 
     void Awake()
     {
         GameEventManager.GameMenu += GameMenu;
         GameEventManager.GameStart += GameStart;
         GameEventManager.GameOver += GameOver;
-	}
+    }
 
     void Start()
     {
+        musician = FindObjectOfType<Musician>();
         GameEventManager.TriggerGameMenu();
     }
-	
-	void Update () {
-        if (Input.GetKeyDown(KeyCode.A))
+
+    void Update()
+    {
+        switch (GameEventManager.CurrentState)
         {
-            GameEventManager.TriggerGameStart();
-        } 
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            GameEventManager.TriggerGameOver();
+            case GameEventManager.GameState.InMenu:
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    GameEventManager.TriggerGameStart();
+                }
+                break;
+
+            case GameEventManager.GameState.Running:
+
+                break;
+
+            case GameEventManager.GameState.Over:
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    GameEventManager.TriggerGameStart();
+                }
+                break;
         }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            GameEventManager.TriggerGameMenu();
-        }
-	}
+    }
 
     void GameMenu()
     {

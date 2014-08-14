@@ -137,7 +137,7 @@ namespace BarelyAPI
             audioSource.Stop();
         }
 
-        void FixedUpdate()
+        void Update()
         {
             if (energy != energyTarget)
             {

@@ -4,8 +4,7 @@ using BarelyAPI;
 
 public class VfxManager : MonoBehaviour
 {
-
-    public Musician musician;
+    Musician musician;
 
     public Texture2D pixel;
 
@@ -19,6 +18,7 @@ public class VfxManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        musician = FindObjectOfType<Musician>();
         musician.Sequencer.AddSectionListener(OnNextSection);
         musician.Sequencer.AddBarListener(OnNextBar);
         musician.Sequencer.AddBeatListener(OnNextBeat);
