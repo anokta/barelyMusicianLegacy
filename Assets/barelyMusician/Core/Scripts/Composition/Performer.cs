@@ -9,11 +9,7 @@ namespace BarelyAPI
         // Audio output
         public float Output
         {
-            get 
-            { 
-                float output = instrument.ProcessNext();
-                return active ? output : 0.0f;
-            }
+            get { return instrument.ProcessNext(); }
         }
 
         bool active;
@@ -36,7 +32,7 @@ namespace BarelyAPI
         public Instrument Instrument
         {
             get { return instrument; }
-            set { instrument = value; initialOnset = instrument.Attack;  }
+            set { instrument = value; initialOnset = instrument.Attack; }
         }
 
         // Score (note list per bar)
@@ -72,17 +68,20 @@ namespace BarelyAPI
 
         public void AddBeat(Sequencer sequencer, Conductor conductor)
         {
-            foreach (NoteMeta noteMeta in currentBar)
+            if (active)
             {
-                if (Mathf.FloorToInt(noteMeta.Offset * sequencer.BeatCount) == sequencer.CurrentBeat)
+                foreach (NoteMeta noteMeta in currentBar)
                 {
-                    NoteMeta meta = conductor.TransformNote(noteMeta);
+                    if (Mathf.FloorToInt(noteMeta.Offset * sequencer.BeatCount) == sequencer.CurrentBeat)
+                    {
+                        NoteMeta meta = conductor.TransformNote(noteMeta);
 
-                    float start = sequencer.CurrentSection * sequencer.BarCount + sequencer.CurrentBar + meta.Offset;
-                    float end = start + meta.Duration;
+                        float start = sequencer.CurrentSection * sequencer.BarCount + sequencer.CurrentBar + meta.Offset;
+                        float end = start + meta.Duration;
 
-                    addNote(new Note(meta.Index, meta.Loudness), start, sequencer.BarLength);
-                    addNote(new Note(meta.Index, 0.0f), end, sequencer.BarLength);
+                        addNote(new Note(meta.Index, meta.Loudness), start, sequencer.BarLength);
+                        addNote(new Note(meta.Index, 0.0f), end, sequencer.BarLength);
+                    }
                 }
             }
         }

@@ -64,8 +64,6 @@ public class GameWorld : MonoBehaviour
                     KillzoneController killzone =
                         (GameObject.Instantiate(killzonePrefab, Vector2.Scale(direction, screenSize) * (currentBeat - (beatCount - 1) / 2.0f) / beatCount, Quaternion.identity) as GameObject).GetComponent<KillzoneController>();
                     killzone.direction = direction;
-
-                    Debug.Log(direction);
                 }
                 break;
         }

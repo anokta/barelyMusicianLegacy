@@ -74,7 +74,7 @@ namespace BarelyAPI
                     EditorGUILayout.BeginHorizontal();
                     EditorGUILayout.LabelField(musician.PerformerNames[i]);
                     GUILayout.FlexibleSpace();
-                    if (!musician.Instruments[i].Active && musician.Ensemble.CurrentSection == SectionType.NONE) GUI.enabled = true;
+                    GUI.enabled = true;
 
                     bool active = GUILayout.Toggle(musician.Instruments[i].Active, "");
                     if (musician.Instruments[i].Active != active)
@@ -82,6 +82,7 @@ namespace BarelyAPI
                         musician.Instruments[i].Active = active;
                         musician.Ensemble.TogglePeformer(musician.PerformerNames[i], musician.Instruments[i].Active);
                     }
+                    if (musician.Ensemble.CurrentSection != SectionType.NONE) GUI.enabled = false; 
                     if (GUILayout.Button("Edit"))
                     {
                         performerWindow = (PerformerWindow)EditorWindow.GetWindow(typeof(PerformerWindow), true, "Performer");

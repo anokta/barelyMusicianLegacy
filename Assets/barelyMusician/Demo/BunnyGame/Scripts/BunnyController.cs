@@ -17,6 +17,8 @@ public class BunnyController : MonoBehaviour
         animator = GetComponent<Animator>();
 
         Vector3 screen = Camera.main.WorldToScreenPoint(transform.position);
+
+        musician.Ensemble.TogglePeformer("Bunny", false);
     }
 
     void Update()
@@ -79,12 +81,14 @@ public class BunnyController : MonoBehaviour
         else if (directionVector == Vector2.zero)
         {
             animator.SetInteger("State", 0);
+            musician.Ensemble.TogglePeformer("Bunny", false);
         }
 
         if (direction != null)
         {
             animator.SetInteger("State", 1);
             animator.CrossFade("Bunny_Running_" + direction, 0.0f);
+            musician.Ensemble.TogglePeformer("Bunny", true);
         }
     }
     void OnTriggerEnter2D(Collider2D other)
