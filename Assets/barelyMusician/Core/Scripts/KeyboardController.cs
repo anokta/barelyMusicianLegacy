@@ -4,8 +4,13 @@ using BarelyAPI;
 
 public class KeyboardController : MonoBehaviour
 {
+    [Range (-40.0f, 6.0f)] 
+    public float volume;
+
     public int fundamentalIndex = (int)NoteIndex.C4;
     public OscillatorType oscType;
+    
+    [Range (0.0f, 10.0f)]
     public float attack, decay, sustain, release;
 
     KeyCode[] keys = 
@@ -19,6 +24,7 @@ public class KeyboardController : MonoBehaviour
     void Awake()
     {
         InstrumentMeta meta = ScriptableObject.CreateInstance<InstrumentMeta>();
+        meta.Volume = volume;
         meta.RootIndex = fundamentalIndex;
         meta.Type = 2;
         meta.OscType = oscType;

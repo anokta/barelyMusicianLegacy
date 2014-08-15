@@ -6,78 +6,78 @@ public class GUIManager : MonoBehaviour
 {
     public GUISkin guiSkin;
 
-    public GUIText timeSignutare;
-    //private string timeSigText;
+    Musician musician;
+    Recorder recorder;
 
-    public Musician musician;
-
-    // Use this for initialization
     void Start()
     {
+        musician = FindObjectOfType<Musician>();
+        recorder = FindObjectOfType<Recorder>();
     }
 
     void OnGUI()
     {
         GUI.skin = guiSkin;
 
-        //timeSignutare.text = timeSigText;
-        GUILayout.BeginArea(new Rect(Screen.width * 0.25f, Screen.height * 0.2f, Screen.width * 0.5f, Screen.height * 0.75f));
+        GUILayout.BeginArea(new Rect(Screen.width * 0.25f, Screen.height * 0.25f, Screen.width * 0.5f, Screen.height * 0.75f));
 
         GUILayout.FlexibleSpace();
 
-        GUILayout.BeginVertical();
-
-        //GUILayout.BeginHorizontal();
-        //GUILayout.Box("BPM: " + Sequencer.Tempo.ToString());
-        //Sequencer.Tempo = (int)GUILayout.HorizontalSlider(Sequencer.Tempo, 72, 220);
-        //GUILayout.EndHorizontal();
-
-        GUILayout.FlexibleSpace();
-
+        GUILayout.BeginHorizontal();
         if (GUILayout.Button("Play"))
         {
             musician.Play();
         }
-
-        GUILayout.FlexibleSpace();
-
         if (GUILayout.Button("Pause"))
         {
             musician.Pause();
         }
-
-        GUILayout.FlexibleSpace();
-
         if (GUILayout.Button("Stop"))
         {
             musician.Stop();
         }
+        bool recording  = GUILayout.Toggle(recorder.IsRecording, "Record");
+        if (recording != recorder.IsRecording)
+        {
+            if (recording) recorder.StartRecord();
+            else recorder.StopRecord();
+        }
+        GUILayout.EndHorizontal();
 
-        GUILayout.FlexibleSpace();
         GUILayout.FlexibleSpace();
 
         GUILayout.BeginHorizontal();
-        if (GUILayout.Button("EXCITING"))
+        if (GUILayout.Button("Exciting", guiSkin.GetStyle("Positive")))
         {
             musician.SetMood(Mood.Exciting, 0.5f);
         }
-        if (GUILayout.Button("HAPPY"))
+        if (GUILayout.Button("Happy", guiSkin.GetStyle("Positive")))
         {
             musician.SetMood(Mood.Happy, 0.5f);
         }
-        if (GUILayout.Button("TENDER"))
+        if (GUILayout.Button("Tender", guiSkin.GetStyle("Positive")))
         {
             musician.SetMood(Mood.Tender, 0.5f);
         }
-        if (GUILayout.Button("DEPRESSED"))
+        GUILayout.EndHorizontal();
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        if (GUILayout.Button("Neutral", guiSkin.GetStyle("Neutral")))
+        {
+            musician.SetMood(Mood.Neutral, 0.5f);
+        }
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("Depressed", guiSkin.GetStyle("Negative")))
         {
             musician.SetMood(Mood.Depressed, 0.5f);
         }
-        if (GUILayout.Button("SAD"))
+        if (GUILayout.Button("Sad", guiSkin.GetStyle("Negative")))
         {
             musician.SetMood(Mood.Sad, 0.5f);
         }
-        if (GUILayout.Button("ANGRY"))
+        if (GUILayout.Button("Angry", guiSkin.GetStyle("Negative")))
         {
             musician.SetMood(Mood.Angry, 0.5f);
         }
@@ -93,17 +93,8 @@ public class GUIManager : MonoBehaviour
         if (stress != musician.Stress)
             musician.SetStress(stress);
         GUILayout.EndVertical();
-        
-        //GUILayout.BeginVertical();
-        //ensemble.PrintValues();
-        //GUILayout.EndVertical();
-
-        //GUILayout.EndHorizontal();
-        //
 
         GUILayout.FlexibleSpace();
-
-        GUILayout.EndVertical();
 
         GUILayout.EndArea();
     }

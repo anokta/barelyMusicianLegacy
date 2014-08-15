@@ -13,32 +13,17 @@ namespace BarelyAPI
         string folderPath;
 
         bool recording;
+        public bool IsRecording
+        {
+            get { return recording; }
+        }
 
         const int HEADER_SIZE = 44;
         const int RESCALE_FACTOR = 32767;
 
-        void Awake()
+        void Start()
         {
-            folderPath = Application.dataPath + "/../Records/";
-        }
-
-        void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                if (!recording)
-                {
-                    StartRecord();
-
-                    Debug.Log("Recording started..");
-                }
-                else
-                {
-                    StopRecord();
-
-                    Debug.Log("Recording stopped. File saved to: " + Path.Combine(folderPath, fileName));
-                }
-            }
+            folderPath = Application.persistentDataPath + "/Records/";
         }
 
         void OnAudioFilterRead(float[] data, int channels)
@@ -51,27 +36,43 @@ namespace BarelyAPI
 
         public void StartRecord()
         {
-            recording = true;
+            if (!recording)
+            {
+                StartWriting();
 
-            StartWriting();
+                recording = true;
+
+                Debug.Log("Recording started..");
+            }
         }
 
         public void StopRecord()
         {
-            recording = false;
+            if (recording)
+            {
+                recording = false;
 
-            WriteHeader();
+                Debug.Log("Recording stopped. File saved to: " + Path.Combine(folderPath, fileName));
 
-            //UnityEditor.FileUtil.MoveFileOrDirectory(Path.Combine(folderPath, fileName), UnityEditor.EditorUtility.SaveFilePanel("Save file to:", Application.persistentDataPath, "NewRecord", "wav"));
+                WriteHeader();
+
+                //#if UNITY_EDITOR
+                //UnityEditor.FileUtil.MoveFileOrDirectory(Path.Combine(folderPath, fileName), UnityEditor.EditorUtility.SaveFilePanel("Save file to:", Application.dataPath, "NewRecord", "wav"));
+                //#endif
+            }
         }
 
         void StartWriting()
         {
+            // Create the folder beforehand if not exists
+            if (!System.IO.Directory.Exists(folderPath))
+                System.IO.Directory.CreateDirectory(folderPath);
+            
             if (!fileName.ToLower().EndsWith(".wav"))
             {
                 fileName += ".wav";
             }
-
+            
             fileStream = new FileStream(Path.Combine(folderPath, fileName), FileMode.Create);
             byte emptyByte = new byte();
 

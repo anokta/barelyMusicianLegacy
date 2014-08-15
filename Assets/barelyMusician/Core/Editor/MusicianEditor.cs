@@ -37,11 +37,11 @@ namespace BarelyAPI
             EditorGUILayout.Space();
             musician.Tempo = EditorGUILayout.IntSlider(new GUIContent("Tempo", "BPM."), musician.Tempo, 88, 220);
 
-            if (Application.isPlaying) GUI.enabled = false;
+            if (musician.IsPlaying) GUI.enabled = false;
             musician.SongDuration = EditorGUILayout.Slider(new GUIContent("Song Duration", "Song duration in minutes."), musician.SongDuration, 1.0f, 10.0f);
             musician.BarsPerSection = EditorGUILayout.IntSlider(new GUIContent("Bars Per Section", "Number of bars per each section."), musician.BarsPerSection, 1, 8);
             musician.BeatsPerBar = EditorGUILayout.IntSlider(new GUIContent("Beats Per Bar", "Number of beats per each bar."), musician.BeatsPerBar, 1, 16);
-            if (Application.isPlaying) GUI.enabled = true;
+            if (musician.IsPlaying) GUI.enabled = true;
 
             EditorGUILayout.Space();
 

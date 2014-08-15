@@ -125,6 +125,11 @@ namespace BarelyAPI
         {
             get { return (audioSource == null) ? false : audioSource.isPlaying; }
         }
+        bool paused;
+        public bool IsPaused
+        {
+            get { return paused; }
+        }
 
         void Awake()
         {
@@ -236,6 +241,7 @@ namespace BarelyAPI
             if (!audioSource.isPlaying)
             {
                 audioSource.Play();
+                paused = false;
             }
         }
 
@@ -244,15 +250,14 @@ namespace BarelyAPI
             if (audioSource.isPlaying)
             {
                 audioSource.Pause();
+                paused = true;
             }
         }
 
         public void Stop()
         {
-            if (audioSource.isPlaying)
-            {
-                audioSource.Stop();
-            }
+            audioSource.Stop();
+            paused = false;
 
             ensemble.Reset();
             sequencer.Reset();
