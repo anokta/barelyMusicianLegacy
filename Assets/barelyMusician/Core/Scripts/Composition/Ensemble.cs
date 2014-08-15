@@ -67,10 +67,15 @@ namespace BarelyAPI
                 performer.Reset();
             }
 
+            currentSection = SectionType.NONE;
+        }
+        
+        public void Reset()
+        {
+            Stop();
+
             macro.Restart();
             meso.Restart();
-
-            currentSection = SectionType.NONE;
         }
 
         public float GetOutput()

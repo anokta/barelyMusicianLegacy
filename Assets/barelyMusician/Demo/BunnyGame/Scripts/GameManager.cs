@@ -32,13 +32,21 @@ public class GameManager : MonoBehaviour
                 break;
 
             case GameEventManager.GameState.Running:
-
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    GameEventManager.TriggerGameOver();
+                    GameEventManager.TriggerGameMenu();
+                }
                 break;
 
             case GameEventManager.GameState.Over:
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     GameEventManager.TriggerGameStart();
+                }
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    GameEventManager.TriggerGameMenu();
                 }
                 break;
         }

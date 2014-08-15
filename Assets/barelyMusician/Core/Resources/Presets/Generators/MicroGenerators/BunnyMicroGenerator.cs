@@ -21,9 +21,9 @@ namespace BarelyAPI
                 if (i % 2 == 0) // || RandomNumber.NextFloat() < 0.01f)
                 {
                     lastNote += RandomNumber.NextInt(-ModeGenerator.SCALE_LENGTH / 4, ModeGenerator.SCALE_LENGTH / 2);
-                    lastNote = System.Math.Max(-ModeGenerator.SCALE_LENGTH / 2, System.Math.Min(ModeGenerator.SCALE_LENGTH, lastNote));
+                    lastNote = System.Math.Max(-ModeGenerator.SCALE_LENGTH / 4, System.Math.Min(ModeGenerator.SCALE_LENGTH, lastNote));
 
-                    line.Add(new NoteMeta(harmonic + lastNote, (float)i / LineLength / 2.0f, 1.0f / LineLength, RandomNumber.NextFloat(0.80f, 0.85f)));
+                    line.Add(new NoteMeta(harmonic + lastNote, (float)i / LineLength / 2.0f, 1.0f / LineLength, RandomNumber.NextFloat(0.85f, 0.90f)));
                 }
             }
         }

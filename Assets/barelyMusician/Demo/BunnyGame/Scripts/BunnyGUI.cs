@@ -5,7 +5,7 @@ using BarelyAPI;
 public class BunnyGUI : MonoBehaviour
 {
 
-    public GUIText startGUI, scoreGUI;
+    public GUIText startGUI, scoreGUI, bunnyScoreGUI;
     int score;
 
     Musician musician;
@@ -32,18 +32,31 @@ public class BunnyGUI : MonoBehaviour
         startGUI.text = "SPACE to Play";
         startGUI.enabled = true;
         scoreGUI.enabled = false;
+
+        bunnyScoreGUI.text = "BUNNYSCORE: " + PlayerPrefs.GetInt("bunnyscore", 0);
+        bunnyScoreGUI.enabled = true;
     }
 
     void GameStart()
     {
         startGUI.enabled = false;
         scoreGUI.enabled = true;
+        bunnyScoreGUI.enabled = false;
 
         score = 0;
     }
 
     void GameOver()
     {
+        if (PlayerPrefs.GetInt("bunnyscore", 0) < score)
+        {
+            PlayerPrefs.SetInt("bunnyscore", score);
+            PlayerPrefs.Save();
+        }
+
+        bunnyScoreGUI.text = "BUNNYSCORE: " + PlayerPrefs.GetInt("bunnyscore", 0);
+
+        bunnyScoreGUI.enabled = true;
         startGUI.text = "SPACE to Restart";
         startGUI.enabled = true;
     }

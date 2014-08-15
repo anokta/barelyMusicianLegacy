@@ -102,6 +102,136 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!1 &285671592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 285671593}
+  - 132: {fileID: 285671594}
+  m_Layer: 0
+  m_Name: barelyBunnysome
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &285671593
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 285671592}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .00999999978, y: .0250000004, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 993749090}
+  m_RootOrder: 4
+--- !u!132 &285671594
+GUIText:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 285671592}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Text: barelyBunnysome
+  m_Anchor: 3
+  m_Alignment: 1
+  m_PixelOffset: {x: 0, y: 0}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: 5aa4c42b93d2bff49a110085080aa241, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 16
+  m_FontStyle: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 934715634
+  m_PixelCorrect: 1
+  m_RichText: 1
+--- !u!114 &386664622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 1
+  Active: 1
+  Volume: -12.3999996
+  Attack: .0250000004
+  Decay: .400000006
+  Sustain: 1
+  Release: .400000006
+  RootIndex: 3
+  Sustained: 0
+  VoiceCount: 16
+  OscType: 0
+  Sample: {fileID: 8300000, guid: bafccd1714a8577469e0df59b46728d6, type: 3}
+  Samples:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!1 &537438086
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 537438087}
+  - 132: {fileID: 537438088}
+  m_Layer: 0
+  m_Name: anokta
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &537438087
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 537438086}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .99000001, y: .0250000004, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 993749090}
+  m_RootOrder: 3
+--- !u!132 &537438088
+GUIText:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 537438086}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Text: by anokta
+  m_Anchor: 5
+  m_Alignment: 1
+  m_PixelOffset: {x: 0, y: 0}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: 5aa4c42b93d2bff49a110085080aa241, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 16
+  m_FontStyle: 2
+  m_Color:
+    serializedVersion: 2
+    rgba: 934715634
+  m_PixelCorrect: 1
+  m_RichText: 1
 --- !u!1 &993749089
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,6 +260,9 @@ Transform:
   m_Children:
   - {fileID: 1420816541}
   - {fileID: 1599628782}
+  - {fileID: 1633940388}
+  - {fileID: 537438087}
+  - {fileID: 285671593}
   m_Father: {fileID: 0}
   m_RootOrder: 3
 --- !u!114 &993749091
@@ -145,6 +278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startGUI: {fileID: 1420816540}
   scoreGUI: {fileID: 1599628783}
+  bunnyScoreGUI: {fileID: 1633940389}
 --- !u!1 &1095581769
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,17 +377,21 @@ MonoBehaviour:
   Mood: 0
   performerFoldout: 1
   PerformerNames:
-  - Drums
   - Bassline
   - Chords
+  - Over
+  - Drums
   - Bunny
+  - Automaton
   Instruments:
-  - {fileID: 2141057887}
   - {fileID: 22662511}
   - {fileID: 1318312706}
+  - {fileID: 1864007566}
+  - {fileID: 2141057887}
   - {fileID: 1343419443}
-  MicroGeneratorTypes: 04000000030000000200000000000000
-  initialTempo: 148
+  - {fileID: 386664622}
+  MicroGeneratorTypes: 030000000200000001000000040000000000000001000000
+  initialTempo: 152
   songDuration: 1
   barsPerSection: 2
   beatsPerBar: 8
@@ -302,7 +440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 1
   Active: 0
-  Volume: -6.19999981
+  Volume: -5.4000001
   Attack: .0250000004
   Decay: .300000012
   Sustain: 1
@@ -475,7 +613,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1599628781}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .850000024, y: .949999988, z: 0}
+  m_LocalPosition: {x: .975000024, y: .949999988, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 993749090}
@@ -488,8 +626,8 @@ GUIText:
   m_GameObject: {fileID: 1599628781}
   m_Enabled: 1
   serializedVersion: 3
-  m_Text: 'SCORE: '
-  m_Anchor: 4
+  m_Text: 'SCORE: 100'
+  m_Anchor: 5
   m_Alignment: 2
   m_PixelOffset: {x: 0, y: 0}
   m_LineSpacing: 1
@@ -503,6 +641,85 @@ GUIText:
     rgba: 4293519849
   m_PixelCorrect: 1
   m_RichText: 1
+--- !u!1 &1633940387
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1633940388}
+  - 132: {fileID: 1633940389}
+  m_Layer: 0
+  m_Name: BunnyScore
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1633940388
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1633940387}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .0250000004, y: .949999988, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 993749090}
+  m_RootOrder: 2
+--- !u!132 &1633940389
+GUIText:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1633940387}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Text: 'BUNNYSCORE: 100'
+  m_Anchor: 3
+  m_Alignment: 0
+  m_PixelOffset: {x: 0, y: 0}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: 5aa4c42b93d2bff49a110085080aa241, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 36
+  m_FontStyle: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4290046441
+  m_PixelCorrect: 1
+  m_RichText: 1
+--- !u!114 &1864007566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 1
+  Active: 0
+  Volume: -9.19999981
+  Attack: .150000006
+  Decay: .5
+  Sustain: 1
+  Release: .25
+  RootIndex: 3
+  Sustained: 1
+  VoiceCount: 16
+  OscType: 0
+  Sample: {fileID: 8300000, guid: 44143fb0c60ed1544b4b3561577f532f, type: 3}
+  Samples:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &2141057887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,7 +733,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 0
   Active: 1
-  Volume: 1.70000005
+  Volume: 1.89999998
   Attack: 0
   Decay: .25
   Sustain: 1

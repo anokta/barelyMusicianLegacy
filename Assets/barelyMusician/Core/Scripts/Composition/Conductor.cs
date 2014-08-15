@@ -115,7 +115,7 @@ namespace BarelyAPI
             float index = getNote((Mathf.RoundToInt(harmonicCurve) != 0 ? Mathf.RoundToInt(harmonicCurve) * meta.Index : meta.Index) + Mathf.RoundToInt(pitchHeight) / 2 * ModeGenerator.SCALE_LENGTH);
             float offset = meta.Offset;
             float duration = Mathf.Max(0.0f, RandomNumber.NextNormal(meta.Duration * articulationMult, meta.Duration * articulationMult * articulationVariance));
-            float loudness = Mathf.Max(0.0f, RandomNumber.NextNormal(meta.Loudness * loudnessMult, meta.Loudness * loudnessMult * loudnessVariance));
+            float loudness = Mathf.Max(0.0f, Mathf.Min(1.0f, RandomNumber.NextNormal(meta.Loudness * loudnessMult, meta.Loudness * loudnessMult * loudnessVariance)));
 
             return new NoteMeta(index, offset, duration, loudness);
         }

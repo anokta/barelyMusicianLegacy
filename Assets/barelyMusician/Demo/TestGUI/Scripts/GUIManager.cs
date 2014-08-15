@@ -4,6 +4,7 @@ using BarelyAPI;
 
 public class GUIManager : MonoBehaviour
 {
+    public GUISkin guiSkin;
 
     public GUIText timeSignutare;
     //private string timeSigText;
@@ -15,13 +16,10 @@ public class GUIManager : MonoBehaviour
     {
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     void OnGUI()
     {
+        GUI.skin = guiSkin;
+
         //timeSignutare.text = timeSigText;
         GUILayout.BeginArea(new Rect(Screen.width * 0.25f, Screen.height * 0.2f, Screen.width * 0.5f, Screen.height * 0.75f));
 

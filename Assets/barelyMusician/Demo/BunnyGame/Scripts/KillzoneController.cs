@@ -42,6 +42,6 @@ public class KillzoneController : MonoBehaviour {
     void OnNextBeat(Sequencer sequencer)
     {
         position += Vector3.Scale(direction, GameWorld.ScreenBounds) / sequencer.BeatCount;
-        killzoneColorCurrent = Color.red;
+        killzoneColorCurrent = new Color(1.0f, 0.1f, 0.1f);
     }
 }

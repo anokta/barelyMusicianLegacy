@@ -16,9 +16,17 @@ public class BunnyController : MonoBehaviour
         musician = FindObjectOfType<Musician>();
         animator = GetComponent<Animator>();
 
-        Vector3 screen = Camera.main.WorldToScreenPoint(transform.position);
-
         musician.Ensemble.TogglePeformer("Bunny", false);
+        musician.Ensemble.TogglePeformer("Over", false);
+    }
+
+    void OnDestroy()
+    {
+        if (direction != Vector2.zero)
+        {
+            musician.Ensemble.TogglePeformer("Bunny", false);
+            musician.Ensemble.TogglePeformer("Over", true);
+        }
     }
 
     void Update()

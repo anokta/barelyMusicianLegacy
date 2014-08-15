@@ -112,13 +112,12 @@ namespace BarelyAPI
             get { return sequencer; }
         }
 
-
         Ensemble ensemble;
         public Ensemble Ensemble
         {
             get { return ensemble; }
         }
-
+        
         Conductor conductor;
 
         AudioSource audioSource;
@@ -141,17 +140,17 @@ namespace BarelyAPI
         {
             if (energy != energyTarget)
             {
-                if (Mathf.Abs(energy - energyTarget) < 0.01f * energyInterpolationSpeed)
+                if (Mathf.Abs(energy - energyTarget) < 0.01f * energyInterpolationSpeed * Time.deltaTime)
                     Energy = energyTarget;
                 else
-                    Energy = Mathf.Lerp(energy, energyTarget, energyInterpolationSpeed);
+                    Energy = Mathf.Lerp(energy, energyTarget, energyInterpolationSpeed * Time.deltaTime);
             }
             if (stress != stressTarget)
             {
-                if (Mathf.Abs(stress - stressTarget) < 0.01f * stressInterpolationSpeed)
+                if (Mathf.Abs(stress - stressTarget) < 0.01f * stressInterpolationSpeed * Time.deltaTime)
                     Stress = stressTarget;
                 else
-                    Stress = Mathf.Lerp(stress, stressTarget, stressInterpolationSpeed);
+                    Stress = Mathf.Lerp(stress, stressTarget, stressInterpolationSpeed * Time.deltaTime);
             }
         }
 
@@ -255,7 +254,7 @@ namespace BarelyAPI
                 audioSource.Stop();
             }
 
-            ensemble.Stop();
+            ensemble.Reset();
             sequencer.Reset();
         }
 
@@ -298,16 +297,16 @@ namespace BarelyAPI
 
         public void SetEnergy(float energy, float smoothness = 0.0f)
         {
-            energyTarget = energy;
-            energyInterpolationSpeed = (smoothness == 0.0f) ? 1.0f : Time.deltaTime / (smoothness * smoothness);
+            energyTarget = Math.Max(-1.0f, Math.Min(1.0f, energy));
+            energyInterpolationSpeed = (smoothness == 0.0f) ? 1.0f : 1.0f / (smoothness * smoothness);
 
             if (smoothness == 0.0f & Energy != energy) Energy = energyTarget;
         }
 
         public void SetStress(float stress, float smoothness = 0.0f)
         {
-            stressTarget = stress;
-            stressInterpolationSpeed = (smoothness == 0.0f) ? 1.0f : Time.deltaTime / (smoothness * smoothness);
+            stressTarget = Math.Max(-1.0f, Math.Min(1.0f, stress));
+            stressInterpolationSpeed = (smoothness == 0.0f) ? 1.0f : 1.0f / (smoothness * smoothness);
 
             if (smoothness == 0.0f & Stress != stress) Stress = stressTarget;
         }

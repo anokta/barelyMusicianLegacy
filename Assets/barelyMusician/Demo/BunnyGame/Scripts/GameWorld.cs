@@ -30,14 +30,14 @@ public class GameWorld : MonoBehaviour
         _instance = this;
 
         screenSize = 2.0f * Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, -Camera.main.transform.position.z));
+
+        GameEventManager.GameMenu += GameMenu;
+        GameEventManager.GameStart += GameStart;
+        GameEventManager.GameOver += GameOver;
     }
 
     void Start()
     {
-        GameEventManager.GameMenu += GameMenu;
-        GameEventManager.GameStart += GameStart;
-        GameEventManager.GameOver += GameOver;
-
         musician = FindObjectOfType<Musician>();
         musician.Sequencer.AddSectionListener(OnNextSection);
         musician.Sequencer.AddBarListener(OnNextBar);
@@ -59,8 +59,9 @@ public class GameWorld : MonoBehaviour
                 {
                     newSection = false;
                     Vector2 direction = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
-                    direction.x = direction.x < 0.75f ? (direction.x > -0.75f ? (direction.x > 0.0f ? 0.75f : -0.75f) : direction.x) : direction.x;
-                    direction.y = direction.y < 0.75f ? (direction.y > -0.75f ? (direction.y > 0.0f ? 0.75f : -0.75f) : direction.y) : direction.y;
+                    direction.x = Mathf.Round(direction.x);//direction.x < 0.75f ? (direction.x > -0.75f ? (direction.x > 0.0f ? 0.75f : -0.75f) : direction.x) : direction.x);
+                    direction.y = Mathf.Round(direction.y);//direction.y < 0.75f ? (direction.y > -0.75f ? (direction.y > 0.0f ? 0.75f : -0.75f) : direction.y) : direction.y);
+                    if(direction == Vector2.zero) direction = Vector2.right;
                     KillzoneController killzone =
                         (GameObject.Instantiate(killzonePrefab, Vector2.Scale(direction, screenSize) * (currentBeat - (beatCount - 1) / 2.0f) / beatCount, Quaternion.identity) as GameObject).GetComponent<KillzoneController>();
                     killzone.direction = direction;
@@ -68,20 +69,21 @@ public class GameWorld : MonoBehaviour
                 break;
         }
 
-        if (GameEventManager.CurrentState != GameEventManager.GameState.InMenu)
-        {
-            if (backgroundTarget != background.color)
-                background.color = Color.Lerp(background.color, backgroundTarget, 2.0f * Time.deltaTime);
-        }
+        if (backgroundTarget != background.color)
+            background.color = Color.Lerp(background.color, backgroundTarget, 2.0f * Time.deltaTime);
     }
 
     void GameMenu()
     {
-        backgroundTarget = Color.white;
+        backgroundTarget = new Color(1.0f, 1.0f, 1.0f, 0.29f);
     }
 
     void GameStart()
     {
+        KillzoneController[] killzones = FindObjectsOfType<KillzoneController>();
+        foreach (KillzoneController killzone in killzones)
+            GameObject.Destroy(killzone.gameObject);
+
         newSection = false;
         backgroundTarget = Color.white;
         bunny = (GameObject.Instantiate(bunnyPrefab) as GameObject).GetComponent<BunnyController>();
@@ -95,12 +97,16 @@ public class GameWorld : MonoBehaviour
 
     void OnNextSection(Sequencer sequencer)
     {
-        newSection = true;
+        if(musician.Energy == 1.0f || musician.Ensemble.CurrentSection != SectionType.INTRO || musician.Ensemble.CurrentSection != SectionType.OUTRO)
+            newSection = true;
         //backgroundTarget = new Color(RandomNumber.NextFloat(), RandomNumber.NextFloat(), RandomNumber.NextFloat());
     }
 
     void OnNextBar(Sequencer sequencer)
     {
+        musician.SetEnergy(musician.Energy + 0.025f, 0.25f);
+        if (musician.Energy == 1.0f || (musician.Energy > 0.55f && musician.Ensemble.CurrentSection == SectionType.CHORUS))
+            newSection = true;
     }
 
     void OnNextBeat(Sequencer sequencer)
