@@ -2,8 +2,8 @@
 using System.Collections;
 using BarelyAPI;
 
-public class NoiseMaker : MonoBehaviour {
-
+public class NoiseMaker : MonoBehaviour
+{
     public Texture2D pixel;
     public int size;
 
@@ -11,15 +11,16 @@ public class NoiseMaker : MonoBehaviour {
 
     float[,] noises;
 
-
-	void Start () {
+    void Start()
+    {
         musician = FindObjectOfType<Musician>();
         musician.Sequencer.AddBeatListener(OnNextBeat);
 
         noises = new float[Screen.width / size + 1, Screen.height / size + 1];
-	}
-	
-	void OnGUI() {
+    }
+
+    void OnGUI()
+    {
         if (musician.IsPlaying || musician.IsPaused)
         {
             GUI.depth = -100;
@@ -37,7 +38,7 @@ public class NoiseMaker : MonoBehaviour {
                 }
             }
         }
-	   }
+    }
 
     void OnNextBeat(Sequencer sequencer)
     {
