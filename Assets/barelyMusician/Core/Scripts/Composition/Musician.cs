@@ -117,7 +117,7 @@ namespace BarelyAPI
         {
             get { return ensemble; }
         }
-        
+
         Conductor conductor;
 
         AudioSource audioSource;
@@ -134,10 +134,6 @@ namespace BarelyAPI
         void Awake()
         {
             Init();
-
-            Debug.Log(Instruments.Count);
-            Debug.Log(PerformerNames.Count);
-            Debug.Log(MicroGeneratorTypes.Count);
 
             audioSource = gameObject.AddComponent<AudioSource>();
             audioSource.hideFlags = HideFlags.HideInInspector;
@@ -188,7 +184,7 @@ namespace BarelyAPI
 
                 ensemble = new Ensemble(macro, meso, conductor);
                 ensemble.Register(sequencer);
-                
+
                 // performers
                 if (PerformerNames == null) PerformerNames = new List<string>();
                 if (Instruments == null) Instruments = new List<InstrumentMeta>();
@@ -241,7 +237,9 @@ namespace BarelyAPI
             if (index > -1)
             {
                 PerformerNames.RemoveAt(index);
+                InstrumentMeta meta = Instruments[index];
                 Instruments.RemoveAt(index);
+                DestroyImmediate(meta);
                 MicroGeneratorTypes.RemoveAt(index);
 
                 if (ensemble != null)

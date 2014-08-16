@@ -11,6 +11,14 @@ namespace BarelyAPI
         {
             set
             {
+                if (value == null)
+                {
+                    sampleData = new float[1];
+                    samplingRatio = 0.0f;
+                    
+                    return;
+                }
+
                 sampleData = new float[value.samples];
                 value.GetData(sampleData, 0);
 

@@ -36,7 +36,7 @@ namespace BarelyAPI
 
                 for (int i = 0; i < meta.Samples.Length; ++i)
                 {
-                    voices.Add(new Voice(new Sampler(meta.Samples[i], false, new Note(meta.RootIndex).Pitch), new Envelope(0.0f, 0.0f, 1.0f, meta.Sustained ? 0.0f : (meta.Samples[i].length / meta.Samples[i].channels))));
+                    voices.Add(new Voice(new Sampler(meta.Samples[i], false, new Note(meta.RootIndex).Pitch), new Envelope(0.0f, 0.0f, 1.0f, (meta.Sustained || meta.Samples[i] == null) ? 0.0f : (meta.Samples[i].length / meta.Samples[i].channels))));
                 }
             }
             else

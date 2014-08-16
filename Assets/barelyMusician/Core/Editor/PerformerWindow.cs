@@ -12,14 +12,12 @@ namespace BarelyAPI
         public int microGeneratorType;
         public InstrumentMeta instrumentMeta;
         public int editIndex;
-        
+
         bool advanced;
         bool sampleListFoldout = true;
 
         void OnEnable()
         {
-            instrumentMeta = ScriptableObject.CreateInstance<InstrumentMeta>();
-
             editIndex = -1;
             //ShowAsDropDown(position, new Vector2(position.width, position.height));
         }
@@ -51,7 +49,7 @@ namespace BarelyAPI
                         EditorGUI.indentLevel--;
                     }
 
-                        instrumentMeta.Sustained = EditorGUILayout.Toggle("Sustained", instrumentMeta.Sustained);
+                    instrumentMeta.Sustained = EditorGUILayout.Toggle("Sustained", instrumentMeta.Sustained);
 
                     break;
 
@@ -112,7 +110,7 @@ namespace BarelyAPI
             EditorGUILayout.BeginHorizontal();
             if (GUILayout.Button("Cancel"))
             {
-                //if (editIndex == -1) DestroyImmediate(instrumentMeta);
+                if (editIndex == -1) DestroyImmediate(instrumentMeta);
 
                 Close();
             }
@@ -129,5 +127,4 @@ namespace BarelyAPI
             EditorGUILayout.Space();
         }
     }
-
 }

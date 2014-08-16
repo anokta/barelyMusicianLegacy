@@ -829,8 +829,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96110f2c31412cc4ea75fe86d51786d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volume: -4.4000001
-  fundamentalIndex: 3
+  volume: -6.5999999
+  fundamentalIndex: 0
   oscType: 5
   attack: .200000003
   decay: .25

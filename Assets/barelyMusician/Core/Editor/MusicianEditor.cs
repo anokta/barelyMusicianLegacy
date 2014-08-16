@@ -118,6 +118,7 @@ namespace BarelyAPI
                     performerWindow = (PerformerWindow)EditorWindow.GetWindow(typeof(PerformerWindow), true, "Performer");
                     performerWindow.musician = musician;
                     performerWindow.performerName = "Performer" + (musician.PerformerNames.Count + 1).ToString();
+                    performerWindow.instrumentMeta = ScriptableObject.CreateInstance<InstrumentMeta>();
                 }
                 EditorGUILayout.EndHorizontal();
                 EditorGUI.indentLevel--;
