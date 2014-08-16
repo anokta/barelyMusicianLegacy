@@ -10,7 +10,7 @@ namespace BarelyAPI
         public float NoteOnsetMultiplier
         {
             get { return noteOnsetMult; }
-            set { noteOnsetMult = 0.25f + 1.75f * value; }
+            set { noteOnsetMult = 0.25f + 3.75f * value; }
         }
 
         // Timbre brightness

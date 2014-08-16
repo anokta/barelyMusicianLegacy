@@ -39,7 +39,7 @@ namespace BarelyAPI
 
             if (musician.IsPlaying) GUI.enabled = false;
             musician.SongDuration = EditorGUILayout.Slider(new GUIContent("Song Duration", "Song duration in minutes."), musician.SongDuration, 1.0f, 10.0f);
-            musician.BarsPerSection = EditorGUILayout.IntSlider(new GUIContent("Bars Per Section", "Number of bars per each section."), musician.BarsPerSection, 1, 8);
+            musician.BarsPerSection = EditorGUILayout.IntSlider(new GUIContent("Bars Per Section", "Number of bars per each section."), musician.BarsPerSection, 1, 12);
             musician.BeatsPerBar = EditorGUILayout.IntSlider(new GUIContent("Beats Per Bar", "Number of beats per each bar."), musician.BeatsPerBar, 1, 16);
             if (musician.IsPlaying) GUI.enabled = true;
 
@@ -89,6 +89,7 @@ namespace BarelyAPI
                         performerWindow.performerName = musician.PerformerNames[i];
                         performerWindow.instrumentMeta = musician.Instruments[i];
                         performerWindow.microGeneratorType = musician.MicroGeneratorTypes[i];
+                        performerWindow.editIndex = i;
                         performerWindow.musician = musician;
                         break;
                     }

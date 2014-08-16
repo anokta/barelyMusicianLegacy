@@ -24,6 +24,8 @@ namespace BarelyAPI
         void Start()
         {
             folderPath = Application.persistentDataPath + "/Records/";
+
+            recording = false;
         }
 
         void OnAudioFilterRead(float[] data, int channels)

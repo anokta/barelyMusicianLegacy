@@ -135,6 +135,10 @@ namespace BarelyAPI
         {
             Init();
 
+            Debug.Log(Instruments.Count);
+            Debug.Log(PerformerNames.Count);
+            Debug.Log(MicroGeneratorTypes.Count);
+
             audioSource = gameObject.AddComponent<AudioSource>();
             audioSource.hideFlags = HideFlags.HideInInspector;
             audioSource.panLevel = 0.0f;
@@ -203,21 +207,30 @@ namespace BarelyAPI
                 }
             }
         }
-        public void RegisterPerformer(string performerName, InstrumentMeta instrumentType, int microGeneratorTypeIndex)
+        public void RegisterPerformer(string performerName, InstrumentMeta instrumentMeta, int microGeneratorTypeIndex, int editIndex = -1)
         {
-            DeregisterPerformer(performerName);
+            if (editIndex >= 0)
+            {
+                if (ensemble != null) ensemble.RemovePerfomer(PerformerNames[editIndex]);
 
-            PerformerNames.Add(performerName);
-            Instruments.Add(instrumentType);
-            MicroGeneratorTypes.Add(microGeneratorTypeIndex);
+                PerformerNames[editIndex] = performerName;
+                Instruments[editIndex] = instrumentMeta;
+                MicroGeneratorTypes[editIndex] = microGeneratorTypeIndex;
+            }
+            else
+            {
+                PerformerNames.Add(performerName);
+                Instruments.Add(instrumentMeta);
+                MicroGeneratorTypes.Add(microGeneratorTypeIndex);
+            }
 
             if (ensemble != null)
             {
-                Instrument instrument = InstrumentFactory.CreateInstrument(instrumentType);
+                Instrument instrument = InstrumentFactory.CreateInstrument(instrumentMeta);
                 MicroGenerator micro = GeneratorFactory.CreateMicroGenerator(microGeneratorTypeIndex, sequencer);
 
                 Performer performer = new Performer(instrument, micro);
-                performer.Active = instrumentType.Active;
+                performer.Active = instrumentMeta.Active;
                 ensemble.AddPerformer(performerName, performer);
             }
         }

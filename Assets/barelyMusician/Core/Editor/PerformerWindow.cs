@@ -11,6 +11,7 @@ namespace BarelyAPI
         public string performerName;
         public int microGeneratorType;
         public InstrumentMeta instrumentMeta;
+        public int editIndex;
         
         bool advanced;
         bool sampleListFoldout = true;
@@ -19,6 +20,7 @@ namespace BarelyAPI
         {
             instrumentMeta = ScriptableObject.CreateInstance<InstrumentMeta>();
 
+            editIndex = -1;
             //ShowAsDropDown(position, new Vector2(position.width, position.height));
         }
 
@@ -110,12 +112,14 @@ namespace BarelyAPI
             EditorGUILayout.BeginHorizontal();
             if (GUILayout.Button("Cancel"))
             {
+                //if (editIndex == -1) DestroyImmediate(instrumentMeta);
+
                 Close();
             }
             EditorGUILayout.Space();
             if (GUILayout.Button("OK"))
             {
-                musician.RegisterPerformer(performerName, instrumentMeta, microGeneratorType);
+                musician.RegisterPerformer(performerName, instrumentMeta, microGeneratorType, editIndex);
 
                 Close();
             }

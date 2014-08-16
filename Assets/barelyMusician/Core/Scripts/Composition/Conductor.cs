@@ -34,7 +34,7 @@ namespace BarelyAPI
         public float ArticulationMultiplier
         {
             get { return articulationMult; }
-            set { articulationMult = 0.5f + value; }
+            set { articulationMult = 0.25f + 1.75f * value; }
         }
 
         // Loudness
