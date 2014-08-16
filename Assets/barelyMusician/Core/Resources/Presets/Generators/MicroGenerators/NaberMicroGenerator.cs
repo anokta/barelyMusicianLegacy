@@ -34,7 +34,7 @@ namespace BarelyAPI
             {
                 if (ca.GetState(i) == 1)
                 {
-                    line.Add(new NoteMeta(keyIndex + markov.CurrentState, (float)i / LineLength / 2.0f, 1.0f / LineLength, 1.0f));
+                    line.Add(new NoteMeta(keyIndex + markov.CurrentState, (float)i / LineLength / 2.0f, 1.0f / LineLength, RandomNumber.NextFloat(0.9f, 0.95f)));
                     markov.GenerateNextState();
                 }
             }

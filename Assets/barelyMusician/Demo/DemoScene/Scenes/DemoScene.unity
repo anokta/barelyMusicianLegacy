@@ -368,7 +368,7 @@ MonoBehaviour:
   - {fileID: 1654681800}
   - {fileID: 862796355}
   MicroGeneratorTypes: 04000000060000000500000002000000
-  initialTempo: 132
+  initialTempo: 142
   songDuration: 2.5
   barsPerSection: 8
   beatsPerBar: 4
@@ -861,7 +861,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 1
   Active: 1
-  Volume: -2.4000001
+  Volume: -3.20000005
   Attack: .0500000007
   Decay: .25
   Sustain: 1

@@ -23,7 +23,7 @@ namespace BarelyAPI
 
         void Start()
         {
-            folderPath = Application.persistentDataPath + "/Records/";
+            folderPath = Application.dataPath + "/Records/";
 
             recording = false;
         }

@@ -36,12 +36,20 @@ public class GUIManager : MonoBehaviour
         {
             musician.Stop();
         }
+
+#if UNITY_WEBPLAYER
+        GUI.enabled = false;
+#endif
         bool recording  = GUILayout.Toggle(recorder.IsRecording, "Record");
         if (recording != recorder.IsRecording)
         {
             if (recording) recorder.StartRecord();
             else recorder.StopRecord();
         }
+#if UNITY_WEBPLAYER
+        GUI.enabled = true;
+#endif
+
         GUILayout.EndHorizontal();
 
         GUILayout.FlexibleSpace();
