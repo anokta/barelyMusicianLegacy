@@ -6,7 +6,7 @@ namespace BarelyAPI
 {
     public abstract class Instrument
     {
-        const float MIN_ONSET = 0.01f;
+        public static float MIN_ONSET = 0.01f;
 
         // Instrument Voices
         protected List<Voice> voices;
