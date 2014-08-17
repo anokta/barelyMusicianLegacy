@@ -266,7 +266,7 @@ GameObject:
   - 114: {fileID: 993552978}
   - 82: {fileID: 993552977}
   m_Layer: 0
-  m_Name: Musician
+  m_Name: barelyMusician
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -355,19 +355,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MacroGeneratorTypeIndex: 1
   MesoGeneratorTypeIndex: 1
-  Mood: 0
+  Mood: 1
   performerFoldout: 1
   PerformerNames:
   - Drums
   - Bass
   - Melody
   - Chords
+  - Strings
   Instruments:
   - {fileID: 1385990328}
   - {fileID: 2060220004}
   - {fileID: 1654681800}
   - {fileID: 862796355}
-  MicroGeneratorTypes: 04000000060000000500000002000000
+  - {fileID: 1732109672}
+  MicroGeneratorTypes: 0400000006000000050000000200000008000000
   initialTempo: 142
   songDuration: 2.5
   barsPerSection: 8
@@ -787,7 +789,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 0
   Active: 1
-  Volume: 0
+  Volume: -.899999976
   Attack: 0
   Decay: .25
   Sustain: 1
@@ -871,6 +873,34 @@ MonoBehaviour:
   VoiceCount: 16
   OscType: 0
   Sample: {fileID: 8300000, guid: 1c08986e68b40d94987938586307d45a, type: 3}
+  Samples:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &1732109672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 1
+  Active: 1
+  Volume: -3.5999999
+  Attack: .150000006
+  Decay: .349999994
+  Sustain: 1
+  Release: .200000003
+  RootIndex: 3
+  Sustained: 1
+  VoiceCount: 16
+  OscType: 0
+  Sample: {fileID: 8300000, guid: 47418d6ea83e9954db0bda9f454539a9, type: 3}
   Samples:
   - {fileID: 0}
   - {fileID: 0}

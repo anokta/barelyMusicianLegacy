@@ -21,13 +21,15 @@ public class KillzoneController : MonoBehaviour {
         position = transform.position;
         transform.localScale = Vector3.Scale(GameWorld.ScreenBounds, Vector2.one - (1.0f - 1.0f / musician.Sequencer.BeatCount) * new Vector2(Mathf.Abs(direction.x), Mathf.Abs(direction.y)));
         killzoneColorCurrent = killzoneColorTarget = Color.clear;
+
+        musician.Ensemble.TogglePeformer("Octave", true);
 	}
-	
 	
     void Update () {
         transform.position = position;
         if (Mathf.Abs(position.x) > GameWorld.ScreenBounds.x / 2.0f || Mathf.Abs(position.y) > GameWorld.ScreenBounds.y / 2.0f)
         {
+            musician.Ensemble.TogglePeformer("Octave", false);
             GameObject.Destroy(gameObject);
             return;
         }

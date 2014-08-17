@@ -54,17 +54,17 @@ public class GameManager : MonoBehaviour
 
     void GameMenu()
     {
-        musician.SetMood(Mood.Tender, 0.5f);
+        musician.SetMood(Mood.Tender, 0.75f);
         musician.Play();
     }
 
     void GameStart()
     {
-        musician.SetMood(Mood.Happy, 0.5f);
+        musician.SetMood(Mood.Happy, 0.75f);
     }
 
     void GameOver()
     {
-        musician.SetMood(Mood.Angry, 0.5f);
+        musician.SetMood(Mood.Angry, 0.75f);
     }
 }

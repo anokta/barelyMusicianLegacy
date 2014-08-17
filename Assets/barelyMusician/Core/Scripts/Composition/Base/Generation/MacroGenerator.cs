@@ -26,7 +26,12 @@ namespace BarelyAPI
         public SectionType GetSection(int index)
         {
             if (sectionSequence.Length == 0)
+            {
                 generateSequence(targetLength);
+
+                // Log the sequence
+                Debug.Log("Sequence: " + sectionSequence);
+            }
 
             if (index >= sectionSequence.Length)
             {

@@ -29,6 +29,11 @@ namespace BarelyAPI
                 progression = progressions[section] = new int[ProgressionLength];
                 for (int i = 0; i < progression.Length; ++i) progression[i] = 1;
                 generateProgression(section, ref progression);
+
+                // Log the progression
+                string log = section + " Progression:";
+                for (int i = 0; i < progression.Length; ++i) log += " " + progression[i];
+                Debug.Log(log);
             }
 
             return progression[index] - 1;

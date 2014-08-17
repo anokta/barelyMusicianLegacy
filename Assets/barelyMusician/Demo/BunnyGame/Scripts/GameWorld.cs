@@ -4,7 +4,6 @@ using BarelyAPI;
 
 public class GameWorld : MonoBehaviour
 {
-
     public GameObject bunnyPrefab;
     public GameObject backgroundPrefab, killzonePrefab;
 
@@ -22,6 +21,7 @@ public class GameWorld : MonoBehaviour
     Musician musician;
     int beatCount, currentBeat;
     bool newSection;
+    int initialTempo;
 
     static GameWorld _instance;
 
@@ -44,6 +44,7 @@ public class GameWorld : MonoBehaviour
         musician.Sequencer.AddBeatListener(OnNextBeat);
         musician.Sequencer.AddPulseListener(OnNextPulse);
 
+        initialTempo = musician.Tempo;
         beatCount = musician.Sequencer.BeatCount;
 
         background = (GameObject.Instantiate(backgroundPrefab) as GameObject).GetComponent<SpriteRenderer>();
@@ -75,11 +76,14 @@ public class GameWorld : MonoBehaviour
 
     void GameMenu()
     {
+        if(musician != null)
+            musician.Tempo = initialTempo;
         backgroundTarget = new Color(1.0f, 1.0f, 1.0f, 0.29f);
     }
 
     void GameStart()
     {
+        musician.Tempo = initialTempo;
         KillzoneController[] killzones = FindObjectsOfType<KillzoneController>();
         foreach (KillzoneController killzone in killzones)
             GameObject.Destroy(killzone.gameObject);
@@ -100,12 +104,14 @@ public class GameWorld : MonoBehaviour
         if(musician.Energy == 1.0f || musician.Ensemble.CurrentSection != SectionType.INTRO || musician.Ensemble.CurrentSection != SectionType.OUTRO)
             newSection = true;
         //backgroundTarget = new Color(RandomNumber.NextFloat(), RandomNumber.NextFloat(), RandomNumber.NextFloat());
+
+        if (musician.Energy == 1.0f) musician.Tempo = Mathf.Min(220, musician.Tempo + 1);
     }
 
     void OnNextBar(Sequencer sequencer)
     {
         musician.SetEnergy(musician.Energy + 0.025f, 0.25f);
-        if (musician.Energy == 1.0f || (musician.Energy > 0.55f && musician.Ensemble.CurrentSection == SectionType.CHORUS))
+        if ((musician.Energy == 1.0f && musician.Ensemble.CurrentSection != SectionType.INTRO && musician.Ensemble.CurrentSection != SectionType.OUTRO) || (musician.Energy > 0.55f && musician.Ensemble.CurrentSection == SectionType.CHORUS))
             newSection = true;
     }
 
