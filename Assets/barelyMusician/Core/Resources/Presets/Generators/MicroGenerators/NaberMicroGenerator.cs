@@ -29,16 +29,19 @@ namespace BarelyAPI
 
         protected override void generateLine(SectionType section, int bar, int harmonic, ref List<NoteMeta> line)
         {
-            int keyIndex = (section == SectionType.CHORUS) ? harmonic : 0;
-
-            ca.Update();
-
-            for (int i = 0; i < 2 * LineLength; ++i)
+            if (section != SectionType.BRIDGE)
             {
-                if (ca.GetState(offset + i) == 1)
+                int keyIndex = (section == SectionType.CHORUS) ? harmonic : 0;
+
+                ca.Update();
+
+                for (int i = 0; i < 2 * LineLength; ++i)
                 {
-                    line.Add(new NoteMeta(keyIndex + markov.CurrentState, 0.5f * i / LineLength, 1.0f / LineLength, RandomNumber.NextFloat(0.9f, 0.95f)));
-                    markov.GenerateNextState();
+                    if (ca.GetState(offset + i) == 1)
+                    {
+                        line.Add(new NoteMeta(keyIndex + markov.CurrentState, 0.5f * i / LineLength, 1.0f / LineLength, RandomNumber.NextFloat(0.9f, 0.95f)));
+                        markov.GenerateNextState();
+                    }
                 }
             }
         }

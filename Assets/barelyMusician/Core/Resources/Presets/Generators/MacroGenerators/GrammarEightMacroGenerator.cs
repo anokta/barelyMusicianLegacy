@@ -16,8 +16,8 @@ namespace BarelyAPI
             grammar.AddRule("Intro", "I");
             grammar.AddRule("Body", "Statement Repetition Cadence");
             grammar.AddRule("Statement", "V V C | V P C | V C");
-            grammar.AddRule("Repetition", "V P C C | V C C | V V C C | V P C | Repetition Repetition | Repetition B Repetition");
-            grammar.AddRule("Cadence", "C | C C | P C C");
+            grammar.AddRule("Repetition", "V C C | V P C | V C B P C | V C B V P C | V C B V C | Repetition B Repetition");
+            grammar.AddRule("Cadence", "C | P C C | C C | P C");
             grammar.AddRule("Outro", "O");
         }
 

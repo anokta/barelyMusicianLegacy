@@ -23,7 +23,8 @@ namespace BarelyAPI
 
         protected override void generateProgression(SectionType section, ref int[] progression)
         {
-            markov.Reset();
+            if(section != SectionType.BRIDGE)
+                markov.Reset();
 
             for (int i = 0; i < progression.Length; ++i)
             {
