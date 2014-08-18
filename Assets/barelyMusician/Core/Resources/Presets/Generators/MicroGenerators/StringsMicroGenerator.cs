@@ -6,12 +6,9 @@ namespace BarelyAPI
 {
     public class StringsMicroGenerator : MicroGenerator
     {
-        int lastNote;
-
         public StringsMicroGenerator(Sequencer sequencer)
             : base(sequencer)
         {
-            lastNote = 0;
         }
 
         protected override void generateLine(SectionType section, int bar, int harmonic, ref List<NoteMeta> line)

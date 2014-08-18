@@ -110,7 +110,7 @@ public class GameWorld : MonoBehaviour
 
     void OnNextBar(Sequencer sequencer)
     {
-        musician.SetEnergy(musician.Energy + 0.025f, 0.25f);
+        musician.SetEnergy(musician.Energy + 0.05f, 0.25f);
         if ((musician.Energy == 1.0f && musician.Ensemble.CurrentSection != SectionType.INTRO && musician.Ensemble.CurrentSection != SectionType.OUTRO) || (musician.Energy > 0.55f && musician.Ensemble.CurrentSection == SectionType.CHORUS))
             newSection = true;
     }

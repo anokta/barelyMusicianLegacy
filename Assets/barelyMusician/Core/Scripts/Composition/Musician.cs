@@ -196,7 +196,7 @@ namespace BarelyAPI
 
                     Instrument instrument = InstrumentFactory.CreateInstrument(Instruments[i]);
                     MicroGenerator micro = GeneratorFactory.CreateMicroGenerator(MicroGeneratorTypes[i], sequencer);
-
+                    if (name.Equals("Melody")) instrument.AddEffect(new Distortion(15.0f));
                     Performer performer = new Performer(instrument, micro);
                     performer.Active = Instruments[i].Active;
                     ensemble.AddPerformer(name, performer);
@@ -223,6 +223,7 @@ namespace BarelyAPI
             if (ensemble != null)
             {
                 Instrument instrument = InstrumentFactory.CreateInstrument(instrumentMeta);
+                if (performerName.Equals("Melody")) instrument.AddEffect(new Distortion(15.0f));
                 MicroGenerator micro = GeneratorFactory.CreateMicroGenerator(microGeneratorTypeIndex, sequencer);
 
                 Performer performer = new Performer(instrument, micro);

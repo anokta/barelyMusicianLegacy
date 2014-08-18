@@ -5,6 +5,7 @@ using BarelyAPI;
 public class GUIManager : MonoBehaviour
 {
     public GUISkin guiSkin;
+    public float smoothness;
 
     Musician musician;
     Recorder recorder;
@@ -57,37 +58,37 @@ public class GUIManager : MonoBehaviour
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Exciting", guiSkin.GetStyle("Positive")))
         {
-            musician.SetMood(Mood.Exciting, 0.5f);
+            musician.SetMood(Mood.Exciting, smoothness);
         }
         if (GUILayout.Button("Happy", guiSkin.GetStyle("Positive")))
         {
-            musician.SetMood(Mood.Happy, 0.5f);
+            musician.SetMood(Mood.Happy, smoothness);
         }
         if (GUILayout.Button("Tender", guiSkin.GetStyle("Positive")))
         {
-            musician.SetMood(Mood.Tender, 0.5f);
+            musician.SetMood(Mood.Tender, smoothness);
         }
         GUILayout.EndHorizontal();
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
         if (GUILayout.Button("Neutral", guiSkin.GetStyle("Neutral")))
         {
-            musician.SetMood(Mood.Neutral, 0.5f);
+            musician.SetMood(Mood.Neutral, smoothness);
         }
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Depressed", guiSkin.GetStyle("Negative")))
         {
-            musician.SetMood(Mood.Depressed, 0.5f);
+            musician.SetMood(Mood.Depressed, smoothness);
         }
         if (GUILayout.Button("Sad", guiSkin.GetStyle("Negative")))
         {
-            musician.SetMood(Mood.Sad, 0.5f);
+            musician.SetMood(Mood.Sad, smoothness);
         }
         if (GUILayout.Button("Angry", guiSkin.GetStyle("Negative")))
         {
-            musician.SetMood(Mood.Angry, 0.5f);
+            musician.SetMood(Mood.Angry, smoothness);
         }
         GUILayout.EndHorizontal();
 

@@ -25,7 +25,7 @@ namespace BarelyAPI
 
         public override float Process(float sample)
         {
-            return Mathf.Clamp(sample * levelApplied, -1.0f, 1.0f) / levelApplied;
+            return Mathf.Clamp(sample * levelApplied, -4.0f, 4.0f) / levelApplied;
         }
     }
 }

@@ -222,6 +222,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fileName: NewRecord
+--- !u!114 &718829208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 1
+  Active: 1
+  Volume: -7.19999981
+  Attack: .00999999978
+  Decay: .25
+  Sustain: .899999976
+  Release: .400000006
+  RootIndex: 3
+  Sustained: 0
+  VoiceCount: 16
+  OscType: 0
+  Sample: {fileID: 8300000, guid: d78e8d47b99703e44bece1a229e817a7, type: 3}
+  Samples:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &862796355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,12 +267,12 @@ MonoBehaviour:
   Attack: .075000003
   Decay: .25
   Sustain: 1
-  Release: .400000006
+  Release: .25
   RootIndex: 3
   Sustained: 0
   VoiceCount: 16
   OscType: 0
-  Sample: {fileID: 8300000, guid: 880fb7e09627bda4c8d4a1094e3dcab2, type: 3}
+  Sample: {fileID: 8300000, guid: ffd1d2f80d7217344b0a4469455c1d2d, type: 3}
   Samples:
   - {fileID: 0}
   - {fileID: 0}
@@ -359,17 +387,19 @@ MonoBehaviour:
   performerFoldout: 1
   PerformerNames:
   - Drums
-  - Bass
+  - Mallet Bass
   - Melody
   - Chords
   - Strings
+  - Bassline
   Instruments:
   - {fileID: 1385990328}
   - {fileID: 2060220004}
   - {fileID: 1654681800}
   - {fileID: 862796355}
   - {fileID: 1732109672}
-  MicroGeneratorTypes: 0400000006000000050000000200000008000000
+  - {fileID: 718829208}
+  MicroGeneratorTypes: 040000000600000005000000020000000800000009000000
   initialTempo: 142
   songDuration: 2.5
   barsPerSection: 8
@@ -697,6 +727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   guiSkin: {fileID: 11400000, guid: e0ccdec4e3496354786696a547b8fc15, type: 2}
+  smoothness: .550000012
 --- !u!4 &1117552452
 Transform:
   m_ObjectHideFlags: 0
@@ -863,16 +894,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 1
   Active: 1
-  Volume: -3.20000005
-  Attack: .0500000007
-  Decay: .25
-  Sustain: 1
-  Release: .25
-  RootIndex: 0
+  Volume: -3.70000005
+  Attack: .0199999996
+  Decay: .400000006
+  Sustain: .899999976
+  Release: .349999994
+  RootIndex: 3
   Sustained: 0
   VoiceCount: 16
   OscType: 0
-  Sample: {fileID: 8300000, guid: 1c08986e68b40d94987938586307d45a, type: 3}
+  Sample: {fileID: 8300000, guid: 4f474cb9e79ad5e45a844924efa8ac02, type: 3}
   Samples:
   - {fileID: 0}
   - {fileID: 0}
@@ -970,10 +1001,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 1
   Active: 1
-  Volume: -2.4000001
+  Volume: -7.80000019
   Attack: .0250000004
   Decay: .400000006
-  Sustain: 1
+  Sustain: .899999976
   Release: .25
   RootIndex: 3
   Sustained: 0
