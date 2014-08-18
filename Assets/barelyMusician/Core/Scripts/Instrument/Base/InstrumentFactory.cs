@@ -12,6 +12,12 @@ namespace BarelyAPI
             get { return instance.instrumentTypes; }
         }
 
+        private string[] effectTypes;
+        public static string[] EffectTypes
+        {
+            get { return instance.effectTypes; }
+        }
+
         private static InstrumentFactory _instance;
         private static InstrumentFactory instance
         {
@@ -26,7 +32,8 @@ namespace BarelyAPI
 
         InstrumentFactory()
         {
-            setInstrumentTypes();
+            setTypes("Instruments");
+            setTypes("Effects");
 
             Resources.UnloadUnusedAssets();
         }
@@ -39,15 +46,34 @@ namespace BarelyAPI
             return (Instrument)Activator.CreateInstance(instrumentType, (System.Object)meta);
         }
 
-        void setInstrumentTypes()
+        public static AudioEffect CreateEffect(int type)
         {
-            UnityEngine.Object[] assets = Resources.LoadAll("Presets/Instruments");
+            Type effectType = Type.GetType("BarelyAPI." + EffectTypes[type]);
+            if (effectType == null) effectType = Type.GetType("BarelyAPI.Distortion");
 
-            instrumentTypes = new string[assets.Length];
-            for (int i = 0; i < instrumentTypes.Length; ++i)
+            return (AudioEffect)Activator.CreateInstance(effectType);
+        }
+
+        void setTypes(string type)
+        {
+            UnityEngine.Object[] assets = Resources.LoadAll("Presets/" + type);
+
+            string[] types = new string[assets.Length];
+            for (int i = 0; i < types.Length; ++i)
             {
-                instrumentTypes[i] = assets[i].name;
+                types[i] = assets[i].name;
+            }
+
+            switch (type)
+            {
+                case "Instruments":
+                    instrumentTypes = types;
+                    break;
+                case "Effects":
+                    effectTypes = types;
+                    break;
             }
         }
+
     }
 }

@@ -13,7 +13,7 @@ namespace BarelyAPI
         public InstrumentMeta instrumentMeta;
         public int editIndex;
 
-        bool advanced;
+        bool advanced, effects;
         bool sampleListFoldout = true;
 
         void OnEnable()
@@ -29,6 +29,39 @@ namespace BarelyAPI
             EditorGUILayout.Space();
             EditorGUILayout.Space();
 
+            microGeneratorType = EditorGUILayout.Popup("Generator", microGeneratorType, GeneratorFactory.MicroGeneratorTypes);
+
+            EditorGUILayout.Space();
+            EditorGUILayout.Space();
+
+            drawInstrument();
+            
+            GUILayout.FlexibleSpace();
+
+            EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button("Cancel"))
+            {
+                if (editIndex == -1)
+                {
+                    DestroyImmediate(instrumentMeta);
+                }
+                Close();
+            }
+            EditorGUILayout.Space();
+            if (GUILayout.Button("OK"))
+            {
+                musician.RegisterPerformer(performerName, instrumentMeta, microGeneratorType, editIndex);
+
+                Close();
+            }
+            EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.Space();
+            EditorGUILayout.Space();
+        }
+
+        void drawInstrument()
+        {
             EditorGUILayout.LabelField("Instrument");
             EditorGUI.indentLevel++;
             instrumentMeta.Volume = EditorGUILayout.Slider("Volume", instrumentMeta.Volume, AudioProperties.MIN_VOLUME_DB, AudioProperties.MAX_VOLUME_DB);
@@ -96,35 +129,40 @@ namespace BarelyAPI
                     }
                     break;
             }
+            EditorGUILayout.Space();
+            drawEffects();
             EditorGUI.indentLevel--;
+        }
 
-            EditorGUILayout.Space();
-            EditorGUILayout.Space();
-
-            microGeneratorType = EditorGUILayout.Popup("Micro Generator", microGeneratorType, GeneratorFactory.MicroGeneratorTypes);
-
-            EditorGUILayout.Space();
-
-            GUILayout.FlexibleSpace();
-
+        void drawEffects()
+        {
             EditorGUILayout.BeginHorizontal();
-            if (GUILayout.Button("Cancel"))
+            EditorGUILayout.LabelField("Effects");
+            GUILayout.FlexibleSpace();
+            if ((instrumentMeta.effects == null || instrumentMeta.effects.Count < 4) &&  GUILayout.Button("Add Effect"))
             {
-                if (editIndex == -1) DestroyImmediate(instrumentMeta);
-
-                Close();
-            }
-            EditorGUILayout.Space();
-            if (GUILayout.Button("OK"))
-            {
-                musician.RegisterPerformer(performerName, instrumentMeta, microGeneratorType, editIndex);
-
-                Close();
+                if (instrumentMeta.effects == null) instrumentMeta.effects = new System.Collections.Generic.List<int>();
+                instrumentMeta.effects.Add(instrumentMeta.effects.Count > 0 ? instrumentMeta.effects[instrumentMeta.effects.Count - 1] : 0);
+                return;
             }
             EditorGUILayout.EndHorizontal();
-
-            EditorGUILayout.Space();
-            EditorGUILayout.Space();
+            EditorGUI.indentLevel++;
+            if (instrumentMeta.effects != null)
+            {
+                for (int i = 0; i < instrumentMeta.effects.Count; ++i)
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    instrumentMeta.effects[i] = EditorGUILayout.Popup(instrumentMeta.effects[i], InstrumentFactory.EffectTypes);
+                    GUILayout.FlexibleSpace();
+                    if (GUILayout.Button("Delete"))
+                    {
+                        instrumentMeta.effects.RemoveAt(i);
+                        break;
+                    }
+                    EditorGUILayout.EndHorizontal();
+                }
+            }
+            EditorGUI.indentLevel--;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace BarelyAPI
 {
@@ -21,5 +22,7 @@ namespace BarelyAPI
         public OscillatorType OscType = OscillatorType.SINE;
         public AudioClip Sample;
         public AudioClip[] Samples;
+
+        public List<int> effects;
     }
 }

@@ -107,6 +107,14 @@ namespace BarelyAPI
         public virtual void SetInstrumentProperties(InstrumentMeta meta)
         {
             Volume = meta.Volume;
+
+            if (meta.effects != null)
+            {
+                foreach(int effect in meta.effects)
+                {
+                    effects.Add(InstrumentFactory.CreateEffect(effect));
+                }
+            }
         }
 
         public virtual void PlayNote(Note note)
