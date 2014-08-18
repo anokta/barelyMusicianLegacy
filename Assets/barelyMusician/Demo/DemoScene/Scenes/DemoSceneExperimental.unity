@@ -74,6 +74,35 @@ NavMeshSettings:
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
   m_NavMesh: {fileID: 0}
+--- !u!114 &243503051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
+  m_Name: (Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
+  m_EditorClassIdentifier: 
+  Type: 1
+  Active: 1
+  Volume: -8.19999981
+  Attack: .0250000004
+  Decay: .400000006
+  Sustain: .899999976
+  Release: .25
+  RootIndex: 3
+  Sustained: 0
+  VoiceCount: 16
+  OscType: 0
+  Sample: {fileID: 8300000, guid: c05dfadd85775d14dadd0a3ab616bde7, type: 3}
+  Samples:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  effects: 0000000000000000
 --- !u!1 &411563711
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,7 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fileName: NewRecord
---- !u!114 &592133160
+--- !u!114 &661844441
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -231,7 +260,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
-  m_Name: (Clone)(Clone)
+  m_Name: (Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
   m_EditorClassIdentifier: 
   Type: 1
   Active: 1
@@ -243,14 +272,14 @@ MonoBehaviour:
   RootIndex: 3
   Sustained: 0
   VoiceCount: 16
-  OscType: 0
-  Sample: {fileID: 8300000, guid: ffd1d2f80d7217344b0a4469455c1d2d, type: 3}
+  OscType: 3
+  Sample: {fileID: 8300000, guid: 47418d6ea83e9954db0bda9f454539a9, type: 3}
   Samples:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  effects: 
+  effects: 00000000
 --- !u!1 &993552975
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,18 +395,18 @@ MonoBehaviour:
   - Strings
   - Bassline
   Instruments:
-  - {fileID: 1586242185}
-  - {fileID: 1420745440}
-  - {fileID: 1062219105}
-  - {fileID: 592133160}
+  - {fileID: 1681144850}
+  - {fileID: 243503051}
+  - {fileID: 1840970859}
+  - {fileID: 661844441}
   - {fileID: 1032554188}
-  - {fileID: 1647021192}
-  MicroGeneratorTypes: 040000000600000005000000020000000800000009000000
-  initialTempo: 140
-  songDuration: 1.5
-  barsPerSection: 8
-  beatsPerBar: 4
-  rootNote: 0
+  - {fileID: 1899530052}
+  MicroGeneratorTypes: 0a0000000600000005000000020000000800000009000000
+  initialTempo: 124
+  songDuration: 2.08999991
+  barsPerSection: 4
+  beatsPerBar: 5
+  rootNote: 5
   masterVolume: 1
   energy: .5
   stress: 0
@@ -700,35 +729,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   effects: 
---- !u!114 &1062219105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
-  m_Name: (Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
-  m_EditorClassIdentifier: 
-  Type: 1
-  Active: 1
-  Volume: -2.70000005
-  Attack: .0250000004
-  Decay: .400000006
-  Sustain: .899999976
-  Release: .349999994
-  RootIndex: 3
-  Sustained: 0
-  VoiceCount: 16
-  OscType: 0
-  Sample: {fileID: 8300000, guid: 4f474cb9e79ad5e45a844924efa8ac02, type: 3}
-  Samples:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  effects: 00000000
 --- !u!1 &1117552450
 GameObject:
   m_ObjectHideFlags: 0
@@ -884,7 +884,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
---- !u!114 &1420745440
+--- !u!114 &1681144850
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -893,36 +893,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
-  m_Name: (Clone)(Clone)(Clone)
-  m_EditorClassIdentifier: 
-  Type: 1
-  Active: 1
-  Volume: -8.19999981
-  Attack: .0250000004
-  Decay: .400000006
-  Sustain: .899999976
-  Release: .25
-  RootIndex: 3
-  Sustained: 0
-  VoiceCount: 16
-  OscType: 0
-  Sample: {fileID: 8300000, guid: f44848ede0e83dc4ca2393480dfb1522, type: 3}
-  Samples:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  effects: 
---- !u!114 &1586242185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
-  m_Name: (Clone)(Clone)
+  m_Name: (Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
   m_EditorClassIdentifier: 
   Type: 0
   Active: 1
@@ -941,8 +912,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 027264c19660ff84b86a6b4445b9dfaa, type: 3}
   - {fileID: 8300000, guid: 8611cd4d247e5b94b861775dd46642e8, type: 3}
   - {fileID: 8300000, guid: 6628b1b1199a7cf4da21ef7f679e5b66, type: 3}
-  effects: 
---- !u!114 &1647021192
+  effects: 00000000
+--- !u!114 &1840970859
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -951,7 +922,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
-  m_Name: (Clone)(Clone)(Clone)(Clone)(Clone)
+  m_Name: (Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
+  m_EditorClassIdentifier: 
+  Type: 1
+  Active: 1
+  Volume: -2.70000005
+  Attack: .0250000004
+  Decay: .400000006
+  Sustain: .899999976
+  Release: .349999994
+  RootIndex: 3
+  Sustained: 0
+  VoiceCount: 16
+  OscType: 0
+  Sample: {fileID: 8300000, guid: 36c44ff0754e29a49bef561932beb7ea, type: 3}
+  Samples:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  effects: 0000000001000000
+--- !u!114 &1899530052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
+  m_Name: (Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
   m_EditorClassIdentifier: 
   Type: 1
   Active: 1
@@ -970,7 +970,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  effects: 
+  effects: 00000000
 --- !u!1 &2033440793
 GameObject:
   m_ObjectHideFlags: 0
