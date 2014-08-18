@@ -87,7 +87,7 @@ namespace BarelyAPI
                     {
                         performerWindow = (PerformerWindow)EditorWindow.GetWindow(typeof(PerformerWindow), true, "Performer");
                         performerWindow.performerName = musician.PerformerNames[i];
-                        performerWindow.instrumentMeta = musician.Instruments[i];
+                        performerWindow.instrumentMeta = InstrumentMeta.Instantiate(musician.Instruments[i]) as InstrumentMeta;
                         performerWindow.microGeneratorType = musician.MicroGeneratorTypes[i];
                         performerWindow.editIndex = i;
                         performerWindow.musician = musician;

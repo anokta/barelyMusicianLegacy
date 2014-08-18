@@ -202,6 +202,7 @@ namespace BarelyAPI
                 }
             }
         }
+
         public void RegisterPerformer(string performerName, InstrumentMeta instrumentMeta, int microGeneratorTypeIndex, int editIndex = -1)
         {
             if (editIndex >= 0)
@@ -209,6 +210,7 @@ namespace BarelyAPI
                 if (ensemble != null) ensemble.RemovePerfomer(PerformerNames[editIndex]);
 
                 PerformerNames[editIndex] = performerName;
+                DestroyImmediate(Instruments[editIndex]);
                 Instruments[editIndex] = instrumentMeta;
                 MicroGeneratorTypes[editIndex] = microGeneratorTypeIndex;
             }

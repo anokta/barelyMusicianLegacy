@@ -41,10 +41,7 @@ namespace BarelyAPI
             EditorGUILayout.BeginHorizontal();
             if (GUILayout.Button("Cancel"))
             {
-                if (editIndex == -1)
-                {
-                    DestroyImmediate(instrumentMeta);
-                }
+                DestroyImmediate(instrumentMeta);
                 Close();
             }
             EditorGUILayout.Space();
