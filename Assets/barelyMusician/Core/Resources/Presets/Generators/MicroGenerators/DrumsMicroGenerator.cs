@@ -16,11 +16,11 @@ namespace BarelyAPI
         {
             if (section != SectionType.INTRO && section != SectionType.OUTRO)
             {
+                float offset = 0.0f;
+                float duration = 0.5f / LineLength;
+
                 for (int i = 0; i < LineLength * 2; ++i)
                 {
-                    float offset = i / (2.0f * LineLength);
-                    float duration = 1.0f / (2.0f * LineLength);
-
                     // kick
                     if (RandomNumber.NextFloat(0.0f, 1.0f) < 0.025f || (RandomNumber.NextFloat(0.0f, 1.0f) < 0.96f && i % 4 == 0))
                         line.Add(new NoteMeta(0, offset, duration, 1.0f));
@@ -33,6 +33,8 @@ namespace BarelyAPI
                     // hihat open
                     if (RandomNumber.NextFloat(0.0f, 1.0f) < 0.01f || i % 16 == 15)
                         line.Add(new NoteMeta(21, offset, duration, 1.0f));
+
+                    offset += duration;
                 }
             }
         }

@@ -15,11 +15,14 @@ namespace BarelyAPI
         {
             for (int i = 0; i < 2 * LineLength; ++i)
             {
-                int noteIndex = (i % 2 == 0) ? harmonic : harmonic + ModeGenerator.SCALE_LENGTH;
-                float volume = (i % 2 == 0) ? 0.9f : 0.6f;
-                if (i == 0) volume = 1.0f;
-                if (i != 1)
-                    line.Add(new NoteMeta(noteIndex, 0.5f * i / LineLength, 1.0f / LineLength, volume));
+                if (i % 2 == 0)
+                {
+                    line.Add(new NoteMeta(harmonic, 0.5f * i / LineLength, 1.0f / LineLength, i == 0 ? 1.0f : 0.9f));
+                }
+                else if(i != 1)
+                {
+                    line.Add(new NoteMeta(harmonic + ModeGenerator.SCALE_LENGTH, 0.5f * i / LineLength, 1.0f / LineLength, 0.6f));
+                }
             }
         }
     }

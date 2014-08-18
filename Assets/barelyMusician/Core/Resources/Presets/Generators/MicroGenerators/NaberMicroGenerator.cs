@@ -9,10 +9,13 @@ namespace BarelyAPI
         Automaton1D ca;
         MarkovChain markov;
 
+        int offset;
+
         public NaberMicroGenerator(Sequencer sequencer)
             : base(sequencer)
         {
             ca = new Automaton1D(81, 90);
+            offset = 27;
             markov = new MarkovChain(ModeGenerator.SCALE_LENGTH);
         }
 
@@ -32,9 +35,9 @@ namespace BarelyAPI
 
             for (int i = 0; i < 2 * LineLength; ++i)
             {
-                if (ca.GetState(i) == 1)
+                if (ca.GetState(offset + i) == 1)
                 {
-                    line.Add(new NoteMeta(keyIndex + markov.CurrentState, (float)i / LineLength / 2.0f, 1.0f / LineLength, RandomNumber.NextFloat(0.9f, 0.95f)));
+                    line.Add(new NoteMeta(keyIndex + markov.CurrentState, 0.5f * i / LineLength, 1.0f / LineLength, RandomNumber.NextFloat(0.9f, 0.95f)));
                     markov.GenerateNextState();
                 }
             }
