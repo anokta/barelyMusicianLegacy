@@ -13,13 +13,13 @@ namespace BarelyAPI
             set { level = value; }
         }
 
-        public Distortion(float distortionLevel = 10.0f)
+        public Distortion(float distortionLevel)
         {
             level = levelApplied = distortionLevel;
         }
 
         public Distortion()
-            : this(10.0f)
+            : this(4.0f)
         {
         }
 
@@ -30,7 +30,7 @@ namespace BarelyAPI
 
         public override float Process(float sample)
         {
-            return Mathf.Clamp(sample * levelApplied, -3.0f, 3.0f) / levelApplied;
+            return Mathf.Clamp(sample * levelApplied, -1.0f, 1.0f) / levelApplied;
         }
     }
 }

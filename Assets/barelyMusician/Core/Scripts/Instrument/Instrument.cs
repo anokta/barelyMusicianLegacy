@@ -94,6 +94,7 @@ namespace BarelyAPI
             {
                 output += voice.ProcessNext();
             }
+            output = Mathf.Clamp(output, -1.0f, 1.0f);
 
             foreach (AudioEffect effect in effects)
             {

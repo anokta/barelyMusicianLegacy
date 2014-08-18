@@ -135,6 +135,9 @@ namespace BarelyAPI
         {
             Init();
 
+            Energy = energyTarget = energy;
+            Stress = stressTarget = stress;
+
             audioSource = gameObject.AddComponent<AudioSource>();
             audioSource.hideFlags = HideFlags.HideInInspector;
             audioSource.panLevel = 0.0f;

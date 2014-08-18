@@ -222,7 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fileName: NewRecord
---- !u!114 &718829208
+--- !u!114 &592133160
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -231,40 +231,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
-  m_Name: 
+  m_Name: (Clone)(Clone)
   m_EditorClassIdentifier: 
   Type: 1
   Active: 1
-  Volume: -7.19999981
-  Attack: .00999999978
-  Decay: .25
-  Sustain: .899999976
-  Release: .400000006
-  RootIndex: 3
-  Sustained: 0
-  VoiceCount: 16
-  OscType: 0
-  Sample: {fileID: 8300000, guid: d78e8d47b99703e44bece1a229e817a7, type: 3}
-  Samples:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  effects: 00000000
---- !u!114 &862796355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Type: 1
-  Active: 1
-  Volume: -4
+  Volume: -4.80000019
   Attack: .075000003
   Decay: .25
   Sustain: 1
@@ -395,12 +366,12 @@ MonoBehaviour:
   - Strings
   - Bassline
   Instruments:
-  - {fileID: 1385990328}
-  - {fileID: 2060220004}
-  - {fileID: 1654681800}
-  - {fileID: 862796355}
-  - {fileID: 1732109672}
-  - {fileID: 718829208}
+  - {fileID: 1586242185}
+  - {fileID: 1420745440}
+  - {fileID: 1437301105}
+  - {fileID: 592133160}
+  - {fileID: 1032554188}
+  - {fileID: 1647021192}
   MicroGeneratorTypes: 040000000600000005000000020000000800000009000000
   initialTempo: 142
   songDuration: 2.5
@@ -700,6 +671,35 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!114 &1032554188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
+  m_Name: (Clone)(Clone)
+  m_EditorClassIdentifier: 
+  Type: 1
+  Active: 1
+  Volume: -4.69999981
+  Attack: .150000006
+  Decay: .349999994
+  Sustain: 1
+  Release: .200000003
+  RootIndex: 3
+  Sustained: 1
+  VoiceCount: 16
+  OscType: 0
+  Sample: {fileID: 8300000, guid: 47418d6ea83e9954db0bda9f454539a9, type: 3}
+  Samples:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  effects: 
 --- !u!1 &1117552450
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,35 +809,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1117552452}
   m_RootOrder: 0
---- !u!114 &1385990328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Type: 0
-  Active: 1
-  Volume: -.899999976
-  Attack: 0
-  Decay: .25
-  Sustain: 1
-  Release: .25
-  RootIndex: 0
-  Sustained: 0
-  VoiceCount: 16
-  OscType: 0
-  Sample: {fileID: 0}
-  Samples:
-  - {fileID: 8300000, guid: 836f6a87c27a2004990660e1c324dfd4, type: 3}
-  - {fileID: 8300000, guid: 027264c19660ff84b86a6b4445b9dfaa, type: 3}
-  - {fileID: 8300000, guid: 8611cd4d247e5b94b861775dd46642e8, type: 3}
-  - {fileID: 8300000, guid: 6628b1b1199a7cf4da21ef7f679e5b66, type: 3}
-  effects: 
 --- !u!1 &1389430736
 GameObject:
   m_ObjectHideFlags: 0
@@ -884,7 +855,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
---- !u!114 &1654681800
+--- !u!114 &1420745440
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -893,11 +864,40 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
-  m_Name: 
+  m_Name: (Clone)(Clone)(Clone)
   m_EditorClassIdentifier: 
   Type: 1
   Active: 1
-  Volume: -3.70000005
+  Volume: -8.19999981
+  Attack: .0250000004
+  Decay: .400000006
+  Sustain: .899999976
+  Release: .25
+  RootIndex: 3
+  Sustained: 0
+  VoiceCount: 16
+  OscType: 0
+  Sample: {fileID: 8300000, guid: f44848ede0e83dc4ca2393480dfb1522, type: 3}
+  Samples:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  effects: 
+--- !u!114 &1437301105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
+  m_Name: (Clone)
+  m_EditorClassIdentifier: 
+  Type: 1
+  Active: 1
+  Volume: -3.20000005
   Attack: .0199999996
   Decay: .400000006
   Sustain: .899999976
@@ -913,7 +913,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   effects: 00000000
---- !u!114 &1732109672
+--- !u!114 &1586242185
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -922,20 +922,49 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
-  m_Name: 
+  m_Name: (Clone)(Clone)
+  m_EditorClassIdentifier: 
+  Type: 0
+  Active: 1
+  Volume: -.600000024
+  Attack: 0
+  Decay: .25
+  Sustain: 1
+  Release: .25
+  RootIndex: 0
+  Sustained: 0
+  VoiceCount: 16
+  OscType: 0
+  Sample: {fileID: 0}
+  Samples:
+  - {fileID: 8300000, guid: 836f6a87c27a2004990660e1c324dfd4, type: 3}
+  - {fileID: 8300000, guid: 027264c19660ff84b86a6b4445b9dfaa, type: 3}
+  - {fileID: 8300000, guid: 8611cd4d247e5b94b861775dd46642e8, type: 3}
+  - {fileID: 8300000, guid: 6628b1b1199a7cf4da21ef7f679e5b66, type: 3}
+  effects: 
+--- !u!114 &1647021192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
+  m_Name: (Clone)(Clone)(Clone)(Clone)(Clone)
   m_EditorClassIdentifier: 
   Type: 1
   Active: 1
-  Volume: -3.5999999
-  Attack: .150000006
-  Decay: .349999994
-  Sustain: 1
-  Release: .200000003
+  Volume: -8.39999962
+  Attack: .00999999978
+  Decay: .25
+  Sustain: .899999976
+  Release: .400000006
   RootIndex: 3
-  Sustained: 1
+  Sustained: 0
   VoiceCount: 16
   OscType: 0
-  Sample: {fileID: 8300000, guid: 47418d6ea83e9954db0bda9f454539a9, type: 3}
+  Sample: {fileID: 8300000, guid: d78e8d47b99703e44bece1a229e817a7, type: 3}
   Samples:
   - {fileID: 0}
   - {fileID: 0}
@@ -993,32 +1022,3 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1117552452}
   m_RootOrder: 2
---- !u!114 &2060220004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Type: 1
-  Active: 1
-  Volume: -7.80000019
-  Attack: .0250000004
-  Decay: .400000006
-  Sustain: .899999976
-  Release: .25
-  RootIndex: 3
-  Sustained: 0
-  VoiceCount: 16
-  OscType: 0
-  Sample: {fileID: 8300000, guid: f44848ede0e83dc4ca2393480dfb1522, type: 3}
-  Samples:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  effects: 
