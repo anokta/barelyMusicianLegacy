@@ -11,3 +11,5 @@ EditorBuildSettings:
     path: Assets/barelyMusician/Demo/DemoScene/Scenes/DemoScene.unity
   - enabled: 0
     path: Assets/barelyMusician/Demo/BunnyGame/Scenes/BunnyScene.unity
+  - enabled: 0
+    path: Assets/barelyMusician/Demo/DemoScene/Scenes/DemoSceneExperimental.unity

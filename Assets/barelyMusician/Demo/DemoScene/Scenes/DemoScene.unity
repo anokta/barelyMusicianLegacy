@@ -251,6 +251,35 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   effects: 
+--- !u!114 &625207954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
+  m_Name: (Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
+  m_EditorClassIdentifier: 
+  Type: 1
+  Active: 1
+  Volume: -4.9000001
+  Attack: .0250000004
+  Decay: .400000006
+  Sustain: .899999976
+  Release: .25
+  RootIndex: 3
+  Sustained: 0
+  VoiceCount: 16
+  OscType: 0
+  Sample: {fileID: 8300000, guid: 2f6d734c58a44fa4f8d55dc4d1b91501, type: 3}
+  Samples:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  effects: 00000000
 --- !u!1 &993552975
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,16 +396,16 @@ MonoBehaviour:
   - Bassline
   Instruments:
   - {fileID: 1586242185}
-  - {fileID: 1420745440}
-  - {fileID: 1062219105}
+  - {fileID: 1972574702}
+  - {fileID: 625207954}
   - {fileID: 592133160}
   - {fileID: 1032554188}
   - {fileID: 1647021192}
-  MicroGeneratorTypes: 040000000600000005000000020000000800000009000000
+  MicroGeneratorTypes: 04000000060000000b000000020000000800000009000000
   initialTempo: 140
   songDuration: 1.5
-  barsPerSection: 8
-  beatsPerBar: 4
+  barsPerSection: 4
+  beatsPerBar: 8
   rootNote: 0
   masterVolume: 1
   energy: .5
@@ -700,35 +729,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   effects: 
---- !u!114 &1062219105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
-  m_Name: (Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
-  m_EditorClassIdentifier: 
-  Type: 1
-  Active: 1
-  Volume: -2.70000005
-  Attack: .0250000004
-  Decay: .400000006
-  Sustain: .899999976
-  Release: .349999994
-  RootIndex: 3
-  Sustained: 0
-  VoiceCount: 16
-  OscType: 0
-  Sample: {fileID: 8300000, guid: 4f474cb9e79ad5e45a844924efa8ac02, type: 3}
-  Samples:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  effects: 00000000
 --- !u!1 &1117552450
 GameObject:
   m_ObjectHideFlags: 0
@@ -884,35 +884,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
---- !u!114 &1420745440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
-  m_Name: (Clone)(Clone)(Clone)
-  m_EditorClassIdentifier: 
-  Type: 1
-  Active: 1
-  Volume: -8.19999981
-  Attack: .0250000004
-  Decay: .400000006
-  Sustain: .899999976
-  Release: .25
-  RootIndex: 3
-  Sustained: 0
-  VoiceCount: 16
-  OscType: 0
-  Sample: {fileID: 8300000, guid: f44848ede0e83dc4ca2393480dfb1522, type: 3}
-  Samples:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  effects: 
 --- !u!114 &1586242185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -965,6 +936,35 @@ MonoBehaviour:
   VoiceCount: 16
   OscType: 0
   Sample: {fileID: 8300000, guid: d78e8d47b99703e44bece1a229e817a7, type: 3}
+  Samples:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  effects: 
+--- !u!114 &1972574702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
+  m_Name: (Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
+  m_EditorClassIdentifier: 
+  Type: 1
+  Active: 1
+  Volume: -8.19999981
+  Attack: .0250000004
+  Decay: .400000006
+  Sustain: .899999976
+  Release: .25
+  RootIndex: 3
+  Sustained: 0
+  VoiceCount: 16
+  OscType: 0
+  Sample: {fileID: 8300000, guid: 7fd5138fd59fd6744b2cdd8370760f7b, type: 3}
   Samples:
   - {fileID: 0}
   - {fileID: 0}

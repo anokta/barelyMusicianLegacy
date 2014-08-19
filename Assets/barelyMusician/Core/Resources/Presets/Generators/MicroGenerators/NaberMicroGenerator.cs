@@ -40,6 +40,7 @@ namespace BarelyAPI
                     if (ca.GetState(offset + i) == 1)
                     {
                         line.Add(new NoteMeta(keyIndex + markov.CurrentState, 0.5f * i / LineLength, 1.0f / LineLength, RandomNumber.NextFloat(0.9f, 0.95f)));
+
                         markov.GenerateNextState();
                     }
                 }
