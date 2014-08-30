@@ -1,4 +1,11 @@
-﻿using System;
+﻿// ----------------------------------------------------------------------
+//   Adaptive music composition engine implementation for interactive systems.
+//
+//     Copyright 2014 Alper Gungormusler. All rights reserved.
+//
+// ------------------------------------------------------------------------
+
+using System;
 using System.IO;
 using UnityEngine;
 
@@ -54,9 +61,9 @@ namespace BarelyAPI
             {
                 recording = false;
 
-                Debug.Log("Recording stopped. File saved to: " + Path.Combine(folderPath, fileName));
-
                 WriteHeader();
+
+                Debug.Log("Recording stopped. File saved to: " + Path.Combine(folderPath, fileName));
 
                 //#if UNITY_EDITOR
                 //UnityEditor.FileUtil.MoveFileOrDirectory(Path.Combine(folderPath, fileName), UnityEditor.EditorUtility.SaveFilePanel("Save file to:", Application.dataPath, "NewRecord", "wav"));
@@ -95,7 +102,7 @@ namespace BarelyAPI
 
             for (int i = 0; i < samples.Length; i++)
             {
-                intData[i] = (short)(samples[i] * RESCALE_FACTOR);
+                intData[i] = (short)(Mathf.Clamp(samples[i], -1.0f, 1.0f) * RESCALE_FACTOR);
                 Byte[] byteArr = new Byte[2];
                 byteArr = BitConverter.GetBytes(intData[i]);
                 byteArr.CopyTo(bytesData, i * 2);

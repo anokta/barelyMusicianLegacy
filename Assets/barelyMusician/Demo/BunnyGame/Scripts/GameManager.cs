@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿// ----------------------------------------------------------------------
+//   Adaptive music composition engine implementation for interactive systems.
+//
+//     Copyright 2014 Alper Gungormusler. All rights reserved.
+//
+// ------------------------------------------------------------------------
+
+using UnityEngine;
 using System.Collections;
 using BarelyAPI;
 
@@ -28,6 +35,10 @@ public class GameManager : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     GameEventManager.TriggerGameStart();
+                }
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    GameEventManager.TriggerGameQuit();
                 }
                 break;
 

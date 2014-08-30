@@ -1,4 +1,11 @@
-﻿using System;
+﻿// ----------------------------------------------------------------------
+//   Adaptive music composition engine implementation for interactive systems.
+//
+//     Copyright 2014 Alper Gungormusler. All rights reserved.
+//
+// ------------------------------------------------------------------------
+
+using System;
 
 namespace BarelyAPI
 {

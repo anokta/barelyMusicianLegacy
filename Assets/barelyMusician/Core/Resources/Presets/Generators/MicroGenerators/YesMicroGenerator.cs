@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿// ----------------------------------------------------------------------
+//   Adaptive music composition engine implementation for interactive systems.
+//
+//     Copyright 2014 Alper Gungormusler. All rights reserved.
+//
+// ------------------------------------------------------------------------
+
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -51,11 +58,7 @@ namespace BarelyAPI
                 else
                 {
                     List<NoteMeta> firstBar = GetLine(section, bar % (4/LineLength+1), 0);
-                    foreach (NoteMeta meta in firstBar)
-                    {
-                        NoteMeta newMeta = new NoteMeta(harmonic + meta.Index, meta.Offset, meta.Duration, meta.Loudness);
-                        line.Add(meta);
-                    }
+                    line.AddRange(firstBar);
                 }
             }
         }

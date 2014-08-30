@@ -154,6 +154,35 @@ GUIText:
     rgba: 934715634
   m_PixelCorrect: 1
   m_RichText: 1
+--- !u!114 &336427211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
+  m_Name: (Clone)(Clone)(Clone)
+  m_EditorClassIdentifier: 
+  Type: 1
+  Active: 0
+  Volume: -1.70000005
+  Attack: .0250000004
+  Decay: .300000012
+  Sustain: 1
+  Release: .5
+  RootIndex: 3
+  Sustained: 0
+  VoiceCount: 16
+  OscType: 0
+  Sample: {fileID: 8300000, guid: 44143fb0c60ed1544b4b3561577f532f, type: 3}
+  Samples:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  effects: 
 --- !u!114 &386664622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,6 +206,35 @@ MonoBehaviour:
   VoiceCount: 16
   OscType: 0
   Sample: {fileID: 8300000, guid: bafccd1714a8577469e0df59b46728d6, type: 3}
+  Samples:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  effects: 
+--- !u!114 &418398697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
+  m_Name: (Clone)
+  m_EditorClassIdentifier: 
+  Type: 1
+  Active: 1
+  Volume: -10.1000004
+  Attack: 0
+  Decay: .25
+  Sustain: 1
+  Release: .25
+  RootIndex: 3
+  Sustained: 0
+  VoiceCount: 16
+  OscType: 0
+  Sample: {fileID: 8300000, guid: 39433e5a3c1c57c48ab8838730742d3a, type: 3}
   Samples:
   - {fileID: 0}
   - {fileID: 0}
@@ -234,35 +292,6 @@ GUIText:
     rgba: 934715634
   m_PixelCorrect: 1
   m_RichText: 1
---- !u!114 &631682175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Type: 1
-  Active: 0
-  Volume: -4.80000019
-  Attack: .0500000007
-  Decay: .400000006
-  Sustain: 1
-  Release: .349999994
-  RootIndex: 3
-  Sustained: 0
-  VoiceCount: 16
-  OscType: 0
-  Sample: {fileID: 8300000, guid: 05e3b5ff38e8cd248b7bf0b8664399bb, type: 3}
-  Samples:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  effects: 
 --- !u!1 &993749089
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,13 +446,13 @@ MonoBehaviour:
   - Octave
   Instruments:
   - {fileID: 22662511}
-  - {fileID: 1318312706}
+  - {fileID: 418398697}
   - {fileID: 1864007566}
   - {fileID: 2141057887}
-  - {fileID: 2088949537}
+  - {fileID: 336427211}
   - {fileID: 386664622}
-  - {fileID: 631682175}
-  MicroGeneratorTypes: 03000000020000000100000004000000000000000100000007000000
+  - {fileID: 1726994898}
+  MicroGeneratorTypes: 030000000c0000000100000004000000000000000100000007000000
   initialTempo: 152
   songDuration: 1
   barsPerSection: 2
@@ -432,35 +461,6 @@ MonoBehaviour:
   masterVolume: .630957365
   energy: .5
   stress: .5
---- !u!114 &1318312706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Type: 1
-  Active: 1
-  Volume: -10.1000004
-  Attack: 0
-  Decay: .25
-  Sustain: 1
-  Release: .25
-  RootIndex: 3
-  Sustained: 0
-  VoiceCount: 16
-  OscType: 0
-  Sample: {fileID: 8300000, guid: 39433e5a3c1c57c48ab8838730742d3a, type: 3}
-  Samples:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  effects: 
 --- !u!1 &1420816539
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,6 +698,35 @@ GUIText:
     rgba: 4290046441
   m_PixelCorrect: 1
   m_RichText: 1
+--- !u!114 &1726994898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
+  m_Name: (Clone)(Clone)
+  m_EditorClassIdentifier: 
+  Type: 1
+  Active: 0
+  Volume: -3.20000005
+  Attack: .0500000007
+  Decay: .400000006
+  Sustain: 1
+  Release: .349999994
+  RootIndex: 3
+  Sustained: 0
+  VoiceCount: 16
+  OscType: 0
+  Sample: {fileID: 8300000, guid: 05e3b5ff38e8cd248b7bf0b8664399bb, type: 3}
+  Samples:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  effects: 
 --- !u!114 &1864007566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -718,35 +747,6 @@ MonoBehaviour:
   Release: .25
   RootIndex: 3
   Sustained: 1
-  VoiceCount: 16
-  OscType: 0
-  Sample: {fileID: 8300000, guid: 44143fb0c60ed1544b4b3561577f532f, type: 3}
-  Samples:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  effects: 
---- !u!114 &2088949537
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
-  m_Name: (Clone)
-  m_EditorClassIdentifier: 
-  Type: 1
-  Active: 0
-  Volume: -3.5999999
-  Attack: .0250000004
-  Decay: .300000012
-  Sustain: 1
-  Release: .5
-  RootIndex: 3
-  Sustained: 0
   VoiceCount: 16
   OscType: 0
   Sample: {fileID: 8300000, guid: 44143fb0c60ed1544b4b3561577f532f, type: 3}

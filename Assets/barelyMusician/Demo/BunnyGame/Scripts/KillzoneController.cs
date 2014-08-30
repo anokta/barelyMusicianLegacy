@@ -1,8 +1,16 @@
-﻿using UnityEngine;
+﻿// ----------------------------------------------------------------------
+//   Adaptive music composition engine implementation for interactive systems.
+//
+//     Copyright 2014 Alper Gungormusler. All rights reserved.
+//
+// ------------------------------------------------------------------------
+
+using UnityEngine;
 using System.Collections;
 using BarelyAPI;
 
-public class KillzoneController : MonoBehaviour {
+public class KillzoneController : MonoBehaviour
+{
 
     Musician musician;
 
@@ -12,7 +20,8 @@ public class KillzoneController : MonoBehaviour {
     public Vector2 direction;
     Vector3 position;
 
-    void Start () {
+    void Start()
+    {
         killzone = GetComponent<SpriteRenderer>();
 
         musician = FindObjectOfType<Musician>();
@@ -23,9 +32,10 @@ public class KillzoneController : MonoBehaviour {
         killzoneColorCurrent = killzoneColorTarget = Color.clear;
 
         musician.Ensemble.TogglePeformer("Octave", true);
-	}
-	
-    void Update () {
+    }
+
+    void Update()
+    {
         transform.position = position;
         if (Mathf.Abs(position.x) > GameWorld.ScreenBounds.x / 2.0f || Mathf.Abs(position.y) > GameWorld.ScreenBounds.y / 2.0f)
         {
@@ -39,7 +49,7 @@ public class KillzoneController : MonoBehaviour {
             killzoneColorCurrent = Color.Lerp(killzoneColorCurrent, killzoneColorTarget, 2.0f * Time.deltaTime);
             killzone.color = killzoneColorCurrent;
         }
-	}
+    }
 
     void OnNextBeat(Sequencer sequencer)
     {

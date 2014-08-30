@@ -222,35 +222,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fileName: NewRecord
---- !u!114 &625207954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
-  m_Name: (Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
-  m_EditorClassIdentifier: 
-  Type: 1
-  Active: 1
-  Volume: -4.9000001
-  Attack: .0250000004
-  Decay: .400000006
-  Sustain: .899999976
-  Release: .25
-  RootIndex: 3
-  Sustained: 0
-  VoiceCount: 16
-  OscType: 0
-  Sample: {fileID: 8300000, guid: 2f6d734c58a44fa4f8d55dc4d1b91501, type: 3}
-  Samples:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  effects: 00000000
 --- !u!1 &993552975
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,8 +340,8 @@ MonoBehaviour:
   Instruments:
   - {fileID: 1586242185}
   - {fileID: 1942542246}
-  - {fileID: 625207954}
-  - {fileID: 1838203855}
+  - {fileID: 1907789729}
+  - {fileID: 1210522105}
   - {fileID: 1434891005}
   - {fileID: 1647021192}
   - {fileID: 1539576365}
@@ -782,6 +753,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1117552452}
   m_RootOrder: 0
+--- !u!114 &1210522105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
+  m_Name: (Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
+  m_EditorClassIdentifier: 
+  Type: 1
+  Active: 1
+  Volume: -5.4000001
+  Attack: .075000003
+  Decay: .25
+  Sustain: 1
+  Release: .150000006
+  RootIndex: 3
+  Sustained: 0
+  VoiceCount: 16
+  OscType: 0
+  Sample: {fileID: 8300000, guid: ffd1d2f80d7217344b0a4469455c1d2d, type: 3}
+  Samples:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  effects: 
 --- !u!1 &1389430736
 GameObject:
   m_ObjectHideFlags: 0
@@ -944,7 +944,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   effects: 
---- !u!114 &1838203855
+--- !u!114 &1907789729
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -953,26 +953,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9a921cacd13ce64cb6e4afa02bda121, type: 3}
-  m_Name: (Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
+  m_Name: (Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
   m_EditorClassIdentifier: 
   Type: 1
   Active: 1
-  Volume: -5.4000001
-  Attack: .075000003
-  Decay: .25
-  Sustain: 1
-  Release: .150000006
+  Volume: -4.80000019
+  Attack: .0250000004
+  Decay: .400000006
+  Sustain: .899999976
+  Release: .25
   RootIndex: 3
   Sustained: 0
   VoiceCount: 16
   OscType: 0
-  Sample: {fileID: 8300000, guid: ffd1d2f80d7217344b0a4469455c1d2d, type: 3}
+  Sample: {fileID: 8300000, guid: 2f6d734c58a44fa4f8d55dc4d1b91501, type: 3}
   Samples:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  effects: 
+  effects: 00000000
 --- !u!114 &1942542246
 MonoBehaviour:
   m_ObjectHideFlags: 0

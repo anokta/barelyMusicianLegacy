@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿// ----------------------------------------------------------------------
+//   Adaptive music composition engine implementation for interactive systems.
+//
+//     Copyright 2014 Alper Gungormusler. All rights reserved.
+//
+// ------------------------------------------------------------------------
+
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 

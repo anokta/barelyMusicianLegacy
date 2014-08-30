@@ -1,4 +1,11 @@
-﻿namespace BarelyAPI
+﻿// ----------------------------------------------------------------------
+//   Adaptive music composition engine implementation for interactive systems.
+//
+//     Copyright 2014 Alper Gungormusler. All rights reserved.
+//
+// ------------------------------------------------------------------------
+
+namespace BarelyAPI
 {
     public abstract class UGen
     {
