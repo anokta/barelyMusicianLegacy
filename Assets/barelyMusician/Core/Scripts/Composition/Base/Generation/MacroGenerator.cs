@@ -37,7 +37,7 @@ namespace BarelyAPI
                 generateSequence(targetLength);
 
                 // Log the sequence
-                Debug.Log("Sequence: " + sectionSequence);
+                //Debug.Log("Sequence: " + sectionSequence);
             }
 
             if (index >= sectionSequence.Length)

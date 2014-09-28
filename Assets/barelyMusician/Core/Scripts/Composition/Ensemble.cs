@@ -67,6 +67,17 @@ namespace BarelyAPI
             performers.Remove(name);
         }
 
+        public Performer GetPerformer(string name)
+        {
+            Performer performer = null;
+            if (performers.TryGetValue(name, out performer))
+            {
+                return performer;
+            }
+
+            return null;
+        }
+
         public void Stop()
         {
             foreach (Performer performer in performers.Values)
